@@ -1,0 +1,35 @@
+@mixin truncated-text($lines) {
+  $line-height: 2rem;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+  -webkit-line-clamp: $lines;
+  height: calc(#{$line-height} * #{$lines});
+  line-height: $line-height;
+}
+
+@mixin grid($columns, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  grid-gap: $gap;
+}
+
+@mixin scrollBar($width: 4px, $bgTrack: #f1f1f1, $bgThumb: #888, $borderRadius: 1rem) {
+  &::-webkit-scrollbar {
+    width: $width;
+    @content;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $bgTrack;
+    border-radius: $borderRadius;
+    @content;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $bgThumb;
+    border-radius: $borderRadius;
+    @content;
+  }
+}

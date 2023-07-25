@@ -1,0 +1,35 @@
+@mixin shineHoverImage() {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: rgba(255, 255, 255, 0.6) none repeat scroll 0 0;
+    height: 0;
+    width: 100%;
+    z-index: 1;
+    @include animate(all, "0.5s");
+  }
+
+  &:hover::before {
+    opacity: 0;
+    height: 100%;
+  }
+}
+
+@mixin zoomHover() {
+  overflow: hidden;
+
+  img {
+    @include animate(all);
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
