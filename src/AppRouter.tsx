@@ -5,6 +5,7 @@ import AdminMainLayout from "./app/components/layouts/admin/AdminMainLayout";
 import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
+import Home from "./app/pages/client/home/Home";
 
 // Components
 
@@ -33,7 +34,7 @@ const AppRouter: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={protectedClientLayout}>
-        <Route index element={<div>Trang chủ</div>} />
+        <Route index element={<Home />} />
         <Route path="category" element={<div>Trang danh mục</div>} />
         <Route path="product" element={<div>Trang sản phẩm</div>} />
         <Route path="account" element={<div>Trang tài khoản</div>} />

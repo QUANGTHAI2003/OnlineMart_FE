@@ -8,7 +8,7 @@ import {
   AccountUser,
 } from "@app/app/assets/icons/index";
 import Sider from "antd/es/layout/Sider";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import AccountItem from "./AccountItem";
 

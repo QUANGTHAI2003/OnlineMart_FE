@@ -18,6 +18,11 @@
       "account_like": "Favorites",
       "account_rating": "Rating",
       "account_voucher": "Vouchers"
+    },
+    "product": {
+      "sold": "Sold",
+      "launched": "Just launched",
+      "sponsorship": "Sponsorship"
     }
   },
   "admin_shop": {

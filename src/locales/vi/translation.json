@@ -18,6 +18,11 @@
       "account_like": "Sản phẩm yêu thích",
       "account_rating": "Nhận xét của tôi",
       "account_voucher": "Mã giảm giá"
+    },
+    "product": {
+      "sold": "Đã bán",
+      "launched": "Just launched",
+      "sponsorship": "Tài trợ"
     }
   },
   "admin_shop": {

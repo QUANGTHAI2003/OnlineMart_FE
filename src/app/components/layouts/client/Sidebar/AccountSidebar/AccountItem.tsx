@@ -1,4 +1,4 @@
-import {styled} from "styled-components";
+import { styled } from "styled-components";
 
 interface IAccountItem {
   icon?: any; //?: truyền vào hay k cg đc
