@@ -23,6 +23,10 @@
       "sold": "Sold",
       "launched": "Just launched",
       "sponsorship": "Sponsorship"
+    },
+    "sidebar": {
+      "sidebar_name": "Categories",
+      "sell": "Selling with OM"
     }
   },
   "admin_shop": {

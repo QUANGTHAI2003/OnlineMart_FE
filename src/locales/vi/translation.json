@@ -23,6 +23,10 @@
       "sold": "Đã bán",
       "launched": "Just launched",
       "sponsorship": "Tài trợ"
+    },
+    "sidebar": {
+      "sidebar_name": "Danh mục",
+      "sell": "Bán hàng cùng OM"
     }
   },
   "admin_shop": {
