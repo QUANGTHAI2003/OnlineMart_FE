@@ -1,18 +1,29 @@
 {
-    "admin_shop": {
-        "sidebar": {
-            "dashboard": "Trang chủ",
-            "products": "Sản phẩm",
-            "product_list": "Danh sách sản phẩm",
-            "product_create": "Tạo sản phẩm",
-            "product_review": "Quản lý đánh giá",
-            "orders": "Đơn hàng",
-            "order_list": "Danh sách đơn hàng",
-            "order_bill": "Quản lý hóa đơn",
-            "info_seller": "Thông tin người bán",
-            "manage_seller": "Quản lý người bán",
-            "manage_role": "Quản lý vai trò",
-            "manage_permission": "Quản lý quyền"
-        }
+  "user": {
+    "account_menu": {
+      "profile": "Thông tin tài khoản",
+      "my_order": "Đơn hàng của tôi",
+      "logout": "Đăng xuất"
+    },
+    "popup_cart": {
+      "recently_title": "Sản phẩm thêm vào gần đây",
+      "button_view": "Xem giỏ hàng"
     }
+  },
+  "admin_shop": {
+    "sidebar": {
+      "dashboard": "Trang chủ",
+      "products": "Sản phẩm",
+      "product_list": "Danh sách sản phẩm",
+      "product_create": "Tạo sản phẩm",
+      "product_review": "Quản lý đánh giá",
+      "orders": "Đơn hàng",
+      "order_list": "Danh sách đơn hàng",
+      "order_bill": "Quản lý hóa đơn",
+      "info_seller": "Thông tin người bán",
+      "manage_seller": "Quản lý người bán",
+      "manage_role": "Quản lý vai trò",
+      "manage_permission": "Quản lý quyền"
+    }
+  }
 }

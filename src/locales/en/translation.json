@@ -1,18 +1,29 @@
 {
-    "admin_shop": {
-        "sidebar": {
-            "dashboard": "Dashboard",
-            "products": "Products",
-            "product_list": "Product list",
-            "product_create": "Create product",
-            "product_review": "Review management",
-            "orders": "Orders",
-            "order_list": "Forwarding orders",
-            "order_bill": "invoice",
-            "info_seller": "Seller information",
-            "manage_seller": "Seller management",
-            "manage_role": "Role management",
-            "manage_permission": "Permission management"
-        }
+  "user": {
+    "account_menu": {
+      "profile": "My profile",
+      "my_order": "My orders",
+      "logout": "Logout"
+    },
+    "popup_cart": {
+      "recently_title": "Recently added products",
+      "button_view": "View My Shopping Cart"
     }
+  },
+  "admin_shop": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "products": "Products",
+      "product_list": "Product list",
+      "product_create": "Create product",
+      "product_review": "Review management",
+      "orders": "Orders",
+      "order_list": "Forwarding orders",
+      "order_bill": "invoice",
+      "info_seller": "Seller information",
+      "manage_seller": "Seller management",
+      "manage_role": "Role management",
+      "manage_permission": "Permission management"
+    }
+  }
 }
