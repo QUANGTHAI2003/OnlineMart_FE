@@ -8,6 +8,16 @@
     "popup_cart": {
       "recently_title": "Recently added products",
       "button_view": "View My Shopping Cart"
+    },
+    "account_user": {
+      "account_of": "Account to",
+      "account_info": "Information",
+      "account_notification": "Notifications",
+      "account_purchase": "Purchases",
+      "account_address": "Addresses",
+      "account_like": "Favorites",
+      "account_rating": "Rating",
+      "account_voucher": "Vouchers"
     }
   },
   "admin_shop": {

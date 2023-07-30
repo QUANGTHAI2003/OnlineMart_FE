@@ -8,6 +8,16 @@
     "popup_cart": {
       "recently_title": "Sản phẩm thêm vào gần đây",
       "button_view": "Xem giỏ hàng"
+    },
+    "account_user": {
+      "account_of": "Tài khoản của",
+      "account_info": "Thông tin tài khoản",
+      "account_notification": "Thông báo của tôi",
+      "account_purchase": "Quản lý đơn hàng",
+      "account_address": "Sổ địa chỉ",
+      "account_like": "Sản phẩm yêu thích",
+      "account_rating": "Nhận xét của tôi",
+      "account_voucher": "Mã giảm giá"
     }
   },
   "admin_shop": {

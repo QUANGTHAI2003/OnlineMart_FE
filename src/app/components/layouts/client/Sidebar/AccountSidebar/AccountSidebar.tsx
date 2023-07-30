@@ -1,39 +1,75 @@
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { Menu, theme } from "antd";
+import {
+  AccountAdress,
+  AccountBell,
+  AccountDiscount,
+  AccountHeart,
+  AccountOrder,
+  AccountStar,
+  AccountUser,
+} from "@app/app/assets/icons/index";
 import Sider from "antd/es/layout/Sider";
-import React from "react";
+import {useTranslation} from "react-i18next";
+
+import AccountItem from "./AccountItem";
 
 const AccountSidebar = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-  const items2: MenuProps["items"] = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
-    const key = String(index + 1);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const { t } = useTranslation();
 
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `Account Sidebar ${key}`,
+  const data = [
+    {
+      id: 1,
+      icon: <AccountUser />,
+      title: t("user.account_user.account_info"),
+    },
+    {
+      id: 1,
+      icon: <AccountBell />,
+      title: t("user.account_user.account_notification"),
+    },
+    {
+      id: 2,
+      icon: <AccountOrder />,
+      title: t("user.account_user.account_purchase"),
+    },
+    {
+      id: 3,
+      icon: <AccountAdress />,
+      title: t("user.account_user.account_address"),
+    },
+    {
+      id: 4,
+      icon: <AccountHeart />,
+      title: t("user.account_user.account_like"),
+    },
+    {
+      id: 5,
+      icon: <AccountStar />,
+      title: t("user.account_user.account_rating"),
+    },
+    {
+      id: 6,
+      icon: <AccountDiscount />,
+      title: t("user.account_user.account_voucher"),
+    },
+  ];
 
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = index * 4 + j + 1;
-        return {
-          key: subKey,
-          label: `Account_${subKey}`,
-        };
-      }),
-    };
-  });
   return (
-    <Sider style={{ background: colorBgContainer }} width={230}>
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
-        style={{ height: "100%" }}
-        items={items2}
-      />
+    <Sider width={230} className="bg-white shadow-inner shadow-gray-200 py-5">
+      <div className="flex px-6 py-2">
+        <div className="">
+          <img className="rounded-full w-10" src="src/app/assets/images/10.png" alt="ggg" />
+        </div>
+
+        <div className="ml-2">
+          <p className="text-xs py-px pl-1.5">{t("user.account_user.account_of")}</p>
+          <p className="text-xl font-medium pl-1.5">Hoàng Lịch</p>
+        </div>
+      </div>
+
+      {data.map((item) => {
+        return <AccountItem key={item.id} title={item.title} icon={item.icon} />;
+      })}
     </Sider>
   );
 };
