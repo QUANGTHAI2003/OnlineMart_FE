@@ -67,6 +67,9 @@
         "connected": "Connected"
       }
     },
+    "special_category": {
+      "name": "Special Category"
+    },
     "product": {
       "sold": "Sold",
       "launched": "Just launched",

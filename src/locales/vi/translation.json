@@ -67,6 +67,9 @@
         "connected": "Đã liên kết"
       }
     },
+    "special_category": {
+      "name": "Danh mục nổi bật"
+    },
     "product": {
       "sold": "Đã bán",
       "launched": "Just launched",

@@ -1,6 +1,7 @@
 import ProductCard from "@app/app/components/clients/ProductCard/ProductCard";
 import ProductCardSale from "@app/app/components/clients/ProductCard/ProductCardSale";
 import ProductCardSkeleton from "@app/app/components/clients/ProductCard/ProductCardSkeleton";
+import SpecialCategory from "@app/app/components/clients/SpecialCategory/SpecialCategory";
 
 const Home = () => {
   const data = [
@@ -141,7 +142,7 @@ const Home = () => {
           />
         ))}
       </div>
-
+      <SpecialCategory />
       {true && <ProductCardSkeleton />}
     </>
   );
