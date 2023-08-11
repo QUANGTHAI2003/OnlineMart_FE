@@ -42,6 +42,11 @@
       "select_provine": "Select province",
       "select_district": "Select district",
       "select_ward": "Select ward"
+    },
+    "searchbar": {
+      "title": "Search",
+      "expand": "Show more",
+      "collapse": "Show less"
     }
   },
   "admin_shop": {

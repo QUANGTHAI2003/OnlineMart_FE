@@ -42,6 +42,11 @@
       "select_provine": "Chọn tỉnh/thành phố",
       "select_district": "Chọn quận/huyện",
       "select_ward": "Chọn phường/xã"
+    },
+    "searchbar": {
+      "title": "Tìm kiếm",
+      "expand": "Xem thêm",
+      "collapse": "Thu gọn"
     }
   },
   "admin_shop": {
