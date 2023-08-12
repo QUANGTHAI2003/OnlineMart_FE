@@ -27,6 +27,11 @@
     "sidebar": {
       "sidebar_name": "Categories",
       "sell": "Selling with OM"
+    },
+    "notifications": {
+      "my_notifications": "My Notifications",
+      "show_all": "Show all",
+      "show_less": "Show less"
     }
   },
   "admin_shop": {

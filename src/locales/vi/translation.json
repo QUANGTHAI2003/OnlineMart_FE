@@ -27,6 +27,11 @@
     "sidebar": {
       "sidebar_name": "Danh mục",
       "sell": "Bán hàng cùng OM"
+    },
+    "notifications": {
+      "my_notifications": "Thông báo của tôi",
+      "show_all": "Xem tất cả",
+      "show_less": "Rút gọn"
     }
   },
   "admin_shop": {
