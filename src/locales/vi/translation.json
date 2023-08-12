@@ -17,35 +17,55 @@
       "account_address": "Sổ địa chỉ",
       "account_like": "Sản phẩm yêu thích",
       "account_rating": "Nhận xét của tôi",
-      "account_voucher": "Mã giảm giá"
-    },
-    "account_user_page": {
-      "account_information": "Thông tin tài khoản",
-      "my_profile": "Thông tin cá nhân",
-      "avatar_see": "Xem ảnh đại diện",
-      "avatar_update": "Cập nhật ảnh đại diện",
-      "avatar_delete": "Xóa ảnh đại diện hiện tại",
-      "birthday": "Ngày sinh",
-      "gender": "Giới tính",
-      "name": "Họ và Tên",
-      "name_placeholder": "Nhập họ và tên",
-      "nickname": "Biệt danh",
-      "nickname_placeholder": "Nhập biệt danh",
-      "male": "Nam",
-      "female": "Nữ",
-      "other_gender": "Khác",
-      "save": "Lưu thay đổi",
-      "phone_email": "Số điện thoại và email",
-      "phone": "Số điện thoại",
-      "email": "Địa chỉ email",
-      "update": "Cập nhật",
-      "security": "Bảo mật",
-      "change_password": "Đổi mật khẩu",
-      "pin": "Thiết lập mã PIN",
-      "setting": "Thiết lập",
-      "social_network": "Liên kết mạng xã hội",
-      "connect": "Liên kết",
-      "connected": "Đã liên kết"
+      "account_voucher": "Mã giảm giá",
+      "account_information": {
+        "edit_profile": {
+          "button_change": "Lưu thay đổi",
+          "title_phone": "Cập nhật số điện thoại",
+          "label_phone": "Số điện thoại",
+          "placeholder_phone": "Nhập số điện thoại",
+          "description_phone": "Mã xác thực (OTP) sẽ được gửi đến số điện thoại này để xác minh số điện thoại là của bạn",
+          "title_email": "Cập nhật email",
+          "label_email": "Cập nhật email",
+          "placeholder_email": "Nhập email",
+          "description_email": "Mã xác thực (OTP) sẽ được gửi đến email này để xác minh email là của bạn",
+          "title_password": "Đổi mật khẩu",
+          "current_password": "Mật khẩu hiện tại",
+          "placeholder_current_password": "Nhập mật khẩu hiện tại",
+          "new_password": "Mật khẩu mới",
+          "placeholder_new_password": "Nhập mật khẩu mới",
+          "enter_new_password": "Mật khẩu hiện tại",
+          "placeholder_enter_new_password": "Mật khẩu hiện tại"
+        }
+      },
+      "account_user_page": {
+        "account_information": "Thông tin tài khoản",
+        "my_profile": "Thông tin cá nhân",
+        "avatar_see": "Xem ảnh đại diện",
+        "avatar_update": "Cập nhật ảnh đại diện",
+        "avatar_delete": "Xóa ảnh đại diện hiện tại",
+        "birthday": "Ngày sinh",
+        "gender": "Giới tính",
+        "name": "Họ và Tên",
+        "name_placeholder": "Nhập họ và tên",
+        "nickname": "Biệt danh",
+        "nickname_placeholder": "Nhập biệt danh",
+        "male": "Nam",
+        "female": "Nữ",
+        "other_gender": "Khác",
+        "save": "Lưu thay đổi",
+        "phone_email": "Số điện thoại và email",
+        "phone": "Số điện thoại",
+        "email": "Địa chỉ email",
+        "update": "Cập nhật",
+        "security": "Bảo mật",
+        "change_password": "Đổi mật khẩu",
+        "pin": "Thiết lập mã PIN",
+        "setting": "Thiết lập",
+        "social_network": "Liên kết mạng xã hội",
+        "connect": "Liên kết",
+        "connected": "Đã liên kết"
+      }
     },
     "product": {
       "sold": "Đã bán",
@@ -75,6 +95,48 @@
       "title": "Tìm kiếm",
       "expand": "Xem thêm",
       "collapse": "Thu gọn"
+    },
+    "footer": {
+      "footer_support": {
+        "title": "Hỗ trợ khách hàng",
+        "hotline": "Hotline:",
+        "time": "1000 đ/phút, 8-21h kể cả T7, CN",
+        "question": "Câu hỏi thường gặp",
+        "submit": "Gửi yêu cầu hỗ trợ",
+        "ordering": "Hướng dẫn đặt hàng",
+        "shipping": "Phương thức vận chuyển",
+        "return_policy": "Chính sách đổi trả",
+        "installment": "Hướng dẫn trả góp",
+        "import": "Chính sách hàng nhập khẩu",
+        "customer": "Hỗ trợ khách hàng: ",
+        "security": "Báo lỗi bảo mật: "
+      },
+      "footer_om": {
+        "title": "Về Online Mart",
+        "om": "Giới thiệu về Online Mart",
+        "blog": "Online Mart Blog",
+        "recruit": "Tuyển dụng",
+        "payment": "Chính sách bảo mật thanh toán",
+        "privacy": "Chính sách bảo mật thông tin cá nhân",
+        "complaint": "Chính sách giải quyết khiếu nại",
+        "terms": "Điều khoản sử dụng",
+        "xu": "Giới thiệu về Online Mart Xu",
+        "vip": "Gói hội viên VIP",
+        "affiliate": "Tiếp thị liên kết cùng Online Mart",
+        "corporate": "Bán hàng doanh nghiệp",
+        "conditions": "Điều kiện vận chuyển"
+      },
+      "footer_cooperation": {
+        "title": "Hợp tác và liên kết",
+        "operation": "Quy chế hoạt động Sàn GDTMĐT",
+        "sell": "Bán hàng cùng Online Mart"
+      },
+      "footer_payment": {
+        "title": "Phương thức thanh toán"
+      },
+      "footer_connect": {
+        "title": "Kết nối với chúng tôi"
+      }
     }
   },
   "admin_shop": {

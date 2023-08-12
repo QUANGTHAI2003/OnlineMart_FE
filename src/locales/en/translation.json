@@ -17,35 +17,55 @@
       "account_address": "Addresses",
       "account_like": "Favorites",
       "account_rating": "Rating",
-      "account_voucher": "Vouchers"
-    },
-    "account_user_page": {
-      "account_information": "Account Information",
-      "my_profile": "My Profile",
-      "avatar_see": "Avatar",
-      "avatar_update": "Change avatar",
-      "avatar_delete": "Delete avatar",
-      "birthday": "Date of birth",
-      "gender": "Gender",
-      "name": "Name",
-      "name_placeholder": "Enter your name",
-      "nickname": "Nickname",
-      "nickname_placeholder": "Enter your nickname",
-      "male": "Male",
-      "female": "Female",
-      "other_gender": "Other",
-      "save": "Save",
-      "phone_email": "Phone number & Email",
-      "phone": "Phone number",
-      "email": "Email",
-      "update": "Update",
-      "security": "Security",
-      "change_password": "Change password",
-      "pin": "Setting PIN",
-      "setting": "Setting",
-      "social_network": "Social network linking",
-      "connect": "Connect",
-      "connected": "Connected"
+      "account_voucher": "Vouchers",
+      "account_information": {
+        "edit_profile": {
+          "button_change": "Save changes",
+          "title_phone": "Update phone number",
+          "label_phone": "Phone number",
+          "placeholder_phone": "Enter phone number",
+          "description_phone": "An authentication code (OTP) will be sent to this phone number to verify that the phone number is yours",
+          "title_email": "Update Email",
+          "label_email": "Email address",
+          "placeholder_email": "Enter email",
+          "description_email": "An authentication code (OTP) will be sent to this email to verify that the email is yours",
+          "title_password": "Change password",
+          "current_password": "Current password",
+          "placeholder_current_password": "Enter the current password",
+          "new_password": "New password",
+          "placeholder_new_password": "Enter a new password",
+          "enter_new_password": "Re-enter the new password",
+          "placeholder_enter_new_password": "Re-enter the new password"
+        }
+      },
+      "account_user_page": {
+        "account_information": "Account Information",
+        "my_profile": "My Profile",
+        "avatar_see": "Avatar",
+        "avatar_update": "Change avatar",
+        "avatar_delete": "Delete avatar",
+        "birthday": "Date of birth",
+        "gender": "Gender",
+        "name": "Name",
+        "name_placeholder": "Enter your name",
+        "nickname": "Nickname",
+        "nickname_placeholder": "Enter your nickname",
+        "male": "Male",
+        "female": "Female",
+        "other_gender": "Other",
+        "save": "Save",
+        "phone_email": "Phone number & Email",
+        "phone": "Phone number",
+        "email": "Email",
+        "update": "Update",
+        "security": "Security",
+        "change_password": "Change password",
+        "pin": "Setting PIN",
+        "setting": "Setting",
+        "social_network": "Social network linking",
+        "connect": "Connect",
+        "connected": "Connected"
+      }
     },
     "product": {
       "sold": "Sold",
@@ -75,6 +95,48 @@
       "title": "Search",
       "expand": "Show more",
       "collapse": "Show less"
+    },
+    "footer": {
+      "footer_support": {
+        "title": "Customer Support",
+        "hotline": "Hotline",
+        "time": "1000 đ/min, 8-21h including T7, CN",
+        "question": "Frequently Asked Questions",
+        "submit": "Submit a support request",
+        "ordering": "Ordering instructions",
+        "shipping": "Shipping method",
+        "return_policy": "Return Policy",
+        "installment": "Installment Instructions",
+        "import": "Import Policy",
+        "customer": "Customer Support: ",
+        "security": "Security error report: "
+      },
+      "footer_om": {
+        "title": "About Online Mart",
+        "om": "About Online Mart",
+        "blog": "Online Mart Blog",
+        "recruit": "Recruit",
+        "payment": "Payment Security Policy",
+        "privacy": "Privacy Policy of Personal Information",
+        "complaint": "Complaint resolution policy",
+        "terms": "Terms of Use",
+        "xu": "About Online Mart Xu",
+        "vip": "VIP Membership Package",
+        "affiliate": "Affiliate Marketing with Online Mart",
+        "corporate": "Corporate sales",
+        "conditions": "Conditions of Carriage"
+      },
+      "footer_cooperation": {
+        "title": "Cooperation and affiliation",
+        "operation": "Operation regulations of E-commerce platform",
+        "sell": "Sell with Online Mart"
+      },
+      "footer_payment": {
+        "title": "Payment methods"
+      },
+      "footer_connect": {
+        "title": "Connect with us"
+      }
     }
   },
   "admin_shop": {
