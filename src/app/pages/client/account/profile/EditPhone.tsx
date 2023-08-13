@@ -26,10 +26,13 @@ const EditPhone = () => {
   };
   return (
     <div className="flex flex-col">
-      <Button onClick={showModal}>Edit Phone</Button>
+      <Button type="primary" ghost onClick={showModal}>
+        {t("user.account_user_page.update")}
+      </Button>
       <Modal
         title={t("user.account_user.account_information.edit_profile.title_phone")}
         footer={null}
+        centered
         open={open}
         onOk={handleOk}
         confirmLoading={confirmLoading}

@@ -1,5 +1,5 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Button, Input, Space, Modal } from "antd";
+import { Button, Input, Modal, Space } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -26,10 +26,13 @@ const EditPassword = () => {
   };
   return (
     <div className="flex flex-col">
-      <Button onClick={showModal}>Edit Password</Button>
+      <Button type="primary" ghost onClick={showModal}>
+        {t("user.account_user_page.update")}
+      </Button>
       <Modal
         title={t("user.account_user.account_information.edit_profile.title_password")}
         footer={null}
+        centered
         open={open}
         onOk={handleOk}
         confirmLoading={confirmLoading}

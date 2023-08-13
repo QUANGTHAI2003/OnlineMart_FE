@@ -26,10 +26,13 @@ const EditEmail = () => {
   };
   return (
     <div className="flex flex-col">
-      <Button onClick={showModal}>Edit Email</Button>
+      <Button type="primary" ghost onClick={showModal}>
+        {t("user.account_user_page.update")}
+      </Button>
       <Modal
         title={t("user.account_user.account_information.edit_profile.title_email")}
         footer={null}
+        centered
         open={open}
         onOk={handleOk}
         confirmLoading={confirmLoading}

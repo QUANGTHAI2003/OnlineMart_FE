@@ -9,6 +9,10 @@ import { Button, Col, DatePicker, Dropdown, Image, Input, Radio, Row, Space, Upl
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import EditEmail from "./EditEmail";
+import EditPassword from "./EditPassword";
+import EditPhone from "./EditPhone";
+
 const UserProfile = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
@@ -124,9 +128,7 @@ const UserProfile = () => {
               </div>
               <div>
                 <Space className="site-button-ghost-wrapper" wrap>
-                  <Button type="primary" ghost>
-                    {t("user.account_user_page.update")}
-                  </Button>
+                  <EditPhone />
                 </Space>
               </div>
             </div>
@@ -144,9 +146,7 @@ const UserProfile = () => {
 
               <div>
                 <Space className="site-button-ghost-wrapper" wrap>
-                  <Button type="primary" ghost>
-                    {t("user.account_user_page.update")}
-                  </Button>
+                  <EditEmail />
                 </Space>
               </div>
             </div>
@@ -166,9 +166,7 @@ const UserProfile = () => {
 
               <div>
                 <Space className="site-button-ghost-wrapper" wrap>
-                  <Button type="primary" ghost>
-                    {t("user.account_user_page.update")}
-                  </Button>
+                  <EditPassword />
                 </Space>
               </div>
             </div>

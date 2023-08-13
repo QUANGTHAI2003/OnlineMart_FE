@@ -1,9 +1,9 @@
 import UserHeader from "@app/app/components/layouts/client/Header/UserHeader";
-import AccountSidebar from "@app/app/components/layouts/client/Sidebar/AccountSidebar/AccountSidebar";
 import CategorySidebar from "@app/app/components/layouts/client/Sidebar/CategorySidebar/CategorySidebar";
 import SortProductSidebar from "@app/app/components/layouts/client/Sidebar/SortProductSidebar/SortProductSidebar";
-import {Layout} from "antd";
-import {Outlet, useLocation} from "react-router-dom";
+import { Layout } from "antd";
+import { Outlet, useLocation } from "react-router-dom";
+
 import UserFooter from "./Footer/UserFooter";
 
 const UserMainLayout = (): JSX.Element => {
@@ -11,20 +11,13 @@ const UserMainLayout = (): JSX.Element => {
   const location = useLocation();
   const homePage = location.pathname === "/";
   const categoryPage = location.pathname === "/category";
-  const accountPage = location.pathname === "/account";
   const maxWidth = homePage ? "1440px" : "1280px";
 
   return (
     <Layout className="layout">
       <UserHeader />
       <Layout className="container mx-auto" style={{ maxWidth }}>
-        {homePage ? (
-          <CategorySidebar />
-        ) : categoryPage ? (
-          <SortProductSidebar />
-        ) : accountPage ? (
-          <AccountSidebar />
-        ) : null}
+        {homePage ? <CategorySidebar /> : categoryPage ? <SortProductSidebar /> : null}
         <div
           style={{
             display: "flex",
