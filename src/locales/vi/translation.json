@@ -32,6 +32,16 @@
       "my_notifications": "Thông báo của tôi",
       "show_all": "Xem tất cả",
       "show_less": "Rút gọn"
+    },
+    "select_address": {
+      "delivered_to": "Giao đến:",
+      "delivered_address": "Địa chỉ giao hàng",
+      "delivered_to_address": "Giao đến địa chỉ",
+      "description": "Hãy chọn địa chỉ nhận hàng để được dự báo thời gian giao hàng cùng phí đóng gói, vận chuyển một cách chính xác nhất.",
+      "another_area": "Chọn khu vực giao hàng khác",
+      "select_provine": "Chọn tỉnh/thành phố",
+      "select_district": "Chọn quận/huyện",
+      "select_ward": "Chọn phường/xã"
     }
   },
   "admin_shop": {

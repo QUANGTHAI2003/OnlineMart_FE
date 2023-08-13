@@ -32,6 +32,16 @@
       "my_notifications": "My Notifications",
       "show_all": "Show all",
       "show_less": "Show less"
+    },
+    "select_address": {
+      "delivered_to": "Delivered to:",
+      "delivered_address": "Delivered address",
+      "delivered_to_address": "Delivered to address",
+      "description": "Please select the delivery address to receive the most accurate forecast of delivery time and packaging and shipping fees.",
+      "another_area": "Choose another delivery area",
+      "select_provine": "Select province",
+      "select_district": "Select district",
+      "select_ward": "Select ward"
     }
   },
   "admin_shop": {

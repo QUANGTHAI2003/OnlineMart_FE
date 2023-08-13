@@ -1,7 +1,6 @@
-import { Counter } from "@app/app/components/Counter/Counter";
+import {Counter} from "@app/app/components/Counter/Counter";
 import MetaHeader from "@app/app/components/Meta/MetaHeader";
-import SelectAddress from "@app/app/components/select";
-import { Col, DatePicker, Row, Space } from "antd";
+import {Col, DatePicker, Row, Space} from "antd";
 
 import OpenGraph from "./../../components/Meta/OpenGraph";
 
@@ -16,7 +15,7 @@ const Dashboard = () => {
         <Counter />
       </Col>
       <Col span={8}>
-        <SelectAddress />
+
       </Col>
       <Col span={8}>
         <Space direction="vertical" size={12}>
