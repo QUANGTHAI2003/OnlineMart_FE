@@ -1,7 +1,7 @@
 import IconMap from "@app/app/assets/images/icon-address.png";
-import {Button, Radio, RadioChangeEvent, Space} from "antd";
-import {useState} from "react";
-import {useTranslation} from "react-i18next";
+import { Button, Radio, RadioChangeEvent, Space } from "antd";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import * as S from "./ModalSelect.style";
 import SelectAddress from "./SelectAddress";

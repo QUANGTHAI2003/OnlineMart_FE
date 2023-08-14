@@ -1,8 +1,8 @@
-import {DownOutlined, UpOutlined} from "@ant-design/icons";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import iconSearch from "@app/app/assets/images/icon-search.png";
-import {Button, Input} from "antd";
-import React, {useEffect, useRef, useState} from "react";
-import {useTranslation} from "react-i18next";
+import { Button, Input } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ISuggestionItem {
   type: "keyword" | "shop";

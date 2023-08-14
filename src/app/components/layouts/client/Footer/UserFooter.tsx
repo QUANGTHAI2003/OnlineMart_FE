@@ -1,4 +1,4 @@
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const UserFooter = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps

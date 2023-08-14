@@ -1,8 +1,8 @@
-import {faBell} from "@fortawesome/free-regular-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Popover} from "antd";
-import {useEffect, useState} from "react";
-import {useTranslation} from "react-i18next";
+import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Popover } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // import { useTranslation } from "react-i18next";
 

@@ -1,5 +1,5 @@
-import {StarIcon} from "@app/app/assets/icons";
-import React, {useEffect, useState} from "react";
+import { StarIcon } from "@app/app/assets/icons";
+import React, { useEffect, useState } from "react";
 
 const StarRating: React.FC<{ value: number }> = ({ value }) => {
   const [rating, setRating] = useState(0);
