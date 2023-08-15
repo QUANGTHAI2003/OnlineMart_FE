@@ -20,6 +20,7 @@ const SignupUser = React.lazy(() => import("@app/app/pages/client/auth/SignupUse
 const NotFound = React.lazy(() => import("@app/app/pages/errors/NotFound"));
 
 const UserProfile = React.lazy(() => import("@app/app/pages/client/account/profile/UserProfile"));
+const Discount = React.lazy(() => import("@app/app/pages/client/account/voucher/Discount"));
 
 const AppRouter: React.FC = () => {
   const protectedAdminLayout = (
@@ -47,7 +48,7 @@ const AppRouter: React.FC = () => {
           <Route path="address" element={<div>Địa chỉ</div>} />
           <Route path="wishlist" element={<div>Yêu thích</div>} />
           <Route path="my_rating" element={<div>Đánh giá của tôi</div>} />
-          <Route path="voucher" element={<div>Phiếu giảm giá</div>} />
+          <Route path="voucher" element={<Discount />} />
         </Route>
       </Route>
       <Route path="/admin/shop" element={protectedAdminLayout}>

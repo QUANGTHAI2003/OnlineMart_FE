@@ -70,6 +70,20 @@
     "special_category": {
       "name": "Danh mục nổi bật"
     },
+    "special_category": {
+      "name": "Danh mục nổi bật"
+    },
+    "voucher": {
+      "name": "Mã giảm giá",
+      "discount": "Giảm giá",
+      "range": "Cho đơn hàng từ ",
+      "all": "Tất cả",
+      "shop": "Nhà bán",
+      "payment-offer": "Ưu đãi nhà bán",
+      "expire": "Hết hiệu lực",
+      "expiry": "HSD",
+      "empty": "Bạn chưa có mã giảm giá nào"
+    },
     "product": {
       "sold": "Đã bán",
       "launched": "Just launched",

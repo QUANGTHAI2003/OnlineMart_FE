@@ -76,9 +76,43 @@ export const ProfilePhone = () => (
   </svg>
 );
 
+export const DiscountItemFrame = () => (
+  <svg width="450" height="132" viewBox="0 0 450 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clipPath="url(#clip0_2299_10859)">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M442.477 0C446.631 0 450 3.582 450 8V124C450 128.418 446.631 132 442.477 132H132.132C132.132 127.581 128.763 124 124.608 124C120.453 124 117.085 127.581 117.085 132H7.52351C3.36865 132 0 128.418 0 124V8C0 3.582 3.36865 0 7.52351 0H117.085C117.085 4.418 120.453 8 124.608 8C128.763 8 132.132 4.418 132.132 0H368.652H442.477Z"
+        fill="#FFFFFF"
+      />
+      <path fillRule="evenodd" clipRule="evenodd" d="M124.608 11V125V11Z" fill="#FFFFFF" />
+      <path d="M124.608 11V125" stroke="#EEEEEE" strokeLinecap="square" strokeDasharray="2 4" />
+    </g>
+    <defs>
+      <clipPath id="clip0_2299_10859">
+        <rect width="450" height="132" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
 // Icon Facebook
 export const IconFacebook = () => (
   <svg className="fill-[#4893f4]" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
     <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" />
+  </svg>
+);
+
+export const CopyIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z"
+      stroke="#0B74E5"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5"
+      stroke="#0B74E5"
+      strokeWidth="1.5"
+    />
   </svg>
 );

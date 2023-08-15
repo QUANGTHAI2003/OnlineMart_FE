@@ -70,6 +70,20 @@
     "special_category": {
       "name": "Special Category"
     },
+    "special_category": {
+      "name": "Special Category"
+    },
+    "voucher": {
+      "name": "My voucher",
+      "discount": "Discount",
+      "range": "for orders form",
+      "all": "All",
+      "shop": "Shop",
+      "payment-offer": "Payment offer",
+      "expire": "Expired",
+      "expiry": "Expiry",
+      "empty": "You do not have any voucher"
+    },
     "product": {
       "sold": "Sold",
       "launched": "Just launched",
