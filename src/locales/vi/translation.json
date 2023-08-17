@@ -13,6 +13,15 @@
       "account_of": "Tài khoản của",
       "account_info": "Thông tin tài khoản",
       "account_notification": "Thông báo của tôi",
+      "account_notification_page": {
+          "remove_all": "Xóa tất cả thông báo",
+          "read_all": "Đánh dấu đọc tất cả",
+          "read_an": "Đánh dấu đã đọc",
+          "remove_an": "Xóa",
+          "detail": " Chi tiết",
+          "no_notification": "Bạn không có thông báo",
+          "no_product": "Bạn chưa có sản phẩm"
+      },
       "account_purchase": "Quản lý đơn hàng",
       "account_address": "Sổ địa chỉ",
       "account_like": "Sản phẩm yêu thích",

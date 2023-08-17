@@ -13,6 +13,15 @@
       "account_of": "Account to",
       "account_info": "Information",
       "account_notification": "Notifications",
+      "account_notification_page": {
+        "remove_all": "Clear all notifications",
+        "read_all": "Mark read all",
+        "read_an": "Mark as read",
+        "remove_an": "Remove",
+        "detail": " Detail",
+        "no_notification": "You don't have any notifications",
+        "no_product": "You don't have a product yet"
+      },
       "account_purchase": "Purchases",
       "account_address": "Addresses",
       "account_like": "Favorites",
