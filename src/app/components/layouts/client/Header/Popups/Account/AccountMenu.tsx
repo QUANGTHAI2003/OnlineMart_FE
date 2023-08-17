@@ -1,5 +1,5 @@
 import { Avatar, Popover } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import AccountMenuSkeleton from "./AccountMenuSkeleton";
@@ -7,12 +7,19 @@ import AccountMenuSkeleton from "./AccountMenuSkeleton";
 interface IAccount {
   name: string;
   avatar: string;
-  loading: boolean;
 }
 
-const AccountMenu: React.FC<IAccount> = ({ name, avatar, loading }) => {
+const AccountMenu: React.FC<IAccount> = ({ name, avatar }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3 * 1000);
+  }, []);
+
   const content = (
     <div className="flex flex-col w-fit items-start gap-1.5 mx-[-12px]">
       <a
@@ -36,13 +43,18 @@ const AccountMenu: React.FC<IAccount> = ({ name, avatar, loading }) => {
     </div>
   );
   return (
-    <Popover content={content} trigger="hover" placement="bottom" className="bg-slate-200 p-1 w-fit">
-      {loading ? (
-        <AccountMenuSkeleton />
-      ) : (
+    <Popover
+      content={content}
+      trigger="hover"
+      placement="bottom"
+      autoAdjustOverflow={true}
+      className=" flex items-center p-1 w-fit h-[32px]"
+    >
+      {loading && <AccountMenuSkeleton />}
+      {!loading && (
         <div className="flex items-center">
           <Avatar className="block" src={avatar} size="small" style={{ marginRight: 11 }} />
-          <span className="text-base">{name}</span>
+          <span className="text-base whitespace-nowrap">{name}</span>
         </div>
       )}
     </Popover>

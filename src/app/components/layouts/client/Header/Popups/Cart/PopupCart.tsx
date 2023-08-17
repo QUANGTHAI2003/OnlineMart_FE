@@ -1,6 +1,6 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Button, List, Popover } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import CartContentSkeleton from "./CartContentSkeleton";
@@ -14,17 +14,23 @@ interface ICartItem {
 
 interface ICartProps {
   items: ICartItem[];
-  loading: boolean;
 }
 
-function Cart({ items, loading }: ICartProps) {
+function Cart({ items }: ICartProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleVisibleChange = (visible: boolean) => {
     setVisible(visible);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3 * 1000);
+  }, []);
 
   const content = loading ? (
     <CartContentSkeleton count={items.length} />
@@ -54,9 +60,15 @@ function Cart({ items, loading }: ICartProps) {
   );
 
   return (
-    <Popover content={content} trigger="hover" open={visible} onOpenChange={handleVisibleChange} placement="bottom">
-      <Badge count={items.length}>
-        <ShoppingCartOutlined className="cursor-pointer  text-2xl" />
+    <Popover
+      content={content}
+      trigger="hover"
+      open={visible}
+      onOpenChange={handleVisibleChange}
+      placement="bottomRight"
+    >
+      <Badge count={items.length} className="text-sm">
+        <ShoppingCartOutlined className="cursor-pointer text-[#000] text-2xl" />
       </Badge>
     </Popover>
   );

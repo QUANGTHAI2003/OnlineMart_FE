@@ -80,7 +80,7 @@ const PopupLanguage: React.FC = () => {
       onOpenChange={handleVisibleChange}
       className="border-none transition-all duration-300 ease-in-out "
     >
-      <Button className="flex items-center justify-start" type="text">
+      <Button className="flex items-center justify-start hover:bg-transparent" type="text">
         <img src={selectedLanguage.flag} alt={selectedLanguage.label} className="w-[25px] mr-[10px] " />
         <span className="text-base">{selectedLanguage.label}</span>
         {visible ? <UpOutlined /> : <DownOutlined />}

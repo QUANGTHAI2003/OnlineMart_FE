@@ -1,10 +1,10 @@
-import UserHeader from "@app/app/components/layouts/client/Header/UserHeader";
 import CategorySidebar from "@app/app/components/layouts/client/Sidebar/CategorySidebar/CategorySidebar";
 import SortProductSidebar from "@app/app/components/layouts/client/Sidebar/SortProductSidebar/SortProductSidebar";
 import { Layout } from "antd";
 import { Outlet, useLocation } from "react-router-dom";
 
 import UserFooter from "./Footer/UserFooter";
+import Header from "./Header/Header";
 
 const UserMainLayout = (): JSX.Element => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -15,7 +15,8 @@ const UserMainLayout = (): JSX.Element => {
 
   return (
     <Layout className="layout">
-      <UserHeader />
+      {/* <UserHeader /> */}
+      <Header />
       <Layout className="container mx-auto" style={{ maxWidth }}>
         {homePage ? <CategorySidebar /> : categoryPage ? <SortProductSidebar /> : null}
         <div

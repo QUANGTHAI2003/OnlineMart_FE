@@ -1,5 +1,12 @@
 {
   "user": {
+    "header": {
+      "seller_home": "Kênh người bán",
+      "seller": "Trở thành người bán",
+      "contact": "Kết nối",
+      "login": "Đăng nhập",
+      "register": "Đăng ký"
+    },
     "account_menu": {
       "profile": "Thông tin tài khoản",
       "my_order": "Đơn hàng của tôi",
@@ -103,7 +110,7 @@
       "sell": "Bán hàng cùng OM"
     },
     "notifications": {
-      "my_notifications": "Thông báo của tôi",
+      "notifications": "Thông báo",
       "show_all": "Xem tất cả",
       "show_less": "Rút gọn"
     },

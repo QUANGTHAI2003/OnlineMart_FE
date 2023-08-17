@@ -77,7 +77,7 @@ const Search: React.FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
   return (
-    <div className="relative w-[500px] h-[40px]">
+    <div className="relative w-[800px] h-[40px]">
       <div className="w-full h-full flex items-center rounded-lg relative border-solid border border-[#DDDDE3] bg-white">
         <img className="w-[20px] h-[20px] max-w-full ml-[18px]" src={iconSearch} alt="icon-search" />
         <Input

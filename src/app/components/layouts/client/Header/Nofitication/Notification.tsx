@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover } from "antd";
@@ -65,7 +66,7 @@ function Notification() {
   const { t } = useTranslation();
   const content = (
     <div className="notification-popover-content mx-auto">
-      <div className="text-left text-lg mb-2 text-gray-500">{t("user.notifications.my_notifications")}</div>
+      <div className="text-left text-lg mb-2 text-gray-500">{t("user.notifications.notifications")}</div>
       <div className="notification-items-container flex-wrap">
         {notifications.slice(0, showLess ? 4 : notifications.length).map((notification) => (
           <div className="notification-item flex items-center mb-2" key={notification.id}>
@@ -91,18 +92,17 @@ function Notification() {
       </button>
     </div>
   );
-
   return (
     <Popover content={content} placement="bottomRight" trigger="hover">
       <div
-        className="text-black w-4/12 text-right rounded-full cursor-pointer"
+        className="text-black flex items-center text-right cursor-pointer"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <span className="text-lg">
           <FontAwesomeIcon icon={faBell} />
         </span>
-        <span className="ps-2"> Notifications </span>
+        <span className="ps-2"> {t("user.notifications.notifications")} </span>
       </div>
     </Popover>
   );

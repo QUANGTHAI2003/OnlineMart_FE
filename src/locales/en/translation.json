@@ -1,5 +1,12 @@
 {
   "user": {
+    "header": {
+      "seller_home": "Seller Centre",
+      "seller": "Start Selling",
+      "contact": "Follow us on",
+      "login": "Login",
+      "register": "Register"
+    },
     "account_menu": {
       "profile": "My profile",
       "my_order": "My orders",
@@ -103,7 +110,7 @@
       "sell": "Selling with OM"
     },
     "notifications": {
-      "my_notifications": "My Notifications",
+      "notifications": "Notifications",
       "show_all": "Show all",
       "show_less": "Show less"
     },
