@@ -6,7 +6,6 @@ import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
-import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import Home from "./app/pages/client/home/Home";
 
 // Components
@@ -21,6 +20,7 @@ const SignupUser = React.lazy(() => import("@app/app/pages/client/auth/SignupUse
 const NotFound = React.lazy(() => import("@app/app/pages/errors/NotFound"));
 
 const UserProfile = React.lazy(() => import("@app/app/pages/client/account/profile/UserProfile"));
+const UserRating = React.lazy(() => import("@app/app/pages/client/account/rating/UserRating"));
 const Discount = React.lazy(() => import("@app/app/pages/client/account/voucher/Discount"));
 
 const AppRouter: React.FC = () => {
@@ -44,11 +44,11 @@ const AppRouter: React.FC = () => {
         <Route path="product" element={<div>Trang sản phẩm</div>} />
         <Route path="account" element={<AccountLayout />}>
           <Route path="edit_profile" element={<UserProfile />} />
-          <Route path="notifications" element={<UserNotification />} />
+          <Route path="notifications" element={<div>Thông báo</div>} />
           <Route path="orders" element={<div>Đơn hàng</div>} />
           <Route path="address" element={<div>Địa chỉ</div>} />
           <Route path="wishlist" element={<div>Yêu thích</div>} />
-          <Route path="my_rating" element={<div>Đánh giá của tôi</div>} />
+          <Route path="my_rating" element={<UserRating />} />>
           <Route path="voucher" element={<Discount />} />
         </Route>
       </Route>

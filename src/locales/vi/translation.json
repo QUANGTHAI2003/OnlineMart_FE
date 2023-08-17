@@ -83,6 +83,12 @@
       "connect": "Liên kết",
       "connected": "Đã liên kết"
     },
+    "rating_user_page": {
+      "my_comment": "Nhận xét của tôi",
+      "let's_comment": "Viết nhận xét với sản phẩm bạn đã sử dụng để cung cấp thông tin hữu ích cho mọi người",
+      "keep shopping": "Tiếp tục mua sắm",
+      "delete": "Xóa"
+    },
     "special_category": {
       "name": "Danh mục nổi bật"
     },

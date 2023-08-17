@@ -83,6 +83,12 @@
       "connect": "Connect",
       "connected": "Connected"
     },
+    "rating_user_page": {
+      "my_comment": "My comments",
+      "let's_comment": "Write a review with the product you used to provide useful information to everyone",
+      "keep shopping": "Keep shopping",
+      "delete": "Delete"
+    },
     "special_category": {
       "name": "Special Category"
     },
