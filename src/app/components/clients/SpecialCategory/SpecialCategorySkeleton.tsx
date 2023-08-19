@@ -1,11 +1,11 @@
 const SpecialCategorySkeleton = () => {
   return (
-    <div className=" animate-pulse p-1">
-      <div className="w-[160px] h-[180px] p-2 flex items-start flex-col ">
-        <div className="w-[125px] h-[125px] rounded ">
-          <div className="bg-slate-200  w-[125px] h-[125px] rounded-md"></div>
+    <div className="animate-pulse w-full">
+      <div className="h-48 p-2 flex items-start flex-col">
+        <div className="w-full h-full rounded">
+          <div className="bg-slate-200 w-full h-full rounded-md"></div>
         </div>
-        <div className=" mt-2  bg-slate-200 w-[125px] h-[25px] rounded-md items-start "></div>
+        <div className="mt-2 bg-slate-200 w-full h-6 rounded-md items-start"></div>
       </div>
     </div>
   );

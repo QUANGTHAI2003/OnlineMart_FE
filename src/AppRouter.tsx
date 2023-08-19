@@ -48,7 +48,7 @@ const AppRouter: React.FC = () => {
           <Route path="orders" element={<div>Đơn hàng</div>} />
           <Route path="address" element={<div>Địa chỉ</div>} />
           <Route path="wishlist" element={<div>Yêu thích</div>} />
-          <Route path="my_rating" element={<UserRating />} />>
+          <Route path="my_rating" element={<UserRating />} />
           <Route path="voucher" element={<Discount />} />
         </Route>
       </Route>

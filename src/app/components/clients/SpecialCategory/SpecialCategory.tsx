@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
+import "swiper/css";
+import "swiper/css/navigation";
 import SpecialCategoryItem from "./SpecialCategoryItem";
 
 const SpecialCategoryData = [
@@ -40,6 +44,18 @@ const SpecialCategoryData = [
     name: "Truyện tranh",
     url: "KhanhAn",
   },
+  {
+    id: 7,
+    image: "https://salt.tikicdn.com/cache/280x280/ts/product/22/33/d3/601306a5216073499075360883c650fc.jpg.webp",
+    name: "Truyện tranh",
+    url: "KhanhAn",
+  },
+  {
+    id: 8,
+    image: "https://salt.tikicdn.com/cache/280x280/ts/product/22/33/d3/601306a5216073499075360883c650fc.jpg.webp",
+    name: "Truyện tranh",
+    url: "KhanhAn",
+  },
 ];
 
 const SpecialCategory = () => {
@@ -52,21 +68,52 @@ const SpecialCategory = () => {
     }, 3000);
   }, []);
   return (
-    <div className="my-2">
-      <div className="text-base font-bold text-[#27272a] leading-6 ">{t("user.special_category.name")}</div>
-      <div className="max-w-[980px] max-h-[400px] p-1 flex items-center">
-        {loadingSkeleton
-          ? SpecialCategoryData.map((item) => {
-              return <SpecialCategoryItem.LoadingSkeleton key={item.id} />;
-            })
-          : !loadingSkeleton &&
-            SpecialCategoryData.map((item) => {
-              return (
-                <SpecialCategoryItem key={item.id} image={item.image} id={item.id} name={item.name} url={item.url} />
-              );
-            })}
-      </div>
-    </div>
+    <section className="w-full">
+      <section className="bg-white rounded-lg px-3 py-3">
+        <div className="text-base font-bold text-[#27272a] leading-6 mb-2">{t("user.special_category.name")}</div>
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={8.5}
+          loop={true}
+          navigation={true}
+          modules={[Navigation]}
+          breakpoints={{
+            320: {
+              slidesPerView: 1.5,
+            },
+            480: {
+              slidesPerView: 2.5,
+            },
+            768: {
+              slidesPerView: 3.5,
+            },
+            992: {
+              slidesPerView: 4.5,
+            },
+            1200: {
+              slidesPerView: 5.5,
+            },
+            1400: {
+              slidesPerView: 6.5,
+            },
+          }}
+        >
+          <div className="flex items-center">
+            {loadingSkeleton
+              ? SpecialCategoryData.map((item) => {
+                  return <SpecialCategoryItem.LoadingSkeleton key={item.id} />;
+                })
+              : SpecialCategoryData.map((item) => {
+                  return (
+                    <SwiperSlide key={item.id}>
+                      <SpecialCategoryItem image={item.image} id={item.id} name={item.name} url={item.url} />
+                    </SwiperSlide>
+                  );
+                })}
+          </div>
+        </Swiper>
+      </section>
+    </section>
   );
 };
 

@@ -109,7 +109,10 @@
     "product": {
       "sold": "Đã bán",
       "launched": "Just launched",
-      "sponsorship": "Tài trợ"
+      "sponsorship": "Tài trợ",
+      "good_price_today": "Good price today",
+      "view_more": "Xem thêm",
+      "suggestions": "Gợi ý hôm nay"
     },
     "sidebar": {
       "sidebar_name": "Danh mục",

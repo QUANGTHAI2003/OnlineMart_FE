@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-indent */
 import Mascot from "@app/app/assets/images/mascot.png";
-import imgItem from "@app/app/assets/images/nofitication/nofiticationItem.png";
+// import imgItem from "@app/app/assets/images/nofitication/nofiticationItem.png";
 import { Button, Col, Row } from "antd";
 import { useTranslation } from "react-i18next";
 const data: any[] = [

@@ -1,3 +1,4 @@
+import Sider from "antd/es/layout/Sider";
 import styled from "styled-components";
 
 export const avatarCategoryLoading = styled.div`
@@ -31,4 +32,10 @@ export const titleCategoryLoading = styled.p`
       background-position: right -40px top 0;
     }
   }
+`;
+
+export const SidebarStyle = styled(Sider)`
+  position: sticky !important;
+  top: 16px;
+  max-height: 100vh;
 `;

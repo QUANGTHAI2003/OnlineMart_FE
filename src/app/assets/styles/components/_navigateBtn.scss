@@ -1,0 +1,17 @@
+.swiper-button-prev,
+.swiper-button-next {
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; 
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px !important; 
+    border-radius: 50% !important; 
+    width: 30px !important; 
+    height: 30px !important; 
+    cursor: pointer !important; 
+    background-color: rgb(255, 255, 255) !important;
+
+    &::after {
+        font-size: 20px !important;
+        font-weight: 700;
+    }
+}

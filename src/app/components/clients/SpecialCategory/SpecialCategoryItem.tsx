@@ -12,8 +12,8 @@ interface ISpecialCategoryItem {
 const SpecialCategoryItem = ({ image, name, url }: ISpecialCategoryItem) => {
   return (
     <Link to={url}>
-      <div className="rounded-lg m-1 ">
-        <div className=" w-[160px] border rounded-lg border-gray-200 border-solid">
+      <div className="rounded-lg">
+        <div className="border rounded-lg border-gray-200 border-solid">
           <div className=" rounded-t-lg bg-[#f5f9ff]">
             <img src={image} alt={name} className="w-full h-full object-cover overflow-hidden p-2" />
           </div>

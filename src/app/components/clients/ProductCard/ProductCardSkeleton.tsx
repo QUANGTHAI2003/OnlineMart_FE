@@ -1,4 +1,8 @@
-const ProductCardSkeleton = () => {
+type ProductCardSkeletonProps = {
+  count: number;
+};
+
+const ProductCardSkeleton = ({ count }: ProductCardSkeletonProps) => {
   return (
     <div
       style={{
@@ -10,7 +14,7 @@ const ProductCardSkeleton = () => {
         padding: "8px",
       }}
     >
-      {[...Array(12)].map((_, index) => (
+      {[...Array(count)].map((_, index) => (
         <div key={index} className="w-full h-full animate-pulse">
           <div className="rounded-xl bg-slate-200 h-40 w-full"></div>
           <div className="info py-3 w-full">

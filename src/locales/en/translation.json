@@ -109,7 +109,10 @@
     "product": {
       "sold": "Sold",
       "launched": "Just launched",
-      "sponsorship": "Sponsorship"
+      "sponsorship": "Sponsorship",
+      "good_price_today": "Good price today",
+      "view_more": "View more",
+      "suggestions": "Today's suggestion"
     },
     "sidebar": {
       "sidebar_name": "Categories",
