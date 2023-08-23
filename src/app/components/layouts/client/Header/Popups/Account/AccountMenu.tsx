@@ -8,12 +8,10 @@ interface IAccount {
   name: string;
   avatar: string;
 }
-
 const AccountMenu: React.FC<IAccount> = ({ name, avatar }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);

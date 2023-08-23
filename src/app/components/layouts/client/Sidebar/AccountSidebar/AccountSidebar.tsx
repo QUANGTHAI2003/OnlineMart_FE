@@ -15,7 +15,6 @@ import AccountItem from "./AccountItem";
 const AccountSidebar = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
-
   const data = [
     {
       id: 1,

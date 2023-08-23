@@ -52,7 +52,7 @@ const SystemNofitication = () => {
           <p className="my-5">{t("user.account_user.account_notification_page.no_notification")}</p>
           <a
             href="#/"
-            className="bg-[#fdd835] py-[5px] px-[20px] text-[14px] text-lg text-[#4a4a4a] rounded-md inline-block mx-auto"
+            className="bg-[#fdd835] py-[5px] px-[20px] text-[14px] text-[#4a4a4a] rounded-md inline-block mx-auto"
           >
             {t("user.account_user.account_notification_page.no_product")}
           </a>

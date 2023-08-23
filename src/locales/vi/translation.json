@@ -32,6 +32,12 @@
       "account_purchase": "Quản lý đơn hàng",
       "account_address": "Sổ địa chỉ",
       "account_like": "Sản phẩm yêu thích",
+      "account_wishlist": {
+        "title": "Sản phẩm yêu thích",
+        "text_empty": "Hãy ❤️ sản phẩm bạn yêu thích khi mua sắm để xem lại thuận tiện nhất",
+        "button_shopping": "Tiếp tục mua sắm",
+        "comment": "({{rating}} nhận xét)"
+      },
       "account_rating": "Nhận xét của tôi",
       "account_voucher": "Mã giảm giá",
       "account_information": {

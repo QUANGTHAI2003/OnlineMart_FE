@@ -7,6 +7,8 @@ import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
 import Home from "./app/pages/client/home/Home";
+import UserNotification from "./app/pages/client/account/notification/UserNotification";
+import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
 
 // Components
 
@@ -44,10 +46,10 @@ const AppRouter: React.FC = () => {
         <Route path="product" element={<div>Trang sản phẩm</div>} />
         <Route path="account" element={<AccountLayout />}>
           <Route path="edit_profile" element={<UserProfile />} />
-          <Route path="notifications" element={<div>Thông báo</div>} />
+          <Route path="notifications" element={<UserNotification />} />
           <Route path="orders" element={<div>Đơn hàng</div>} />
           <Route path="address" element={<div>Địa chỉ</div>} />
-          <Route path="wishlist" element={<div>Yêu thích</div>} />
+          <Route path="wishlist" element={<UserWishlist />} />
           <Route path="my_rating" element={<UserRating />} />
           <Route path="voucher" element={<Discount />} />
         </Route>

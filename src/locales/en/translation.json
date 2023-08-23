@@ -32,6 +32,12 @@
       "account_purchase": "Purchases",
       "account_address": "Addresses",
       "account_like": "Favorites",
+      "account_wishlist": {
+        "title": "Favorites List",
+        "text_empty": "Take ❤️ your favorite products when shopping for the most convenient review",
+        "button_shopping": "Continue shopping",
+        "comment": "({{rating}} comments)"
+      },
       "account_rating": "Rating",
       "account_voucher": "Vouchers",
       "account_information": {

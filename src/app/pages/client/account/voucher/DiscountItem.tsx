@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { CopyIcon, DiscountItemFrame } from "@app/app/assets/icons";
 import { formatVNCurrency } from "@app/utils/helper";
 import { notificationController } from "@app/utils/notification";
