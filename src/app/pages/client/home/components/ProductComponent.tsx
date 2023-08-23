@@ -1,6 +1,6 @@
 import ProductCard from "@app/app/components/clients/ProductCard/ProductCard";
 import ProductCardSkeleton from "@app/app/components/clients/ProductCard/ProductCardSkeleton";
-import { Button, Row, TabsProps } from "antd";
+import { Button, Col, Row, TabsProps } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
@@ -79,16 +79,17 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
         ) : (
           <Row gutter={[8, 8]}>
             {data.slice(0, productCount).map((item) => (
-              <ProductCard
-                key={uuidv4()}
-                id={item.id}
-                name={item.name}
-                price={item.price}
-                discountRate={item.discount_rate}
-                quantitySold={item.quantity_sold}
-                ratingAverage={item.rating_average}
-                thumbnailUrl={item.thumbnail_url}
-              />
+              <Col key={uuidv4()} className="gutter-row" xs={{ span: 12 }} sm={{ span: 6 }} xl={{ span: 4 }}>
+                <ProductCard
+                  id={item.id}
+                  name={item.name}
+                  price={item.price}
+                  discountRate={item.discount_rate}
+                  quantitySold={item.quantity_sold}
+                  ratingAverage={item.rating_average}
+                  thumbnailUrl={item.thumbnail_url}
+                />
+              </Col>
             ))}
           </Row>
         )}
