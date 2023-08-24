@@ -98,9 +98,6 @@
     "special_category": {
       "name": "Special Category"
     },
-    "special_category": {
-      "name": "Special Category"
-    },
     "voucher": {
       "name": "My voucher",
       "discount": "Discount",
@@ -128,6 +125,46 @@
       "notifications": "Notifications",
       "show_all": "Show all",
       "show_less": "Show less"
+    },
+    "orders":{
+      "order":{
+        "my_order": "My order",
+        "all_menus": "All menus",
+        "wait_pay": "Wait for pay",
+        "processing": "Processing",
+        "being_transported": "Being Transported",
+        "delivered": "Delivered",
+        "canceled": "Canceled",
+        "find_order": "Find orders by Order ID, Seller or Product Name",
+        "find_orders": "Find orers",
+        "repurchase": "Repurchase",
+        "see_detail": "See details",
+        "see_more": "See more",
+        "show_less": "Show less",
+        "product": "product"
+      },
+      "order_details":{
+        "order_detail": "Order details",
+        "order_date": "Order date",
+        "receive_address": "RECEIVER'S ADDRESS",
+        "delivery_method": "DELIVERY METHOD",
+        "payments": "PAYMENTS",
+        "address": "Address",
+        "phone": "Phone",
+        "delivery_on": "Delivery On",
+        "product": "Product",
+        "price": "Price",
+        "quantity": "Quantity",
+        "discount": "Discount",
+        "provided": "Provided by",
+        "provisional": "Provisional",
+        "chat_seller": "Chat with the seller",
+        "repurchase": "Repurchase",
+        "transport_fee": "Transport fee",
+        "total": "Total",
+        "cancel_order": "Cancel Order",
+        "back_order": "<< Back to my order"
+      }
     },
     "select_address": {
       "delivered_to": "Delivered to:",

@@ -98,9 +98,6 @@
     "special_category": {
       "name": "Danh mục nổi bật"
     },
-    "special_category": {
-      "name": "Danh mục nổi bật"
-    },
     "voucher": {
       "name": "Mã giảm giá",
       "discount": "Giảm giá",
@@ -128,6 +125,47 @@
       "notifications": "Thông báo",
       "show_all": "Xem tất cả",
       "show_less": "Rút gọn"
+    },
+    "orders":{
+      "order":{
+        "my_order": "Đơn hàng của tôi",
+        "all_menus": "Tất cả đơn",
+        "wait_pay": "Chờ thanh toán",
+        "processing": "Đang xử lý",
+        "being_transported": "Đang vận chuyển",
+        "delivered": "Đã giao",
+        "canceled": "Đã hủy",
+        "find_order": "Tìm đơn hàng theo Mã đơn hàng, Nhà bán hoặc Tên sản phẩm",
+        "find_orders": "Tìm đơn hàng",
+        "repurchase": "Mua lại",
+        "see_detail": "Xem chi tiết",
+        "see_more": "Xem thêm",
+        "show_less": "Rút gọn",
+        "product": "sản phẩm"
+        
+      },
+      "order_details":{
+        "order_detail": "Chi tiết đơn hàng",
+        "order_date": "Ngày đặt hàng",
+        "receive_address": "ĐỊA CHỈ NGƯỜI NHẬN",
+        "delivery_method": "HÌNH THỨC GIAO HÀNG",
+        "payments": "HÌNH THỨC THANH TOÁN",
+        "address": "Địa chỉ",
+        "phone": "Số điện thoại",
+        "delivery_on": "Giao hàng vào",
+        "product": "Sản phẩm",
+        "price": "Giá",
+        "quantity": "Số lượng",
+        "discount": "Giảm giá",
+        "provided": "Cung cấp bởi",
+        "provisional": "Tạm tính",
+        "chat_seller": "Chat với nhà bán",
+        "repurchase": "Mua lại",
+        "transport_fee": "Phí vận chuyển",
+        "total": "Tổng cộng",
+        "cancel_order": "Hủy đơn hàng",
+        "back_order": "<< Quay lại đơn hàng của tôi"
+      }
     },
     "select_address": {
       "delivered_to": "Giao đến:",

@@ -20,7 +20,8 @@ const Product = React.lazy(() => import("@app/app/pages/admin/products/Product")
 const LoginUser = React.lazy(() => import("@app/app/pages/client/auth/LoginUser"));
 const SignupUser = React.lazy(() => import("@app/app/pages/client/auth/SignupUser"));
 const NotFound = React.lazy(() => import("@app/app/pages/errors/NotFound"));
-
+const ListOrder = React.lazy(() => import("@app/app/pages/client/account/orders/ListOrder"));
+const OrderDetail = React.lazy(() => import("@app/app/pages/client/account/orders/OrderDetail"));
 const UserProfile = React.lazy(() => import("@app/app/pages/client/account/profile/UserProfile"));
 const UserRating = React.lazy(() => import("@app/app/pages/client/account/rating/UserRating"));
 const Discount = React.lazy(() => import("@app/app/pages/client/account/voucher/Discount"));
@@ -47,6 +48,8 @@ const AppRouter: React.FC = () => {
         <Route path="account" element={<AccountLayout />}>
           <Route path="edit_profile" element={<UserProfile />} />
           <Route path="notifications" element={<UserNotification />} />
+          <Route path="orders" element={<ListOrder />} />
+          <Route path="order/:id" element={<OrderDetail />} />
           <Route path="orders" element={<div>Đơn hàng</div>} />
           <Route path="address" element={<div>Địa chỉ</div>} />
           <Route path="wishlist" element={<UserWishlist />} />

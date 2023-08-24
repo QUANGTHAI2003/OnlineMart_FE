@@ -62,7 +62,7 @@ function Notification() {
     },
   ];
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const { t } = useTranslation();
   const content = (
     <div className="notification-popover-content mx-auto">

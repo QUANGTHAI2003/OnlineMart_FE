@@ -14,7 +14,9 @@ const Dashboard = () => {
         <OpenGraph title="Dashboard" />
         <Counter />
       </Col>
-      <Col span={8}></Col>
+      <Col span={8}>
+
+      </Col>
       <Col span={8}>
         <Space direction="vertical" size={12}>
           <RangePicker />
