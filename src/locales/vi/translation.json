@@ -111,7 +111,7 @@
     },
     "product": {
       "sold": "Đã bán",
-      "launched": "Just launched",
+      "launched": "Vừa mở bán",
       "sponsorship": "Tài trợ",
       "good_price_today": "Giá tốt hôm nay",
       "view_more": "Xem thêm",
@@ -181,6 +181,33 @@
       "title": "Tìm kiếm",
       "expand": "Xem thêm",
       "collapse": "Thu gọn"
+    },
+    "product_detail": {
+      "brand": "Thương hiệu",
+      "view_review": "Xem {{count}} đánh giá",
+      "sold": "Đã bán {{count}}",
+      "end_after": "Kết thúc sau",
+      "delivery": "Giao hàng",
+      "discounted": "Giảm giá {{price}} và miễn phí vận chuyển",
+      "quantity": "Số lượng",
+      "purchase": "Mua hàng",
+      "purchased": "Đã mua hàng",
+      "view_image": "Xem thêm {{image}} hình ảnh",
+      "view_shop": "Xem cửa hàng",
+      "follow": "Theo dõi",
+      "followed": "Đã theo dõi",
+      "reply": "Trả lời tin nhắn",
+      "detail_info": "Thông tin chi tiết",
+      "description": "Mô tả sản phẩm",
+      "review": "Đánh giá - Nhận xét từ khách hàng",
+      "review_count": "{{count}} đánh giá",
+      "all_images": "Tất cả hình ảnh {{images}}",
+      "sort_by": "Sắp xếp theo: ",
+      "empty": "Không có đánh giá nào cho sản phẩm này",
+      "write_review": "Đã viết: ",
+      "receive_like": "Nhận được: ",
+      "like": "Thích",
+      "comments": "Bình luận"
     },
     "footer": {
       "footer_support": {

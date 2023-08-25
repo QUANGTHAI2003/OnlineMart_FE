@@ -181,6 +181,33 @@
       "expand": "Show more",
       "collapse": "Show less"
     },
+    "product_detail": {
+      "brand": "Brand",
+      "view_review": "View {{count}} reviews",
+      "sold": "Sold {{count}}",
+      "end_after": "Ends after",
+      "delivery": "Delivery",
+      "discounted": "Discounted by {{price}} with free shipping",
+      "quantity": "Quantity",
+      "purchase": "Purchase",
+      "purchased": "Purchased",
+      "view_image": "View more {{image}} images",
+      "view_shop": "View shop",
+      "follow": "Follow",
+      "followed": "Followed",
+      "reply": "Reply chat",
+      "detail_info": "Detail information",
+      "description": "Product description",
+      "review": "Review - Comment from customers",
+      "review_count": "{{count}} reviews",
+      "all_images": "All images {{images}}",
+      "sort_by": "Sort by: ",
+      "empty": "Do not have any review for this product",
+      "write_review": "Wrote: ",
+      "receive_like": "Received: ",
+      "like": "Like",
+      "comments": "Comments"
+    },
     "footer": {
       "footer_support": {
         "title": "Customer Support",

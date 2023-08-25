@@ -7,6 +7,8 @@ export const ImageGallery = styled.div`
   position: relative;
   height: 64px;
   transition: all 0.5s linear;
+  flex: 1;
+
   &.active {
     border: 1px solid rgb(13, 92, 182);
   }

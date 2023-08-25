@@ -1,4 +1,3 @@
-import UserHeader from "@app/app/components/layouts/client/Header/UserHeader";
 import CategorySidebar from "@app/app/components/layouts/client/Sidebar/CategorySidebar/CategorySidebar";
 import SortProductSidebar from "@app/app/components/layouts/client/Sidebar/SortProductSidebar/SortProductSidebar";
 import { useResponsive } from "@app/hooks";
@@ -6,6 +5,7 @@ import { Layout } from "antd";
 import { Outlet, useLocation } from "react-router-dom";
 
 import UserFooter from "./Footer/UserFooter";
+import UserHeader from "./Header/UserHeader";
 
 const UserMainLayout = (): JSX.Element => {
   // eslint-disable-next-line react-hooks/exhaustive-deps

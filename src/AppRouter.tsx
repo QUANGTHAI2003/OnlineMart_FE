@@ -6,7 +6,6 @@ import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
-import Home from "./app/pages/client/home/Home";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
 
@@ -20,6 +19,10 @@ const Product = React.lazy(() => import("@app/app/pages/admin/products/Product")
 const LoginUser = React.lazy(() => import("@app/app/pages/client/auth/LoginUser"));
 const SignupUser = React.lazy(() => import("@app/app/pages/client/auth/SignupUser"));
 const NotFound = React.lazy(() => import("@app/app/pages/errors/NotFound"));
+
+const Home = React.lazy(() => import("@app/app/pages/client/home/Home"));
+const ProductDetail = React.lazy(() => import("@app/app/pages/client/ProductDetail/ProductDetail"));
+
 const ListOrder = React.lazy(() => import("@app/app/pages/client/account/orders/ListOrder"));
 const OrderDetail = React.lazy(() => import("@app/app/pages/client/account/orders/OrderDetail"));
 const UserProfile = React.lazy(() => import("@app/app/pages/client/account/profile/UserProfile"));
@@ -44,13 +47,12 @@ const AppRouter: React.FC = () => {
       <Route path="/" element={protectedClientLayout}>
         <Route index element={<Home />} />
         <Route path="category" element={<div>Trang danh mục</div>} />
-        <Route path="product" element={<div>Trang sản phẩm</div>} />
+        <Route path="product" element={<ProductDetail />} />
         <Route path="account" element={<AccountLayout />}>
           <Route path="edit_profile" element={<UserProfile />} />
           <Route path="notifications" element={<UserNotification />} />
           <Route path="orders" element={<ListOrder />} />
           <Route path="order/:id" element={<OrderDetail />} />
-          <Route path="orders" element={<div>Đơn hàng</div>} />
           <Route path="address" element={<div>Địa chỉ</div>} />
           <Route path="wishlist" element={<UserWishlist />} />
           <Route path="my_rating" element={<UserRating />} />

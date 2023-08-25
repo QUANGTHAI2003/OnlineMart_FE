@@ -59,7 +59,7 @@ const ModalSelect = () => {
 
   return (
     <>
-      <S.ButtonStyle onClick={showModal}>
+      <S.ButtonStyle onClick={showModal} className="select-address-btn">
         <img src={IconMap} alt="Icon address" />
         <h4 className="title">{t("user.select_address.delivered_to")}</h4>
         <div className="address">{address}</div>

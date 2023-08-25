@@ -29,7 +29,7 @@ const UserHeader = () => {
               </a>
             </li>
             <li className="inline-block mx-1">
-              <div className="text-black inline-flex items-center">
+              <a href="/#" className="text-black inline-flex items-center">
                 <span className="cursor-text">{t("user.header.contact")}</span>
                 <a href="/#">
                   <FontAwesomeIcon icon={faFacebook} className="text-base mx-1 text-black" />
@@ -37,9 +37,10 @@ const UserHeader = () => {
                 <a href="/#">
                   <FontAwesomeIcon icon={faInstagram} className="text-base mx-1 text-black" />
                 </a>
-              </div>
+              </a>
             </li>
           </ul>
+
           <ul className="flex items-center mt-[5px]">
             <li className="inline-block">
               <a href="/#">

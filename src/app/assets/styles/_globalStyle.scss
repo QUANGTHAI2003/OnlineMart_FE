@@ -59,3 +59,20 @@ select {
 button {
   box-shadow: none;
 }
+
+img {
+  max-width: 100%;
+}
+
+
+body::-webkit-scrollbar{
+  width: 0px;
+}
+
+body::-webkit-scrollbar-track{
+  display: none;
+}
+
+body::-webkit-scrollbar-thumb{
+  display: none;
+}
