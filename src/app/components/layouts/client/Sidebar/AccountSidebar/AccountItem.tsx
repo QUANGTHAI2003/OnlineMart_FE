@@ -1,27 +1,26 @@
-import { Link } from "react-router-dom";
-import { styled } from "styled-components";
+import { NavLink } from "react-router-dom";
+
+import * as S from "./AccountSidebar.styles";
 
 interface IAccountItem {
   icon?: any; //?: truyền vào hay k cg đc
   title: string; //k có ?: bắt buộc truyền
   url: string;
+  onClickSidebar: any;
 }
 
-const AccountItemLink = styled(Link)`
-  svg {
-    display: flex;
-  }
-`;
-
-const AccountItem = ({ icon, title, url }: IAccountItem) => {
+const AccountItem = ({ icon, title, url, onClickSidebar }: IAccountItem) => {
   return (
-    <AccountItemLink
-      to={`/account/${url}`}
-      className="flex flex-row items-center py-3 hover:bg-slate-200 active:bg-blue-600/50 group focus:bg-blue-600/25 transition-all duration-200 cursor-pointer"
-    >
-      <div className="basis-3/12 text-xl pl-3 ml-5 fill-[#4a4a4a] place-self-center group-focus:fill-white">{icon}</div>
-      <p className="text-sm text-[#4a4a4a] group-focus:text-white">{title}</p>
-    </AccountItemLink>
+    <S.AccountItemLinkStyle className="flex flex-row items-center transition-all duration-200 cursor-pointer">
+      <NavLink
+        to={`/account/${url}`}
+        onClick={onClickSidebar}
+        className={`flex flex-row items-center gap-x-4 py-3 transition-all duration-200 cursor-pointer`}
+      >
+        {icon}
+        <span className="text-sm text-[#4a4a4a] group-focus:text-white">{title}</span>
+      </NavLink>
+    </S.AccountItemLinkStyle>
   );
 };
 

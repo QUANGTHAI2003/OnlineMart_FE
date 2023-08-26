@@ -109,6 +109,23 @@
       "expiry": "HSD",
       "empty": "Bạn chưa có mã giảm giá nào"
     },
+    "address": {
+      "name": "Sổ địa chỉ",
+      "add_address": "Thêm địa chỉ mới",
+      "edit_address": "Chỉnh sửa địa chỉ",
+      "default_address": "Địa chỉ mặc định",
+      "address": "Địa chỉ: ",
+      "p_address": "Nhập địa chỉ: ",
+      "phone": "Điện thoại: ",
+      "p_phone": "Nhập số điện thoại",
+      "action_edit": "Chỉnh sửa",
+      "action_delete": "Xóa",
+      "confirm_delete": "Bạn có muốn xóa địa chỉ này ?",
+      "action_update": "Cập nhật",
+      "fullname": "Họ và tên: ",
+      "p_fullname": "Nhập họ và tên",
+      "set_default": "Đặt làm địa chỉ mặc định"
+    },
     "product": {
       "sold": "Đã bán",
       "launched": "Vừa mở bán",

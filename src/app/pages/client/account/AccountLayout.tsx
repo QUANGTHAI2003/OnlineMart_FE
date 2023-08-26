@@ -1,41 +1,59 @@
 import AccountSidebar from "@app/app/components/layouts/client/Sidebar/AccountSidebar/AccountSidebar";
+import { useResponsive } from "@app/hooks";
 import { Layout } from "antd";
-import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
+import * as S from "./AccountLayout.styles";
 
 const AccountLayout = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const navigate = useNavigate();
+  const location = useLocation();
+  const { isTablet } = useResponsive();
+  const [showSidebar, setShowSidebar] = useState(true);
 
-  // Redirect to the "edit" route if the current route is "/account"
   useEffect(() => {
-    const currentPath = window.location.pathname;
+    const currentPath = location.pathname;
     if (currentPath === "/account") {
       navigate("edit_profile");
     }
-  }, [navigate]);
+  }, [location.pathname, navigate]);
+
+  const handleBack = () => {
+    setShowSidebar(true);
+    navigate("/account");
+  };
+
+  const handleSidebarToggle = () => {
+    if (!isTablet) {
+      setShowSidebar(!showSidebar);
+    }
+  };
 
   return (
-    <Layout className="container mx-auto">
-      <AccountSidebar />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-        }}
-      >
-        <Layout.Content
-          style={{
-            padding: 24,
-            minHeight: 280,
-            background: "#f5f5fa",
-          }}
-        >
-          <Outlet />
-        </Layout.Content>
-      </div>
-    </Layout>
+    <S.AccountLayoutStyle className="container mx-auto">
+      {showSidebar && <AccountSidebar onSidebar={handleSidebarToggle} />}
+      {(!isTablet && showSidebar) || (
+        <div className="flex flex-col w-full">
+          <Layout.Content
+            className="p-4 md:5 lg:6"
+            style={{
+              minHeight: 280,
+              background: "#f5f5fa",
+            }}
+          >
+            <>
+              {!isTablet && (
+                <button className="cursor-pointer" onClick={handleBack}>
+                  Back
+                </button>
+              )}
+              <Outlet />
+            </>
+          </Layout.Content>
+        </div>
+      )}
+    </S.AccountLayoutStyle>
   );
 };
 

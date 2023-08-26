@@ -8,6 +8,7 @@ import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
+import Address from "./app/pages/client/account/address/Address";
 
 // Components
 
@@ -53,7 +54,7 @@ const AppRouter: React.FC = () => {
           <Route path="notifications" element={<UserNotification />} />
           <Route path="orders" element={<ListOrder />} />
           <Route path="order/:id" element={<OrderDetail />} />
-          <Route path="address" element={<div>Địa chỉ</div>} />
+          <Route path="address" element={<Address />} />
           <Route path="wishlist" element={<UserWishlist />} />
           <Route path="my_rating" element={<UserRating />} />
           <Route path="voucher" element={<Discount />} />

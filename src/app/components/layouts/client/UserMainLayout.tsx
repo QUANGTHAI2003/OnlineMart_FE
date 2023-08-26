@@ -5,7 +5,6 @@ import { Layout } from "antd";
 import { Outlet, useLocation } from "react-router-dom";
 
 import UserFooter from "./Footer/UserFooter";
-import UserHeader from "./Header/UserHeader";
 
 const UserMainLayout = (): JSX.Element => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -19,7 +18,7 @@ const UserMainLayout = (): JSX.Element => {
 
   return (
     <Layout className="layout">
-      <UserHeader />
+      {/* <UserHeader /> */}
       <Layout className="container mx-auto gap-6 mt-6" style={{ maxWidth }}>
         {isTablet && (homePage ? <CategorySidebar /> : categoryPage ? <SortProductSidebar /> : null)}
         <div className="flex flex-col overflow-hidden">
@@ -29,7 +28,7 @@ const UserMainLayout = (): JSX.Element => {
           {homePage && <UserFooter />}
         </div>
       </Layout>
-      {homePage || <UserFooter />}
+      {/* {homePage || <UserFooter />} */}
     </Layout>
   );
 };
