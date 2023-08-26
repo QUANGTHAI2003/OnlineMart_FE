@@ -63,12 +63,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-unused-vars': 'warn',
-    'react-hooks/exhaustive-deps': [
-      'warn',
-      {
-        additionalHooks: '^use',
-      },
-    ],
     'react/jsx-fragments': ['warn', 'syntax'],
     'no-unused-vars': [
       'warn',
