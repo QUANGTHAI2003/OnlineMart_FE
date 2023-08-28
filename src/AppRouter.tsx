@@ -21,6 +21,7 @@ const LoginUser = React.lazy(() => import("@app/app/pages/client/auth/LoginUser"
 const SignupUser = React.lazy(() => import("@app/app/pages/client/auth/SignupUser"));
 const NotFound = React.lazy(() => import("@app/app/pages/errors/NotFound"));
 
+const ProductCategory = React.lazy(() => import("@app/app/pages/client/category/ProductCategory"));
 const Home = React.lazy(() => import("@app/app/pages/client/home/Home"));
 const ProductDetail = React.lazy(() => import("@app/app/pages/client/ProductDetail/ProductDetail"));
 
@@ -47,7 +48,7 @@ const AppRouter: React.FC = () => {
     <Routes>
       <Route path="/" element={protectedClientLayout}>
         <Route index element={<Home />} />
-        <Route path="category" element={<div>Trang danh mục</div>} />
+        <Route path="category" element={<ProductCategory />} />
         <Route path="product" element={<ProductDetail />} />
         <Route path="account" element={<AccountLayout />}>
           <Route path="edit_profile" element={<UserProfile />} />

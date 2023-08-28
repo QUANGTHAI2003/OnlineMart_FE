@@ -21,13 +21,13 @@
       "account_info": "Thông tin tài khoản",
       "account_notification": "Thông báo của tôi",
       "account_notification_page": {
-          "remove_all": "Xóa tất cả thông báo",
-          "read_all": "Đánh dấu đọc tất cả",
-          "read_an": "Đánh dấu đã đọc",
-          "remove_an": "Xóa",
-          "detail": " Chi tiết",
-          "no_notification": "Bạn không có thông báo",
-          "no_product": "Bạn chưa có sản phẩm"
+        "remove_all": "Xóa tất cả thông báo",
+        "read_all": "Đánh dấu đọc tất cả",
+        "read_an": "Đánh dấu đã đọc",
+        "remove_an": "Xóa",
+        "detail": " Chi tiết",
+        "no_notification": "Bạn không có thông báo",
+        "no_product": "Bạn chưa có sản phẩm"
       },
       "account_purchase": "Quản lý đơn hàng",
       "account_address": "Sổ địa chỉ",
@@ -95,8 +95,33 @@
       "keep shopping": "Tiếp tục mua sắm",
       "delete": "Xóa"
     },
-    "special_category": {
-      "name": "Danh mục nổi bật"
+    "product_category_sidebar": {
+      "product_category": "Danh Mục Sản Phẩm",
+      "rating": "Đánh Giá",
+      "price": "Giá",
+      "range": "Chọn khoảng giá",
+      "color": "Màu sắc",
+      "apply": "Áp dụng",
+      "see_more": "Xem thêm",
+      "collapse": "Thu gọn"
+    },
+    "product_category_page": {
+      "sponsored": "Tài trợ bởi",
+      "sort_by": "Lọc",
+      "popular": "Nổi bật",
+      "top_sell": "Bán chạy",
+      "latest": "Mới nhất",
+      "low_high": "Giá thấp đến cao",
+      "high_low": "Giá cao đến thấp",
+      "to": "đến",
+      "delete_all": "Xóa tất cả",
+      "filter": "Bộ Lọc Tìm Kiếm",
+      "address": "Địa Chỉ Nhận Hàng",
+      "rate": "Đánh giá",
+      "price": "Giá",
+      "reset": "Thiết lập lại",
+      "apply": "Áp dụng",
+      "range": "Hoặc nhập giá ở ô dưới đây"
     },
     "voucher": {
       "name": "Mã giảm giá",

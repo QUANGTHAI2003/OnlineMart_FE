@@ -95,8 +95,33 @@
       "keep shopping": "Keep shopping",
       "delete": "Delete"
     },
-    "special_category": {
-      "name": "Special Category"
+    "product_category_sidebar": {
+      "product_category": "Product Category",
+      "rating": "Rating",
+      "price": "Price",
+      "range": "Price range",
+      "color": "Color",
+      "apply": "Apply",
+      "see_more": "See more",
+      "collapse": "Collapse"
+    },
+    "product_category_page": {
+      "sponsored": "Sponsored by",
+      "sort_by": "Sort by",
+      "popular": "Popular",
+      "top_sell": "Top best selling",
+      "latest": "Latest",
+      "low_high": "Low to high",
+      "high_low": "High to low",
+      "to": "to",
+      "delete_all": "Delete all",
+      "filter": "Search Filter",
+      "address": "Address",
+      "rate": "Rating",
+      "price": "Price",
+      "reset": "Reset",
+      "apply": "Apply",
+      "range": "Or enter in the box below"
     },
     "voucher": {
       "name": "My voucher",
