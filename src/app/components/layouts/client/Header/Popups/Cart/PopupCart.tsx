@@ -17,7 +17,6 @@ interface ICartProps {
 }
 
 function Cart({ items }: ICartProps) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -52,9 +51,11 @@ function Cart({ items }: ICartProps) {
         )}
       />
       <div className="mt-4">
-        <Button type="primary" block>
-          {t("user.popup_cart.button_view")}
-        </Button>
+        <a href="/checkout">
+          <Button type="primary" block>
+            {t("user.popup_cart.button_view")}
+          </Button>
+        </a>
       </div>
     </div>
   );
@@ -67,9 +68,11 @@ function Cart({ items }: ICartProps) {
       onOpenChange={handleVisibleChange}
       placement="bottomRight"
     >
-      <Badge count={items.length} className="text-sm">
-        <ShoppingCartOutlined className="cursor-pointer text-[#000] text-2xl" />
-      </Badge>
+      <a href="/checkout">
+        <Badge count={items.length} className="text-sm">
+          <ShoppingCartOutlined className="cursor-pointer text-[#000] text-2xl" />
+        </Badge>
+      </a>
     </Popover>
   );
 }

@@ -74,8 +74,8 @@ const Search: React.FC = () => {
     }
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
+
   return (
     <div className="relative w-[800px] h-[40px]">
       <div className="w-full h-full flex items-center rounded-lg relative border-solid border border-[#DDDDE3] bg-white">

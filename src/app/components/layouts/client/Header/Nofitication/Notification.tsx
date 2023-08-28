@@ -5,8 +5,6 @@ import { Popover } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-// import { useTranslation } from "react-i18next";
-
 function Notification() {
   const [visible, setVisible] = useState(false);
   const [showLess, setShowLess] = useState(true);
@@ -62,8 +60,8 @@ function Notification() {
     },
   ];
 
-
   const { t } = useTranslation();
+
   const content = (
     <div className="notification-popover-content mx-auto">
       <div className="text-left text-lg mb-2 text-gray-500">{t("user.notifications.notifications")}</div>

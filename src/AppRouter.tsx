@@ -6,9 +6,10 @@ import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
+import Address from "./app/pages/client/account/address/Address";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
-import Address from "./app/pages/client/account/address/Address";
+import Cart from "./app/pages/client/home/Cart";
 
 // Components
 
@@ -49,6 +50,7 @@ const AppRouter: React.FC = () => {
       <Route path="/" element={protectedClientLayout}>
         <Route index element={<Home />} />
         <Route path="category" element={<ProductCategory />} />
+        <Route path="checkout" element={<Cart />} />
         <Route path="product" element={<ProductDetail />} />
         <Route path="account" element={<AccountLayout />}>
           <Route path="edit_profile" element={<UserProfile />} />

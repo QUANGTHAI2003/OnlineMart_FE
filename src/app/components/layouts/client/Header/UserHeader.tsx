@@ -11,8 +11,8 @@ import Search from "./SearchBar/Search";
 
 const UserHeader = () => {
   const isAuthenticated = true;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
+
   return (
     <header className="h-[120px] bg-white">
       <div className="w-[1200px] max-w-full mx-auto my-0">
@@ -29,7 +29,7 @@ const UserHeader = () => {
               </a>
             </li>
             <li className="inline-block mx-1">
-              <a href="/#" className="text-black inline-flex items-center">
+              <div className="text-black inline-flex items-center">
                 <span className="cursor-text">{t("user.header.contact")}</span>
                 <a href="/#">
                   <FontAwesomeIcon icon={faFacebook} className="text-base mx-1 text-black" />
@@ -37,7 +37,7 @@ const UserHeader = () => {
                 <a href="/#">
                   <FontAwesomeIcon icon={faInstagram} className="text-base mx-1 text-black" />
                 </a>
-              </a>
+              </div>
             </li>
           </ul>
 
@@ -48,9 +48,9 @@ const UserHeader = () => {
               </a>
             </li>
             <li className="inline-block">
-              <a href="/#">
+              <div>
                 <PopupLanguage />
-              </a>
+              </div>
             </li>
             <li className="inline-block">
               {!isAuthenticated ? (

@@ -16,6 +16,39 @@
       "recently_title": "Recently added products",
       "button_view": "View My Shopping Cart"
     },
+    "shopping_cart_page": {
+      "cart": "Cart",
+      "selectAll": "Select All",
+      "price": "Price",
+      "quantity": "Quantity",
+      "sub_total": "Sub total",
+      "items": "Items",
+      "btn_checkout": "Check out",
+      "btn_delete": "Delete",
+      "btn_confirm_title": "Delete product",
+      "btn_confirm_description": "Do you want to delete the selected product?",
+      "deliver": "Delivering to",
+      "change_address": "Change",
+      "home_address": "Home",
+      "promotion": "Promotion",
+      "promotion_description": "Select or enter different coupon code",
+      "discount": "Discount",
+      "total_price": "Total",
+      "shop_promotion": "Shop Promotion",
+      "shop_promotion_condition": "Please select a product first",
+      "empty_cart": "Your cart is empty",
+      "empty_description": "Continue shopping",
+      "modal_coupon": {
+        "title": "OM Promotion",
+        "empty_coupon": "There are no coupon codes yet",
+        "empty_description": "If you have a coupon code from the shop, please enter it in the input above",
+        "placeholder": "Enter code coupon",
+        "button_apply": "Apply",
+        "button_cancel": "Unchecked",
+        "title_list": "Coupons",
+        "limit": "Apply up to: 1"
+      }
+    },
     "account_user": {
       "account_of": "Account to",
       "account_info": "Information",
@@ -168,8 +201,8 @@
       "show_all": "Show all",
       "show_less": "Show less"
     },
-    "orders":{
-      "order":{
+    "orders": {
+      "order": {
         "my_order": "My order",
         "all_menus": "All menus",
         "wait_pay": "Wait for pay",
@@ -185,7 +218,7 @@
         "show_less": "Show less",
         "product": "product"
       },
-      "order_details":{
+      "order_details": {
         "order_detail": "Order details",
         "order_date": "Order date",
         "receive_address": "RECEIVER'S ADDRESS",
