@@ -35,13 +35,7 @@ const AccountLayout = () => {
       {showSidebar && <AccountSidebar onSidebar={handleSidebarToggle} />}
       {(!isTablet && showSidebar) || (
         <div className="flex flex-col w-full">
-          <Layout.Content
-            className="p-4 md:5 lg:6"
-            style={{
-              minHeight: 280,
-              background: "#f5f5fa",
-            }}
-          >
+          <Layout.Content className="p-4 md:5 lg:6">
             <>
               {!isTablet && (
                 <button className="cursor-pointer" onClick={handleBack}>

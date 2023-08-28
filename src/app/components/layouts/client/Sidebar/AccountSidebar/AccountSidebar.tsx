@@ -7,14 +7,16 @@ import {
   AccountStar,
   AccountUser,
 } from "@app/app/assets/icons/index";
+import { AvatarImage } from "@app/app/components/Images";
+import { useResponsive } from "@app/hooks";
 import { useTranslation } from "react-i18next";
 
 import AccountItem from "./AccountItem";
 import * as S from "./AccountSidebar.styles";
 
 const AccountSidebar = ({ onSidebar }: any) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
+  const { isTablet } = useResponsive();
   const data = [
     {
       id: 1,
@@ -61,26 +63,37 @@ const AccountSidebar = ({ onSidebar }: any) => {
   ];
 
   return (
-    <S.AccountSidebarStyle width={230} className="bg-white rounded-md shadow-gray-200 py-5">
-      <div className="flex px-6 py-2">
-        <div className="">
-          <img className="rounded-full w-10" src="src/app/assets/images/10.png" alt="ggg" />
+    <div className="flex flex-col justify-center w-full md:block md:w-auto">
+      <S.AccountSidebarStyle width={230} className="md:bg-white rounded-md shadow-gray-200 py-5">
+        <div className="flex items-center px-6 py-2">
+          <AvatarImage className="block" src="https://source.unsplash.com/random" size="large" alt="Quang Thai" />
+
+          <div className="ml-2">
+            <p className="text-xs py-px pl-1.5">{t("user.account_user.account_of")}</p>
+            <p className="text-xl font-medium pl-1.5">Hoàng Lịch</p>
+          </div>
         </div>
 
-        <div className="ml-2">
-          <p className="text-xs py-px pl-1.5">{t("user.account_user.account_of")}</p>
-          <p className="text-xl font-medium pl-1.5">Hoàng Lịch</p>
-        </div>
-      </div>
-
-      <ul className="flex flex-col justify-center">
-        {data.map((item) => {
-          return (
-            <AccountItem key={item.id} title={item.title} icon={item.icon} url={item.url} onClickSidebar={onSidebar} />
-          );
-        })}
-      </ul>
-    </S.AccountSidebarStyle>
+        <ul className="flex flex-col justify-center">
+          {data.map((item) => {
+            return (
+              <AccountItem
+                key={item.id}
+                title={item.title}
+                icon={item.icon}
+                url={item.url}
+                onClickSidebar={onSidebar}
+              />
+            );
+          })}
+        </ul>
+      </S.AccountSidebarStyle>
+      {isTablet || (
+        <S.ButtonStyle className="wrap-btn">
+          <button className="wrap-btn__button">Đăng Xuất</button>
+        </S.ButtonStyle>
+      )}
+    </div>
   );
 };
 
