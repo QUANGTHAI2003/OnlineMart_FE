@@ -1,53 +1,36 @@
 import ProductCard from "@app/app/components/clients/ProductCard/ProductCard";
 import ProductCardSkeleton from "@app/app/components/clients/ProductCard/ProductCardSkeleton";
 import { Button, Col, Row, TabsProps } from "antd";
+import queryString from "query-string";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-import data from "../data";
+import { productTab } from "../data";
 import * as S from "../Home.styles";
-
-const tabData = [
-  {
-    id: 1,
-    thumbnail: "https://salt.tikicdn.com/cache/w100/ts/personalish/f9/27/b5/3a8e2286a1c8fb91b67acc5ee35f82f0.png.webp",
-    title: "Dành cho bạn",
-  },
-  {
-    id: 2,
-    thumbnail: "https://salt.tikicdn.com/cache/w100/ts/personalish/d4/de/6f/412a517a5b52d5312b66a47c088daa2e.png.webp",
-    title: "Free shipping",
-  },
-  {
-    id: 3,
-    thumbnail: "https://salt.tikicdn.com/cache/w100/ts/personalish/f9/27/b5/3a8e2286a1c8fb91b67acc5ee35f82f0.png.webp",
-    title: "Sản phẩm mới",
-  },
-  {
-    id: 4,
-    thumbnail: "https://salt.tikicdn.com/cache/w100/ts/personalish/f9/27/b5/3a8e2286a1c8fb91b67acc5ee35f82f0.png.webp",
-    title: "Sản phẩm bán chạy",
-  },
-  {
-    id: 5,
-    thumbnail: "https://salt.tikicdn.com/cache/100x100/ts/upload/20/68/cf/6d4adbdbcd1c35b0a438a655d9a420d0.png.webp",
-    title: "Sản phẩm giảm giá",
-  },
-];
 
 interface IFixedHeader {
   isFixedHeader: string;
 }
 
 const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
+  const location = useLocation();
+  const nagigate = useNavigate();
 
   const initialProductCount = 18;
-  const [productCount, setProductCount] = useState(initialProductCount);
-  const [loadingSkeletonCount, setLoadingSkeletonCount] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const paramFilterName = "tab";
+  const inititalTab = productTab.tabs[0].slug;
+
+  const [productCount, setProductCount] = useState<number>(initialProductCount);
+  const [tabFiltered, setTabFiltered] = useState<any>((): any => {
+    const params = queryString.parse(location.search);
+    return String(params?.[paramFilterName] || inititalTab);
+  });
+
+  const [loadingSkeletonCount, setLoadingSkeletonCount] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleViewMore = () => {
     setIsLoading(true);
@@ -57,6 +40,17 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
     }, 1000);
   };
 
+  const handleChangeTab = (key: string) => {
+    setTabFiltered(key);
+    const queryParams = queryString.stringify({ [paramFilterName]: key || inititalTab });
+    nagigate({ search: queryParams });
+  };
+
+  useEffect(() => {
+    const params = queryString.parse(location.search);
+    setTabFiltered(params?.[paramFilterName] || inititalTab);
+  }, [inititalTab, location.search]);
+
   useEffect(() => {
     setLoadingSkeletonCount(true);
     setTimeout(() => {
@@ -64,12 +58,12 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
     }, 5000);
   }, []);
 
-  const itemData = tabData.map((item) => ({
-    key: item.id.toString(),
+  const itemData = productTab.tabs.map((productTabData: any) => ({
+    key: productTabData?.slug,
     label: (
       <>
-        <img src={item.thumbnail} alt="" />
-        <span className="tab-text">{item.title}</span>
+        <img src={productTabData?.icon} alt={productTabData?.title} />
+        <span className="tab-text">{productTabData?.title}</span>
       </>
     ),
     children: (
@@ -78,8 +72,8 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
           <ProductCardSkeleton count={18} />
         ) : (
           <Row gutter={[8, 8]}>
-            {data.slice(0, productCount).map((item) => (
-              <Col key={uuidv4()} className="gutter-row" xs={{ span: 12 }} sm={{ span: 6 }} xl={{ span: 4 }}>
+            {productTabData?.items?.slice(0, productCount).map((item: any) => (
+              <Col key={uuidv4()} xs={{ span: 12 }} sm={{ span: 6 }} xl={{ span: 4 }}>
                 <ProductCard
                   id={item.id}
                   name={item.name}
@@ -94,7 +88,7 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
           </Row>
         )}
 
-        {productCount < data.length && (
+        {productCount < productTabData?.items?.length && (
           <Button type="primary" size="large" loading={isLoading} ghost className="view_more" onClick={handleViewMore}>
             {t("user.product.view_more")}
           </Button>
@@ -109,7 +103,14 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
     <S.ProductStyle isfixed={isFixedHeader}>
       <div className="header" id="productList">
         <h2>{t("user.product.suggestions")}</h2>
-        <S.TabsStyle defaultActiveKey="1" items={items} animated={false} centered />
+        <S.TabsStyle
+          defaultActiveKey={inititalTab}
+          activeKey={tabFiltered}
+          items={items}
+          animated={false}
+          centered
+          onChange={handleChangeTab}
+        />
       </div>
     </S.ProductStyle>
   );

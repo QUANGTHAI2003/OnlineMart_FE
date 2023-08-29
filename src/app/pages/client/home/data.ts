@@ -205,3 +205,1256 @@ export const dataSlide = [
     imgSlide: "https://salt.tikicdn.com/cache/w1080/ts/tikimsp/25/01/c9/ba0192409674b424fcfdbae12697322a.png.webp",
   },
 ];
+
+export const productTab = {
+  tabs: [
+    {
+      id: 1,
+      title: "Dành cho bạn",
+      slug: "danh-cho-ban",
+      icon: "https://salt.tikicdn.com/ts/personalish/f9/27/b5/3a8e2286a1c8fb91b67acc5ee35f82f0.png",
+      items: [
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Bánh Trung Thu",
+      slug: "banh-trung-thu",
+      icon: "https://i.ibb.co/S7Znt58/TRUNGTHU-GYHN-2.png",
+      items: [
+        {
+          id: 6772415,
+          name: "Bánh Trung Thu",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "Freeship",
+      slug: "freeship",
+      icon: "https://salt.tikicdn.com/ts/personalish/d4/de/6f/412a517a5b52d5312b66a47c088daa2e.png",
+      items: [
+        {
+          id: 6772415,
+          name: "Freeship",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "Astra Plus",
+      slug: "astra-plus",
+      icon: "https://salt.tikicdn.com/ts/personalish/1a/41/2f/bd05c095d72298752832dd5e87917c1c.png",
+      items: [
+        {
+          id: 6772415,
+          name: "Astra Plus",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+      ],
+    },
+    {
+      id: 5,
+      title: "Dịch vụ số",
+      slug: "dich-vu-so",
+      icon: "https://salt.tikicdn.com/ts/personalish/08/b8/5c/5c6327fd3cf12c534bff4a55dab2f12d.png",
+      items: [
+        {
+          id: 6772415,
+          name: "Dịch vụ số",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+      ],
+    },
+    {
+      id: 6,
+      title: "Deal Siêu Hot",
+      slug: "deal-sieu-hot",
+      icon: "https://salt.tikicdn.com/ts/personalish/41/99/9a/8898607d7fca4b79775a708c57a8152f.png",
+      items: [
+        {
+          id: 6772415,
+          name: "Deal Siêu Hot",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 0,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+        {
+          id: 6772415,
+          name: "Lò Nướng Điện Sunhouse SHD4206 (10L) - Hàng chính hãng",
+          price: 470000,
+          discount_rate: 40,
+          quantity_sold: 14074,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 6771909,
+          name: "Lò Nướng Điện Sunhouse SHD4216 (16L) - Hàng chính hãng",
+          price: 759000,
+          discount_rate: 28,
+          quantity_sold: 14074,
+          rating_average: 4.3,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/f6/47/6c/0a4343c10030b1a025fd4750a05e67a1.png",
+        },
+        {
+          id: 71985742,
+          name: "Áo Gió Nam, Áo khoác nam [Nhập EZAGG10K giảm 10K + Miễn Phí Vận Chuyển] Chống Thấm Nước Có Túi Trong Kèm Túi Khóa Kéo Phong Cách Trẻ Trung",
+          price: 159000,
+          discount_rate: 47,
+          quantity_sold: 328,
+          rating_average: 4.45,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/b7/53/6a/df9e01310eb21e2e9f872b239f7ad10e.jpg",
+        },
+        {
+          id: 252608893,
+          name: "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size XXL 54+8 miếng",
+          price: 305000,
+          discount_rate: 36,
+          quantity_sold: 6855,
+          rating_average: 4.8,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/3b/7d/8f/f6d83d4d0804e9c65aec36e117b83966.jpg",
+        },
+        {
+          id: 193143163,
+          name: "[26.07_MUA 1 TẶNG 2 + VOUCHER 20K] Combo 2 bịch cà phê hòa tan Nescafé 3in1 vị nguyên bản - công thức cải tiến (Bịch 46 gói)",
+          price: 360000,
+          discount_rate: 0,
+          quantity_sold: 1869,
+          rating_average: 4.95,
+          thumbnail_url:
+            "https://salt.tikicdn.com/cache/280x280/ts/product/24/05/0c/3d326e7b6d2faa0f393bd7db970047e0.jpg",
+        },
+      ],
+    },
+  ],
+};
