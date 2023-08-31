@@ -3,22 +3,16 @@ import { useToggle } from "@app/hooks";
 import { Alert, FloatButton, Layout } from "antd";
 import { Outlet } from "react-router-dom";
 
-import MainSidebar from "./AdminMainSidebar";
+import AdminMainSidebar from "./Sidebar/AdminMainSidebar";
 
 const AdminMainLayout = () => {
-  // const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-
-  // const toggleSidebar = () => {
-  //   setSidebarCollapsed(!sidebarCollapsed);
-  // };
-
   const [isCollapsed, toggleSidebar] = useToggle(false);
 
   return (
     <>
       <Alert message={<div>hello</div>} type="warning" style={{ textAlign: "center" }} />
       <Layout>
-        <MainSidebar isCollapsed={isCollapsed} />
+        <AdminMainSidebar isCollapsed={isCollapsed} />
         <Layout>
           <MainHeader isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
           <Layout.Content
