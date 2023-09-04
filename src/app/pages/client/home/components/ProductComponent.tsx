@@ -55,7 +55,7 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
     setLoadingSkeletonCount(true);
     setTimeout(() => {
       setLoadingSkeletonCount(false);
-    }, 5000);
+    }, 500);
   }, []);
 
   const itemData = productTab.tabs.map((productTabData: any) => ({
@@ -73,7 +73,7 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
         ) : (
           <Row gutter={[8, 8]}>
             {productTabData?.items?.slice(0, productCount).map((item: any) => (
-              <Col key={uuidv4()} xs={{ span: 12 }} sm={{ span: 6 }} xl={{ span: 4 }}>
+              <Col key={uuidv4()} xs={{ span: 12 }} sm={{ span: 6 }} md={{ span: 8 }} lg={{ span: 6 }} xl={{ span: 4 }}>
                 <ProductCard
                   id={item.id}
                   name={item.name}

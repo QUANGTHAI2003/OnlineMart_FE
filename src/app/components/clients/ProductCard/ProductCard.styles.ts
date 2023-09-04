@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ProductItem = styled.div`
-  > a {
+  .product-item {
     text-decoration: none;
     display: flex;
     position: relative;
@@ -13,12 +13,37 @@ export const ProductItem = styled.div`
     overflow: hidden;
     color: rgb(36, 36, 36);
 
-    > * {
-      width: 100%;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
+      transform: scale(1.01);
+    }
+  }
+
+  &.small {
+    height: 100%;
+
+    .price-discount {
+      font-size: 16px;
+
+      &__discount {
+        font-size: 12px;
+      }
     }
 
-    &:hover {
-      box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
+    .rating-star {
+      .om-rate {
+        font-size: 12px;
+      }
+    }
+
+    .quantity {
+      font-size: 10px;
+    }
+
+    .delivery-date {
+      span {
+        font-size: 12px;
+      }
     }
   }
 `;
@@ -106,9 +131,20 @@ export const Thumbnail = styled.div`
   width: 100%;
   padding-top: 100%;
 
+  .blur-load {
+    background-size: 10px;
+    background-repeat: repeat;
+    width: 100%;
+    height: 100%;
+  }
+
   > img {
     display: block;
     z-index: 2;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    transition: opacity 250ms ease-in-out 0s;
   }
 
   img {
@@ -118,11 +154,13 @@ export const Thumbnail = styled.div`
 `;
 
 export const Info = styled.div`
+  min-height: 200px;
   display: flex;
   flex-direction: column;
 
   .info {
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     padding: 4px 8px;
     gap: 4px;
@@ -147,22 +185,28 @@ export const Info = styled.div`
   .price-discount {
     text-align: left;
     font-size: 18px;
+    line-height: 150%;
     font-weight: 500;
     color: rgb(39, 39, 42);
-    margin-bottom: 4px;
+    margin: 0px;
     display: flex;
-    -webkit-box-align: center;
-    align-items: flex-end;
+    align-items: center;
 
-    .price-discount__discount {
+    &__discount {
       display: inline-block;
-      margin-left: 8px;
-      padding: 0px 6px;
+      height: 18px;
+      margin-left: 12px;
+      padding: 0px 4px;
       background: rgb(245, 245, 250);
       border-radius: 1000px;
       color: rgb(39, 39, 42);
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
+      line-height: 150%;
+    }
+
+    &.has-discount {
+      color: rgb(255, 66, 78);
     }
   }
 
@@ -187,6 +231,30 @@ export const Info = styled.div`
       width: 100%;
     }
   }
+
+  .have-variant {
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .variant-item {
+      align-items: center;
+      border: 0.5px solid rgb(26, 148, 255);
+      border-radius: 2px;
+      padding: 2px 4px;
+      display: flex;
+
+      &-text {
+        color: rgb(26, 148, 255);
+        font-size: 10px;
+        line-height: 12px;
+        font-weight: 400;
+      }
+    }
+  }
 `;
 
 export const ProductName = styled.div`
@@ -198,13 +266,12 @@ export const ProductName = styled.div`
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
       overflow: hidden;
-      white-space: break-spaces;
       font-weight: 400;
-      font-size: 16px;
+      font-size: 14px;
+      line-height: 150%;
       color: rgb(39, 39, 42);
       margin: 0px;
       word-break: break-word;
-      line-height: 125%;
     }
   }
 
@@ -212,7 +279,9 @@ export const ProductName = styled.div`
     line-height: 100%;
 
     .om-rate {
-      font-size: 13px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
 
       &-star {
         margin-inline-end: 2px;
@@ -224,11 +293,12 @@ export const ProductName = styled.div`
     color: rgb(128, 128, 137);
     font-weight: 400;
     font-size: 12px;
+    line-height: 150%;
 
     &.has-border {
       position: relative;
-      margin-left: 6px;
-      padding-left: 8px;
+      margin-left: 4px;
+      padding-left: 5px;
 
       &::before {
         content: "";
@@ -246,16 +316,18 @@ export const ProductName = styled.div`
 
 export const DeliveryInfo = styled.div`
   margin-inline: 8px;
-  .delivery-info {
+
+  .delivery-date {
     display: flex;
     gap: 4px;
     border-top: 1px solid rgb(235, 235, 240);
     padding-top: 6px;
     padding-bottom: 8px;
+    align-items: center;
 
     span {
       font-weight: 400;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 150%;
       color: rgb(128, 128, 137);
       -webkit-box-orient: vertical;

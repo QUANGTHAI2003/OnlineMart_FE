@@ -1,6 +1,7 @@
 import OfficialIcon from "@app/app/assets/images/official.png";
-import { formatCurrency } from "@app/utils/helper";
+import { formatCurrency, formatVNCurrency } from "@app/utils/helper";
 import { Rate } from "antd";
+import { useLayoutEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as S from "./ProductCard.styles";
@@ -24,17 +25,35 @@ const ProductCard: React.FC<IProductCardItem> = ({
   ratingAverage,
   thumbnailUrl,
 }) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
+  const productItemRef = useRef<HTMLDivElement>(null);
+
+  const smallProductItem = 170;
+
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      if (productItemRef.current) {
+        const productItemWidth = productItemRef.current.offsetWidth;
+        productItemRef.current.classList.toggle("small", productItemWidth < smallProductItem);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <S.ProductItem className="rounded-sm">
-      <a href={`/${id}`}>
-        <span className="flex-col">
+    <S.ProductItem ref={productItemRef}>
+      <a href={`/${id}`} className="product-item">
+        <span className="flex flex-col w-full">
           <S.Thumbnail>
             <div className="w-full h-full absolute top-0 left-0">
               <div className="thumbnail">
-                <img src={thumbnailUrl} className="w-full h-full object-cover" alt="Img" />
+                <img src={thumbnailUrl} className="w-full h-full object-contain block" alt="Img" />
               </div>
             </div>
           </S.Thumbnail>
@@ -49,18 +68,18 @@ const ProductCard: React.FC<IProductCardItem> = ({
                   <h3>{name}</h3>
                 </div>
                 {ratingAverage == 0 || (
-                  <div className="flex items-end mt-2 flex-wrap">
+                  <div className="flex items-start mt-2 flex-wrap">
                     <div className="rating-star">
                       <Rate disabled allowHalf defaultValue={ratingAverage} />
                     </div>
-                    <div className="quantity has-border">
-                      {`${t("user.product.sold")} ${quantitySold > 1000 ? "1000+" : quantitySold}`}
+                    <div className="quantity has-border flex-1">
+                      <span>{`${t("user.product.sold")} ${formatVNCurrency(quantitySold)}`}</span>
                     </div>
                   </div>
                 )}
               </S.ProductName>
               <div>
-                <div className="price-discount has-discount">
+                <div className={`price-discount ${discountRate !== 0 && "has-discount"}`}>
                   <div className="price-discount__price">{formatCurrency(price)}</div>
                   {discountRate == 0 || (
                     <div className="price-discount__discount">
@@ -69,9 +88,14 @@ const ProductCard: React.FC<IProductCardItem> = ({
                   )}
                 </div>
               </div>
+              <div className="have-variant">
+                <div className="variant-item">
+                  <div className="variant-item-text">Nhiều màu</div>
+                </div>
+              </div>
             </div>
-            <S.DeliveryInfo>
-              <div className="delivery-info">
+            <S.DeliveryInfo className="delivery-info">
+              <div className="delivery-date">
                 <span>Giao thứ 2, ngày 31/07</span>
               </div>
             </S.DeliveryInfo>
