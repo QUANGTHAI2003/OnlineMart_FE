@@ -1,4 +1,5 @@
 import { useResponsive } from "@app/hooks";
+import { formatCurrency } from "@app/utils/helper";
 import { faAngleDown, faAngleRight, faStore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, InputNumber } from "antd";
@@ -76,8 +77,10 @@ const ShoppingCartItem = ({
                   </div>
                   <div className="col-2">
                     <div className="p-0 m-0">
-                      <span className="font-medium text-sm inline-block mr-[5px] text-[#242424] ">{product.price}</span>
-                      <del className="inline-block text-xs">319.000 ₫</del>
+                      <span className="font-medium text-sm inline-block mr-[5px] text-[#242424]">
+                        {formatCurrency(product.price)}
+                      </span>
+                      <del className="inline-block text-xs">{formatCurrency(120000)}</del>
                     </div>
                   </div>
                   <div className="col-3 w-[130px] px-[15px]">
@@ -87,7 +90,7 @@ const ShoppingCartItem = ({
                   </div>
                   <div className="col-4 w-[120px] px-[15px]">
                     <span className="text-[#ff424e] leading-5 block font-medium text-sm">
-                      {product.price * product.quantity}
+                      {formatCurrency(product.price * product.quantity)}
                     </span>
                   </div>
                   <div className="col-5 w-12 text-right">
@@ -129,7 +132,6 @@ const ShoppingCartItem = ({
                   </div>
                 </div>
               </S.Ticket> */}
-
               {showCouponModal ? (
                 <FontAwesomeIcon
                   icon={faAngleDown}

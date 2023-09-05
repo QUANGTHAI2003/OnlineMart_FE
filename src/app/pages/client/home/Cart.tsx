@@ -9,7 +9,7 @@ import CartSkeleton from "./CartSkeleton";
 import ShippingAddress from "./components/cart/ShippingAddress";
 import ShoppingCartEmpty from "./components/cart/ShoppingCartEmpty";
 import ShoppingCartItem from "./components/cart/ShoppingCartItem";
-import TotalWithCoupon from "./components/cart/TotalWithCoupon";
+import Total from "./components/cart/Total";
 
 interface IProduct {
   productId: number;
@@ -18,11 +18,13 @@ interface IProduct {
   price: number;
   quantity: number;
 }
+
 interface IShop {
   shopId: number;
   shopName: string;
   products: IProduct[];
 }
+
 interface ICart {
   cart: {
     shops: IShop[];
@@ -51,15 +53,15 @@ const Cart = () => {
                 productId: 1,
                 productName: "Máy Xay Thịt 4 Lưỡi - Dung Tích 2 Lít - Công Suất 300W",
                 thumbnail: "https://source.unsplash.com/random",
-                price: 329000,
+                price: 153000,
                 quantity: 2,
               },
               {
                 productId: 2,
                 productName: "Dầu Gội Dược Liệu Thái Dương 3 (500ml, Hương Hoa Đào)",
                 thumbnail: "https://source.unsplash.com/random",
-                price: 329000,
-                quantity: 1,
+                price: 15000,
+                quantity: 15,
               },
             ],
             coupons: [
@@ -98,7 +100,7 @@ const Cart = () => {
                 productName:
                   "Tã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size M 76+8 miếngTã/bỉm quần HUGGIES SKINCARE gói SUPER JUMBO size M 76+8 miếng",
                 thumbnail: "https://source.unsplash.com/random",
-                price: 329000,
+                price: 89000,
                 quantity: 3,
               },
             ],
@@ -234,7 +236,7 @@ const Cart = () => {
           {!loading && (
             <S.Cart>
               <div className="flex flex-nowrap justify-between basis-[100%] cart">
-                <div className="flex flex-col grow shrink cart-content">
+                <div className="flex flex-col grow shrink cart-content mb-[242px] xl:mb-0">
                   <S.CartFirst>
                     <div className="cart-label">
                       <Checkbox className="whitespace-nowrap" checked={selectAll} onChange={handleSelectAll}>
@@ -278,14 +280,14 @@ const Cart = () => {
                   {isDesktop && (
                     <div className="sticky top-[-270.2px] w-full">
                       <ShippingAddress />
-                      <TotalWithCoupon />
+                      <Total />
                     </div>
                   )}
                 </div>
               </div>
               {!isDesktop && (
                 <S.TotalWithCoupon>
-                  <TotalWithCoupon />
+                  <Total />
                 </S.TotalWithCoupon>
               )}
             </S.Cart>

@@ -1,4 +1,5 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { formatCurrency } from "@app/utils/helper";
 import { Badge, Button, List, Popover } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -44,7 +45,7 @@ function Cart({ items }: ICartProps) {
               <img src={item.urlImage} alt={item.name} className="w-[40px] h-[40px] mr-2" />
               <div className="flex w-full flex-row justify-between">
                 <div className="font-bold line-clamp-1">{item.name}</div>
-                <div className="text-red-600 font-semibold">{item.price.toLocaleString()}</div>
+                <div className="text-red-600 font-semibold">{formatCurrency(item.price)}</div>
               </div>
             </div>
           </List.Item>

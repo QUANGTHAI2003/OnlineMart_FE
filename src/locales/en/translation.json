@@ -49,6 +49,30 @@
         "limit": "Apply up to: 1"
       }
     },
+    "payment_page": {
+      "delivery_method": "Choose Delivery Method",
+      "delivery_by": "Delivered by",
+      "quantity": "QT",
+      "payment_method": "Choose Payment Method",
+      "cod_method": "Cash on delivery",
+      "momo_method": "Payment via MoMo wallet",
+      "zalopay_method": "Payment via Zalopay wallet",
+      "vnpay_method": "Payment via VNPay",
+      "scan_qr_method": "Scan QR Code from the banking app",
+      "order": {
+        "title": "Order",
+        "btn_change": "Change",
+        "amount": "Total amount",
+        "btn_view_information": "View information",
+        "btn_collapse": "Collapse",
+        "subtotal": "Subtotal",
+        "shipping_fee": "Shipping fee",
+        "shipping_discount": "Shipping discount",
+        "discount": "Discount",
+        "btn_place_order": "Place Order",
+        "apply_free_ship": "has been applied!"
+      }
+    },
     "account_user": {
       "account_of": "Account to",
       "account_info": "Information",

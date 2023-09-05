@@ -285,3 +285,10 @@ export const Ticket = styled.div`
     }
   }
 `;
+export const MenuFixed = styled.div`
+  z-index: 100;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`;

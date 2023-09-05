@@ -49,6 +49,30 @@
         "limit": "Áp dụng tối đa: 1"
       }
     },
+    "payment_page": {
+      "delivery_method": "Chọn hình thức giao hàng",
+      "delivery_by": "Được giao bởi",
+      "quantity": "SL",
+      "payment_method": "Chọn hình thức thanh toán",
+      "cod_method": "Thanh toán tiền mặt khi nhận hàng",
+      "momo_method": "Thanh toán bằng ví MoMo",
+      "zalopay_method": "Thanh toán bằng ví ZaloPay",
+      "vnpay_method": "Thanh toán bằng VNPAY",
+      "scan_qr_method": "Quét Mã QR từ ứng dụng ngân hàng",
+      "order": {
+        "title": "Đơn hàng",
+        "btn_change": "Thay đổi",
+        "amount": "Tổng tiền",
+        "btn_view_information": "Xem thông tin",
+        "btn_collapse": "Thu gọn",
+        "subtotal": "Tạm tính",
+        "shipping_fee": "Phí vận chuyển",
+        "shipping_discount": "Khuyến mãi vận chuyển",
+        "discount": "Giảm giá",
+        "btn_place_order": "Đặt hàng",
+        "apply_free_ship": "đã được áp dụng!"
+      }
+    },
     "account_user": {
       "account_of": "Tài khoản của",
       "account_info": "Thông tin tài khoản",
@@ -201,8 +225,8 @@
       "show_all": "Xem tất cả",
       "show_less": "Rút gọn"
     },
-    "orders":{
-      "order":{
+    "orders": {
+      "order": {
         "my_order": "Đơn hàng của tôi",
         "all_menus": "Tất cả đơn",
         "wait_pay": "Chờ thanh toán",
@@ -217,9 +241,8 @@
         "see_more": "Xem thêm",
         "show_less": "Rút gọn",
         "product": "sản phẩm"
-        
       },
-      "order_details":{
+      "order_details": {
         "order_detail": "Chi tiết đơn hàng",
         "order_date": "Ngày đặt hàng",
         "receive_address": "ĐỊA CHỈ NGƯỜI NHẬN",

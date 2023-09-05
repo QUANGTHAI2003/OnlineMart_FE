@@ -10,6 +10,7 @@ import Address from "./app/pages/client/account/address/Address";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
 import Cart from "./app/pages/client/home/Cart";
+import Payment from "./app/pages/client/home/Payment";
 
 // Components
 
@@ -51,6 +52,7 @@ const AppRouter: React.FC = () => {
         <Route index element={<Home />} />
         <Route path="category" element={<ProductCategory />} />
         <Route path="checkout" element={<Cart />} />
+        <Route path="checkout/payment" element={<Payment />} />
         <Route path="product" element={<ProductDetail />} />
         <Route path="account" element={<AccountLayout />}>
           <Route path="edit_profile" element={<UserProfile />} />
