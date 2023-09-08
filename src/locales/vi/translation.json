@@ -364,6 +364,46 @@
       "manage_seller": "Quản lý người bán",
       "manage_role": "Quản lý vai trò",
       "manage_permission": "Quản lý quyền"
+    },
+    "authentication": {
+      "signin": {
+        "name": "Đăng nhập",
+        "question": "Bạn chưa có tài khoản? ",
+        "p_phone": "Nhập số điện thoại",
+        "p_password": "Nhập mật khẩu",
+        "null_phone": "Số điện thoại không được để trống",
+        "err_phone": "Số điện thoại không hợp lệ",
+        "null_password": "Mật khẩu không được để trống",
+        "submit": "Đăng nhập",
+        "forgot": "Quên mật khẩu? Nhấn vào",
+        "link": "đây",
+        "other": "Hoặc, đăng nhập bằng"
+      },
+      "signup": {
+        "tooltip_email": "Vui lòng sử dụng email chính của bạn để đảm bảo bạn không bỏ lỡ các thông tin quan trọng từ chúng tôi",
+        "tooltip_industry": "Việc chọn đúng ngành hàng chủ lực sẽ giúp bộ phận Hỗ trợ Đối tác điều phối nhân viên có chuyên môn về ngành hàng để hỗ trợ Quý Nhà Bán trong tương lai.",
+        "title": "Đăng ký bán hàng",
+        "intro": "Tiếp cận hơn 22 triệu lượt truy cập mỗi tháng!",
+        "name": "Đăng ký ngay",
+        "label_email": "Email",
+        "p_email": "Nhập địa chỉ email",
+        "null_email": "Vui lòng địa chỉ email",
+        "err_email": "Email chưa đúng định dạng",
+        "label_fullname": "Họ tên",
+        "p_fullname": "Nhập họ và tên",
+        "err_fullname": "Vui lòng nhập tên nhà bán",
+        "label_phone": "Số điện thoại",
+        "err_phone": "Số điện thoại không hợp lệ",
+        "p_phone": "Nhập số điện thoại",
+        "label_industry": "Ngành hàng",
+        "err_industry": "Vui lòng chọn ngành hàng",
+        "label_password": "Mật khẩu",
+        "p_password": "Nhập mật khẩu",
+        "label_repass": "Xác nhận mật khẩu",
+        "err_repass": "Xác nhận mật khẩu chưa khớp",
+        "submit": "Đăng ký ngay",
+        "question": "Bạn đã có tài khoản?"
+      }
     }
   }
 }

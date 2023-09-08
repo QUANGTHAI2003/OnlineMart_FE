@@ -117,6 +117,35 @@ export const CopyIcon = () => (
   </svg>
 );
 
+// export const PlusIcon = () => (
+//   <svg
+//     stroke="currentColor"
+//     fill="#787878"
+//     strokeWidth="0"
+//     viewBox="0 0 24 24"
+//     height="1.5em"
+//     width="1.5em"
+//     xmlns="http://www.w3.org/2000/svg"
+//   >
+//     <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+//   </svg>
+// );
+
+// export const CheckIcon = () => (
+//   <svg
+//     className="ml-3"
+//     stroke="currentColor"
+//     fill="#26bc4e"
+//     strokeWidth="0"
+//     viewBox="0 0 512 512"
+//     height="0.75em"
+//     width="0.75em"
+//     xmlns="http://www.w3.org/2000/svg"
+//   >
+//     <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"></path>
+//   </svg>
+// );
+
 export const IconNext = () => (
   <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path

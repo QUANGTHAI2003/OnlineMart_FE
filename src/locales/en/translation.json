@@ -364,6 +364,46 @@
       "manage_seller": "Seller management",
       "manage_role": "Role management",
       "manage_permission": "Permission management"
+    },
+    "authentication": {
+      "signin": {
+        "name": "Sign in",
+        "question": "Don't have an account?",
+        "p_phone": "Type your phone number",
+        "p_password": "Type your password",
+        "null_phone": "Please input your phone number",
+        "err_phone": "Phone number is in wrong format",
+        "null_password": "Please input your password",
+        "submit": "Submit",
+        "forgot": "Forgot password? Click",
+        "link": "here",
+        "other": "Or, signin with"
+      },
+      "signup": {
+        "tooltip_email": "Please enter your most frequently used email address to make sure you don’t miss any important notices from Tiki.",
+        "tooltip_industry": "Based on the main product category selected, Tiki will assign a specialized support agent to assist you better in the future.",
+        "title": "Start selling today",
+        "intro": "Reach more than 22 million active visitors each month!",
+        "name": "Register",
+        "label_email": "Email",
+        "p_email": "Type your email",
+        "null_email": "Please input your email",
+        "err_email": "Email is in wrong format",
+        "label_fullname": "Full name",
+        "p_fullname": "Type your name",
+        "err_fullname": "Please input owner’s full name",
+        "label_phone": "Mobile phone number",
+        "p_phone": "Type your phone number",
+        "err_phone": "Phone number must contains at least 8 digits",
+        "label_industry": "Main selling category",
+        "err_industry": "Please select main selling category",
+        "label_password": "Password",
+        "p_password": "Type your password",
+        "label_repass": "Confirm password",
+        "err_repass": "Confirm password does not match above password",
+        "submit": "Register",
+        "question": "Already have an account?"
+      }
     }
   }
 }
