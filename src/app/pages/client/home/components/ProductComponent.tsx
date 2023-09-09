@@ -1,10 +1,9 @@
 import ProductCard from "@app/app/components/clients/ProductCard/ProductCard";
 import ProductCardSkeleton from "@app/app/components/clients/ProductCard/ProductCardSkeleton";
+import { useSyncUrlWithTab } from "@app/hooks";
 import { Button, Col, Row, TabsProps } from "antd";
-import queryString from "query-string";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { productTab } from "../data";
@@ -16,19 +15,13 @@ interface IFixedHeader {
 
 const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
   const { t } = useTranslation();
-  const location = useLocation();
-  const nagigate = useNavigate();
 
   const initialProductCount = 18;
   const paramFilterName = "tab";
   const inititalTab = productTab.tabs[0].slug;
 
   const [productCount, setProductCount] = useState<number>(initialProductCount);
-  const [tabFiltered, setTabFiltered] = useState<any>((): any => {
-    const params = queryString.parse(location.search);
-    return String(params?.[paramFilterName] || inititalTab);
-  });
-
+  const { tabFiltered, handleChangeTab } = useSyncUrlWithTab(inititalTab, paramFilterName);
   const [loadingSkeletonCount, setLoadingSkeletonCount] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -39,17 +32,6 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
       setIsLoading(false);
     }, 1000);
   };
-
-  const handleChangeTab = (key: string) => {
-    setTabFiltered(key);
-    const queryParams = queryString.stringify({ [paramFilterName]: key || inititalTab });
-    nagigate({ search: queryParams });
-  };
-
-  useEffect(() => {
-    const params = queryString.parse(location.search);
-    setTabFiltered(params?.[paramFilterName] || inititalTab);
-  }, [inititalTab, location.search]);
 
   useEffect(() => {
     setLoadingSkeletonCount(true);

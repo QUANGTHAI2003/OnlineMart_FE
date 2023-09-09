@@ -404,6 +404,56 @@
         "submit": "Đăng ký ngay",
         "question": "Bạn đã có tài khoản?"
       }
+    },
+    "product": {
+      "list": {
+        "add_product": "Thêm sản phẩm",
+        "table" : {
+          "product": "Sản phẩm",
+          "category": "Danh mục",
+          "brand":"Thương hiệu",
+          "price": "Giá",
+          "stock": "Tồn kho",
+          "updated_at": "Cập nhật lần cuối",
+          "action": "Thao tác",
+          "edit": "Sửa sản phẩm",
+          "delete": "Xóa sản phẩm",
+          "selecting": "Đang chọn: {{count}}"
+        },
+        "status": {
+          "all": "Tất cả",
+          "selling": "Đang bán",
+          "out_of_stock": "Hết hàng",
+          "draft": "Nháp",
+          "waiting_for_approve": "Chờ duyệt",
+          "off": "Đã tắt"
+        },
+        "filter": {
+          "type": {
+            "name": "Tên sản phẩm",
+            "category": "Danh mục",
+            "brand": "Thương hiệu",
+            "price": "Giá",
+            "sku": "SKU"
+          },
+          "placeholder": "Nhập vào {{placeholder}} ...",
+          "category": "Danh mục",
+          "select_category": "Vui lòng chọn danh mục",
+          "brand": "Thương hiệu",
+          "select_brand": "Vui lòng chọn thương hiệu",
+          "search_by": "Tìm kiếm theo tên {{search_by}}",
+          "other_filter": "Bộ lọc khác",
+          "filtering": "Đang lọc: ",
+          "clear_all": "Xóa tất cả",
+          "apply": "Áp dụng",
+          "cancel": "Hủy",
+          "update_selected": "Cập nhật sản phẩm được chọn",
+          "select_at_less": "Vui lòng chọn ít nhất 1 sản phẩm bên dưới",
+          "update_quantity": "Update quantity products",
+          "update_status": "On/Off products status",
+          "delete": "Delete selected products"
+        }
+      }
     }
   }
 }

@@ -27,10 +27,8 @@ const ProductDetail = () => {
   const [variantThumbnail, setVariantThumbnail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
 
-  const breadCrumbData = product_detail.breadcrumbs;
   const productGallery = product_detail.images;
   const productQuantity = product_detail.stock_item.qty;
 

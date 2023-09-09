@@ -1,7 +1,6 @@
 import { ConfigProvider } from "antd";
 import enUS from "antd/lib/locale/en_US";
 import viVN from "antd/lib/locale/vi_VN";
-import React from "react";
 import { HelmetProvider } from "react-helmet-async";
 
 import AppRouter from "./AppRouter";

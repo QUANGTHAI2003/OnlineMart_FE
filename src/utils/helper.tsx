@@ -102,3 +102,7 @@ export const formatTimeAgo = (timestamp: number) => {
   const years = Math.floor(secondsElapsed / year);
   return `${years} ${t.years} ${t.ago}`;
 };
+
+export const removeDiacritics = (str: string) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};

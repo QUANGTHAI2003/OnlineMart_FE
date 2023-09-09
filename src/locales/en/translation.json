@@ -404,6 +404,56 @@
         "submit": "Register",
         "question": "Already have an account?"
       }
+    },
+    "product": {
+      "list": {
+        "add_product": "Add product",
+        "table" : {
+          "product": "Product",
+          "category": "Category",
+          "brand": "Brand",
+          "price": "Price",
+          "stock": "Stock quantity",
+          "updated_at": "Last update",
+          "action": "Action",
+          "edit": "Edit product",
+          "delete": "Delete product",
+          "selecting": "Selecting: {{count}}"
+        },
+        "status": {
+          "all": "All",
+          "selling": "Selling",
+          "out_of_stock": "Out of stock",
+          "draft": "Draft",
+          "waiting_for_approve": "Reviewing",
+          "off": "Delisted"
+        },
+        "filter": {
+          "type": {
+            "name": "Name",
+            "category": "Category",
+            "brand": "Brand",
+            "price": "Price",
+            "sku": "SKU"
+          },
+          "placeholder": "Enter {{placeholder}} ...",
+          "category": "Category",
+          "select_category": "Select Category",
+          "brand": "Brand",
+          "select_brand": "Select Brand",
+          "search_by": "Search by {{search_by}} name",
+          "other_filter": "Other Filters",
+          "filtering": "Filtering: ",
+          "clear_all": "Clear All",
+          "apply": "Apply",
+          "cancel": "Cancel",
+          "update_selected": "Update selected products",
+          "select_at_less": "Please select at least 1 product below",
+          "update_quantity": "Update quantity products",
+          "update_status": "On/Off products status",
+          "delete": "Delete selected products"
+        }
+      }
     }
   }
 }

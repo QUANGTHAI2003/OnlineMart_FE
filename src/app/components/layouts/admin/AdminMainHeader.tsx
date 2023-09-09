@@ -12,7 +12,6 @@ const MainHeader: React.FC<IMainHeaderProps> = ({ isCollapsed, toggleSidebar }) 
     token: { colorBgContainer },
   } = theme.useToken();
 
-  console.log("header render");
   return (
     <Layout.Header style={{ padding: 0, background: colorBgContainer }}>
       <Button

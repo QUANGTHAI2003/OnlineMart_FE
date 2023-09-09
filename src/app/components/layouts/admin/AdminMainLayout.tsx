@@ -15,16 +15,9 @@ const AdminMainLayout = () => {
         <AdminMainSidebar isCollapsed={isCollapsed} />
         <Layout>
           <MainHeader isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
-          <Layout.Content
-            style={{
-              padding: 24,
-              minHeight: 280,
-              background: "#fff",
-            }}
-          >
+          <Layout.Content className="p-6 bg-white">
             <Outlet />
           </Layout.Content>
-          <Layout.Footer style={{ textAlign: "center" }}>Ant Design ©2023 Created by Ant UED</Layout.Footer>
         </Layout>
         <FloatButton.BackTop />
       </Layout>

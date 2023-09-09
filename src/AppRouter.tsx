@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
+import { AdminBreadcrumb } from "./app/components/common/Breadcrumb/Breadcrumb";
 import AdminMainLayout from "./app/components/layouts/admin/AdminMainLayout";
 import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
@@ -15,11 +16,11 @@ import Payment from "./app/pages/client/home/Payment";
 
 // Pages
 const Dashboard = React.lazy(() => import("@app/app/pages/admin/Dashboard"));
-const Product = React.lazy(() => import("@app/app/pages/admin/products/Product"));
 const LoginUser = React.lazy(() => import("@app/app/pages/client/auth/LoginUser"));
 const SignupUser = React.lazy(() => import("@app/app/pages/client/auth/SignupUser"));
 const NotFound = React.lazy(() => import("@app/app/pages/errors/NotFound"));
 
+// Client
 const ProductCategory = React.lazy(() => import("@app/app/pages/client/category/ProductCategory"));
 const Home = React.lazy(() => import("@app/app/pages/client/home/Home"));
 const ProductDetail = React.lazy(() => import("@app/app/pages/client/ProductDetail/ProductDetail"));
@@ -35,6 +36,9 @@ const Address = React.lazy(() => import("@app/app/pages/client/account/address/A
 const SwitchPageAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SwitchPageAdmin"));
 const SigninAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SigninAdmin"));
 const SignupAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SignupAdmin"));
+
+// Admin
+const AdminProductList = React.lazy(() => import("@app/app/pages/admin/products/list/Product"));
 
 const AppRouter: React.FC = () => {
   const protectedAdminLayout = (
@@ -71,8 +75,8 @@ const AppRouter: React.FC = () => {
       <Route path="/admin/shop" element={protectedAdminLayout}>
         <Route index element={<Dashboard />} />
         <Route path="products">
-          <Route index element={<Product />} />
-          <Route path="create" element={<div>Product Create</div>} />
+          <Route index element={<AdminProductList />} />
+          <Route path="create" element={<AdminBreadcrumb />} />
           <Route path="review" element={<div>Product Review</div>} />
         </Route>
         <Route path="orders">
