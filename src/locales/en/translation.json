@@ -5,7 +5,13 @@
       "seller": "Start Selling",
       "contact": "Follow us on",
       "login": "Login",
-      "register": "Register"
+      "register": "Register",
+      "navigation_home": "Home",
+      "navigation_category": "Categories",
+      "navigation_notifications": "Notifications",
+      "navigation_user": "Information",
+      "popover_come_home": "Back home",
+      "payment_title_page": "Order Confirmation"
     },
     "account_menu": {
       "profile": "My profile",

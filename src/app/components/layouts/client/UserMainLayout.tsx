@@ -5,16 +5,15 @@ import { Layout } from "antd";
 import { Outlet, useLocation } from "react-router-dom";
 
 import UserFooter from "./Footer/UserFooter";
+import Navigation from "./Header/Navigation";
 import UserHeader from "./Header/UserHeader";
 
 const UserMainLayout = (): JSX.Element => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const location = useLocation();
   const homePage = location.pathname === "/";
   const categoryPage = location.pathname === "/category";
   const maxWidth = homePage ? "1440px" : "1280px";
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { isTablet } = useResponsive();
 
   return (
@@ -29,6 +28,7 @@ const UserMainLayout = (): JSX.Element => {
           {homePage && <UserFooter />}
         </div>
       </Layout>
+      {!isTablet && homePage && <Navigation />}
       {homePage || <UserFooter />}
     </Layout>
   );

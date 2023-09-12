@@ -5,7 +5,13 @@
       "seller": "Trở thành người bán",
       "contact": "Kết nối",
       "login": "Đăng nhập",
-      "register": "Đăng ký"
+      "register": "Đăng ký",
+      "navigation_home": "Trang chủ",
+      "navigation_category": "Danh mục",
+      "navigation_notifications": "Thông báo",
+      "navigation_user": "Cá nhân",
+      "popover_come_home": "Trở về trang chủ",
+      "payment_title_page": "Xác nhận đơn hàng"
     },
     "account_menu": {
       "profile": "Thông tin tài khoản",

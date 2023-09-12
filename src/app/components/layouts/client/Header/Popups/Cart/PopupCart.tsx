@@ -1,8 +1,10 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { useResponsive } from "@app/hooks";
 import { formatCurrency } from "@app/utils/helper";
 import { Badge, Button, List, Popover } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import CartContentSkeleton from "./CartContentSkeleton";
 
@@ -15,10 +17,13 @@ interface ICartItem {
 
 interface ICartProps {
   items: ICartItem[];
+  isBlue: boolean;
 }
 
-function Cart({ items }: ICartProps) {
+function Cart({ items, isBlue }: ICartProps) {
   const { t } = useTranslation();
+  const { isDesktop } = useResponsive();
+  const location = useLocation();
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -31,6 +36,8 @@ function Cart({ items }: ICartProps) {
       setLoading(false);
     }, 3 * 1000);
   }, []);
+
+  const haveTextWhite = location.pathname.startsWith("/account/");
 
   const content = loading ? (
     <CartContentSkeleton count={items.length} />
@@ -71,7 +78,12 @@ function Cart({ items }: ICartProps) {
     >
       <a href="/checkout">
         <Badge count={items.length} className="text-sm">
-          <ShoppingCartOutlined className="cursor-pointer text-[#000] text-2xl" />
+          <ShoppingCartOutlined
+            className={`cursor-pointer text-2xl ${isBlue && `text-[#0060FF]`} ${
+              haveTextWhite && !isDesktop ? "text-white" : ""
+            } 
+            }`}
+          />
         </Badge>
       </a>
     </Popover>

@@ -77,7 +77,7 @@ const Search: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="relative w-[800px] h-[40px]">
+    <div className="relative w-auto h-[40px]">
       <div className="w-full h-full flex items-center rounded-lg relative border-solid border border-[#DDDDE3] bg-white">
         <img className="w-[20px] h-[20px] max-w-full ml-[18px]" src={iconSearch} alt="icon-search" />
         <Input
@@ -96,7 +96,7 @@ const Search: React.FC = () => {
           ref={suggestionRef}
           onMouseEnter={() => setIsClickingSuggestion(true)}
           onMouseLeave={() => setIsClickingSuggestion(false)}
-          className="absolute w-full h-auto mt-[2px] border border-[#DDDDE3] z-10 bg-white"
+          className="absolute w-full h-auto mt-[2px] border border-[#DDDDE3] z-[600] bg-white"
         >
           {suggestions.slice(0, showLess ? 3 : suggestions.length).map((suggestion, index) => (
             <div

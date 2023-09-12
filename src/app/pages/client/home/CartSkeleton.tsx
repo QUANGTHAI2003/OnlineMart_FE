@@ -2,8 +2,8 @@ import * as S from "./Cart.styles";
 
 const CartSkeleton = () => {
   return (
-    <div className="flex flex-nowrap justify-between basis-[100%]">
-      <div className="flex flex-col grow shrink basis-[910px]">
+    <div className="flex-col flex xl:flex-row flex-nowrap justify-between basis-[100%]">
+      <div className="flex flex-col grow shrink xl:basis-[910px]">
         <S.CartFirst>
           <div
             className="rounded bg-white py-[9px] px-4 mb-3 flex items-center
@@ -74,7 +74,7 @@ const CartSkeleton = () => {
           </div>
         </div>
       </div>
-      <div className="flex grow shrink basis-[calc(100%_-_925px)] ml-5">
+      <div className="flex grow shrink basis-[calc(100%_-_925px)] xl:ml-5">
         <div className="sticky top-[-270.2px] w-full">
           <div>
             <div className="bg-white rounded mb-3 text-sm leading-5 p-4 animate-pulse">
@@ -96,9 +96,7 @@ const CartSkeleton = () => {
             <div className="w-full h-10 rounded bg-slate-200 mb-2"></div>
             <div className="w-full h-10 rounded bg-slate-200"></div>
           </div>
-          <button className="w-full bg-[#ff424e] text-center block cursor-pointer mt-[15px] border-none rounded px-[10px] py-[13px] text-white font-normal text-sm">
-            Mua ngay (1)
-          </button>
+          <div className="w-auto mx-4 h-12 rounded bg-slate-200"></div>
         </div>
       </div>
     </div>

@@ -85,7 +85,7 @@ const ShoppingCartItem = ({
                   </div>
                   <div className="col-3 w-[130px] px-[15px]">
                     <div className="quantity text-center">
-                      <InputNumber min={1} max={10} defaultValue={product.quantity} className="text-center" />
+                      <InputNumber min={1} defaultValue={product.quantity} className="text-center" />
                     </div>
                   </div>
                   <div className="col-4 w-[120px] px-[15px]">

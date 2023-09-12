@@ -8,7 +8,7 @@ const ShippingAddress = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <div className="xl:mt-0">
       <div className="bg-white rounded mb-3 text-sm leading-5 p-4">
         <div className="hidden xl:flex items-center justify-between mb-3">
           <h3 className="text-[#808089] font-normal m-0">{t("user.shopping_cart_page.deliver")}</h3>
