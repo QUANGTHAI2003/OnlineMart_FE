@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
+    "@chatscope/chat-ui-kit-react": "^1.10.1",
+    "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
@@ -35,6 +37,7 @@
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.2.1",
     "lodash": "^4.17.21",
+    "openai": "^4.6.0",
     "path": "^0.12.7",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
