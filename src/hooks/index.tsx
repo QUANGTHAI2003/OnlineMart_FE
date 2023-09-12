@@ -1,3 +1,4 @@
+export { default as useCopyToClipboard } from "./useCopyToClipboard";
 export { default as useCountdown } from "./useCountdown";
 export { default as useDebounce } from "./useDebounce";
 export { default as useLanguage } from "./useLanguage";
