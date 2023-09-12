@@ -1,3 +1,5 @@
+import { MouseEvent } from "react";
+
 export const RatingStar = () => (
   <svg
     stroke="currentColor"
@@ -102,8 +104,21 @@ export const IconFacebook = () => (
   </svg>
 );
 
-export const CopyIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+interface ICopyIconProps {
+  onClick?: (event: MouseEvent<SVGSVGElement>) => void;
+  className?: string;
+}
+
+export const CopyIcon: React.FC<ICopyIconProps> = ({ onClick, className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    onClick={onClick}
+    className={className}
+  >
     <path
       d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z"
       stroke="#0B74E5"
@@ -330,5 +345,57 @@ export const LinkArrow = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"></path>
+  </svg>
+);
+
+export const SendIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M1.01171 0.93071C1.23685 0.73762 1.55463 0.695347 1.82242 0.822865L17.5724 8.32287C17.8336 8.44724 18 8.71073 18 9.00001C18 9.28929 17.8336 9.55278 17.5724 9.67716L1.82242 17.1772C1.55463 17.3047 1.23685 17.2624 1.01171 17.0693C0.786571 16.8762 0.696372 16.5686 0.7816 16.2845L2.96696 9.00001L0.7816 1.71552C0.696372 1.43143 0.786571 1.1238 1.01171 0.93071ZM4.308 9.75001L2.70424 15.0959L13.9305 9.75001H4.308ZM13.9305 8.25001H4.308L2.70424 2.90417L13.9305 8.25001Z"
+      fill="#c4c4cf"
+    ></path>
+  </svg>
+);
+
+export const ScrollDownIcon = () => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_d_321_46221)">
+      <rect x="8" y="4" width="32" height="32" rx="16" fill="white"></rect>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M24.0001 12.5C24.4603 12.5 24.8334 12.8731 24.8334 13.3333V24.6548L28.4108 21.0774C28.7363 20.752 29.2639 20.752 29.5893 21.0774C29.9148 21.4028 29.9148 21.9305 29.5893 22.2559L24.5893 27.2559C24.4331 27.4122 24.2211 27.5 24.0001 27.5C23.7791 27.5 23.5671 27.4122 23.4108 27.2559L18.4108 22.2559C18.0854 21.9305 18.0854 21.4028 18.4108 21.0774C18.7363 20.752 19.2639 20.752 19.5893 21.0774L23.1667 24.6548V13.3333C23.1667 12.8731 23.5398 12.5 24.0001 12.5Z"
+        fill="#515158"
+      ></path>
+      <rect x="8.5" y="4.5" width="31" height="31" rx="15.5" stroke="#DDDDE3"></rect>
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_321_46221"
+        x="0"
+        y="0"
+        width="48"
+        height="48"
+        filterUnits="userSpaceOnUse"
+        // eslint-disable-next-line react/no-unknown-property
+        color-interpolationfilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        ></feColorMatrix>
+        <feOffset dy="4"></feOffset>
+        <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+        <feComposite in2="hardAlpha" operator="out"></feComposite>
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0"></feColorMatrix>
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_321_46221"></feBlend>
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_321_46221" result="shape"></feBlend>
+      </filter>
+    </defs>
   </svg>
 );

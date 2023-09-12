@@ -6,6 +6,7 @@ import AdminMainLayout from "./app/components/layouts/admin/AdminMainLayout";
 import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
+import AI from "./app/pages/AI";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
@@ -58,6 +59,7 @@ const AppRouter: React.FC = () => {
       <Route path="/" element={protectedClientLayout}>
         <Route index element={<Home />} />
         <Route path="category" element={<ProductCategory />} />
+        <Route path="ai" element={<AI />} />
         <Route path="checkout" element={<Cart />} />
         <Route path="checkout/payment" element={<Payment />} />
         <Route path="product" element={<ProductDetail />} />

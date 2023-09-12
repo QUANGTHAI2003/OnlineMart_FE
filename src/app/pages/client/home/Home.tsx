@@ -1,3 +1,4 @@
+import ChatGPT from "@app/app/components/clients/Chat/ChatGPT/ChatGPT";
 import ModalSelect from "@app/app/components/clients/SelectAddress/ModalSelect";
 import SpecialCategory from "@app/app/components/clients/SpecialCategory/SpecialCategory";
 import { useResponsive } from "@app/hooks";
@@ -85,6 +86,7 @@ const Home = () => {
       <SaleComponent />
       <SpecialCategory />
       <ProductComponent isFixedHeader={isHeaderFixed.toString()} />
+      <ChatGPT />
       {/* <ModalSelect /> */}
       {/* <ProductComponent /> */}
       {/* {true && <ProductCardSkeleton />} */}

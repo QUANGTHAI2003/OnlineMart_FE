@@ -316,6 +316,13 @@
       "like": "Thích",
       "comments": "Bình luận"
     },
+    "chatgpt": {
+      "assistant": "Trợ lý ảo Online Mart",
+      "system_error": "Đã có lỗi xảy ra ở hệ thống!",
+      "is_typing": "Chatgpt đang gõ...",
+      "chat_input": "Nhập nội dung chat",
+      "about_us": "Tích hợp trí tuệ nhân tạo, thông tin mang tính tham khảo"
+    },
     "footer": {
       "footer_support": {
         "title": "Hỗ trợ khách hàng",

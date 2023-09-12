@@ -316,6 +316,13 @@
       "like": "Like",
       "comments": "Comments"
     },
+    "chatgpt": {
+      "assistant": "Assistant Online Mart",
+      "system_error": "System error, please try again later",
+      "is_typing": "ChatGPT is typing...",
+      "chat_input": "Type your message here...",
+      "about_us": "Integrate AI for customer care"
+    },
     "footer": {
       "footer_support": {
         "title": "Customer Support",
