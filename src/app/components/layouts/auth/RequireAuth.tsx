@@ -1,4 +1,3 @@
-import { getAccessToken } from "@app/utils/localstorage";
 import React from "react";
 import { Navigate } from "react-router-dom";
 
@@ -9,7 +8,7 @@ interface IRequireAuthProps {
 
 const RequireAuth: React.FC<IRequireAuthProps> = ({ children, type }) => {
   // remove 1 when have api
-  const token = getAccessToken();
+  const token = true;
 
   const checkType = {
     client: "/login",
