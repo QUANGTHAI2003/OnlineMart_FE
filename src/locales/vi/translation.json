@@ -323,6 +323,65 @@
       "chat_input": "Nhập nội dung chat",
       "about_us": "Tích hợp trí tuệ nhân tạo, thông tin mang tính tham khảo"
     },
+    "account": {
+      "welcome": "Chào mừng đến với Online Mart",
+      "sign_up": {
+        "Sign_up": "Đăng ký",
+        "full_name": "Nhập tên của bạn",
+        "phone": "Số điện thoại",
+        "password": "Mật khẩu",
+        "cf_password": "Xác nhận mật khẩu",
+        "agree": "Tôi đồng ý về ",
+        "rules": "Điều khoản và điều kiện sử dụng dịch vụ & Chính sách bảo mật thông tin",
+        "validate": {
+          "required": "Vui lòng không bỏ trống",
+          "max_phone": " Số điện thoại chỉ được tối đa 10 Số",
+          "min_phone": "Số điện thoại phải có ít nhất 9 số",
+          "email": "Vui lòng nhập đúng định dạng email",
+          "number": "Vui lòng nhập số",
+          "text": "Tên không được chứa số và kí tự đặc biệt",
+          "not_match": "Mật khẩu không trùng",
+          "terms": "Vui lòng đồng ý với điều khoản"
+        }
+      },
+      "login": {
+        "Login": " Đăng nhập",
+        "password": "Mật khẩu",
+        "agree": "Tôi đồng ý về",
+        "rules": "Điều khoản và điều kiện sử dụng dịch vụ & Chính sách bảo mật thông tin",
+        "forgot": "Quên mật khẩu",
+        "or": "Hoặc",
+        "required": "Vui lòng không bỏ trống",
+        "remember_me": "Ghi nhớ tài khoản"
+      },
+      "forgot": {
+        "forgot_pass": "Quên mật khẩu",
+        "plz": "Vui lòng nhập email,",
+        "cf": " Xác nhận",
+        "box": "của bạn vào ô bên dưới"
+      },
+      "otp": {
+        "otp_auth": "Xác thực OTP",
+        "send": "Một mã OTP vừa được gửi đến email của bạn,",
+        "mail": "vui lòng kiểm tra và nhập vào ô bên dưới",
+        "no_mail": "Nếu bạn không nhận được mã?",
+        "plz": "Vui lòng nhấn",
+        "cf": " Xác nhận",
+        "otp": "Gửi lại mã xác nhận",
+        "press_agin": "Gửi lại mã xác nhận sau:"
+      },
+      "change_pass": {
+        "change": "Đổi mật khẩu",
+        "new_password": "Tạo một mật khẩu mới cho",
+        "pass": "Mật khẩu",
+        "cf_pass": "Xác nhận mật khẩu",
+        "not_match": "Mật khẩu không trùng",
+        "validate": {
+          "required": "Vui lòng không bỏ trống",
+          "not_match": "Mật khẩu không trùng"
+        }
+      }
+    },
     "footer": {
       "footer_support": {
         "title": "Hỗ trợ khách hàng",
@@ -424,10 +483,10 @@
     "product": {
       "list": {
         "add_product": "Thêm sản phẩm",
-        "table" : {
+        "table": {
           "product": "Sản phẩm",
           "category": "Danh mục",
-          "brand":"Thương hiệu",
+          "brand": "Thương hiệu",
           "price": "Giá",
           "stock": "Tồn kho",
           "updated_at": "Cập nhật lần cuối",

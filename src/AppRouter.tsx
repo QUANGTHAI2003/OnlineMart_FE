@@ -18,7 +18,9 @@ import Payment from "./app/pages/client/home/Payment";
 // Pages
 const Dashboard = React.lazy(() => import("@app/app/pages/admin/Dashboard"));
 const LoginUser = React.lazy(() => import("@app/app/pages/client/auth/LoginUser"));
-const SignupUser = React.lazy(() => import("@app/app/pages/client/auth/SignupUser"));
+const CheckOtp = React.lazy(() => import("@app/app/pages/client/auth/CheckOtp"));
+const ChangePass = React.lazy(() => import("@app/app/pages/client/auth/ChangePass"));
+const EmailForm = React.lazy(() => import("@app/app/pages/client/auth/Email"));
 const NotFound = React.lazy(() => import("@app/app/pages/errors/NotFound"));
 
 // Client
@@ -38,7 +40,6 @@ const SwitchPageAdmin = React.lazy(() => import("@app/app/pages/admin/auth/Switc
 const SigninAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SigninAdmin"));
 const SignupAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SignupAdmin"));
 
-// Admin
 const AdminProductList = React.lazy(() => import("@app/app/pages/admin/products/list/Product"));
 
 const AppRouter: React.FC = () => {
@@ -90,8 +91,10 @@ const AppRouter: React.FC = () => {
       </Route>
 
       <Route element={<AuthLayout />}>
-        <Route path="login" element={<LoginUser />} />
-        <Route path="signup" element={<SignupUser />} />
+        <Route path="auth/login" element={<LoginUser />} />
+        <Route path="auth/forgot" element={<CheckOtp />} />
+        <Route path="auth/changepass" element={<ChangePass />} />
+        <Route path="auth/email" element={<EmailForm />} />
         <Route path="admin/shop/auth/switch" element={<SwitchPageAdmin />} />
         <Route path="admin/shop/auth/signin" element={<SigninAdmin />} />
         <Route path="admin/shop/auth/signup" element={<SignupAdmin />} />
