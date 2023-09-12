@@ -72,7 +72,7 @@ const Address = () => {
         })}
       </div>
       <Modal
-        className="w-[700px]"
+        className="w-[650px]"
         centered
         title={t("user.address.add_address")}
         open={isModalOpen}

@@ -4,6 +4,7 @@ import { Button, Modal } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import * as S from "./Address.styles";
 import EditAddress from "./EditAddress";
 interface IAddressItem {
   id: number;
@@ -13,12 +14,13 @@ interface IAddressItem {
   token: any;
 }
 
-const AddressItem = ({ name, address, phone, token }: IAddressItem) => {
+const AddressItem = ({ id, name, address, phone, token }: IAddressItem) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
+    console.log(Object.values({ id }).toString());
     setIsModalOpen(true);
   };
 
@@ -43,12 +45,13 @@ const AddressItem = ({ name, address, phone, token }: IAddressItem) => {
         console.log("Cancel");
       },
     });
+    console.log(Object.values({ id }).toString());
   };
 
   return (
-    <div className="bg-white flex justify-between p-5 mt-3">
+    <S.Layout>
       <div className="flex flex-col gap-y-3">
-        <div>
+        <div className="md:text-sm sm:text-xs">
           <span className="uppercase">{name}</span>
           {token && (
             <span>
@@ -57,27 +60,27 @@ const AddressItem = ({ name, address, phone, token }: IAddressItem) => {
             </span>
           )}
         </div>
-        <div>
-          <span className="text-[#787878] text-sm">{t("user.address.address")}</span>
+        <div className="md:text-sm sm:text-xs">
+          <span className="text-[#787878]">{t("user.address.address")}</span>
           {address}
         </div>
-        <div>
-          <span className="text-[#787878] text-sm">{t("user.address.phone")}</span>
+        <div className="md:text-sm sm:text-xs">
+          <span className="text-[#787878]">{t("user.address.phone")}</span>
           {phone}
         </div>
       </div>
       <div className="flex justify-end items-start">
-        <Button onClick={showModal} className="text-blue-600 border-0">
+        <Button onClick={showModal} className="text-blue-600 border-0 ">
           {t("user.address.action_edit")}
         </Button>
         {!token && (
-          <Button className="text-red-600 border-0" onClick={showConfirm}>
+          <Button className="text-red-600 border-0 " onClick={showConfirm}>
             {t("user.address.action_delete")}
           </Button>
         )}
       </div>
       <Modal
-        className="w-[700px]"
+        className="w-[650px]"
         centered
         title={t("user.address.edit_address")}
         open={isModalOpen}
@@ -87,7 +90,7 @@ const AddressItem = ({ name, address, phone, token }: IAddressItem) => {
       >
         <EditAddress />
       </Modal>
-    </div>
+    </S.Layout>
   );
 };
 

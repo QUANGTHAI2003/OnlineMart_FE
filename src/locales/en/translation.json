@@ -198,14 +198,17 @@
       "default_address": "Default",
       "address": "Address: ",
       "p_address": "Enter your address",
+      "err_address": "Please input your address",
       "phone": "Phone: ",
       "p_phone": "Enter your phone number",
+      "err_phone": "Please input your phone number",
       "action_edit": "Edit",
       "action_delete": "Delete",
       "confirm_delete": "Do yout want to delete this address? ",
       "action_update": "Update",
       "fullname": "Fullname:",
       "p_fullname": "Enter your fullname",
+      "err_fullname": "Please input your fullname",
       "set_default": "Set default address"
     },
     "product": {

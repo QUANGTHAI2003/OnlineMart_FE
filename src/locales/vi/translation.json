@@ -198,14 +198,17 @@
       "default_address": "Địa chỉ mặc định",
       "address": "Địa chỉ: ",
       "p_address": "Nhập địa chỉ: ",
+      "err_address": "Vui lòng nhập địa chỉ",
       "phone": "Điện thoại: ",
       "p_phone": "Nhập số điện thoại",
+      "err_phone": "Vui lòng nhập số điện thoại hợp lệ",
       "action_edit": "Chỉnh sửa",
       "action_delete": "Xóa",
       "confirm_delete": "Bạn có muốn xóa địa chỉ này ?",
       "action_update": "Cập nhật",
       "fullname": "Họ và tên: ",
       "p_fullname": "Nhập họ và tên",
+      "err_fullname": "Vui lòng nhập họ và tên",
       "set_default": "Đặt làm địa chỉ mặc định"
     },
     "product": {

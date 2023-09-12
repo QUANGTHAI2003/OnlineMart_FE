@@ -1,6 +1,7 @@
 import SelectAddress from "@app/app/components/clients/SelectAddress/SelectAddress";
-import { Input, Button, Checkbox } from "antd";
+import { Input, Button, Form } from "antd";
 import type { CheckboxChangeEvent } from "antd/es/checkbox";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as S from "./Address.styles";
@@ -11,55 +12,101 @@ const onChange = (e: CheckboxChangeEvent) => {
 const handleGetAddress = (address: string) => {
   console.log(address);
 };
+
 const CreateAddress = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
+  useEffect(() => {
+    console.log("render");
+  });
   return (
     <S.AddressStyle>
       <div className="min-w-min bg-white">
-        <form className="w-[650px]" action="Add" method="post">
-          <div className="w-[650px] flex items-center align-middle justify-between mt-4">
-            <label htmlFor="username">{t("user.address.fullname")}</label>
-            <div className="w-[490px]">
-              <Input className="text-sm px-3 text-gray-700 w-full" placeholder={t("user.address.p_fullname")} />
-            </div>
-          </div>
-          <div className="w-[650px] flex items-center align-middle justify-between mt-4">
-            <label htmlFor="phone">{t("user.address.phone")}</label>
-            <div className="w-[490px]">
-              <Input className="text-sm px-3 text-gray-700 w-full" placeholder={t("user.address.p_phone")} />
-            </div>
-          </div>
-          <div className="w-[650px] flex items-center align-middle justify-between">
+        <Form
+          className="md:text-sm sm:text-xs"
+          autoComplete="off"
+          onFinish={(values) => {
+            console.log({ values });
+          }}
+          onFinishFailed={(error) => {
+            console.log({ error });
+          }}
+        >
+          {/* Họ và tên */}
+          <S.FormItem
+            name="fullname"
+            label={t("user.address.fullname")}
+            rules={[
+              {
+                required: true,
+                message: t("user.address.err_fullname"),
+              },
+              { whitespace: true },
+              { min: 6 },
+            ]}
+          >
+            <Input placeholder={t("user.address.p_fullname")} />
+          </S.FormItem>
+          {/* Số điện thoại */}
+          <S.FormItem
+            name="phone"
+            label={t("user.address.phone")}
+            rules={[
+              {
+                required: true,
+                message: "",
+              },
+              {
+                validator(_: any, value: any) {
+                  return new Promise((resolve: any, reject: any) => {
+                    const phoneRegex = /(0[3|5|7|8|9])+([0-9]{8})\b/g;
+                    if (phoneRegex.test(value)) {
+                      resolve();
+                    } else {
+                      reject(t("user.address.err_phone"));
+                    }
+                  });
+                },
+              },
+            ]}
+          >
+            <Input type="number" placeholder={t("user.address.p_phone")} />
+          </S.FormItem>
+          {/* Select */}
+          <S.FormItem>
             <SelectAddress onAddressChange={handleGetAddress} />
-          </div>
-          <div className="w-[650px] flex items-center align-middle justify-between mt-4">
-            <label htmlFor="address">{t("user.address.address")}</label>
-            <div className="w-[490px]">
-              <TextArea
-                className="text-sm px-3 text-gray-700 w-full"
-                rows={2}
-                placeholder={t("user.address.p_address")}
-              />
-            </div>
-          </div>
-          <div className="w-[650px] flex items-center align-middle justify-between mt-4">
-            <div></div>
-            <div className="w-[490px]">
-              <Checkbox onChange={onChange} className="text-sm">
-                {t("user.address.set_default")}
-              </Checkbox>
-            </div>
-          </div>
-          <div className="w-[650px] flex items-center align-middle justify-between mt-4">
-            <div></div>
-            <div className="w-[490px]">
-              <Button className="bg-[#fdd835] text-center text-sm py-2 px-12 text-[#4a4a4a] h-auto">
-                {t("user.address.action_update")}
-              </Button>
-            </div>
-          </div>
-        </form>
+          </S.FormItem>
+          {/* Địa chỉ */}
+          <S.FormItem
+            name="address"
+            label={t("user.address.address")}
+            rules={[
+              {
+                required: true,
+                message: t("user.address.err_address"),
+              },
+              { whitespace: true },
+              { min: 3 },
+            ]}
+          >
+            <TextArea rows={3} placeholder={t("user.address.p_address")} />
+          </S.FormItem>
+          {/* Check Default */}
+          <S.FormItem name="default_address" valuePropName="checked">
+            <S.FormCheckBox onChange={onChange} value>
+              {t("user.address.set_default")}
+            </S.FormCheckBox>
+          </S.FormItem>
+          <S.FormItem>
+            <Button
+              block
+              type="primary"
+              htmlType="submit"
+              className="bg-[#fdd835] text-center text-sm py-2 px-12 text-[#4a4a4a] h-auto"
+            >
+              {t("user.address.action_update")}
+            </Button>
+          </S.FormItem>
+        </Form>
       </div>
     </S.AddressStyle>
   );
