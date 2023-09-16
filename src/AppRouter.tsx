@@ -34,6 +34,7 @@ const UserProfile = React.lazy(() => import("@app/app/pages/client/account/profi
 const UserRating = React.lazy(() => import("@app/app/pages/client/account/rating/UserRating"));
 const Discount = React.lazy(() => import("@app/app/pages/client/account/voucher/Discount"));
 const Address = React.lazy(() => import("@app/app/pages/client/account/address/Address"));
+const UserSearch = React.lazy(() => import("@app/app/pages/client/search/UserSearch"));
 
 // Admin
 const SwitchPageAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SwitchPageAdmin"));
@@ -64,6 +65,7 @@ const AppRouter: React.FC = () => {
         <Route path="checkout" element={<Cart />} />
         <Route path="checkout/payment" element={<Payment />} />
         <Route path="product" element={<ProductDetail />} />
+        <Route path="search" element={<UserSearch />} />
         <Route path="account" element={<AccountLayout />}>
           <Route path="edit_profile" element={<UserProfile />} />
           <Route path="notifications" element={<UserNotification />} />

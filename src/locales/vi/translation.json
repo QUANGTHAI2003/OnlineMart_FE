@@ -119,8 +119,8 @@
           "placeholder_current_password": "Nhập mật khẩu hiện tại",
           "new_password": "Mật khẩu mới",
           "placeholder_new_password": "Nhập mật khẩu mới",
-          "enter_new_password": "Mật khẩu hiện tại",
-          "placeholder_enter_new_password": "Mật khẩu hiện tại"
+          "enter_new_password": "Nhập lại mật khẩu mới",
+          "placeholder_enter_new_password": "Nhập lại mật khẩu mới"
         }
       }
     },
@@ -150,7 +150,17 @@
       "setting": "Thiết lập",
       "social_network": "Liên kết mạng xã hội",
       "connect": "Liên kết",
-      "connected": "Đã liên kết"
+      "connected": "Đã liên kết",
+      "valid": {
+        "name_required": "Họ & tên không được để trống",
+        "phone_required": "Số điện thoại không được để trống",
+        "phone_pattern": "Số điện thoại phải bắt đầu bằng 0 và bao gồm 10 chữ số",
+        "email_required": "Email không được bỏ trống",
+        "password_old_required": "Mật khẩu hiện tại không được bỏ trống",
+        "password_new_required": "Mật khẩu mới không được để trống",
+        "password_new_confirm_required": "Nhập lại mật khẩu không được bỏ trống",
+        "password_new_confirm_match": "Mật khẩu không khớp"
+      }
     },
     "rating_user_page": {
       "my_comment": "Nhận xét của tôi",
@@ -167,6 +177,13 @@
       "apply": "Áp dụng",
       "see_more": "Xem thêm",
       "collapse": "Thu gọn"
+    },
+    "search_page": {
+      "financed": "Tài trợ bởi",
+      "see_more": "Xem thêm",
+      "all": "Tất cả",
+      "sort_by": "Sắp xếp",
+      "viewed_products": "Sản Phẩm Đã Xem"
     },
     "product_category_page": {
       "sponsored": "Tài trợ bởi",

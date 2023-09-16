@@ -14,7 +14,7 @@ const UserMainLayout = (): JSX.Element => {
   const categoryPage = location.pathname === "/category";
   const maxWidth = homePage ? "1440px" : "1280px";
 
-  const { isTablet } = useResponsive();
+  const { isTablet, isDesktop } = useResponsive();
 
   return (
     <Layout className="layout">
@@ -29,7 +29,7 @@ const UserMainLayout = (): JSX.Element => {
         </div>
       </Layout>
       {!isTablet && homePage && <Navigation />}
-      {homePage || <UserFooter />}
+      {isDesktop && <UserFooter />}
     </Layout>
   );
 };

@@ -22,7 +22,7 @@ const UserHeader = () => {
   const { isDesktop } = useResponsive();
 
   const haveMainHeader = location.pathname === "/category" || location.pathname === "/";
-  const haveBtnCallback = location.pathname === "/category";
+  const haveBtnCallback = location.pathname === "/category" || location.pathname === "search";
   const haveHeaderPageAccount = location.pathname.startsWith("/account/") || location.pathname.startsWith("/checkout");
   const haveHeaderPageDetail = location.pathname === "/product";
 

@@ -23,7 +23,7 @@ const RatingItem: React.FC<IRatingItem> = ({ content, value }) => {
       {loadingSkeletonCount ? (
         <RatingSkeleton count={1} />
       ) : (
-        <div>
+        <div className="rating_item">
           <Rate allowHalf defaultValue={value} />
           {content}
         </div>

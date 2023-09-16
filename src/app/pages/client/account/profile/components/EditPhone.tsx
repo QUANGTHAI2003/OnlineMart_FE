@@ -1,10 +1,16 @@
 import ImgPhone from "@app/app/assets/images/phone.png";
-import { Button, Input, Modal } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+const onFinishFailed = (errorInfo: any) => {
+  console.log("Failed:", errorInfo);
+};
+type FieldType = {
+  edit_phone?: string;
+};
+
 const EditPhone = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -24,6 +30,7 @@ const EditPhone = () => {
   const handleCancel = () => {
     setOpen(false);
   };
+
   return (
     <div className="flex flex-col">
       <Button type="primary" ghost onClick={showModal}>
@@ -40,11 +47,30 @@ const EditPhone = () => {
       >
         <div className="flex-grow-[1] flex-shrink-[1]">
           <div className="flex justify-center bg-white py-[20px] px-[20px]">
-            <form action="" method="" className="w-full p-[16px] border border-[#ebebf0] border-solid rounded-[4px]">
-              <div className="flex flex-col mb-[34px]">
-                <label htmlFor="edit_phone" className="mb-[4px] text-[14px] text-[#38383d]">
-                  {t("user.account_user.account_information.edit_profile.label_phone")}
-                </label>
+            <Form
+              name="basic"
+              initialValues={{ remember: true }}
+              onFinish={(values) => {
+                console.log({ values });
+              }}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+              className="w-full p-[16px] border border-[#ebebf0] border-solid rounded-[4px]"
+              layout="vertical"
+            >
+              <Form.Item<FieldType>
+                name="edit_phone"
+                rules={[
+                  { required: true, message: t("user.account_user_page.valid.phone_required") },
+                  {
+                    pattern: /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/,
+                    message: t("user.account_user_page.valid.phone_pattern"),
+                  },
+                ]}
+                hasFeedback
+                className="flex flex-col mb-[34px]"
+                label={t("user.account_user.account_information.edit_profile.label_phone")}
+              >
                 <div className="flex flex-col flex-grow-[1] flex-shrink-[1] relative">
                   <div className="w-full">
                     <img
@@ -58,15 +84,20 @@ const EditPhone = () => {
                       className="py-[10px] pl-[40px] h-[36px] pr-[12px]"
                     />
                   </div>
-                  <div className="text-[11px] text-[#38383d] absolute top-[100%]">
-                    {t("user.account_user.account_information.edit_profile.description_phone")}
-                  </div>
                 </div>
-              </div>
-              <Button key="submit" className="w-full h-[40px] mt-3" type="primary" loading={loading} onClick={handleOk}>
-                {t("user.account_user.account_information.edit_profile.button_change")}
-              </Button>
-            </form>
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  className="w-full h-[40px] mt-3"
+                  type="primary"
+                  htmlType="submit"
+                  loading={loading}
+                  // onClick={handleOk}
+                >
+                  {t("user.account_user.account_information.edit_profile.button_change")}
+                </Button>
+              </Form.Item>
+            </Form>
           </div>
         </div>
       </Modal>

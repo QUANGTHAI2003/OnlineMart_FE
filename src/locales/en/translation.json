@@ -150,7 +150,17 @@
       "setting": "Setting",
       "social_network": "Social network linking",
       "connect": "Connect",
-      "connected": "Connected"
+      "connected": "Connected",
+      "valid": {
+        "name_required": "Please enter a Name",
+        "phone_required": "Please enter a Phone number",
+        "phone_pattern": "Phone numbers must start with 0 and consist of 10 digits",
+        "email_required": "Please enter a Email",
+        "password_old_required": "Please enter a Current password",
+        "password_new_required": "Please enter a New password",
+        "password_new_confirm_required": "Please enter a Re-enter the new password",
+        "password_new_confirm_match": "The two passwords that you entered does not match"
+      }
     },
     "rating_user_page": {
       "my_comment": "My comments",
@@ -167,6 +177,13 @@
       "apply": "Apply",
       "see_more": "See more",
       "collapse": "Collapse"
+    },
+    "search_page": {
+      "financed": "Tài trợ bởi",
+      "see_more": "Xem thêm",
+      "all": "Tất cả",
+      "sort_by": "Sắp xếp",
+      "viewed_products": "Sản Phẩm Đã Xem"
     },
     "product_category_page": {
       "sponsored": "Sponsored by",

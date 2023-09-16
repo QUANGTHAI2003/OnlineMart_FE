@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import ProductCard from "@app/app/components/clients/ProductCard/ProductCard";
 import ProductCardSkeleton from "@app/app/components/clients/ProductCard/ProductCardSkeleton";
 import data from "@app/app/pages/client/home/data";
-import { Row } from "antd";
+import { Col, Row } from "antd";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -169,16 +169,17 @@ const ProductCategory = () => {
       ) : (
         <Row gutter={[8, 8]}>
           {data.map((item) => (
-            <ProductCard
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              price={item.price}
-              discountRate={item.discount_rate}
-              quantitySold={item.quantity_sold}
-              ratingAverage={item.rating_average}
-              thumbnailUrl={item.thumbnail_url}
-            />
+            <Col key={item.id} xs={{ span: 12 }} sm={{ span: 6 }} xl={{ span: 4 }}>
+              <ProductCard
+                id={item.id}
+                name={item.name}
+                price={item.price}
+                discountRate={item.discount_rate}
+                quantitySold={item.quantity_sold}
+                ratingAverage={item.rating_average}
+                thumbnailUrl={item.thumbnail_url}
+              />
+            </Col>
           ))}
         </Row>
       )}

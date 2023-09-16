@@ -1,10 +1,9 @@
 import ImgEmail from "@app/app/assets/images/email.png";
-import { Button, Input, Modal } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const EditEmail = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -24,6 +23,13 @@ const EditEmail = () => {
   const handleCancel = () => {
     setOpen(false);
   };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
+  type FieldType = {
+    email?: string;
+  };
   return (
     <div className="flex flex-col">
       <Button type="primary" ghost onClick={showModal}>
@@ -40,11 +46,28 @@ const EditEmail = () => {
       >
         <div className="flex-grow-[1] flex-shrink-[1]">
           <div className="flex justify-center bg-white py-[20px] px-[20px]">
-            <form action="" method="" className="w-full p-[16px] border border-[#ebebf0] border-solid rounded-[4px]">
-              <div className="flex flex-col mb-[34px]">
-                <label htmlFor="edit_email" className="mb-[4px] text-[14px] text-[#38383d]">
-                  {t("user.account_user.account_information.edit_profile.label_email")}
-                </label>
+            <Form
+              name="basic"
+              initialValues={{ remember: true }}
+              onFinish={(values) => {
+                console.log({ values });
+              }}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+              layout="vertical"
+              className="w-full p-[16px] border border-[#ebebf0] border-solid rounded-[4px]"
+            >
+              <Form.Item<FieldType>
+                name="email"
+                rules={[
+                  { required: true, message: t("user.account_user_page.valid.email_required") },
+                  { whitespace: true },
+                  { type: "email" },
+                ]}
+                hasFeedback
+                className="flex flex-col mb-[34px]"
+                label={t("user.account_user.account_information.edit_profile.label_email")}
+              >
                 <div className="flex flex-col flex-grow-[1] flex-shrink-[1] relative">
                   <div className="w-full">
                     <img
@@ -58,15 +81,20 @@ const EditEmail = () => {
                       className="py-[10px] pl-[40px] h-[36px] pr-[12px]"
                     />
                   </div>
-                  <div className="text-[11px] text-[#38383d] absolute top-[100%]">
-                    {t("user.account_user.account_information.edit_profile.description_email")}
-                  </div>
                 </div>
-              </div>
-              <Button key="submit" className="w-full h-[40px] mt-3" type="primary" loading={loading} onClick={handleOk}>
-                {t("user.account_user.account_information.edit_profile.button_change")}
-              </Button>
-            </form>
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  className="w-full h-[40px] mt-3"
+                  type="primary"
+                  htmlType="submit"
+                  loading={loading}
+                  // onClick={handleOk}
+                >
+                  {t("user.account_user.account_information.edit_profile.button_change")}
+                </Button>
+              </Form.Item>
+            </Form>
           </div>
         </div>
       </Modal>
