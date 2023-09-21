@@ -1,4 +1,4 @@
-import MainHeader from "@app/app/components/layouts/admin/AdminMainHeader";
+import MainHeader from "@app/app/components/layouts/admin/Header/AdminMainHeader";
 import { useToggle } from "@app/hooks";
 import { Alert, FloatButton, Layout } from "antd";
 import { Outlet } from "react-router-dom";

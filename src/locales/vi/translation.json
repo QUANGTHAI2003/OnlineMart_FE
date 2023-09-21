@@ -546,6 +546,15 @@
           "delete": "Delete selected products"
         }
       }
+    },
+    "header": {
+        "notifications": "Cập nhật nhà bán",
+        "view_all": "Xem tất cả",
+        "read_all": "Đã đọc tất cả",
+        "profile": "Hồ sơ nhà bán",
+        "change_password":"Thay đổi mật khẩu",
+        "add_another_account": "Thêm tài khoản khác",
+        "logout": "Đăng xuất"
     }
   }
 }

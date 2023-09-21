@@ -546,6 +546,15 @@
           "delete": "Delete selected products"
         }
       }
-    }
+    },
+    "header": {
+      "notifications": "Notifications",
+      "view_all": "View all",
+      "read_all": "Mark all as read",
+      "profile": "Profile",
+      "change_password":"Change password",
+      "add_another_account": "Add another account",
+      "logout": "Log out"
+  }
   }
 }
