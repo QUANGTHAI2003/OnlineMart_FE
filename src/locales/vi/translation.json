@@ -269,26 +269,27 @@
         "product": "sản phẩm"
       },
       "order_details": {
-        "order_detail": "Chi tiết đơn hàng",
-        "order_date": "Ngày đặt hàng",
+        "order_detail": "Chi tiết đơn hàng ",
+        "order_date": "Ngày đặt hàng ",
         "receive_address": "ĐỊA CHỈ NGƯỜI NHẬN",
         "delivery_method": "HÌNH THỨC GIAO HÀNG",
         "payments": "HÌNH THỨC THANH TOÁN",
-        "address": "Địa chỉ",
-        "phone": "Số điện thoại",
-        "delivery_on": "Giao hàng vào",
+        "address": "Địa chỉ: ",
+        "phone": "Số điện thoại: ",
+        "delivery_on": "Giao hàng vào ",
         "product": "Sản phẩm",
         "price": "Giá",
         "quantity": "Số lượng",
         "discount": "Giảm giá",
         "provided": "Cung cấp bởi",
-        "provisional": "Tạm tính",
+        "provisional": "Tạm tính:",
         "chat_seller": "Chat với nhà bán",
         "repurchase": "Mua lại",
-        "transport_fee": "Phí vận chuyển",
-        "total": "Tổng cộng",
+        "transport_fee": "Phí vận chuyển: ",
+        "total": "Tổng cộng:",
         "cancel_order": "Hủy đơn hàng",
-        "back_order": "<< Quay lại đơn hàng của tôi"
+        "back_order": "<< Quay lại đơn hàng của tôi",
+        "table_scrool":" Kéo sang trái hoặc phải để xem thêm nội dung"
       }
     },
     "select_address": {

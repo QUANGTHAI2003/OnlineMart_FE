@@ -16,10 +16,16 @@ export const SearchBar = styled.div`
   justify-content: center !important;
   display: flex;
 `;
-export const CustomTabs = styled(Tabs)`
+export const CustomTabs = styled(Tabs).withConfig({
+  shouldForwardProp: () => true,
+})`
+  .om-tabs-tab {
+    justify-content: center;
+    width: 140px;
+  }
   .om-tabs-nav {
+    margin: 0;
     background-color: white;
-    margin-bottom: 0 !important;
   }
 `;
 export const OrderItem = styled.div`
@@ -165,6 +171,34 @@ export const OrderItem = styled.div`
         cursor: pointer;
         margin-left: 8px;
       }
+    }
+  }
+`;
+export const OrderDetails = styled.div`
+  .table-scroll-instructions {
+    display: none;
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .infor-method {
+      display: none !important;
+    }
+    .link-agin {
+      padding-left: 0 !important;
+    }
+    .sub-total {
+      font-size: 12px;
+      padding: 0 !important;
+    }
+    .table-caption {
+      display: block;
+      text-align: center;
+    }
+    .table-scroll-instructions {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      background-color: #f0f0f0;
     }
   }
 `;
