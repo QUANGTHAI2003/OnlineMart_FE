@@ -103,6 +103,35 @@ export const formatTimeAgo = (timestamp: number) => {
   return `${years} ${t.years} ${t.ago}`;
 };
 
+export const formatShortenNumber = (number: number) => {
+  const language: string = getLang();
+  type Translations = {
+    [key: string]: {
+      prefix: string;
+    };
+  };
+
+  const translations: Translations = {
+    en: {
+      prefix: " million+",
+    },
+    vi: {
+      prefix: "tr+",
+    },
+  };
+
+  const t = translations[language] || translations.en;
+  const suffixes: string[] = ["", "k+", `${t.prefix}`];
+  let suffixIndex = 0;
+
+  while (number >= 1000 && suffixIndex < suffixes.length - 1) {
+    // eslint-disable-next-line no-param-reassign
+    number = Math.floor(number / 100) / 10;
+    suffixIndex++;
+  } 
+  return number + suffixes[suffixIndex];
+};
+
 export const removeDiacritics = (str: string) => {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 };

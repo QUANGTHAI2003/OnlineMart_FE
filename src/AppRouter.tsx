@@ -35,6 +35,7 @@ const UserRating = React.lazy(() => import("@app/app/pages/client/account/rating
 const Discount = React.lazy(() => import("@app/app/pages/client/account/voucher/Discount"));
 const Address = React.lazy(() => import("@app/app/pages/client/account/address/Address"));
 const UserSearch = React.lazy(() => import("@app/app/pages/client/search/UserSearch"));
+const StoreIndex = React.lazy(() => import("@app/app/pages/client/store/StoreIndex"));
 
 // Admin
 const SwitchPageAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SwitchPageAdmin"));
@@ -60,6 +61,7 @@ const AppRouter: React.FC = () => {
     <Routes>
       <Route path="/" element={protectedClientLayout}>
         <Route index element={<Home />} />
+        <Route path="cua-hang" element={<StoreIndex />}></Route>
         <Route path="category" element={<ProductCategory />} />
         <Route path="ai" element={<AI />} />
         <Route path="checkout" element={<Cart />} />

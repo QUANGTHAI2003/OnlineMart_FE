@@ -124,6 +124,51 @@
         }
       }
     },
+    "seller": {
+      "followers": "Followers",
+      "chat": "Chat Response",
+      "follower_btn": "Track",
+      "following_btn": "Is following",
+      "follower_success": "Followed",
+      "see_all": "See all",
+      "store": "Store",
+      "all_product": "All products",
+      "Gallery": "Gallery",
+      "store_profile": "Store profile",
+      "for_order": "For orders from",
+      "save": "Save",
+      "discount": "Discount",
+      "save_coupon": "Saved successfully",
+      "coupon_desc": " You can view and use discount codes on the Shopping Cart page",
+      "input_search": "Find products in store",
+      "all_products": {
+        "sidebar_text": "Product Categories",
+        "see_also": "See also",
+        "Collapse": "Collapse",
+        "title": "All products: ",
+        "results": "results",
+        "common": "Common",
+        "hot_selling": "Hot selling",
+        "new_arrivals": "New arrivals",
+        "low_to_high_priecs": "Low to high prices",
+        "high_to_low_priecs": "High to low prices"
+      },
+      "info": {
+        "cancellation_rate": "Cancellation rate",
+        "return_rate": "Return rate",
+        "cancel_des": "The percentage of cancellations due to seller errors in the last 4 weeks",
+        "return_des": "The rate of exchange/return orders due to seller errors in the last 4 weeks",
+        "members": "Member since year",
+        "product": "Product",
+        "store": "Store Description",
+        "assess": "Evaluate",
+        "million": "  million+",
+        "follow": "Followers",
+        "buy": "Buy online products of ",
+        "reputation": "store on Tiki.vn. ✓ High quality, reputable, good price ✓ Genuine ✓ Nationwide delivery",
+        "feedback": "Chat Response"
+      }
+    },
     "account_user_page": {
       "account_information": "Account Information",
       "my_profile": "My Profile",
@@ -289,7 +334,7 @@
         "total": "Total:",
         "cancel_order": "Cancel Order",
         "back_order": "<< Back to my order",
-        "table_scrool":"Drag left or right to see more content"
+        "table_scrool": "Drag left or right to see more content"
       }
     },
     "select_address": {
@@ -553,9 +598,9 @@
       "view_all": "View all",
       "read_all": "Mark all as read",
       "profile": "Profile",
-      "change_password":"Change password",
+      "change_password": "Change password",
       "add_another_account": "Add another account",
       "logout": "Log out"
-  }
+    }
   }
 }

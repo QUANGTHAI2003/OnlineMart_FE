@@ -27,9 +27,7 @@ const ProductCard: React.FC<IProductCardItem> = ({
 }) => {
   const { t } = useTranslation();
   const productItemRef = useRef<HTMLDivElement>(null);
-
   const smallProductItem = 170;
-
   useLayoutEffect(() => {
     const handleResize = () => {
       if (productItemRef.current) {
@@ -37,9 +35,7 @@ const ProductCard: React.FC<IProductCardItem> = ({
         productItemRef.current.classList.toggle("small", productItemWidth < smallProductItem);
       }
     };
-
     handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);

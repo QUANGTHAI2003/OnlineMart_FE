@@ -124,6 +124,51 @@
         }
       }
     },
+    "seller": {
+      "followers": "Người theo dõi",
+      "chat": "Phản hồi Chat",
+      "follower_btn": "Theo dõi",
+      "following_btn": "Đang theo",
+      "follower_success": "Theo dõi thành công",
+      "see_all": "Xem tất cả",
+      "store": "Cửa hàng",
+      "all_product": "Tất cả sản phẩm",
+      "Gallery": "Bộ sưu tập",
+      "store_profile": "Thông tin cửa hàng",
+      "for_order": "Cho đơn từ ",
+      "save": "Lưu",
+      "discount": "Giảm",
+      "save_coupon": "Lưu thành công",
+      "coupon_desc": " Bạn có thể xem và sử dụng mã giảm giá ở trang Giỏ Hàngg",
+      "input_search": "Tìm sản phẩm tại cửa hàng",
+      "all_products": {
+        "sidebar_text": "Danh mục sản phẩm",
+        "see_also": "Xem thêm",
+        "Collapse": "Thu gọn",
+        "title": "Tất cả sản phẩm: ",
+        "results": "kết quả",
+        "common": "Phổ biến",
+        "hot_selling": "Bán chạy",
+        "new_arrivals": "Hàng mới",
+        "low_to_high_priecs": "Giá thấp đến cao",
+        "high_to_low_priecs": "Giá cao đến thấp"
+      },
+      "info": {
+        "cancellation_rate": "Tỉ lệ huỷ",
+        "return_rate": "Tỉ lệ đổi trả",
+        "cancel_des": "Tỉ lệ đơn hàng hủy do lỗi người bán trong 4 tuần qua.",
+        "return_des": "Tỉ lệ đơn hàng đổi/trả do lỗi người bán trong 4 tuần qua.",
+        "members": "Thành viên từ năm",
+        "product": "Sản phẩm",
+        "store": "Mô tả cửa hàng",
+        "assess": "Đánh giá",
+        "million": "tr+",
+        "follow": "Người theo dõi",
+        "buy": "Mua online sản phẩm của cửa hàng ",
+        "reputation": " trên Tiki.vn. ✓ chất lượng cao, uy tín, giá tốt ✓ Chính hãng ✓ Giao hàng toàn quốc",
+        "feedback": "Phản hồi Chat"
+      }
+    },
     "account_user_page": {
       "account_information": "Thông tin tài khoản",
       "my_profile": "Thông tin cá nhân",
@@ -289,7 +334,7 @@
         "total": "Tổng cộng:",
         "cancel_order": "Hủy đơn hàng",
         "back_order": "<< Quay lại đơn hàng của tôi",
-        "table_scrool":" Kéo sang trái hoặc phải để xem thêm nội dung"
+        "table_scrool": " Kéo sang trái hoặc phải để xem thêm nội dung"
       }
     },
     "select_address": {
@@ -549,13 +594,13 @@
       }
     },
     "header": {
-        "notifications": "Cập nhật nhà bán",
-        "view_all": "Xem tất cả",
-        "read_all": "Đã đọc tất cả",
-        "profile": "Hồ sơ nhà bán",
-        "change_password":"Thay đổi mật khẩu",
-        "add_another_account": "Thêm tài khoản khác",
-        "logout": "Đăng xuất"
+      "notifications": "Cập nhật nhà bán",
+      "view_all": "Xem tất cả",
+      "read_all": "Đã đọc tất cả",
+      "profile": "Hồ sơ nhà bán",
+      "change_password": "Thay đổi mật khẩu",
+      "add_another_account": "Thêm tài khoản khác",
+      "logout": "Đăng xuất"
     }
   }
 }
