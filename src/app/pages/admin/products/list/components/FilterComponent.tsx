@@ -42,7 +42,7 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
   });
 
   return (
-    <section className="filter pt-4 pb-6">
+    <section className="filter pt-4 pb-6 px-6 bg-white">
       <Row gutter={16} wrap={false} align="middle">
         <Col className="flex-1">
           <Form>

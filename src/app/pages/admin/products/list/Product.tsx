@@ -27,8 +27,8 @@ const Product = () => {
 
   return (
     <main>
-      <AdminBreadcrumb />
-      <section className="header mt-3">
+      <AdminBreadcrumb className="bg-white px-6" />
+      <section className="header px-6 bg-white">
         <Row justify="space-between">
           <Col md={16}>
             <Typography.Title level={3}>{t("admin_shop.sidebar.product_list")}</Typography.Title>

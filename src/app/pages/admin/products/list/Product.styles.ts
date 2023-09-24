@@ -36,6 +36,7 @@ export const FilterDropdownStyle = styled.section`
 
 export const TableStyle = styled.section`
   margin-top: 24px;
+  margin: 24px;
 
   h3 {
     font-weight: bold;

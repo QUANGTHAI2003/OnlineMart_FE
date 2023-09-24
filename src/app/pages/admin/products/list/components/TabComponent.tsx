@@ -31,7 +31,16 @@ const TabComponent = () => {
   const inititalTab = ProductListTab(t)[0].tab;
   const { tabFiltered, handleChangeTab } = useSyncUrlWithTab(inititalTab, "tab");
 
-  return <AdminTabs items={items} type="card" size="large" activeKey={tabFiltered} onChange={handleChangeTab} />;
+  return (
+    <AdminTabs
+      className="bg-white px-6"
+      items={items}
+      type="card"
+      size="large"
+      activeKey={tabFiltered}
+      onChange={handleChangeTab}
+    />
+  );
 };
 
 export default TabComponent;
