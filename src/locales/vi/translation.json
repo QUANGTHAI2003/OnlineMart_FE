@@ -591,6 +591,93 @@
           "update_status": "On/Off products status",
           "delete": "Delete selected products"
         }
+      },
+      "create": {
+        "basic_info": "1. Thông tin cơ bản",
+        "product_desc": "2. Mô tả sản phẩm",
+        "option_operaton": "3. Lựa chọn & vận hành",
+        "cancel": "Hủy",
+        "save_draft": "Lưu nháp",
+        "save_off": "Lưu tắt",
+        "save_on": "Lưu bật",
+        "expand": "Mở rộng thông tin",
+        "collapse": "Thu gọn thông tin",
+        "important_info": "Thông tin quan trọng",
+        "basic": {
+          "label": {
+            "product_name": "Tên sản phẩm",
+            "category": "Danh mục",
+            "brand": "Thương hiệu",
+            "origin": "Xuất xứ"
+          },
+          "placeholder": {
+            "product_name": "Nhập tên sản phẩm",
+            "category": "Chọn danh mục",
+            "brand": "Chọn thương hiệu",
+            "origin": "Chọn xuất xứ"
+          },
+          "rules": {
+            "product_name_required": "Tên sản phẩm không được để trống",
+            "product_name_min": "Tên sản phẩm phải có ít nhất 3 kí tự",
+            "product_name_max": "Tên sản phẩm không được vượt quá 255 kí tự",
+            "category_required": "Danh mục không được để trống",
+            "brand_required": "Thương hiệu không được để trống",
+            "origin_required": "Xuất xứ không được để trống"
+          }
+        },
+        "description": {
+          "label": {
+            "product_video": "Video sản phẩm",
+            "product_desc": "Mô tả sản phẩm"
+          },
+          "placeholder": {
+            "upload_video": "Nhấn hoặc kéo thả tập tin vào để tải lên",
+            "video_limit": ".mp4, .mkv | Độ dài video tối đa 1,5 phút | Tối đa 15 MB"
+          },
+          "rules": {
+            "product_desc_required": "Vui lòng nhập mô tả sản phẩm"
+          }
+        },
+        "option": {
+          "label": {
+            "selling_price": "Giá bán",
+            "product_code": "Mã sản phẩm",
+            "add_variant": "Thêm lựa chọn hàng để giúp khách hàng tìm kiếm sản phẩm và dễ dàng thêm mới lựa chọn",
+            "variant": "Tên lựa chọn {{count}}",
+            "variant_for": "Các lựa chọn cho {{name}}",
+            "delete_all": "Xóa tất cả lựa chọn",
+            "variant_operation": "Lựa chọn & vận hành",
+            "operation": "Vận hành",
+            "operation_model": "Mô hình vận hành",
+            "note": "Lưu ý:",
+            "note_shipping": " Shipper có thể từ chối nhận hàng nếu bạn nhập Trọng lượng / Kích thước khác với thực tế.",
+            "weight": "Trọng lượng sau đóng gói (kg)",
+            "dimension": "Chiều dài (cm)  x Chiều rộng (cm)  x Chiều cao (cm)",
+            "images": "Hình ảnh",
+            "product_image": "Hình ảnh sản phẩm",
+            "gallery_images": "Hình ảnh thư viện",
+            "click_drag_upload": "Nhấn hoặc kéo thả hình ảnh vào đây để tải lên",
+            "image_limit": "Kích thước tối thiểu: 500px x 500px | .jpg, .png | Tối đa 10 MB"
+          },
+          "placeholder": {
+            "selling_price": "Vui lòng nhập giá bán",
+            "product_code": "Vui lòng nhập mã sản phẩm",
+            "variant_name": "Nhập tên lựa chọn",
+            "variant_for": "Chọn lựa chọn cho {{name}}",
+            "length": "Chiều dài",
+            "width": "Chiều rộng",
+            "height": "Chiều cao"
+          },
+          "rules": {
+            "selling_price": "Vui lòng nhập giá bán",
+            "variant_required": "Vui lòng nhập tên lựa chọn",
+            "operation_model_required": "Vui lòng chọn mô hình vận hành",
+            "weight_required": "Vui lòng nhập trọng lượng",
+            "dimension_required": "Vui lòng nhập kích thước",
+            "dimension_value": "Kích thước phải lớn hơn 0",
+            "product_image_required": "Vui lòng chọn hình ảnh sản phẩm"
+          }
+        }
       }
     },
     "header": {

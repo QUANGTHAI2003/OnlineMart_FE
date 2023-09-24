@@ -591,6 +591,94 @@
           "update_status": "On/Off products status",
           "delete": "Delete selected products"
         }
+      },
+      "create": {
+        "basic_info": "1. Basic Information",
+        "product_desc": "2. Product Descriptions",
+        "option_operaton": "3. Options & Operation",
+        "cancel": "Cancel",
+        "save_draft": "Save as draft",
+        "save_off": "Submit and turn off",
+        "save_on": "Submit and turn on",
+        "expand": "Expand",
+        "collapse": "Collapse",
+        "important_info": "Important information",
+        "basic": {
+          "label": {
+            "product_name": "Product name",
+            "category": "Category",
+            "brand": "Brand",
+            "origin": "Origin"
+          },
+          "placeholder": {
+            "product_name": "Enter product name",
+            "category": "Select category",
+            "brand": "Select brand",
+            "origin": "Select origin"
+          },
+          "rules": {
+            "product_name_required": "Please enter product name",
+            "product_name_min": "Please enter product name with at least 3 characters",
+            "product_name_max": "Please enter product name with at most 255 characters",
+            "category_required": "Please select category",
+            "brand_required": "Please select brand",
+            "origin_required": "Please select origin"
+          }
+        },
+        "description": {
+          "label": {
+            "product_video": "Product video",
+            "product_desc": "Product description"
+          },
+          "placeholder": {
+            "upload_video": "Click or drag the file to upload",
+            "video_limit": ".mp4, .mkv | Video length up to 1.5 minutes | Up to 15 MB"
+          },
+          "rules": {
+            "product_desc_required": "Please enter product description"
+          }
+        },
+        "option": {
+          "label": {
+            "selling_price": "Selling price",
+            "product_code": "Product code",
+            "add_variant": "Add variation(s) to make it easier for customers to find the product and add new variant",
+            "variant": "Variant {{count}}",
+            "variant_for": "Variant(s) of {{name}}",
+            "delete_all": "Delete all variants",
+            "variant_operation": "Variants & Operation",
+            "operation": "Operation",
+            "operation_model": "Operation model",
+            "note": "Note:",
+            "note_shipping": " Shipper may refuse to receive the item if you enter a different Weight/Dimension than the actual one.",
+            "weight": "Weight after packing (kg)",
+            "dimension": "Length (cm)  x Width (cm)  x Height (cm)",
+            "images": "Images",
+            "product_image": "Product Image",
+            "gallery_images": "Gallery Images",
+            "click_drag_upload": "Click or drag and drop an image here to upload",
+            "image_limit": "Min size: 500px x 500px | .jpg, .png | Maximum 10 MB"
+
+          },
+          "placeholder": {
+            "selling_price": "Enter selling price",
+            "product_code": "Enter product code",
+            "variant_name": "Enter variant name",
+            "variant_for": "Select variant(s) for {{name}}",
+            "length": "Length",
+            "width": "Width",
+            "height": "Height"
+          },
+          "rules": {
+            "selling_price": "Please enter selling price",
+            "variant_required": "Please enter variant name",
+            "operation_model_required": "Please enter operation model",
+            "weight_required": "Please enter weight",
+            "dimension_required": "Please enter dimension",
+            "dimension_value": "Please enter dimension value greater than 0",
+            "product_image_required": "Please select product image"
+          }
+        }
       }
     },
     "header": {

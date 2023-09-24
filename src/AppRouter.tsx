@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { AdminBreadcrumb } from "./app/components/common/Breadcrumb/Breadcrumb";
 import AdminMainLayout from "./app/components/layouts/admin/AdminMainLayout";
 import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
@@ -43,6 +42,7 @@ const SigninAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SigninAdm
 const SignupAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SignupAdmin"));
 
 const AdminProductList = React.lazy(() => import("@app/app/pages/admin/products/list/Product"));
+const AdminProductCreate = React.lazy(() => import("@app/app/pages/admin/products/create/ProductCreate"));
 
 const AppRouter: React.FC = () => {
   const protectedAdminLayout = (
@@ -83,7 +83,7 @@ const AppRouter: React.FC = () => {
         <Route index element={<Dashboard />} />
         <Route path="products">
           <Route index element={<AdminProductList />} />
-          <Route path="create" element={<AdminBreadcrumb />} />
+          <Route path="create" element={<AdminProductCreate />} />
           <Route path="review" element={<div>Product Review</div>} />
         </Route>
         <Route path="orders">

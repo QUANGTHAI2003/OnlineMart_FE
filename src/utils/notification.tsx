@@ -1,4 +1,5 @@
-import { notification } from "antd";
+import { App, notification } from "antd";
+import type { MessageInstance } from "antd/es/message/interface";
 import { ArgsProps } from "antd/es/notification/interface";
 import styled from "styled-components";
 
@@ -44,9 +45,19 @@ const openErrorNotification = (config: NotificationProps): void => {
   });
 };
 
+let message: MessageInstance;
+
 export const notificationController = {
   success: openSuccessNotification,
   info: openInfoNotification,
   warning: openWarningNotification,
   error: openErrorNotification,
 };
+
+export default () => {
+  const staticFunction = App.useApp();
+  message = staticFunction.message;
+  return null;
+};
+
+export { message };

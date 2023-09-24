@@ -4,6 +4,7 @@ import { MediaQueryAllQueryable, MediaQueryMatchers, useMediaQuery } from "react
 interface IResponsiveReturnValues {
   isMobile: boolean;
   isTablet: boolean;
+  isSmallDesktop: boolean;
   isDesktop: boolean;
   isBigScreen: boolean;
   mobileOnly: boolean;
@@ -19,6 +20,7 @@ interface IResponsiveReturnValues {
 const useResponsive = (): IResponsiveReturnValues => {
   const isMobile = useMediaQuery({ query: media.xs });
   const isTablet = useMediaQuery({ query: media.md });
+  const isSmallDesktop = useMediaQuery({ query: media.lg });
   const isDesktop = useMediaQuery({ query: media.xl });
   const isBigScreen = useMediaQuery({ query: media.xxl });
 
@@ -37,6 +39,7 @@ const useResponsive = (): IResponsiveReturnValues => {
   return {
     isMobile,
     isTablet,
+    isSmallDesktop,
     isDesktop,
     isBigScreen,
     mobileOnly,

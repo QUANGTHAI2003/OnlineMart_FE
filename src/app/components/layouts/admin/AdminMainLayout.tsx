@@ -15,7 +15,7 @@ const AdminMainLayout = () => {
         <AdminMainSidebar isCollapsed={isCollapsed} />
         <Layout>
           <MainHeader isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
-          <Layout.Content className="p-6 bg-white">
+          <Layout.Content>
             <Outlet />
           </Layout.Content>
         </Layout>
