@@ -96,6 +96,7 @@
       "account_address": "Sổ địa chỉ",
       "account_like": "Sản phẩm yêu thích",
       "account_wishlist": {
+        "confirm_title": "Bạn có muốn xóa sản phẩm yêu thích này không?",
         "title": "Sản phẩm yêu thích",
         "text_empty": "Hãy ❤️ sản phẩm bạn yêu thích khi mua sắm để xem lại thuận tiện nhất",
         "button_shopping": "Tiếp tục mua sắm",

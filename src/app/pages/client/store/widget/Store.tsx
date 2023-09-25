@@ -16,16 +16,19 @@ import Widget from "./Widget";
 
 const Store = () => {
   const { t } = useTranslation();
-  const [isCopied, setIsCopied] = useState<boolean>(false);
-  const handleCopy = () => {
-    if (!isCopied) {
-      setIsCopied(true);
-      notificationController.success({
-        message: t("user.seller.save_coupon"),
-        description: t("user.seller.coupon_desc"),
-      });
-    }
+  const [copiedCoupons, setCopiedCoupons] = useState(new Set());
+  const handleCopy = (couponCode: string) => {
+    setCopiedCoupons((prevCopiedCoupons) => {
+      const updatedCopiedCoupons = new Set(prevCopiedCoupons);
+      updatedCopiedCoupons.add(couponCode);
+      return updatedCopiedCoupons;
+    });
+    notificationController.success({
+      message: t("user.seller.save_coupon"),
+      description: t("user.seller.coupon_desc"),
+    });
   };
+
   const dividedBanners = [];
   const banner = dataSeller.banners;
   for (let i = 0; i < banner?.length; i += 2) {
@@ -83,11 +86,11 @@ const Store = () => {
                         {t("user.seller.for_order")}
                         {formatVNCurrency(item.min_amount)}
                       </p>
-                      {isCopied === true ? (
+                      {copiedCoupons.has(item.coupon_code) ? (
                         <CouponStoreSaved />
                       ) : (
                         <div className="btn-copy">
-                          <CopyToClipboard text={item.coupon_code} onCopy={handleCopy}>
+                          <CopyToClipboard text={item.coupon_code} onCopy={() => handleCopy(item.coupon_code)}>
                             <button className="border-0 bg-transparent">{t("user.seller.save")}</button>
                           </CopyToClipboard>
                         </div>

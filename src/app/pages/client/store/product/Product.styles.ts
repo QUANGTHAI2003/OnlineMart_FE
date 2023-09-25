@@ -55,7 +55,7 @@ export const SortBy = styled.div`
       align-content: center;
     }
     .om-radio-wrapper {
-      margin: 0 !important
-     }
+      margin: 0 !important;
+    }
   }
 `;

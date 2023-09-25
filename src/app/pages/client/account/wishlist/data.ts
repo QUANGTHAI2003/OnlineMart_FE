@@ -1,0 +1,26 @@
+export const data = [
+  {
+    id: 156712149,
+    name: "Giày chạy thể thao nam nữ Running Shoes Anta svs c sf  svsf s vf sfd s  sfs vdsvs s sf 812245588",
+    thumbnail_url: "https://salt.tikicdn.com/cache/280x280/ts/product/b6/f9/06/94f1b614e3f36dd4cc532718598a776d.jpg",
+    price: 659500,
+    list_price: 1319000,
+    original_price: 1319000,
+    discount_rate: 50,
+    discount: 659500,
+    rating_average: 5,
+    review_count: 54,
+  },
+  {
+    id: 216173180,
+    name: "Điện thoại Samsung Galaxy S23 5G (8GB/256GB) - Hàng chính hãng",
+    thumbnail_url: "https://salt.tikicdn.com/cache/280x280/ts/product/e7/95/a5/3d8980f5fe6a483b65a6da03247a1708.png",
+    price: 23491000,
+    list_price: 23491000,
+    original_price: 23491000,
+    discount: 0,
+    discount_rate: 0,
+    rating_average: 4.5,
+    review_count: 54,
+  },
+];

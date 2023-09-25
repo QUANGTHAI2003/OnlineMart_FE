@@ -1,8 +1,7 @@
 import { RatingStar } from "@app/app/assets/icons";
-import OfficialIcon from "@app/app/assets/images/official.png";
 import { dataWidget } from "@app/app/pages/client/store/data";
 import * as S from "@app/app/pages/client/store/widget/component/WidgetList.styles";
-import { formatCurrency } from "@app/utils/helper";
+import { formatCurrency, formatShortenNumber } from "@app/utils/helper";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
@@ -65,7 +64,7 @@ const WidgetList = () => {
                     {windowWidth < 1024 ? (
                       <div className="flex justify-center w-full mt-3">
                         <Link title="Xem tất cả Deal Hot" to="?t=product">
-                          Xem tất cả
+                          {t("user.seller.see_all")}
                           <FontAwesomeIcon className="ml-2" icon={faAngleRight} />
                         </Link>
                       </div>
@@ -74,13 +73,13 @@ const WidgetList = () => {
                 ) : (
                   <>
                     {widget.items.slice(0, widget.data_collapsed).map((item: any) => (
-                      <a href="#a" className="widget-item" key={uuidv4()}>
+                      <a href={item.url_path} className="widget-item" key={uuidv4()}>
                         <div className="selling">
                           <div className="thumbnail-item">
                             <div className="text-center relative w-full flex ">
                               <img src={item.thumbnail_url} alt="" width="124" height="124" className="object-cover" />
                               <div className="absolute z-10">
-                                <img src={OfficialIcon} alt="bagde icon" width="72" height="20" />
+                                <img className="object-contain" src={item.icon_authentic_brand} alt="bagde icon" width="72" height="20" />
                               </div>
                             </div>
                           </div>
@@ -90,19 +89,24 @@ const WidgetList = () => {
                                 <h3 className="mb-1">{item.name}</h3>
                               </div>
                               <div className="rating mb-1">
-                                <div className="text-rating">4.6</div>
+                                <div className="text-rating">{item.rating_average}</div>
                                 <RatingStar />
                                 <div className="line"></div>
-                                <span className="percent">Đã bán 9k</span>
+                                <span className="percent">{`Đã bán ${formatShortenNumber(item.quantity_sold)}`}</span>
                               </div>
                               <div className="flex items-center">
-                                <div className="discount has-discount">{formatCurrency(250000)}</div>
-                                <div className="percent-discount">15%</div>
+                                <div className="discount has-discount">{formatCurrency(item.price)}</div>
+                                <div className="percent-discount">{`-${item.discount_rate}%`}</div>
                               </div>
                             </div>
                             <div>
                               <div className="line-badge"></div>
-                              <div className="ship-text">Giao chủ nhật, ngày 03/09</div>
+                              <div className="flex flex-row justify-start items-center">
+                                {item.icon_now ? (
+                                  <img src={item.icon_now} className="mr-1" width="32" height="16" alt="" />
+                                ) : null}
+                                <div className="ship-text">{item.delivery_info_date}</div>
+                              </div>
                             </div>
                           </div>
                         </div>
