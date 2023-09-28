@@ -679,6 +679,64 @@
             "product_image_required": "Vui lòng chọn hình ảnh sản phẩm"
           }
         }
+      },
+      "review": {
+        "site_header": {
+          "suggestion": "Nhà bán mong muốn có thêm đánh giá sản phẩm từ khách hàng ?",
+          "connector": "Hãy thử tạo",
+          "link": "Chiến dịch đánh giá sản phẩm",
+          "review_management": "Quản lý đánh giá",
+          "view_details": "Xem chi tiết",
+          "all_tab": "Tất cả"
+        },
+        "feedback": {
+          "action": "Trả lời",
+          "comment": "Đánh giá",
+          "close": "Đóng",
+          "send_a_response": "Gửi trả lời",
+          "joined": "Đã tham gia",
+          "ago": "ngày trước",
+          "comment_on": "Nhận xét vào ngày",
+          "used_for": "Đã dùng",
+          "days": "ngày"
+        },
+        "filter": {
+          "include_content": "Có nội dung",
+          "include_media": "Có hình ảnh / video",
+          "already_replied": "Đã trả lời",
+          "not_yet_replied": "Chưa trả lời",
+          "filtering": "Đang lọc",
+          "content_type": "Loại đánh giá",
+          "clear_all": "Xóa tất cả",
+          "apply": "Áp dụng",
+          "seller_reply": "Nhà bán",
+          "status": "Trạng thái",
+          "approved": "Đã duyệt",
+          "reported": "Đã báo cáo",
+          "reject": "Đã ẩn",
+          "review_date": "Ngày đánh giá"
+        },
+        "table_cpn": {
+          "total_review": "Số đánh giá",
+          "order_id": "Mã đơn hàng",
+          "product": "Sản phẩm",
+          "rating": "Đánh giá",
+          "content": "Nội dung",
+          "reviewer": "Người đánh giá",
+          "review_date": "Ngày đánh giá",
+          "seller_replies": "Nhà bán trả lời",
+          "status": "Trạng thái",
+          "action": "Thao tác",
+          "title": "Tiêu đề",
+          "sku": "Mã SKU"
+        },
+        "rating_text": {
+          "abysmal": "Rất tệ",
+          "bad": "Tệ",
+          "normal": "Bình thường",
+          "exellent": "Tốt",
+          "very_good": "Rất tốt"
+        }
       }
     },
     "header": {

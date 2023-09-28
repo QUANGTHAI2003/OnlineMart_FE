@@ -41,6 +41,7 @@ const SigninAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SigninAdm
 const SignupAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SignupAdmin"));
 
 const AdminProductList = React.lazy(() => import("@app/app/pages/admin/products/list/Product"));
+const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/products/review/ProductReview"));
 const AdminProductCreate = React.lazy(() => import("@app/app/pages/admin/products/create/ProductCreate"));
 
 
@@ -84,7 +85,7 @@ const AppRouter: React.FC = () => {
         <Route path="products">
           <Route index element={<AdminProductList />} />
           <Route path="create" element={<AdminProductCreate />} />
-          <Route path="review" element={<div>Product Review</div>} />
+          <Route path="review" element={<AdminProductReview />} />
         </Route>
         <Route path="orders">
           <Route index element={<div>Order List</div>} />

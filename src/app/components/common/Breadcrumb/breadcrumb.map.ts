@@ -1,6 +1,7 @@
 const breadcrumbNameMap: Record<string, string> = {
   "/products": "admin_shop.sidebar.product_list",
   "/products/create": "admin_shop.sidebar.product_create",
+  "/products/review": "admin_shop.sidebar.product_review",
 };
 
 const updatedBreadcrumbNameMap: Record<string, string> = {
