@@ -594,6 +594,64 @@
           "delete": "Delete selected products"
         }
       },
+      "review": {
+        "site_header": {
+          "suggestion": "Does the seller wish to have more product reviews from customers ?",
+          "connector": "Please try to create",
+          "link": "Product review strategy",
+          "review_management": "Review management",
+          "view_details": "View details",
+          "all_tab": "All"
+        },
+        "feedback": {
+          "action": "Action",
+          "comment": "Comment",
+          "close": "Close",
+          "send_a_response": "Send a response",
+          "joined": "Joined",
+          "ago": "days ago",
+          "comment_on": "Comment on",
+          "used_for": "Used for",
+          "days": "days"
+        },
+        "filter": {
+          "include_content": "Include content",
+          "include_media": "Include image / video",
+          "already_replied": "Already replied",
+          "not_yet_replied": "Not yet replied",
+          "filtering": "Filtering",
+          "content_type": "Content type",
+          "clear_all": "Clear all",
+          "apply": "Apply",
+          "seller_reply": "Seller's reply",
+          "status": "Status",
+          "approved": "Approved",
+          "reported": "Reported",
+          "reject": "Reject",
+          "review_date": "Review date"
+        },
+        "table_cpn": {
+          "total_review": "Total reviews",
+          "order_id": "Order ID",
+          "product": "Product",
+          "rating": "Rating",
+          "content": "Content",
+          "reviewer": "Reviewer",
+          "review_date": "Review date",
+          "seller_replies": "Seller's replies",
+          "status": "Status",
+          "action": "Action",
+          "title": "Title",
+          "sku": "SKU"
+        },
+        "rating_text": {
+          "abysmal": "Abysmal",
+          "bad": "Bad",
+          "normal": "Normal",
+          "exellent": "Exellent",
+          "very_good": "Very Good"
+        }
+      },
       "create": {
         "basic_info": "1. Basic Information",
         "product_desc": "2. Product Descriptions",
@@ -660,7 +718,6 @@
             "gallery_images": "Gallery Images",
             "click_drag_upload": "Click or drag and drop an image here to upload",
             "image_limit": "Min size: 500px x 500px | .jpg, .png | Maximum 10 MB"
-
           },
           "placeholder": {
             "selling_price": "Enter selling price",
@@ -691,75 +748,6 @@
       "change_password": "Change password",
       "add_another_account": "Add another account",
       "logout": "Log out"
-    }
-      },
-      "review": {
-        "site_header": {
-          "suggestion": "Does the seller wish to have more product reviews from customers ?",
-          "connector": "Please try to create",
-          "link": "Product review strategy",
-          "review_management": "Review management",
-          "view_details": "View details",
-          "all_tab": "All"
-        },
-        "feedback": {
-          "action": "Action",
-          "comment": "Comment",
-          "close": "Close",
-          "send_a_response": "Send a response",
-          "joined": "Joined",
-          "ago": "days ago",
-          "comment_on": "Comment on",
-          "used_for": "Used for",
-          "days": "days"
-        },
-        "filter": {
-          "include_content": "Include content",
-          "include_media": "Include image / video",
-          "already_replied": "Already replied",
-          "not_yet_replied": "Not yet replied",
-          "filtering": "Filtering",
-          "content_type": "Content type",
-          "clear_all": "Clear all",
-          "apply": "Apply",
-          "seller_reply": "Seller's reply",
-          "status": "Status",
-          "approved": "Approved",
-          "reported": "Reported",
-          "reject": "Reject",
-          "review_date": "Review date"
-        },
-        "table_cpn": {
-          "total_review": "Total reviews",
-          "order_id": "Order ID",
-          "product": "Product",
-          "rating": "Rating",
-          "content": "Content",
-          "reviewer": "Reviewer",
-          "review_date": "Review date",
-          "seller_replies": "Seller's replies",
-          "status": "Status",
-          "action": "Action",
-          "title": "Title",
-          "sku": "SKU"
-        },
-        "rating_text": {
-          "abysmal": "Abysmal",
-          "bad": "Bad",
-          "normal": "Normal",
-          "exellent": "Exellent",
-          "very_good": "Very Good"
-        }
-      },
-      "header": {
-        "notifications": "Notifications",
-        "view_all": "View all",
-        "read_all": "Mark all as read",
-        "profile": "Profile",
-        "change_password": "Change password",
-        "add_another_account": "Add another account",
-        "logout": "Log out"
-      }
     }
   }
 }
