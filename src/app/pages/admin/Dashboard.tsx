@@ -1,4 +1,3 @@
-import { Counter } from "@app/app/components/Counter/Counter";
 import MetaHeader from "@app/app/components/Meta/MetaHeader";
 import { Col, DatePicker, Row, Space } from "antd";
 
@@ -12,11 +11,8 @@ const Dashboard = () => {
       <Col span={8}>
         <MetaHeader title="Dashboard" />
         <OpenGraph title="Dashboard" />
-        <Counter />
       </Col>
-      <Col span={8}>
-
-      </Col>
+      <Col span={8}></Col>
       <Col span={8}>
         <Space direction="vertical" size={12}>
           <RangePicker />

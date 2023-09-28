@@ -11,15 +11,12 @@ const PageAccount = () => {
   const history = useNavigate();
   const { t } = useTranslation();
   const [title, setTitle] = useState<string>("");
-  const [clickCount, setClickCount] = useState(0);
   const [clickTimeout, setClickTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   const haveCart = location.pathname.startsWith("/account/");
   const backHome = location.pathname === "/account/edit_profile";
 
   const handleClick = () => {
-    setClickCount((prevCount) => prevCount + 1);
-
     if (clickTimeout) {
       clearTimeout(clickTimeout);
       setClickTimeout(null);
@@ -27,7 +24,6 @@ const PageAccount = () => {
     } else {
       setClickTimeout(
         setTimeout(() => {
-          setClickCount(0);
           handleSingleClick();
         }, 300)
       );

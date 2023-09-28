@@ -15,7 +15,7 @@ import Payment from "./app/pages/client/home/Payment";
 
 // Pages
 const Dashboard = React.lazy(() => import("@app/app/pages/admin/Dashboard"));
-const LoginUser = React.lazy(() => import("@app/app/pages/client/auth/LoginUser"));
+const AuthUser = React.lazy(() => import("@app/app/pages/client/auth/AuthUser"));
 const CheckOtp = React.lazy(() => import("@app/app/pages/client/auth/CheckOtp"));
 const ChangePass = React.lazy(() => import("@app/app/pages/client/auth/ChangePass"));
 const EmailForm = React.lazy(() => import("@app/app/pages/client/auth/Email"));
@@ -96,7 +96,7 @@ const AppRouter: React.FC = () => {
       </Route>
 
       <Route element={<AuthLayout />}>
-        <Route path="auth/login" element={<LoginUser />} />
+        <Route path="auth" element={<AuthUser />} />
         <Route path="auth/forgot" element={<CheckOtp />} />
         <Route path="auth/changepass" element={<ChangePass />} />
         <Route path="auth/email" element={<EmailForm />} />

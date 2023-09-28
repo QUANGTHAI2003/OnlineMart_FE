@@ -2,8 +2,8 @@ import { Avatar as AntdAvatar } from "antd";
 import React, { ReactNode, useState } from "react";
 
 interface IAvatarImageProps {
-  src: string | ReactNode | undefined;
-  alt: string;
+  src: string | null | undefined;
+  alt: string | undefined;
   [key: string]: any;
 }
 

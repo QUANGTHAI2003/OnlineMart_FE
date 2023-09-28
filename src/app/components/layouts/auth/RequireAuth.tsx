@@ -1,26 +1,47 @@
+import { userApi } from "@app/store/slices/api/userApi";
+import { Spin } from "antd";
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { Navigate, useLocation } from "react-router-dom";
 
 interface IRequireAuthProps {
   children: React.ReactNode;
   type: "client" | "adminShop" | "superAdmin";
+  allowedRoles?: string[];
 }
 
 const RequireAuth: React.FC<IRequireAuthProps> = ({ children, type }) => {
-  // remove 1 when have api
-  const token = true;
+  const [cookies] = useCookies(["logged_in"]);
+  const location = useLocation();
+
+  const { isLoading, isFetching } = userApi.endpoints.getMe.useQuery(null, {
+    skip: false,
+    refetchOnMountOrArgChange: true,
+  });
+
+  const loading = isLoading || isFetching;
+
+  const user = userApi.endpoints.getMe.useQueryState(null, {
+    selectFromResult: (data) => {
+      return data;
+    },
+  });
+
+  if (loading) {
+    return <Spin />;
+  }
 
   const checkType = {
-    client: "/login",
+    client: "/auth",
     adminShop: "/admin/shop/login",
     superAdmin: "/admin/super/login",
   }[type];
 
-  return token ? (
+  return cookies.logged_in || user ? (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>{children}</>
   ) : (
-    <Navigate to={checkType} replace={true} />
+    <Navigate to={checkType} state={{ form: location }} replace />
   );
 };
 

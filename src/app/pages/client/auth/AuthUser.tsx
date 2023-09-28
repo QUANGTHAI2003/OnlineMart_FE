@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-one-expression-per-line */
+import { useSyncUrlWithTab } from "@app/hooks";
 import { TabsProps } from "antd";
 import { useTranslation } from "react-i18next";
 
@@ -9,21 +10,19 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import * as S from "./Login.style";
 
-const LoginUser = () => {
+const AuthUser = () => {
   const { t } = useTranslation();
 
-  const onChange = (key: string) => {
-    console.log(key);
-  };
+  const { tabFiltered, handleChangeTab } = useSyncUrlWithTab("login", "tab");
 
   const items: TabsProps["items"] = [
     {
-      key: "1",
+      key: "signup",
       label: t("user.account.sign_up.Sign_up"),
       children: <SignUp />,
     },
     {
-      key: "2",
+      key: "login",
       label: t("user.account.login.Login"),
       children: <Login />,
     },
@@ -40,11 +39,11 @@ const LoginUser = () => {
           <div className="text-center text-base justify-center mb-4">
             <span>{t("user.account.welcome")}</span>
           </div>
-          <S.CustomTabs defaultActiveKey="2" items={items} onChange={onChange}></S.CustomTabs>
+          <S.CustomTabs defaultActiveKey="login" activeKey={tabFiltered} items={items} onChange={handleChangeTab} />
         </div>
       </div>
     </S.Form>
   );
 };
 
-export default LoginUser;
+export default AuthUser;

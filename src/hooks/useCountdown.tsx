@@ -5,8 +5,9 @@ const useCountdown = (targetDate: Date) => {
 
   const updateCountdown = useCallback(async () => {
     try {
-      const response = await fetch("http://worldtimeapi.org/api/ip");
-      const { unixtime } = await response.json();
+      // const response = await fetch("http://worldtimeapi.org/api/ip");
+      // const { unixtime } = await response.json();
+      const unixtime = new Date().getTime();
 
       const now = unixtime * 1000;
       const distance = targetDate.getTime() - now;

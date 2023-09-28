@@ -1,4 +1,7 @@
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+
 import { getLang } from "./localstorage";
+import { notificationController } from "./notification";
 
 export const formatCurrency = (price: number, locale = "vi-VN", currency = "VND"): string => {
   return price.toLocaleString(locale, {
@@ -128,10 +131,65 @@ export const formatShortenNumber = (number: number) => {
     // eslint-disable-next-line no-param-reassign
     number = Math.floor(number / 100) / 10;
     suffixIndex++;
-  } 
+  }
   return number + suffixes[suffixIndex];
 };
 
 export const removeDiacritics = (str: string) => {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 };
+
+export const notifySuccess = (message: string, description?: string) => {
+  notificationController.success({
+    message,
+    description,
+  });
+};
+
+export const notifyError = (message: string, description?: string) => {
+  notificationController.error({
+    message,
+    description,
+  });
+};
+
+export const notifyWarning = (message: string, description?: string) => {
+  notificationController.warning({
+    message,
+    description,
+  });
+};
+
+export const notifyInfo = (message: string, description?: string) => {
+  notificationController.info({
+    message,
+    description,
+  });
+};
+
+export function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryError {
+  return typeof error === "object" && error != null && "status" in error;
+}
+
+interface IEntityError {
+  status: 422;
+  data: {
+    errors: {
+      [key: string]: string[];
+    };
+  };
+}
+
+export function isErrorWithMessage(error: unknown): error is { message: string } {
+  return typeof error === "object" && error != null && "message" in error && typeof (error as any).message === "string";
+}
+
+export function isEntityError(error: unknown): error is IEntityError {
+  return (
+    isFetchBaseQueryError(error) &&
+    error.status === 422 &&
+    typeof error.data === "object" &&
+    error.data !== null &&
+    !(error.data instanceof Array)
+  );
+}

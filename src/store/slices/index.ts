@@ -1,9 +1,12 @@
-import appReducer from "./appSlice";
-import counterSlice from "./counterSlice";
+import { authApi } from "./api/authApi";
+import { userApi } from "./api/userApi";
+import authSlice from "./authSlice";
 
-const exportData = {
-  app: appReducer,
-  counter: counterSlice,
+const exportData: any = {
+  [authApi.reducerPath]: authApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
+  userState: authSlice,
 };
 
-export default exportData;
+export { exportData as rootReducer };
+

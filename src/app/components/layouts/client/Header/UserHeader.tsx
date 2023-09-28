@@ -1,10 +1,11 @@
 import logo from "@app/app/assets/images/Logo.svg";
 import { useResponsive } from "@app/hooks";
+import { useAppSelector } from "@app/store/store";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import PageAccount from "./HeaderResponsive/PageAccount";
 import PageDetail from "./HeaderResponsive/PageDetail";
@@ -15,7 +16,14 @@ import PopupLanguage from "./Popups/Language/PopupLanguage";
 import Search from "./SearchBar/Search";
 
 const UserHeader = () => {
-  const isAuthenticated = true;
+  const user = useAppSelector((state) => state.userState.user);
+
+  let isAuthenticated = false;
+  if (user) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
   const { t } = useTranslation();
   const location = useLocation();
   const history = useNavigate();
@@ -73,20 +81,18 @@ const UserHeader = () => {
             <li className="inline-block">
               {!isAuthenticated ? (
                 <>
-                  <a
-                    href="/#"
+                  <Link
+                    to="/auth?tab=signup"
                     className="text-base text-black mr-1 inline-block relative after:content-[''] after:block after:absolute after:w-[1px] after:h-[15px] after:bg-black after:right-[-5px] after:top-[50%] after:transform after:translate-y-[-40%]"
                   >
                     {t("user.header.register")}
-                  </a>
-                  <a href="/#" className="text-base text-black ml-2">
+                  </Link>
+                  <Link to="/auth?tab=login" className="text-base text-black ml-2">
                     {t("user.header.login")}
-                  </a>
+                  </Link>
                 </>
               ) : (
-                <a href="/#" className="text-black">
-                  <AccountMenu name="Pham Truong Xuan" avatar="https://source.unsplash.com/random" />
-                </a>
+                <AccountMenu />
               )}
             </li>
           </ul>
@@ -94,9 +100,9 @@ const UserHeader = () => {
 
         {isDesktop && (
           <div className="px-3 flex xl:flex items-center justify-between h-[calc(120px_-_35px)]">
-            <div className="hidden xl:w-[200px] xl:flex items-center">
+            <Link to="/" className="hidden xl:w-[200px] xl:flex items-center">
               <img src={logo} alt="logo-svg" className="w-[150px]" />
-            </div>
+            </Link>
             {haveBtnCallback && (
               <div className="xl:hidden h-10 min-w-10 w-10 flex items-center justify-center">
                 <FontAwesomeIcon
