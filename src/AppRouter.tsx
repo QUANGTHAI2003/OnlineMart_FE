@@ -39,7 +39,7 @@ const StoreIndex = React.lazy(() => import("@app/app/pages/client/store/StoreInd
 const SwitchPageAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SwitchPageAdmin"));
 const SigninAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SigninAdmin"));
 const SignupAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SignupAdmin"));
-
+const AdminOrderList = React.lazy(() => import("@app/app/pages/admin/orders/list/Order"));
 const AdminProductList = React.lazy(() => import("@app/app/pages/admin/products/list/Product"));
 const Category = React.lazy(() => import("@app/app/pages/admin/products/categories/Category"));
 const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/products/review/ProductReview"));
@@ -91,7 +91,7 @@ const AppRouter: React.FC = () => {
         </Route>
         <Route path="categories" element={<Category />} />
         <Route path="orders">
-          <Route index element={<div>Order List</div>} />
+          <Route index element={<AdminOrderList />} />
           <Route path="bill" element={<div>Order Bill</div>} />
         </Route>
         <Route path="info-seller" element={<div>Seller info</div>} />

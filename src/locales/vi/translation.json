@@ -741,6 +741,73 @@
         }
       }
     },
+    "orders": {
+      "list": {
+        "add_order":"Thêm đơn hàng",
+        "table": {
+          "id_order":"Mã đơn hàng: ",
+          "orders": "Đơn hàng: ",
+          "product":"Sản phẩm",
+          "order": "Mã đơn hàng/ Ngày đặt hàng",
+          "status": "Trạng thái ",
+          "confirm": "Hạn xác nhận",
+          "quantity": "Số lượng/DT/GTĐH",
+          "infor_receiver": "Thông tin vận chuyển",
+          "delivery_by":"Được giao bởi: ",
+          "pick_delivery":"Được giao bởi: ",
+          "shipping_fee":"Phí vận chuyển: ",
+          "order_label":"Nhãn đơn hàng",
+          "qty":"Số lượng: ",
+          "payment_method":"Phương thức thanh toán",
+          "sale_price":"Giảm giá",
+          "sub_total":"Tạm tính",
+          "price":"Đơn giá: ",
+          "print":"In phiếu",
+          "action": "Thao tác",
+          "edit": "Sửa sản phẩm",
+          "delete": "Xóa sản phẩm",
+          "selecting": "Đang chọn: {{count}}"
+        },
+        "status": {
+          "all": "Tất cả",
+          "awaiting": "Chờ xác nhận",
+          "processing": "Đang xử lý",
+          "shipping": "Đang vận chuyển",
+          "delivered": "Đã giao hàng",
+          "canceled": "Đã hủy"
+        },
+        "filter": {
+          "type": {
+            "id": "Mã đơn hàng",
+            "sku": "SKU",
+            "infor_user":"Thông tin khách hàng"
+          },
+          "print":"In phiếu các đơn hàng được chọn",
+          "placeholder": "Nhập tối đa 20 {{placeholder}} cách nhau bằng dấu ',' ",
+          "not_printed":"Chưa in phiếu",
+          "need_invoice":"Cần xuất hóa đơn",
+          "order_label":"Nhãn đơn hàng",
+          "invoice_required":"Cần xuất hóa đơn",
+          "invoice_issued":"Đã xuất hóa đơn",
+          "delivery":"Hình thức giao hàng",
+          "ghtk_delivery":"Giao hàng tiết kiệm",
+          "shop_delivery":"Nhà bán tự vận hành",
+          "om_delivery":"Online Mart Giao hàng",
+          "other_filter":"Bộ lọc khác",
+          "last_7":"7 ngày qua",
+          "today":"Hôm nay",
+          "update_selected":"Cập nhật đơn hàng được chọn ",
+          "select_at_less":"Vui lòng chọn ít nhất 1 đơn hàng bên dưới",
+          "delete_filter":"Xóa",
+          "last_30":"30 ngày qua",
+          "all_time":"Toàn thời gian",
+          "custom":"Tùy chỉnh",
+          "order_date":"Ngày đặt hàng "
+        }
+      }
+
+
+    },
     "categories": {
       "name": "Danh mục sản phẩm",
       "title": "Thêm danh mục sản phẩm",
