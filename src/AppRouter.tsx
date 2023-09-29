@@ -41,9 +41,9 @@ const SigninAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SigninAdm
 const SignupAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SignupAdmin"));
 
 const AdminProductList = React.lazy(() => import("@app/app/pages/admin/products/list/Product"));
+const Category = React.lazy(() => import("@app/app/pages/admin/products/categories/Category"));
 const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/products/review/ProductReview"));
 const AdminProductCreate = React.lazy(() => import("@app/app/pages/admin/products/create/ProductCreate"));
-
 
 const AppRouter: React.FC = () => {
   const protectedAdminLayout = (
@@ -87,6 +87,7 @@ const AppRouter: React.FC = () => {
           <Route path="create" element={<AdminProductCreate />} />
           <Route path="review" element={<AdminProductReview />} />
         </Route>
+        <Route path="categories" element={<Category />} />
         <Route path="orders">
           <Route index element={<div>Order List</div>} />
           <Route path="bill" element={<div>Order Bill</div>} />

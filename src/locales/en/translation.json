@@ -497,6 +497,7 @@
       "product_list": "Product list",
       "product_create": "Create product",
       "product_review": "Review management",
+      "product_categories": "Category",
       "orders": "Orders",
       "order_list": "Forwarding orders",
       "order_bill": "invoice",
@@ -739,6 +740,28 @@
           }
         }
       }
+    },
+    "categories": {
+      "name": "Category",
+      "title": "Add new",
+      "p_search": "Search",
+      "name_label": "Name",
+      "name_err": " Please input this field",
+      "image_label": "Image",
+      "image_err": "Please input this field",
+      "hide_status": "Hidden",
+      "show_status": "Show",
+      "meta_title": "Title",
+      "meta_keyword": "Keyword",
+      "meta_desc": "Description",
+      "button_form": "Update",
+      "col_name": "Name",
+      "col_image": "Image",
+      "col_keyword": "Keyword",
+      "col_status": "Status",
+      "col_action": "Action",
+      "btn_edit": "Edit",
+      "btn_delete": "Delete"
     },
     "header": {
       "notifications": "Notifications",

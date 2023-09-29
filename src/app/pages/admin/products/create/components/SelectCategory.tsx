@@ -33,6 +33,7 @@ const SelectCategory = ({ value = {}, onChange }: any) => {
 
   return (
     <Cascader
+      fieldNames={{ value: "id" }}
       allowClear={false}
       value={selectedValue}
       open={openDropdown}

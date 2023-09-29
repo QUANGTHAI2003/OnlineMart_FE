@@ -35,6 +35,11 @@ export const adminShopRoutes: ISidebarMenu[] = [
         key: "product_review",
         url: "/admin/shop/products/review",
       },
+      {
+        title: "admin_shop.sidebar.product_categories",
+        key: "product_categories",
+        url: "/admin/shop/categories",
+      },
     ],
   },
   {
