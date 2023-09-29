@@ -1,68 +1,39 @@
-import Img from "@app/app/assets/images/avatarCategorySidebar.webp";
 import ImgSell from "@app/app/assets/images/selling.webp";
-import { useEffect, useState } from "react";
+import { useGetCategoryRootQuery } from "@app/store/slices/api/categoryApi";
+import { ICategory } from "@app/types/categories.types";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import * as S from "./CategorySidebar.styles";
 import CategorySidebarItem from "./CategorySidebarItem";
 
-const CategorySidebarData = [
-  {
-    id: 1,
-    title: "Đồ Chơi - Mẹ & Bé",
-    image: Img,
-  },
-  {
-    id: 2,
-    title: "Đồ Chơi - Mẹ & Bé Dinh chi nguyen",
-    image: Img,
-  },
-  {
-    id: 3,
-    title: "Đồ Chơi - Mẹ & Bé",
-    image: Img,
-  },
-  {
-    id: 4,
-    title: "Đồ Chơi - Mẹ & Bé",
-    image: Img,
-  },
-];
-
 const CategorySidebar = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
-  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoadingSkeleton(false);
-    }, 1000);
-  }, []);
+
+  const { data, isFetching } = useGetCategoryRootQuery();
+
   return (
-    <S.SidebarStyle className="bg-[#f5f5fa]" width={230}>
-      <div className="bg-white rounded-[8px] flex flex-col py-[12px] px-[8px] relative mb-[16px]">
-        <div className="mb-[8px] ps-[12px] font-[700] text-[14px] text-[#27272A] line-[150%]">
+    <S.SidebarStyle className="bg-transparent" width={230}>
+      <div className="sidebar bg-white rounded-lg flex flex-col py-3 px-2 relative mb-4">
+        <div className="mb-2 ps-3 font-bold text-sm text-[#27272A] leading-normal">
           {t("user.sidebar.sidebar_name")}
         </div>
-        {loadingSkeleton &&
-          CategorySidebarData.map((item) => {
-            return <CategorySidebarItem.LoadingSkeleton key={item.id} />;
-          })}
-        {!loadingSkeleton &&
-          CategorySidebarData.map((item) => {
-            return <CategorySidebarItem key={item.id} title={item.title} image={item.image} />;
+        {isFetching && <CategorySidebarItem.LoadingSkeleton count={8} />}
+        {!isFetching &&
+          data?.map((categoryItem: ICategory) => {
+            return <CategorySidebarItem key={categoryItem.id} categoryItem={categoryItem} />;
           })}
       </div>
-      <div className="bg-white rounded-[8px] flex flex-col py-[12px] px-[8px] relative mb-[16px]">
-        <a
-          href="#/"
-          className="hover:bg-[#27272a1f] hover:ease-in transition-all duration-[30ms] active:bg-[#27272a3d] flex py-[7px] px-[10px] items-center rounded-[8px] cursor-pointer"
+      <div className="bg-white rounded-md flex flex-col py-3 px-2 relative mb-4">
+        <Link
+          to="/admin/shop"
+          className="hover:bg-[#27272a1f] hover:ease-in transition-all duration-100 active:bg-[#27272a3d] flex p-2 items-center rounded-md cursor-pointer"
         >
-          <div className="basis-[32px] height-[32px] me-[8px] line-[0]">
+          <div className="basis-8 height-8 me-2">
             <img src={ImgSell} alt="Bán hàng cùng OM" width={32} height={32} />
           </div>
-          <p className="text-[14px] text-[#27272A] font-[400] leading-[150%]">{t("user.sidebar.sell")}</p>
-        </a>
+          <p className="text-sm text-[#27272A] leading-normal">{t("user.sidebar.sell")}</p>
+        </Link>
       </div>
     </S.SidebarStyle>
   );

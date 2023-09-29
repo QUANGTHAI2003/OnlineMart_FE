@@ -38,4 +38,13 @@ export const SidebarStyle = styled(Sider)`
   position: sticky !important;
   top: 16px;
   max-height: 100vh;
+
+  .sidebar {
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
 `;
