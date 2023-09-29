@@ -1,27 +1,23 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import imgHome from "@app/app/assets/images/nofitication/home.png";
 import imgOrder from "@app/app/assets/images/nofitication/order.png";
 import imgTime from "@app/app/assets/images/nofitication/time.png";
 import imgVoucher from "@app/app/assets/images/nofitication/voucher.png";
+import imgItem from "@app/app/assets/images/nofitication/nofiticationItem.png";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Dropdown, Space } from "antd";
+import { INotification } from "./ListNotification.interface";
+import { Button, Dropdown, Space } from "antd";
 import { useTranslation } from "react-i18next";
-
-import GeneralNotification from "./GeneralNotification";
-import OrderNofitication from "./OrderNofitication";
-import PromotionNotification from "./PromotionNotification";
-import SystemNofitication from "./SystemNofitication";
+import { data } from "./data";
 import * as S from "./UserNotification.styles";
+import useSyncUrlWithTab from "@app/hooks/useSyncUrlWithTab";
+import UserNotificationItem from "./UserNotificationItem";
+import EmptyNotification from "./EmptyNotification";
+import { v4 as uuidv4 } from "uuid";
+
 const UserNotification = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
-  const onChange = (key: any) => {
-    console.log(key);
-  };
-  const itemsNofitication = [
+  const NofiticationTab = [
     {
       label: (
         <S.NotificationItem>
@@ -29,7 +25,7 @@ const UserNotification = () => {
         </S.NotificationItem>
       ),
       key: "home",
-      children: <GeneralNotification />,
+      tab: "home",
     },
     {
       label: (
@@ -38,7 +34,7 @@ const UserNotification = () => {
         </S.NotificationItem>
       ),
       key: "voucher",
-      children: <PromotionNotification />,
+      tab: "voucher",
     },
     {
       label: (
@@ -47,7 +43,7 @@ const UserNotification = () => {
         </S.NotificationItem>
       ),
       key: "order",
-      children: <OrderNofitication />,
+      tab: "order",
     },
     {
       label: (
@@ -56,9 +52,23 @@ const UserNotification = () => {
         </S.NotificationItem>
       ),
       key: "time",
-      children: <SystemNofitication />,
+      tab: "time",
     },
   ];
+
+  const initialTab = NofiticationTab[0].tab;
+  const { tabFiltered, handleChangeTab } = useSyncUrlWithTab(initialTab, "tab");
+  const filteredNotification =
+    tabFiltered === "home" ? data : data.filter((notification: INotification) => notification.slug === tabFiltered);
+  const visibleData = filteredNotification.map((notification: INotification) => (
+    <UserNotificationItem key={uuidv4()} data={notification.items} image={imgItem} />
+  ));
+  const visibleNotification = NofiticationTab.map((item: any) => ({
+    key: item.key,
+    label: item.label,
+    children: visibleData.length > 0 ? visibleData : <EmptyNotification />,
+  }));
+  const element = visibleNotification;
   const items = [
     {
       label: <p>{t("user.account_user.account_notification_page.read_all")}</p>,
@@ -75,22 +85,27 @@ const UserNotification = () => {
       {/* Content */}
       <div className="bg-[#ffffff] rounded-lg border-solid border-2 border-[#f5f5fa]">
         <div className="relative">
-          <S.TabsNav defaultActiveKey="1" items={itemsNofitication} onChange={onChange} />
-          <Dropdown
-            className="absolute right-0 top-0 m-0 mr-5 mt-8"
-            placement="bottomRight"
-            arrow={{ pointAtCenter: true }}
-            menu={{
-              items,
-            }}
-            trigger={["click"]}
-          >
-            <a onClick={(e) => e.preventDefault()} className="px-5 text-[#666666]">
-              <Space>
-                <FontAwesomeIcon icon={faEllipsisVertical} />
-              </Space>
-            </a>
-          </Dropdown>
+          <S.TabsNav
+            items={element}
+            onChange={handleChangeTab}
+            activeKey={tabFiltered}
+            tabBarExtraContent={
+              <Dropdown
+                placement="bottomRight"
+                arrow={{ pointAtCenter: true }}
+                menu={{
+                  items,
+                }}
+                trigger={["click"]}
+              >
+                <Button onClick={(e) => e.preventDefault()} className="text-black border-none">
+                  <Space>
+                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                  </Space>
+                </Button>
+              </Dropdown>
+            }
+          />
         </div>
       </div>
     </>
