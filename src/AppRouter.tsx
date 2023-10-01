@@ -45,6 +45,8 @@ const Category = React.lazy(() => import("@app/app/pages/admin/products/categori
 const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/products/review/ProductReview"));
 const AdminProductCreate = React.lazy(() => import("@app/app/pages/admin/products/create/ProductCreate"));
 
+const RoleManage = React.lazy(() => import("@app/app/pages/admin/manage_seller/role/RoleManage"));
+
 const AppRouter: React.FC = () => {
   const protectedAdminLayout = (
     <RequireAuth type="adminShop">
@@ -93,7 +95,9 @@ const AppRouter: React.FC = () => {
           <Route path="bill" element={<div>Order Bill</div>} />
         </Route>
         <Route path="info-seller" element={<div>Seller info</div>} />
-        <Route path="manage-seller" element={<div>Manage Seller</div>} />
+        <Route path="manage-seller">
+          <Route path="role" element={<RoleManage />} />
+        </Route>
       </Route>
 
       <Route element={<AuthLayout />}>

@@ -771,6 +771,50 @@
       "change_password": "Thay đổi mật khẩu",
       "add_another_account": "Thêm tài khoản khác",
       "logout": "Đăng xuất"
+    },
+    "manage_seller": {
+      "role_list_data": {
+        "admin": "Quản trị viên",
+        "editor": "Biên tập viên",
+        "manager": "Quản lý",
+        "staff": "Nhân viên",
+        "desc_admin": "Vai trò này có đầy đủ các quyền.",
+        "desc_editor": "Vai trò này có quyền chỉnh sửa thông tin, bao gồm: thêm, sửa, xóa.",
+        "desc_manager": "Vai trò này có quyền xem tất cả các thông tin.",
+        "desc_staff": "Vai trò này có một hoặc chỉ một số quyền nhất định."
+      },
+      "search_type": {
+        "name": "Tên vai trò",
+        "create_at": "Ngày thêm",
+        "updated_at": "Ngày sửa"
+      },
+      "site_header": {
+        "list_of_roles": "Danh sách vai trò",
+        "list_of_permissions": "Danh sách các quyền",
+        "add_roles": "Thêm vai trò",
+        "add_roles_title": "Thêm vai trò mới",
+        "cancel": "Hủy",
+        "add_new": "Thêm mới"
+      },
+      "table_header": {
+        "name": "Tên vai trò",
+        "description": "Mô tả vai trò",
+        "create_at": "Ngày thêm",
+        "update_at": "Ngày sửa",
+        "action": "Thao tác",
+        "tolal_roles": "Số vai trò:",
+        "selected": "Đã chọn",
+        "items": "mục",
+        "edit_role": "Sửa vai trò",
+        "cancel": "Hủy",
+        "edit": "Sửa",
+        "enter_role_name": "Nhập tên vai trò",
+        "multiple_permission": "Chọn các quyền (nhiều)",
+        "enter_role_description": "Nhập vào mô tả vai trò",
+        "confirm": "Xác nhận xóa",
+        "confirm_detail": "Bạn chắc chắn muốn xóa vai trò này ?",
+        "delete": "Xóa"
+      }
     }
   }
 }

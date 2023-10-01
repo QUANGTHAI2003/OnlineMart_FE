@@ -771,6 +771,50 @@
       "change_password": "Change password",
       "add_another_account": "Add another account",
       "logout": "Log out"
+    },
+    "manage_seller": {
+      "role_list_data": {
+        "admin": "Admin",
+        "editor": "Editor",
+        "manager": "Manager",
+        "staff": "Staff",
+        "desc_admin": "This role has full permissions.",
+        "desc_editor": "This role has the permission to edit information, including: add, edit, delete.",
+        "desc_manager": "This role has the permission to view all information.",
+        "desc_staff": "This role has one or only a few specific permissions."
+      },
+      "search_type": {
+        "name": "Role name",
+        "create_at": "Creation date",
+        "updated_at": "Modification date"
+      },
+      "site_header": {
+        "list_of_roles": "List of roles",
+        "list_of_permissions": "List of permissions",
+        "add_roles": "Add a role",
+        "add_roles_title": "Add a new role",
+        "cancel": "Cancel",
+        "add_new": "Add new"
+      },
+      "table_header": {
+        "name": "Name",
+        "description": "Description",
+        "create_at": "Creation date",
+        "update_at": "Creation update",
+        "action": "Action",
+        "tolal_roles": "Total roles:",
+        "selected": "Selected",
+        "items": "items",
+        "edit_role": "Edit role",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "enter_role_name": "Enter role name",
+        "multiple_permission": "Select multiple permissions",
+        "enter_role_description": "Enter role description",
+        "confirm": "Confirm",
+        "confirm_detail": "Are you sure you want to delete this role ?",
+        "delete": "Delete"
+      }
     }
   }
 }
