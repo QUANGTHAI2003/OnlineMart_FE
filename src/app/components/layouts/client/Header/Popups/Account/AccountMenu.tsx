@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 
 import AccountMenuSkeleton from "./AccountMenuSkeleton";
 
+const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
+
 const AccountMenu: React.FC = () => {
   const { t } = useTranslation();
 
@@ -68,7 +70,7 @@ const AccountMenu: React.FC = () => {
       {loading && <AccountMenuSkeleton />}
       {!loading && (
         <div className="flex items-center">
-          <AvatarImage src={user?.avatar} alt={user?.user_name || user?.full_name} size="small" className="mr-3" />
+          <AvatarImage src={`${baseImage}/${user?.avatar}`} alt={user?.full_name} size="small" className="mr-3" />
           <span className="text-base whitespace-nowrap">{user?.user_name || user?.full_name}</span>
         </div>
       )}

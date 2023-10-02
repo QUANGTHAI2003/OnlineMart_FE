@@ -1,5 +1,5 @@
 import { userApi } from "@app/store/slices/api/userApi";
-import { Spin } from "antd";
+import CustomLoading from "@app/utils/Loading/CustomLoading";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { Navigate, useLocation } from "react-router-dom";
@@ -28,7 +28,7 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ children, type }) => {
   });
 
   if (loading) {
-    return <Spin />;
+    return <CustomLoading />;
   }
 
   const checkType = {

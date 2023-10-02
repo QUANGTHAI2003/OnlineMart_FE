@@ -1,12 +1,15 @@
 import { EditOutlined } from "@ant-design/icons";
 import facebookImg from "@app/app/assets/icons/facebook.png";
 import googleImg from "@app/app/assets/icons/google.png";
-import avatarImg from "@app/app/assets/images/10.png";
-import { faEnvelope, faEye, faImage, faLock, faPhone, faShield, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { useDeleteUserAvatarMutation, useUpdateUserMutation } from "@app/store/slices/api/userApi";
+import { useAppSelector } from "@app/store/store";
+import { formatDate, isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { faEnvelope, faEye, faLock, faPhone, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import type { MenuProps, RadioChangeEvent } from "antd";
-import { Button, Col, DatePicker, Dropdown, Form, Image, Input, Radio, Row, Space, Upload } from "antd";
-import { useState } from "react";
+import type { MenuProps, RadioChangeEvent, UploadProps } from "antd";
+import { Button, Col, DatePicker, Dropdown, Form, Image, Input, message, Radio, Row, Space, Upload } from "antd";
+import ImgCrop from "antd-img-crop";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import EditEmail from "./components/EditEmail";
@@ -14,64 +17,125 @@ import EditPassword from "./components/EditPassword";
 import EditPhone from "./components/EditPhone";
 import * as S from "./UserProfile.styles";
 
-const onFinish = (fieldValues: any) => {
-  const values = {
-    ...fieldValues,
-    "date-picker": fieldValues["date-picker"] ? fieldValues["date-picker"].format("DD-MM-YYYY") : "",
-  };
-
-  console.log(values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
-
 type FieldType = {
   name?: string;
   nickname?: string;
   gender?: string;
-  date?: Date;
+  birthday?: any;
 };
+
+const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
+const baseUrl = import.meta.env.VITE_API_BASE_URL as string;
+const acceptedAvatar = ["image/png", "image/jpg", "image/jpeg", "image/gif", "image/svg", "image/webp"];
+const acceptedSize = 1024 * 1024 * 2; // 2MB
 
 const UserProfile = () => {
   const { t } = useTranslation();
 
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState<number>(1);
+  const [visible, setVisible] = useState<boolean>(false);
+
+  const user = useAppSelector((state) => state.userState.user);
+
+  const [updateUser, { isLoading, error }] = useUpdateUserMutation(user);
+  const [deleteUserAvatar] = useDeleteUserAvatarMutation();
+
   const onChangeRadio = (e: RadioChangeEvent) => {
     const radioValue = e.target?.value;
     setValue(radioValue);
   };
 
+  const onFinish = async (fieldValues: FieldType) => {
+    const values = {
+      ...fieldValues,
+      birthday: fieldValues["birthday"] ? fieldValues["birthday"].format("YYYY-MM-DD") : "",
+      id: user.id,
+    };
+
+    try {
+      await updateUser(values).unwrap();
+      notifySuccess("Successfully", "Update user information successfully");
+    } catch (err) {
+      notifyError("Error", "Update user information failed");
+    }
+  };
+
+  const handleDeleteAvatar = async () => {
+    try {
+      await deleteUserAvatar(user.id).unwrap();
+      notifySuccess("Successfully", "Delete avatar successfully");
+    } catch (err) {
+      notifyError("Error", "Delete avatar failed");
+    }
+  };
+
+  const errorForm: any = useMemo(() => {
+    const errorResult = error;
+
+    if (isEntityError(errorResult)) {
+      return errorResult.data.errors;
+    }
+
+    return null;
+  }, [error]);
+
+  const props: UploadProps = {
+    name: "avatar",
+    method: "PATCH",
+    accept: acceptedAvatar.join(","),
+    showUploadList: false,
+    action: `${baseUrl}/api/user/${user?.id}`,
+    beforeUpload: (file) => {
+      if (!acceptedAvatar.includes(file.type)) {
+        message.error(`${file.name} is not a valid image file`);
+      }
+
+      const isLt2M = file.size < acceptedSize;
+
+      if (!isLt2M) {
+        message.error("Image must smaller than 2MB");
+      }
+
+      return acceptedAvatar.includes(file.type) && isLt2M;
+    },
+    onChange(info) {
+      if (info.file.status === "done") {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
+
   const items: MenuProps["items"] = [
     {
-      key: "1",
+      key: 1,
       label: (
-        <Upload>
-          <FontAwesomeIcon icon={faImage} className="mr-3 text-[#b6b6be]" />
-          {t("user.account_user_page.avatar_see")}
-        </Upload>
+        <ImgCrop rotationSlider aspectSlider showReset resetText="reset" showGrid cropShape="round">
+          <Upload {...props}>
+            <FontAwesomeIcon icon={faEye} className="mr-3 text-[#b6b6be]" />
+            {t("user.account_user_page.avatar_update")}
+          </Upload>
+        </ImgCrop>
       ),
     },
     {
-      key: "2",
+      key: 2,
       label: (
-        <Upload>
-          <FontAwesomeIcon icon={faEye} className="mr-3 text-[#b6b6be]" />
-          {t("user.account_user_page.avatar_update")}
-        </Upload>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+        <div role="button" tabIndex={0} onClick={handleDeleteAvatar} onKeyDown={handleDeleteAvatar}>
           <FontAwesomeIcon icon={faTrashCan} className="mr-3 text-[#b6b6be]" />
           {t("user.account_user_page.avatar_delete")}
-        </a>
+        </div>
       ),
     },
   ];
+
+  const initialValues = {
+    full_name: user.full_name,
+    user_name: user.user_name,
+    birthday: formatDate(user.birthday),
+    gender: user.gender,
+  };
 
   return (
     <S.UserProfile>
@@ -82,22 +146,34 @@ const UserProfile = () => {
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 24 }}
-          initialValues={{ remember: true, gender: 1 }}
+          initialValues={initialValues}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
           className="content_profile"
         >
           <S.UserProfileLeft>
-            <Row gutter={[0, 0]} className="row_profile">
+            <Row className="row_profile">
               <Col xs={24} sm={24} md={24} lg={5} xl={6} className="col_leftProfile">
                 <div className="avatar">
-                  <Dropdown menu={{ items }} placement="bottom" arrow={{ pointAtCenter: true }}>
-                    <Image src={avatarImg} alt="avatar.png" preview={false} className="img" />
+                  <Image
+                    src={`${baseImage}/${user?.avatar}`}
+                    alt={user?.full_name}
+                    width={120}
+                    height={120}
+                    preview={{
+                      visible: visible,
+                      onVisibleChange: (value) => {
+                        setVisible(value);
+                      },
+                    }}
+                    fallback={`https://ui-avatars.com/api/?name=${user?.full_name}&background=random&rounded=true&size=120`}
+                    className="img object-cover"
+                  />
+                  <Dropdown trigger={["click"]} menu={{ items }} placement="bottom" arrow={{ pointAtCenter: true }}>
+                    <Space direction="vertical" className="avatar_space">
+                      <EditOutlined className="editOutline" />
+                    </Space>
                   </Dropdown>
-                  <Space direction="vertical" className="avatar_space">
-                    <EditOutlined className="editOutline" />
-                  </Space>
                 </div>
               </Col>
 
@@ -105,27 +181,38 @@ const UserProfile = () => {
                 <Row gutter={[0, 12]}>
                   <Col span={24}>
                     <Form.Item<FieldType>
-                      name="name"
+                      label={t("user.account_user_page.name")}
+                      name="full_name"
+                      hasFeedback
                       rules={[
                         { required: true, message: t("user.account_user_page.valid.name_required") },
                         { whitespace: true },
                         { min: 2 },
                       ]}
-                      hasFeedback
-                      label={t("user.account_user_page.name")}
+                      validateStatus={errorForm?.full_name && "error"}
+                      help={errorForm?.full_name && errorForm?.full_name[0]}
                     >
-                      <Input className="w-full" placeholder={t("user.account_user_page.name_placeholder")} />
+                      <Input
+                        size="middle"
+                        className="w-full"
+                        placeholder={t("user.account_user_page.name_placeholder")}
+                      />
                     </Form.Item>
                   </Col>
 
                   <Col span={24}>
                     <Form.Item<FieldType>
-                      name="nickname"
-                      rules={[{ whitespace: true }, { min: 3 }, { max: 20 }]}
-                      hasFeedback
                       label={t("user.account_user_page.nickname")}
+                      name="user_name"
+                      hasFeedback
+                      rules={[{ whitespace: true }, { min: 3 }, { max: 20 }]}
+                      validateStatus={errorForm?.user_name && "error"}
                     >
-                      <Input className="w-full" placeholder={t("user.account_user_page.nickname_placeholder")} />
+                      <Input
+                        size="middle"
+                        className="w-full"
+                        placeholder={t("user.account_user_page.nickname_placeholder")}
+                      />
                     </Form.Item>
                   </Col>
                 </Row>
@@ -135,38 +222,35 @@ const UserProfile = () => {
                 <Row justify="start" gutter={[0, 12]}>
                   <Col span={24}>
                     <Form.Item<FieldType>
-                      name="date-picker"
-                      hasFeedback
                       label={t("user.account_user_page.birthday")}
+                      name="birthday"
+                      hasFeedback
                       labelCol={{ span: 6 }}
                       labelAlign="left"
+                      validateStatus={errorForm?.birthday && "error"}
+                      help={errorForm?.birthday && errorForm?.birthday[0]}
                     >
-                      <DatePicker className="date-picker w-full" />
+                      <DatePicker size="middle" className="date-picker w-full" format="DD/MM/YYYY" />
                     </Form.Item>
                   </Col>
                   <Col span={24}>
                     <Form.Item<FieldType>
-                      name="gender"
-                      // rules={[{ required: true, message: t("user.account_user_page.valid.gender_required") }]}
                       label={t("user.account_user_page.gender")}
+                      name="gender"
                       labelCol={{ span: 6 }}
                       labelAlign="left"
+                      hasFeedback
                     >
-                      <Radio.Group
-                        onChange={onChangeRadio}
-                        value={value}
-                        className="radioGroup_item radio_group"
-                        // defaultValue={1}
-                      >
-                        <Radio value={1}>{t("user.account_user_page.male")}</Radio>
-                        <Radio value={2}>{t("user.account_user_page.female")}</Radio>
-                        <Radio value={3}>{t("user.account_user_page.other_gender")}</Radio>
+                      <Radio.Group onChange={onChangeRadio} value={value}>
+                        <Radio value="0">{t("user.account_user_page.male")}</Radio>
+                        <Radio value="1">{t("user.account_user_page.female")}</Radio>
+                        <Radio value="2">{t("user.account_user_page.other_gender")}</Radio>
                       </Radio.Group>
                     </Form.Item>
                   </Col>
                   <Col>
-                    <Form.Item className="save_button">
-                      <Button className="px-5" type="primary" htmlType="submit">
+                    <Form.Item>
+                      <Button loading={isLoading} className="px-5" type="primary" htmlType="submit">
                         {t("user.account_user_page.save")}
                       </Button>
                     </Form.Item>
@@ -185,7 +269,7 @@ const UserProfile = () => {
                     <FontAwesomeIcon icon={faPhone} className="icon" />
                     <div className="detail_info_item">
                       <p>{t("user.account_user_page.phone")}</p>
-                      <p>0359874563</p>
+                      <p>{user.phone || "Vui lòng cập nhật số điện thoại"}</p>
                     </div>
                   </div>
                   <div className="update">
@@ -200,7 +284,7 @@ const UserProfile = () => {
                     <FontAwesomeIcon icon={faEnvelope} className="icon" />
                     <div className="detail_info_item">
                       <p>{t("user.account_user_page.email")}</p>
-                      <p className="email_address">nguyenhoanglich1661@gmail.comgggggggggggggtttttttteeeeeee</p>
+                      <p className="email_address">{user.email || "Vui lòng cập nhật địa chỉ email"}</p>
                     </div>
                   </div>
                   <div className="update">
@@ -224,22 +308,6 @@ const UserProfile = () => {
                 <div>
                   <Space className="site-button-ghost-wrapper" wrap>
                     <EditPassword />
-                  </Space>
-                </div>
-              </div>
-
-              <div className="content_item">
-                <div className="info_item">
-                  <FontAwesomeIcon icon={faShield} className="icon" />
-                  <div className="detail_info_item">
-                    <p>{t("user.account_user_page.pin")}</p>
-                  </div>
-                </div>
-                <div>
-                  <Space className="site-button-ghost-wrapper" wrap>
-                    <Button type="primary" ghost>
-                      {t("user.account_user_page.setting")}
-                    </Button>
                   </Space>
                 </div>
               </div>

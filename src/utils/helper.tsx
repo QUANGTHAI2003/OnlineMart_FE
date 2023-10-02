@@ -1,4 +1,5 @@
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+import dayjs from "dayjs";
 
 import { getLang } from "./localstorage";
 import { notificationController } from "./notification";
@@ -21,6 +22,14 @@ export const formatVNCurrency = (number: number) => {
   }
 
   return number.toFixed(0) + suffixes[suffixIndex];
+};
+
+export const formatDate = (dateString: string) => {
+  const locale = getLang();
+
+  const formatString = locale === "vi" ? "DD-MM-YYYY" : "YYYY-MM-DD";
+  const formattedDate = dayjs(dayjs(dateString).format(formatString), formatString);
+  return formattedDate;
 };
 
 export const formatTimeAgo = (timestamp: number) => {

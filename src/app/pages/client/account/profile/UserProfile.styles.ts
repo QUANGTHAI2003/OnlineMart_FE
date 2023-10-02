@@ -52,26 +52,31 @@ export const UserProfileLeft = styled(Col)`
     padding: 20px;
 
     .col_leftProfile {
-      width: 24%;
-
       .avatar {
         position: relative;
         cursor: pointer;
         width: 100%;
 
         .img {
-          border-radius: 100%;
+          border-radius: 9999px;
           border: 4px solid #c2e1ff;
+          width: 100%;
+          height: 100% !important;
         }
+
+        .om-image-mask {
+          border-radius: 9999px;
+        }
+
         .avatar_space {
           position: absolute;
           bottom: 0.25rem;
-          right: 1rem;
+          right: 6px;
           z-index: 10;
+          cursor: pointer;
 
           .editOutline {
-            max-width: 1rem;
-            max-height: 1rem;
+            width: 20px;
             background: #64646d;
             padding: 0.25rem;
             border-radius: 100%;
@@ -84,10 +89,6 @@ export const UserProfileLeft = styled(Col)`
       width: 70%;
       display: grid;
       row-gap: 2rem;
-
-      :where(.css-dev-only-do-not-override-14mi6y0).om-form-item .om-form-item-explain-error {
-        font-size: 11px;
-      }
 
       .input_name {
         display: flex;
@@ -113,10 +114,6 @@ export const UserProfileLeft = styled(Col)`
       display: grid;
       row-gap: 2rem;
       margin-top: 0.75rem;
-
-      :where(.css-dev-only-do-not-override-14mi6y0).om-form-item .om-form-item-explain-error {
-        font-size: 11px;
-      }
 
       .input_date {
         display: flex;
@@ -145,9 +142,6 @@ export const UserProfileLeft = styled(Col)`
   }
   @media only screen and (max-width: 992px) {
     width: 100%;
-    :where(.css-dev-only-do-not-override-14mi6y0).om-row {
-      display: inline;
-    }
 
     .col_leftProfile {
       .avatar {
@@ -156,9 +150,7 @@ export const UserProfileLeft = styled(Col)`
           justify-content: center;
           margin-bottom: 20px;
         }
-        .img {
-          width: 35%;
-        }
+
         .avatar_space {
           display: none;
         }

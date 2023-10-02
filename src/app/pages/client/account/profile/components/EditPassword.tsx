@@ -1,40 +1,61 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Button, Form, Input, Modal, Space } from "antd";
-import { useState } from "react";
+import { useUpdateUserMutation } from "@app/store/slices/api/userApi";
+import { useAppSelector } from "@app/store/store";
+import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { Button, Form, Input, Modal } from "antd";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
 type FieldType = {
-  password_old?: string;
-  password_new?: string;
-  password_new_confirm?: string;
+  new_password: string;
+  confirm_password: string;
 };
 
 const EditPassword = () => {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const user = useAppSelector((state) => state.userState.user);
+  const [updateUser, { isLoading, error }] = useUpdateUserMutation(user);
+
+  const handleSubmit = async (fieldValues: FieldType) => {
+    const values = {
+      password: fieldValues.new_password,
+      id: user?.id,
+    };
+
+    try {
+      await updateUser(values).unwrap();
+      setTimeout(() => {
+        setOpen(false);
+      }, 200);
+      notifySuccess("Successfully", "Update password successfully");
+    } catch (err) {
+      notifyError("Error", "Update password failed");
+    }
+  };
+
+  const errorForm: any = useMemo(() => {
+    const errorResult = error;
+    console.log(errorResult);
+
+    if (isEntityError(errorResult)) {
+      return errorResult.data.errors;
+    }
+
+    return null;
+  }, [error]);
+
   const showModal = () => {
     setOpen(true);
   };
-  const handleOk = () => {
-    setLoading(true);
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
+
   const handleCancel = () => {
     setOpen(false);
   };
 
   return (
-    <div className="flex flex-col">
+    <>
       <Button type="primary" ghost onClick={showModal}>
         {t("user.account_user_page.update")}
       </Button>
@@ -43,120 +64,64 @@ const EditPassword = () => {
         footer={null}
         centered
         open={open}
-        onOk={handleOk}
-        confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >
-        <div className="flex-grow-[1] flex-shrink-[1]">
-          <div className="flex justify-center bg-white py-[20px] px-[20px]">
-            <Form
-              name="basic"
-              initialValues={{ remember: true }}
-              onFinish={(values) => {
-                console.log({ values });
-              }}
-              onFinishFailed={onFinishFailed}
-              layout="vertical"
-              autoComplete="off"
-              className="w-full p-[16px] border border-[#ebebf0] border-solid rounded-[4px]"
+        <div className="p-5">
+          <Form
+            name="password"
+            onFinish={handleSubmit}
+            layout="vertical"
+            autoComplete="off"
+            className="w-full p-4 border border-[#ebebf0] border-solid rounded-md"
+          >
+            <Form.Item<FieldType>
+              label={t("user.account_user.account_information.edit_profile.new_password")}
+              name="new_password"
+              rules={[{ required: true, message: t("user.account_user_page.valid.password_new_required") }, { min: 6 }]}
+              hasFeedback
+              validateStatus={errorForm?.new_password ? "error" : ""}
+              help={errorForm?.new_password ? errorForm?.new_password[0] : ""}
             >
-              <Form.Item<FieldType>
-                name="password_old"
-                rules={[
-                  { required: true, message: t("user.account_user_page.valid.password_old_required") },
-                  { min: 3 },
-                ]}
-                hasFeedback
-                className="flex flex-col mb-3"
-                label={t("user.account_user.account_information.edit_profile.current_password")}
-              >
-                <div className="flex flex-col flex-grow-[1] flex-shrink-[1] relative">
-                  <div className="w-full">
-                    <Space className="w-[100%]" direction="vertical">
-                      <Input.Password
-                        name="password_old"
-                        id="password_old"
-                        className="py-[10px] h-[36px] pr-[12px]"
-                        placeholder={t(
-                          "user.account_user.account_information.edit_profile.placeholder_current_password"
-                        )}
-                      />
-                    </Space>
-                  </div>
-                </div>
-              </Form.Item>
-              <Form.Item<FieldType>
-                name="password_new"
-                rules={[
-                  { required: true, message: t("user.account_user_page.valid.password_new_required") },
-                  { min: 6 },
-                ]}
-                hasFeedback
-                className="flex flex-col mb-3"
-                label={t("user.account_user.account_information.edit_profile.new_password")}
-              >
-                <div className="flex flex-col flex-grow-[1] flex-shrink-[1] relative">
-                  <div className="w-full">
-                    <Space className="w-[100%]" direction="vertical">
-                      <Input.Password
-                        id="password_new"
-                        className="py-[10px] h-[36px] pr-[12px]"
-                        placeholder={t("user.account_user.account_information.edit_profile.placeholder_new_password")}
-                        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                      />
-                    </Space>
-                  </div>
-                </div>
-              </Form.Item>
-              <Form.Item<FieldType>
-                name="password_new_confirm"
-                dependencies={["password_new"]}
-                rules={[
-                  { required: true, message: t("user.account_user_page.valid.password_new_confirm_required") },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue("password_new") === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(t("user.account_user_page.valid.password_new_confirm_match"));
-                    },
-                  }),
-                ]}
-                hasFeedback
-                label={t("user.account_user.account_information.edit_profile.enter_new_password")}
-                className="flex flex-col"
-              >
-                <div className="flex flex-col flex-grow-[1] flex-shrink-[1] relative">
-                  <div className="w-full">
-                    <Space className="w-[100%]" direction="vertical">
-                      <Input.Password
-                        id="password_new_confirm"
-                        className="py-[10px] h-[36px] pr-[12px]"
-                        placeholder={t(
-                          "user.account_user.account_information.edit_profile.placeholder_enter_new_password"
-                        )}
-                        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                      />
-                    </Space>
-                  </div>
-                </div>
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  htmlType="submit"
-                  className="w-full h-[40px] mt-3"
-                  type="primary"
-                  loading={loading}
-                  // onClick={handleOk}
-                >
-                  {t("user.account_user.account_information.edit_profile.button_change")}
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
+              <Input.Password
+                size="middle"
+                placeholder={t("user.account_user.account_information.edit_profile.placeholder_new_password")}
+                iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              />
+            </Form.Item>
+            <Form.Item<FieldType>
+              label={t("user.account_user.account_information.edit_profile.enter_new_password")}
+              name="confirm_password"
+              dependencies={["new_password"]}
+              rules={[
+                { required: true, message: t("user.account_user_page.valid.password_new_confirm_required") },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("new_password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(t("user.account_user_page.valid.password_new_confirm_match"));
+                  },
+                }),
+              ]}
+              hasFeedback
+              validateStatus={errorForm?.confirm_password ? "error" : ""}
+              help={errorForm?.confirm_password ? errorForm?.confirm_password[0] : ""}
+            >
+              <Input.Password
+                size="middle"
+                placeholder={t("user.account_user.account_information.edit_profile.placeholder_enter_new_password")}
+                iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button block size="large" htmlType="submit" type="primary" loading={isLoading}>
+                {t("user.account_user.account_information.edit_profile.button_change")}
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 

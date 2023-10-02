@@ -11,9 +11,10 @@ const AvatarImage: React.FC<IAvatarImageProps> = ({ src, alt = "User Avatar", ..
   const [imageSrc, setImageSrc] = useState<string | ReactNode>(src);
 
   const fallbackSrc = "https://ui-avatars.com/api/";
+  const postFix = "&background=random&rounded=true&size=120";
 
   const handleImageError = (): any => {
-    setImageSrc(`${fallbackSrc}?name=${encodeURIComponent(alt)}`);
+    setImageSrc(`${fallbackSrc}?name=${encodeURIComponent(alt)}${postFix}`);
   };
 
   return <AntdAvatar src={imageSrc} alt={alt} onError={handleImageError} {...rest} />;
