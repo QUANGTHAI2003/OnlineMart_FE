@@ -29,6 +29,7 @@
     "@tinymce/tinymce-react": "^4.3.0",
     "@types/node": "^16.18.38",
     "antd": "^5.6.4",
+    "antd-img-crop": "^4.13.0",
     "async-mutex": "^0.4.0",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
