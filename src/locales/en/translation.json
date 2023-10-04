@@ -497,6 +497,8 @@
       "product_list": "Product list",
       "product_create": "Create product",
       "product_review": "Review management",
+      "management": "Management",
+      "product_inventory": "Inventory management",
       "product_categories": "Category",
       "orders": "Orders",
       "order_list": "Forwarding orders",
@@ -741,6 +743,67 @@
         }
       }
     },
+    "orders": {
+      "list": {
+        "add_order": "Add Order",
+        "table": {
+          "id_order": "Order code: ",
+          "orders": "Order: ",
+          "order": "Order code/Order date",
+          "status": "Status ",
+          "confirm": "Confirm deadline",
+          "quantity": "Quantity/Rev./Order value",
+          "delivery_by": "Delivered by: ",
+          "pick_delivery": "Delivered by: ",
+          "shipping_fee": "Shipping fee: ",
+          "order_label": "Order label ",
+          "qty": "Quantity: ",
+          "payment_method": "Payment Method",
+          "sale_price": "Sale Price",
+          "sub_total": "Sub total",
+          "price": "Price: ",
+          "print": "Print ballots",
+          "action": "Actions",
+          "selecting": "Selecting: {{count}}"
+        },
+        "status": {
+          "all": "All",
+          "awaiting": "Awaiting Confirmation",
+          "processing": "Processing",
+          "shipping": "Processing",
+          "delivered": "Delivered",
+          "canceled": "Canceled"
+        },
+        "filter": {
+          "type": {
+            "id": "Order code",
+            "sku": "SKU",
+            "infor_user": "Customer info"
+          },
+          "print": "In phiếu các sản đơn hàng được chọn",
+          "placeholder": "Enter max: 20 {{placeholder}} separated with ',' ",
+          "not_printed": "Not printed",
+          "need_invoice": "Need invoice required",
+          "order_label": "Order label",
+          "invoice_required": "Invoice required",
+          "invoice_issued": "Invoice issued",
+          "delivery": "Fulfillment Type",
+          "ghtk_delivery": "GHTK delivery",
+          "shop_delivery": "Seller delivery",
+          "om_delivery": "Online Mart delivery",
+          "other_filter": "Other filters",
+          "last_7": "Last 7 days",
+          "today": "Today",
+          "update_selected": "Update selected orders ",
+          "select_at_less": "Please select at least 1 order below",
+          "delete_filter": "Clear",
+          "last_30": "Last 30 days",
+          "all_time": "All time",
+          "custom": "Custom",
+          "order_date": "Order date"
+        }
+      }
+    },
     "categories": {
       "name": "Category",
       "title": "Add new",
@@ -815,77 +878,50 @@
         "confirm_detail": "Are you sure you want to delete this role ?",
         "delete": "Delete"
       }
-    "orders": {
-      "list": {
-        "add_order":"Add Order",
-        "table": {
-          "id_order":"Order code: ",
-          "orders": "Order: ",
-          "order": "Order code/Order date",
-          "status": "Status ",
-          "confirm": "Confirm deadline",
-          "quantity": "Quantity/Rev./Order value",
-          "delivery_by":"Delivered by: ",
-          "pick_delivery":"Delivered by: ",
-          "shipping_fee":"Shipping fee: ",
-          "order_label":"Order label ",
-          "qty":"Quantity: ",
-          "payment_method":"Payment Method",
-          "sale_price":"Sale Price",
-          "sub_total":"Sub total",
-          "price":"Price: ",
-          "print":"Print ballots",
-          "action": "Actions",
-          "selecting": "Selecting: {{count}}"
-        },
-        "status": {
-          "all": "All",
-          "awaiting": "Awaiting Confirmation",
-          "processing": "Processing",
-          "shipping": "Processing",
-          "delivered": "Delivered",
-          "canceled": "Canceled"
-        },
-        "filter": {
-          "type": {
-            "id": "Order code",
-            "sku": "SKU",
-            "infor_user":"Customer info"
-          },
-          "print":"In phiếu các sản đơn hàng được chọn",
-          "placeholder": "Enter max: 20 {{placeholder}} separated with ',' ",
-          "not_printed":"Not printed",
-          "need_invoice":"Need invoice required",
-          "order_label":"Order label",
-          "invoice_required":"Invoice required",
-          "invoice_issued":"Invoice issued",
-          "delivery":"Fulfillment Type",
-          "ghtk_delivery":"GHTK delivery",
-          "shop_delivery":"Seller delivery",
-          "om_delivery":"Online Mart delivery",
-          "other_filter":"Other filters",
-          "last_7":"Last 7 days",
-          "today":"Today",
-          "update_selected":"Update selected orders ",
-          "select_at_less":"Please select at least 1 order below",
-          "delete_filter":"Clear",
-          "last_30":"Last 30 days",
-          "all_time":"All time",
-          "custom":"Custom",
-          "order_date":"Order date"
-        }
-      }
-
-
     },
-    "header": {
-      "notifications": "Notifications",
-      "view_all": "View all",
-      "read_all": "Mark all as read",
-      "profile": "Profile",
-      "change_password": "Change password",
-      "add_another_account": "Add another account",
-      "logout": "Log out"
+    "inventory": {
+      "site_header": {
+        "inventory_manage": "Inventory management",
+        "product_list": "View product list"
+      },
+      "filter": {
+        "name": "Product name",
+        "supplier": "Supplier",
+        "converted_product": "Converted product",
+        "print_barcode": "Print barcode label",
+        "categories": "Product category",
+        "other_manage": "Other management",
+        "in_process": "In progress",
+        "suspended": "Suspended",
+        "warranty": "Warranty",
+        "yes": "Yes",
+        "no": "No",
+        "warranty_policy": "Warranty policy",
+        "12-month_warranty": "12-month warranty",
+        "24-month_warranty": "24-month warranty",
+        "36-month_warranty": "36-month warranty",
+        "selling": "Selling",
+        "allowing_sales": "Allowing sales",
+        "not_allowing_sales": "Not allowing sales",
+        "classifying": "classifying products",
+        "combo": "Combo",
+        "regular_product": "Regular product",
+        "creation_date": "Creation date"
+      },
+      "table": {
+        "image": "Image",
+        "product": "Product",
+        "sellable": "Sellable",
+        "inventory": "Inventory",
+        "created_at": "Creation date",
+        "retail_price": "Retail price",
+        "import_price": "Import price",
+        "wholesale_price": "Wholesale price",
+        "barcode": "Barcode",
+        "supplier": "Supplier",
+        "status": "Status",
+        "number_of_stock": "Number of products in stock"
+      }
     }
   }
 }

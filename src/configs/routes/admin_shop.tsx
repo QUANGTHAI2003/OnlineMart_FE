@@ -4,6 +4,7 @@ import {
   ShopOutlined,
   ShoppingCartOutlined,
   UsergroupAddOutlined,
+  ControlOutlined,
 } from "@ant-design/icons";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
 
@@ -39,6 +40,19 @@ export const adminShopRoutes: ISidebarMenu[] = [
         title: "admin_shop.sidebar.product_categories",
         key: "product_categories",
         url: "/admin/shop/categories",
+      },
+    ],
+  },
+  {
+    title: "admin_shop.sidebar.management",
+    key: "manage",
+    url: "/admin/shop/manage",
+    icon: <ControlOutlined />,
+    children: [
+      {
+        title: "admin_shop.sidebar.product_inventory",
+        key: "product_inventory",
+        url: "/admin/shop/products/inventory",
       },
     ],
   },

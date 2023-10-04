@@ -115,6 +115,10 @@ export const formatTimeAgo = (timestamp: number) => {
   return `${years} ${t.years} ${t.ago}`;
 };
 
+export const formatNumber = (number: number): string => {
+  return number.toLocaleString("en-IN");
+};
+
 export const formatShortenNumber = (number: number) => {
   const language: string = getLang();
   type Translations = {
