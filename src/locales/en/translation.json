@@ -826,6 +826,67 @@
       "btn_edit": "Edit",
       "btn_delete": "Delete"
     },
+    "seller": {
+      "list": "List of houses for sale",
+      "link_register": "Create a registration link",
+      "title_permissions": "List of permissions",
+      "no_permissions": "No rights",
+      "filter": {
+        "type": {
+          "info_seller": "Supplier Information",
+          "code": "MTS/CODE ĐKKĐ/CCCD",
+          "condition": "Condition",
+          "all": "All",
+          "activity": "Activity",
+          "inactive": "Inactive",
+          "profile_status": "Profile status",
+          "incomplete": "Incomplete profile",
+          "waiting": "Waiting for additional sellers",
+          "peding": "Pending approval",
+          "other": "Other filters",
+          "type_of": "Type of house for sale",
+          "sale_country": "Houses for sale in the country",
+          "international": "International Seller",
+          "sale_segment": "House for sale segment",
+          "seller_admin": "OM Seller",
+          "shop_admin": "Only OM shop",
+          "not_shop_admin": "Not includign OM shop"
+        },
+        "placeholder": "Enter {{placeholder}} ...",
+        "reset_btn": "Reset",
+        "search_btn": "Search",
+        "filter": "Unfilter",
+        "apply": "Apply"
+      },
+      "register": {
+        "title": "ADD EMPLOYEES",
+        "form": {
+          "validate_required": "mandatory information",
+          "validate_type": "improper formatting",
+          "validate_min": "has a minimum talent level of {{min}} characters",
+          "validate_max": "has a maximum talent of {{max}} characters",
+          "name": "Staff's name",
+          "placeholder": "Enter",
+          "email": "Email",
+          "right": "Rights",
+          "position": "Positions",
+          "placeholder_select": "Select",
+          "phone": "Phone number",
+          "password": "Your password",
+          "btn_submit": "Register"
+        }
+      },
+      "table": {
+        "seller_info": "Seller Information",
+        "condition": "Condition",
+        "contact_info": "Contact information",
+        "tag_active": "Activity",
+        "tag_inactive": "Inactive",
+        "charge": "Person in charge",
+        "creator": "Store creator",
+        "detail": "Detail"
+      }
+    },
     "header": {
       "notifications": "Notifications",
       "view_all": "View all",

@@ -830,6 +830,67 @@
       "btn_edit": "Sửa",
       "btn_delete": "Xoá"
     },
+    "seller": {
+      "list": "Danh sách nhà bán",
+      "link_register": "Tạo link đăng ký",
+      "title_permissions": "Danh sách quyền",
+      "no_permissions": "Không có quyền nào",
+      "filter": {
+        "type": {
+          "info_seller": "Thông tin nhà cung cấp",
+          "code": "Mã số đăng ký kinh doanh hoặc mã số thuế",
+          "all": "Tất cả",
+          "condition": "Trạng thái",
+          "activity": "Hoạt động",
+          "inactive": "Không hoạt động",
+          "profile_status": "Trạng thái hồ sơ",
+          "incomplete": "Chưa hoàn thành hồ sơ",
+          "waiting": "Chờ nhà bán bổ sung",
+          "peding": "Đang chờ duyệt",
+          "other": "Bộ lọc khác",
+          "type_of": "Loại nhà bán",
+          "sale_country": "Nhà bán trong nước",
+          "international": "Nhà bán quốc tế",
+          "sale_segment": "Phân khúc nhà bán",
+          "seller_admin": "Nhà bán OM",
+          "shop_admin": "Chỉ gồm shop OM",
+          "not_shop_admin": "Không gồm shop OM"
+        },
+        "placeholder": "Nhập vào {{placeholder}} ...",
+        "reset_btn": "Thiết lập lại",
+        "search_btn": "Tìm kiếm",
+        "filter": "Bỏ lọc",
+        "apply": "Áp dụng"
+      },
+      "register": {
+        "title": "Thêm nhân viên",
+        "form": {
+          "validate_required": "không được để trống",
+          "validate_type": "không đúng định dạng",
+          "validate_min": "có độ tài tối thiểu là {{min}} ký tự",
+          "validate_max": "có độ tài tối da là {{max}} ký tự",
+          "name": "Tên nhân viên",
+          "placeholder": "Nhập vào",
+          "email": "Email",
+          "right": "Quyền",
+          "position": "Vai trò",
+          "placeholder_select": "Lựa chọn",
+          "phone": "Số diện thoại",
+          "password": "Mật khẩu",
+          "btn_submit": "Đăng ký"
+        }
+      },
+      "table": {
+        "seller_info": "Thông tin nhà bán",
+        "condition": "Trạng thái",
+        "contact_info": "Thông tin liên hệ",
+        "tag_active": "Hoạt động",
+        "tag_inactive": "Không hoạt động",
+        "charge": "Người phụ trách",
+        "creator": "Người tạo cửa hàng",
+        "detail": "Chi tiết"
+      }
+    },
     "header": {
       "notifications": "Cập nhật nhà bán",
       "view_all": "Xem tất cả",

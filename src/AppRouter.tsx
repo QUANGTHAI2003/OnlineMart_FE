@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
+import { AdminBreadcrumb } from "./app/components/common/Breadcrumb/Breadcrumb";
 import AdminMainLayout from "./app/components/layouts/admin/AdminMainLayout";
 import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
@@ -11,6 +12,7 @@ import UserNotification from "./app/pages/client/account/notification/UserNotifi
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
 import Cart from "./app/pages/client/home/Cart";
 import Payment from "./app/pages/client/home/Payment";
+import SellerInfo from "./app/pages/admin/seller/SellerInfo";
 // Components
 
 // Pages
@@ -96,7 +98,7 @@ const AppRouter: React.FC = () => {
           <Route index element={<AdminOrderList />} />
           <Route path="bill" element={<div>Order Bill</div>} />
         </Route>
-        <Route path="info-seller" element={<div>Seller info</div>} />
+        <Route path="info-seller" element={<SellerInfo />} />
         <Route path="manage-seller">
           <Route path="role" element={<RoleManage />} />
         </Route>
