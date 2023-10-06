@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { AdminBreadcrumb } from "./app/components/common/Breadcrumb/Breadcrumb";
 import AdminMainLayout from "./app/components/layouts/admin/AdminMainLayout";
 import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
@@ -43,9 +42,10 @@ const SigninAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SigninAdm
 const SignupAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SignupAdmin"));
 const AdminOrderList = React.lazy(() => import("@app/app/pages/admin/orders/list/Order"));
 const AdminProductList = React.lazy(() => import("@app/app/pages/admin/products/list/Product"));
-const Category = React.lazy(() => import("@app/app/pages/admin/products/categories/Category"));
+const AdminCategory = React.lazy(() => import("@app/app/pages/admin/products/categories/Category"));
 const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/products/review/ProductReview"));
 const AdminProductCreate = React.lazy(() => import("@app/app/pages/admin/products/create/ProductCreate"));
+const AdminSupplier = React.lazy(() => import("@app/app/pages/admin/products/suppliers/Supplier"));
 const AdminProductInventory = React.lazy(() => import("@app/app/pages/admin/products/inventory/ProductInventory"));
 
 const RoleManage = React.lazy(() => import("@app/app/pages/admin/manage_seller/role/RoleManage"));
@@ -93,7 +93,8 @@ const AppRouter: React.FC = () => {
           <Route path="review" element={<AdminProductReview />} />
           <Route path="inventory" element={<AdminProductInventory />} />
         </Route>
-        <Route path="categories" element={<Category />} />
+        <Route path="categories" element={<AdminCategory />} />
+        <Route path="suppliers" element={<AdminSupplier />} />
         <Route path="orders">
           <Route index element={<AdminOrderList />} />
           <Route path="bill" element={<div>Order Bill</div>} />

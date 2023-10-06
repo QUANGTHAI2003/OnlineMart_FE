@@ -41,6 +41,11 @@ export const adminShopRoutes: ISidebarMenu[] = [
         key: "product_categories",
         url: "/admin/shop/categories",
       },
+      {
+        title: "admin_shop.sidebar.suppliers",
+        key: "suppliers",
+        url: "/admin/shop/suppliers",
+      },
     ],
   },
   {
