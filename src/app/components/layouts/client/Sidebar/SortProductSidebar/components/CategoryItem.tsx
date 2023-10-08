@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from "react";
-
-import CategorySkeleton from "../skeletons/CategorySkeleton";
+import React from "react";
+import { Link } from "react-router-dom";
 
 interface ICategoryItem {
-  content: string;
+  id: number;
+  name: string;
+  slug: string;
 }
 
-const CategoryItem: React.FC<ICategoryItem> = ({ content }) => {
-  const [loadingSkeletonCount, setLoadingSkeletonCount] = useState(false);
+const CategoryItem: React.FC<ICategoryItem> = ({ id, name, slug }) => {
+  // const [loadingSkeletonCount, setLoadingSkeletonCount] = useState(false);
 
-  useEffect(() => {
-    setLoadingSkeletonCount(true);
-    setTimeout(() => {
-      setLoadingSkeletonCount(false);
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   setLoadingSkeletonCount(true);
+  //   setTimeout(() => {
+  //     setLoadingSkeletonCount(false);
+  //   }, 3000);
+  // }, []);
 
   return (
-    <div className="category">
-      {loadingSkeletonCount ? (
-        <CategorySkeleton count={1} />
-      ) : (
-        <div>
-          <p>{content}</p>
-        </div>
-      )}
-    </div>
+    <Link to={`category/${slug}/${id}`} className="category">
+      <p>{name}</p>
+    </Link>
   );
 };
 

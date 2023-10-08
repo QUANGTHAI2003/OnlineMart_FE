@@ -1,15 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import { rootReducer } from "./slices";
-import { authApi } from "./slices/api/authApi";
-import { categoryApi } from "./slices/api/categoryApi";
-import { userApi } from "./slices/api/userApi";
+import { apiMiddleware, rootReducer } from "./slices";
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([authApi.middleware, userApi.middleware, categoryApi.middleware]),
+  middleware: apiMiddleware,
   devTools: process.env.NODE_ENV === "development",
 });
 

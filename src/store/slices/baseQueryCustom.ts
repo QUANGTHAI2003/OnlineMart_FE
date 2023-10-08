@@ -20,7 +20,7 @@ const baseQueryCustom: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryEr
 
   let result = await baseQuery(args, api, extraOptions);
 
-  if ((result?.error as any)?.originalStatus === 403 || (result?.error as any)?.originalStatus === 500) {
+  if ((result?.error as any)?.originalStatus === 403) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
 

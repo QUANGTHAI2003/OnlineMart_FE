@@ -46,6 +46,7 @@ export const CategoryItem = styled.div`
 export const RatingItem = styled.div`
   padding: 15px 0;
   border-bottom: 1px solid #f5f5fa;
+  cursor: pointer !important;
 
   .title {
     margin-bottom: 13px;
@@ -61,8 +62,11 @@ export const RatingItem = styled.div`
     font-size: 12px;
     margin: 0 10px 8px 0;
   }
-  :where(.css-dev-only-do-not-override-14mi6y0).om-rate .om-rate-star:not(:last-child) {
-    margin-inline-end: 3px;
+  .om-rate-star {
+    cursor: pointer !important;
+    &:not(:last-child) {
+      margin-inline-end: 3px;
+    }
   }
 `;
 export const PriceItem = styled.div`
@@ -101,7 +105,9 @@ export const PriceItem = styled.div`
     color: #38383d;
   }
 `;
-export const SpreadPriceItem = styled(Space)`
+export const SpreadPriceItem = styled(Space).withConfig({
+  shouldForwardProp: () => true,
+})`
   width: 100%;
   text-align: center;
 
@@ -115,7 +121,9 @@ export const SpreadPriceItem = styled(Space)`
     width: 74px;
   }
 `;
-export const Apply = styled(Space)`
+export const Apply = styled(Space).withConfig({
+  shouldForwardProp: () => true,
+})`
   margin: 10px 0;
   width: 100%;
 

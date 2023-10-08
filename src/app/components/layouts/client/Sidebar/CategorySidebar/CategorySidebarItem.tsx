@@ -11,7 +11,7 @@ const CategorySidebarItem = ({ categoryItem }: ICategorySidebarItem) => {
   const { id, name, slug, thumbnail_url } = categoryItem;
   return (
     <Link
-      to={`${slug}/c${id}`}
+      to={`category/${slug}/${id}`}
       className="hover:bg-[#27272a1f] hover:ease-in transition-all duration-[30ms] active:bg-[#27272a3d] flex py-[7px] px-[10px] items-center rounded-[8px] cursor-pointer"
     >
       <div className="basis-[32px] height-[32px] me-[8px] line-[0]">

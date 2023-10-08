@@ -918,15 +918,6 @@
         "detail": "Detail"
       }
     },
-    "header": {
-      "notifications": "Notifications",
-      "view_all": "View all",
-      "read_all": "Mark all as read",
-      "profile": "Profile",
-      "change_password": "Change password",
-      "add_another_account": "Add another account",
-      "logout": "Log out"
-    },
     "manage_seller": {
       "role_list_data": {
         "admin": "Admin",
@@ -1014,6 +1005,15 @@
         "status": "Status",
         "number_of_stock": "Number of products in stock"
       }
+    },
+    "header": {
+      "notifications": "Notifications",
+      "view_all": "View all",
+      "read_all": "Mark all as read",
+      "profile": "Profile",
+      "change_password": "Change password",
+      "add_another_account": "Add another account",
+      "logout": "Log out"
     }
   }
 }

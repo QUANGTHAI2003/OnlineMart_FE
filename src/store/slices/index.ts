@@ -1,14 +1,23 @@
 import { authApi } from "./api/authApi";
 import { categoryApi } from "./api/categoryApi";
+import { productCategoryApi } from "./api/producCategoryApi";
 import { userApi } from "./api/userApi";
 import authSlice from "./authSlice";
+import sortSidebarSlice from "./sortSidebarSlice";
 
-const exportData: any = {
+export const rootReducer: any = {
   [authApi.reducerPath]: authApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
   [categoryApi.reducerPath]: categoryApi.reducer,
+  [productCategoryApi.reducerPath]: productCategoryApi.reducer,
   userState: authSlice,
+  sortSidebar: sortSidebarSlice,
 };
 
-export { exportData as rootReducer };
-
+export const apiMiddleware = (getDefaultMiddleware: any) =>
+  getDefaultMiddleware().concat(
+    authApi.middleware,
+    userApi.middleware,
+    categoryApi.middleware,
+    productCategoryApi.middleware
+  );

@@ -11,7 +11,7 @@ import UserHeader from "./Header/UserHeader";
 const UserMainLayout = (): JSX.Element => {
   const location = useLocation();
   const homePage = location.pathname === "/";
-  const categoryPage = location.pathname === "/category";
+  const categoryPage = location.pathname.startsWith("/category/");
   const maxWidth = homePage ? "1440px" : "1280px";
 
   const { isTablet, isDesktop } = useResponsive();

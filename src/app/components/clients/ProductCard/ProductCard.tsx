@@ -14,6 +14,7 @@ interface IProductCardItem {
   quantitySold: number;
   ratingAverage: number;
   thumbnailUrl: string;
+  type?: string;
 }
 
 const ProductCard: React.FC<IProductCardItem> = ({
@@ -24,6 +25,7 @@ const ProductCard: React.FC<IProductCardItem> = ({
   quantitySold,
   ratingAverage,
   thumbnailUrl,
+  type,
 }) => {
   const { t } = useTranslation();
   const productItemRef = useRef<HTMLDivElement>(null);
@@ -84,11 +86,13 @@ const ProductCard: React.FC<IProductCardItem> = ({
                   )}
                 </div>
               </div>
-              <div className="have-variant">
-                <div className="variant-item">
-                  <div className="variant-item-text">Nhiều màu</div>
+              {type === "configurable" && (
+                <div className="have-variant">
+                  <div className="variant-item">
+                    <div className="variant-item-text">Nhiều màu</div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <S.DeliveryInfo className="delivery-info">
               <div className="delivery-date">

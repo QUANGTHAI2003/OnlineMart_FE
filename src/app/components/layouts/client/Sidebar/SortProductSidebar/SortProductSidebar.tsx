@@ -1,67 +1,23 @@
 import ModalSelect from "@app/app/components/clients/SelectAddress/ModalSelect";
-import { formatCurrency } from "@app/utils/helper";
+import { useAppSelector } from "@app/store/store";
 import Sider from "antd/es/layout/Sider";
 import { useTranslation } from "react-i18next";
 
 import { AdvertiseItem, CategoryItem, CheckboxSortItem, PriceItem, RatingItem, SpreadPriceItem } from "./components";
 import * as S from "./SortProductSidebar.styles";
 
-const categories = [
-  {
-    id: 1,
-    content: "Điện thoại Smartphone",
-  },
-  {
-    id: 2,
-    content: "Máy tính bảng",
-  },
-  {
-    id: 3,
-    content: "Máy đọc sách",
-  },
-  {
-    id: 4,
-    content: "Điện thoại phổ thông",
-  },
-  {
-    id: 5,
-    content: "Điện thoại bàn",
-  },
-];
-
 const rating = [
   {
     id: 1,
-    content: "Từ 1 sao",
-    value: 1,
-  },
-  {
-    id: 2,
-    content: "Từ 4 sao",
-    value: 4.75,
-  },
-  {
-    id: 3,
-    content: "Từ 5 sao",
     value: 5,
   },
-];
-
-const price = [
-  {
-    id: 1,
-    lowest: formatCurrency(2000),
-    best: formatCurrency(2000),
-  },
   {
     id: 2,
-    lowest: formatCurrency(20000),
-    best: formatCurrency(200000),
+    value: 4,
   },
   {
     id: 3,
-    lowest: formatCurrency(200000),
-    best: formatCurrency(20000500),
+    value: 3,
   },
 ];
 
@@ -82,88 +38,51 @@ const advertise = [
   },
 ];
 
-const variant: any = [
-  {
-    id: 1,
-    title: "ROM",
-    values: [
-      {
-        id: 1,
-        name: "32GB",
-      },
-      {
-        id: 2,
-        name: "64GB",
-      },
-      {
-        id: 3,
-        name: "128GB",
-      },
-      {
-        id: 4,
-        name: "256GB",
-      },
-      {
-        id: 5,
-        name: "512GB",
-      },
-      {
-        id: 6,
-        name: "1TB",
-      },
-      {
-        id: 7,
-        name: "2TB",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Màu sắc",
-    values: [
-      {
-        id: 1,
-        name: "Đỏ",
-      },
-      {
-        id: 2,
-        name: "Cam",
-      },
-      {
-        id: 3,
-        name: "Vàng",
-      },
-      {
-        id: 4,
-        name: "Lục",
-      },
-      {
-        id: 5,
-        name: "Lam",
-      },
-      {
-        id: 6,
-        name: "Chàm",
-      },
-      {
-        id: 7,
-        name: "Tím",
-      },
-    ],
-  },
-];
-
 const SortProductSidebar = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
+
+  const childrenCategory = useAppSelector((state) => state.sortSidebar.category) || [];
+  const sortPrice = useAppSelector((state) => {
+    const price = state?.sortSidebar?.price;
+
+    if (!price) {
+      return [];
+    }
+
+    const { min_price, average_price, max_price } = price;
+
+    return [
+      { id: 1, min: 0, max: min_price },
+      { id: 2, min: min_price, max: average_price },
+      { id: 3, min: average_price, max: max_price },
+      { id: 4, min: max_price, max: 1000000000000 },
+    ];
+  });
+  const sortShop = useAppSelector((state) => state.sortSidebar.shop) || [];
+  const sortSupplier = useAppSelector((state) => state.sortSidebar.supplier) || [];
+
+  const otherSort: any = [
+    {
+      id: 1,
+      title: "Shop",
+      slug: "shop",
+      values: [...sortShop],
+    },
+    {
+      id: 2,
+      title: "Supplier",
+      slug: "supplier",
+      values: [...sortSupplier],
+    },
+  ];
 
   return (
     <S.ProductCategory>
       <Sider width={200} className="sider">
         <S.CategoryItem>
           <h3 className="title">{t("user.product_category_sidebar.product_category")}</h3>
-          {categories.map((item) => {
-            return <CategoryItem key={item.id} content={item.content} />;
+          {childrenCategory.map((item: any) => {
+            return <CategoryItem key={item.id} id={item.id} name={item.name} slug={item.slug} />;
           })}
         </S.CategoryItem>
 
@@ -174,14 +93,14 @@ const SortProductSidebar = () => {
         <S.RatingItem>
           <h3 className="title">{t("user.product_category_sidebar.rating")}</h3>
           {rating.map((item) => {
-            return <RatingItem key={item.id} content={item.content} value={item.value} />;
+            return <RatingItem key={item.id} value={item.value} />;
           })}
         </S.RatingItem>
 
         <S.PriceItem>
           <h3 className="title">{t("user.product_category_sidebar.price")}</h3>
-          {price.map((item) => {
-            return <PriceItem key={item.id} lowest={item.lowest} best={item.best} />;
+          {sortPrice.map((item: any) => {
+            return <PriceItem key={item.id} min={item.min} max={item.max} />;
           })}
 
           <p className="spread_title">{t("user.product_category_sidebar.range")}</p>
@@ -189,7 +108,7 @@ const SortProductSidebar = () => {
         </S.PriceItem>
 
         <S.CheckboxSortItem>
-          {variant.map((item: any): any => {
+          {otherSort.map((item: any): any => {
             return <CheckboxSortItem key={item.id} sortData={item} />;
           })}
         </S.CheckboxSortItem>

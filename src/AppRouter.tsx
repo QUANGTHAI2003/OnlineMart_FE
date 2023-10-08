@@ -5,13 +5,13 @@ import AdminMainLayout from "./app/components/layouts/admin/AdminMainLayout";
 import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
+import SellerInfo from "./app/pages/admin/seller/SellerInfo";
 import AI from "./app/pages/AI";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
 import Cart from "./app/pages/client/home/Cart";
 import Payment from "./app/pages/client/home/Payment";
-import SellerInfo from "./app/pages/admin/seller/SellerInfo";
 // Components
 
 // Pages
@@ -68,7 +68,7 @@ const AppRouter: React.FC = () => {
       <Route path="/" element={protectedClientLayout}>
         <Route index element={<Home />} />
         <Route path="cua-hang" element={<StoreIndex />}></Route>
-        <Route path="category" element={<ProductCategory />} />
+        <Route path="category/:slug/:id" element={<ProductCategory />} />
         <Route path="ai" element={<AI />} />
         <Route path="checkout" element={<Cart />} />
         <Route path="checkout/payment" element={<Payment />} />

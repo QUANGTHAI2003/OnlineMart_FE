@@ -1,18 +1,8 @@
-import { Drawer, Space } from "antd";
+import { Drawer } from "antd";
 import styled from "styled-components";
 
-interface IFixedHeader {
-  isfixed: string;
-}
-export const HomeStyle = styled.section<IFixedHeader>`
+export const HomeStyle = styled.section`
   .om-tabs-nav-wrap {
-    position: ${(props) => {
-      return props.isfixed == "true" ? "fixed !important" : "initial !important";
-    }};
-
-    padding-top: ${(props) => {
-      return props.isfixed == "true" ? "64px" : "0";
-    }};
     width: -webkit-fill-available;
     top: 0;
     z-index: 999;
@@ -27,6 +17,10 @@ export const HomeStyle = styled.section<IFixedHeader>`
     font-weight: 400;
     padding: 15px 0 15px 25px;
     background: #fff;
+  }
+
+  .om-pagination-options {
+    display: none;
   }
 `;
 export const ProductCategory = styled.div`
@@ -229,65 +223,6 @@ export const ProductCategory = styled.div`
     }
   }
 `;
-export const ProductStyle = styled.section<IFixedHeader>`
-  background: rgb(245, 245, 250);
-  border-radius: 8px;
-  margin-top: 10px;
-
-  .header {
-    width: 100%;
-    top: 0px;
-    z-index: 997;
-    transition: all 1s ease 0s;
-    padding-top: ${(props) => {
-      return props.isfixed == "true" ? "32px" : "0";
-    }};
-    opacity: 1;
-    display: flex;
-    background: rgb(245, 245, 250);
-    flex-direction: column;
-
-    h2 {
-      color: rgb(39, 39, 42);
-      display: flex;
-      padding: 12px 16px;
-      background-color: white;
-      flex: 1 1 0%;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 150%;
-      text-transform: unset;
-      border-radius: 8px 8px 0px 0px;
-      position: ${(props) => {
-        return props.isfixed == "true" ? "fixed !important" : "initial !important";
-      }};
-      top: ${(props) => {
-        return props.isfixed == "true" ? "0" : "initial";
-      }};
-      margin-top: ${(props) => {
-        return props.isfixed == "true" ? "16px" : "0";
-      }};
-      width: 100%;
-      top: 0;
-      z-index: 9999;
-      opacity: 1;
-      transition: all 1s ease 0s;
-    }
-  }
-
-  .view_more {
-    width: 240px;
-    margin-top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .om-row {
-    padding-top: ${(props) => {
-      return props.isfixed == "true" ? "130px" : "0";
-    }};
-  }
-`;
 export const SortPaginateItemMain = styled.div`
   margin-bottom: 7px;
 `;
@@ -308,17 +243,6 @@ export const SortPaginateItem = styled.div`
       display: none;
     }
   }
-  @media only screen and (max-width: 768px) {
-    display: none;
-  }
-  @media only screen and (max-width: 480px) {
-    display: none;
-  }
-  @media only screen and (max-width: 320px) {
-    display: none;
-  }
-`;
-export const Sort = styled(Space)`
   @media only screen and (max-width: 768px) {
     display: none;
   }
@@ -385,7 +309,9 @@ export const SortDrawer = styled.div`
     }
   }
 `;
-export const DrawerItem = styled(Drawer)`
+export const DrawerItem = styled(Drawer).withConfig({
+  shouldForwardProp: () => true,
+})`
   .address-btn {
     border-bottom: 1px solid #f5f5f5;
     padding-bottom: 10px;
@@ -539,43 +465,5 @@ export const FilterItem = styled.div`
   }
   .delete_all:hover {
     color: #0b74e5 !important;
-  }
-
-  @media only screen and (max-width: 1400px) {
-    /* .delete_all_space {
-      display: none;
-    } */
-  }
-  @media only screen and (max-width: 1200px) {
-  }
-  @media only screen and (max-width: 992px) {
-    .delete_all_space {
-      display: none;
-    }
-  }
-  @media only screen and (max-width: 768px) {
-    .delete_all_space {
-      display: none;
-    }
-  }
-  @media only screen and (max-width: 480px) {
-    .delete_all_space {
-      display: none;
-    }
-  }
-  @media only screen and (max-width: 320px) {
-    .delete_all_space {
-      display: none;
-    }
-  }
-`;
-export const PaginateItem = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
-
-  li {
-    font-size: 16px;
   }
 `;
