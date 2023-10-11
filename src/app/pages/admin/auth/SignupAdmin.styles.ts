@@ -1,3 +1,4 @@
+import { Form } from "antd";
 import styled from "styled-components";
 // Switch
 export const BackgroundUrl = styled.div`
@@ -49,6 +50,16 @@ export const Button2 = styled.button`
   cursor: pointer;
 `;
 // Signin
+export const FormItem = styled(Form.Item).withConfig({
+  shouldForwardProp: () => true,
+})`
+  .om-form-item-label {
+    display: none;
+  }
+  .om-form-item-explain-error {
+    font-size: 12px;
+  }
+`;
 export const Frame = styled.div`
   height: 100vh;
   display: flex;
@@ -121,4 +132,7 @@ export const Intro = styled.div`
 `;
 export const FormRegister = styled.div`
   width: 640px;
+  .om-form-item-explain-error {
+    font-size: 12px;
+  }
 `;

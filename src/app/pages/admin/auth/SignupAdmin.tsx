@@ -1,7 +1,5 @@
-import { InfoCircleOutlined } from "@ant-design/icons";
-import { Tooltip } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -10,31 +8,38 @@ import * as S from "./SignupAdmin.styles";
 const DataIndustry = [
   {
     id: 1,
-    name: "Bách hóa Online",
+    value: "Bách hóa Online",
+    label: "Bách hóa Online",
   },
   {
     id: 2,
-    name: "Balo và Vali",
+    value: "Balo và Vali",
+    label: "Balo và Vali",
   },
   {
     id: 3,
-    name: "Điện gia dụng",
+    value: "Điện gia dụng",
+    label: "Điện gia dụng",
   },
   {
     id: 4,
-    name: "Điện thoại - Máy tính bảng",
+    value: "Điện thoại - Máy tính bảng",
+    label: "Điện thoại - Máy tính bảng",
   },
   {
     id: 5,
-    name: "Đồ chơi",
+    value: "Đồ chơi",
+    label: "Đồ chơi",
   },
   {
     id: 6,
-    name: "Đồng hồ và Trang sức",
+    value: "Đồng hồ và Trang sức",
+    label: "Đồng hồ và Trang sức",
   },
   {
     id: 7,
-    name: "Thời trang",
+    value: "Thời trang",
+    label: "Thời trang",
   },
 ];
 const SignupAdmin = () => {
@@ -42,164 +47,157 @@ const SignupAdmin = () => {
   useEffect(() => {
     console.log("render");
   }, []);
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-  const onSubmit = (data: any) => console.log(data);
-
+  const validateMessages = {
+    required: "${label} " + t("admin_shop.authentication.signup.err_null"),
+    pattern: {
+      mismatch: "${label} " + t("admin_shop.authentication.signup.err_pattern"),
+    },
+    types: {
+      email: "${label} " + t("admin_shop.authentication.signup.err_pattern"),
+    },
+    string: {
+      min: "${label} " + t("admin_shop.authentication.signup.min_required", { min: "${min}" }),
+    },
+  };
   return (
     <div className="flex flex-wrap bg-[#fff]">
       <S.Intro className="md:h-full sm:h-fit md:mb-0 md:bg-[#fff] md:p-11 sm:p-4 sm:bg-[#f5f5fa]">
         <h2 className="text-3xl mb-2">{t("admin_shop.authentication.signup.title")}</h2>
-        <p className="mb-12">{t("admin_shop.authentication.signup.intro")}</p>
-        <div className="w-full h-3/6 overflow-hidden rounded">
+        <p className="mb-12 sm:mb-0">{t("admin_shop.authentication.signup.intro")}</p>
+        <div className="w-full h-3/6 overflow-hidden rounded sm:hidden lg:block">
           <img className="w-full h-full object-cover rounded" src="https://source.unsplash.com/random" alt="img" />
         </div>
       </S.Intro>
       <S.FormRegister className="bg-[#f5f5fa] md:py-12 md:px-20 sm:py-8 sm:px-4">
         <h2 className="text-3xl mb-4 md:block sm:hidden">{t("admin_shop.authentication.signup.name")}</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col items-center gap-4 mb-3">
-            {/* Email */}
-            <S.FormField>
-              <div className="flex justify-start items-center gap-1">
-                <S.Label htmlFor="email">{t("admin_shop.authentication.signup.label_email")}</S.Label>
-                <Tooltip title={t("admin_shop.authentication.signup.tooltip_email")}>
-                  <InfoCircleOutlined />
-                </Tooltip>
-              </div>
-              <S.Input
-                id="email"
-                {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })}
-                aria-invalid={errors.email ? "true" : "false"}
-                placeholder={t("admin_shop.authentication.signup.p_email")}
-              />
-              {errors.email?.type === "required" && (
-                <span className="text-sm text-red-500" role="alert">
-                  {t("admin_shop.authentication.signup.null_email")}
-                </span>
-              )}
-              {errors.email?.type === "pattern" && (
-                <span className="text-sm text-red-500" role="alert">
-                  {t("admin_shop.authentication.signup.err_email")}
-                </span>
-              )}
-            </S.FormField>
-            {/* Họ tên */}
-            <S.FormField>
-              <div className="flex justify-start items-center gap-1">
-                <S.Label htmlFor="fullname">{t("admin_shop.authentication.signup.label_fullname")}</S.Label>
-              </div>
-              <S.Input
-                id="fullname"
-                {...register("fullname", { required: true })}
-                aria-invalid={errors.fullname ? "true" : "false"}
-                placeholder={t("admin_shop.authentication.signup.p_fullname")}
-              />
-              {errors.fullname?.type === "required" && (
-                <span className="text-sm text-red-500" role="alert">
-                  {t("admin_shop.authentication.signup.err_fullname")}
-                </span>
-              )}
-            </S.FormField>
-            {/* Số điện thoại  */}
-            <S.FormField>
-              <div className="flex justify-start items-center gap-1">
-                <S.Label htmlFor="phone">{t("admin_shop.authentication.signup.label_phone")}</S.Label>
-              </div>
-              <S.Input
-                type="tel"
-                id="phone"
-                {...register("phone", { required: true, pattern: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g })}
-                aria-invalid={errors.phone ? "true" : "false"}
-                placeholder={t("admin_shop.authentication.signup.p_phone")}
-              />
-              {errors.phone?.type === "required" && (
-                <span className="text-sm text-red-500" role="alert">
-                  {t("admin_shop.authentication.signin.null_phone")}
-                </span>
-              )}
-              {errors.phone?.type === "pattern" && (
-                <span className="text-sm text-red-500" role="alert">
-                  {t("admin_shop.authentication.signup.err_phone")}
-                </span>
-              )}
-            </S.FormField>
-            {/* Ngành hàng */}
-            <S.FormField>
-              <div className="flex justify-start items-center gap-1">
-                <S.Label htmlFor="industry">{t("admin_shop.authentication.signup.label_industry")}</S.Label>
-                <Tooltip title={t("admin_shop.authentication.signup.tooltip_industry")}>
-                  <InfoCircleOutlined />
-                </Tooltip>
-              </div>
-              <S.Select
-                id="industry"
-                {...register("industry", { required: true })}
-                aria-invalid={errors.industry ? "true" : "false"}
-              >
-                <option value=""></option>
-                {DataIndustry.map((item) => {
-                  return (
-                    <option key={item.id} value={item.name}>
-                      {item.name}
-                    </option>
-                  );
-                })}
-              </S.Select>
-              {errors.industry?.type === "required" && (
-                <span className="text-sm text-red-500" role="alert">
-                  {t("admin_shop.authentication.signup.err_industry")}
-                </span>
-              )}
-            </S.FormField>
-            {/* Mật khẩu */}
-            <S.FormField>
-              <div className="flex justify-start items-center gap-1">
-                <S.Label htmlFor="password">{t("admin_shop.authentication.signup.label_password")}</S.Label>
-              </div>
-              <S.Input
-                id="password"
-                {...register("password", { required: true })}
-                aria-invalid={errors.password ? "true" : "false"}
-                placeholder={t("admin_shop.authentication.signup.p_password")}
-              />
-              {errors.password?.type === "required" && (
-                <span className="text-sm text-red-500" role="alert">
-                  {t("admin_shop.authentication.signin.null_password")}
-                </span>
-              )}
-            </S.FormField>
-            {/* Xác nhận mật khẩu */}
-            <S.FormField>
-              <div className="flex justify-start items-center gap-1">
-                <S.Label htmlFor="repass">{t("admin_shop.authentication.signup.label_repass")}</S.Label>
-              </div>
-              <S.Input
-                id="repass"
-                {...register("repass", { required: true })}
-                aria-invalid={errors.repass ? "true" : "false"}
-              />
-              {errors.repass?.type === "required" && (
-                <span className="text-sm text-red-500" role="alert">
-                  {t("admin_shop.authentication.signup.err_repass")}
-                </span>
-              )}
-            </S.FormField>
-            <S.Confirm type="submit" value={t("admin_shop.authentication.signup.name")} />
-            <div className="text-center">
-              <p className="text-sm leading-4">
-                {t("admin_shop.authentication.signup.question")}
-                &nbsp;
-                <Link to="../admin/shop/auth/signin" className="text-[#1BA8FF]" style={{ textDecoration: "none" }}>
-                  {t("admin_shop.authentication.signin.name")}
-                </Link>
-              </p>
-            </div>
+        <Form
+          layout="vertical"
+          className="md:text-sm sm:text-xs"
+          autoComplete="off"
+          onFinish={(values) => {
+            console.log({ values });
+          }}
+          onFinishFailed={(error) => {
+            console.log({ error });
+          }}
+          validateMessages={validateMessages}
+        >
+          {/* Email */}
+          <Form.Item
+            name="email"
+            hasFeedback
+            className="mb-5"
+            tooltip={t("admin_shop.authentication.signup.tooltip_email")}
+            label={t("admin_shop.authentication.signup.label_email")}
+            rules={[
+              {
+                required: true,
+              },
+              {
+                type: "email",
+              },
+            ]}
+          >
+            <Input placeholder={t("admin_shop.authentication.signup.p_email")} />
+          </Form.Item>
+          {/* Họ và tên */}
+          <Form.Item
+            hasFeedback
+            name="fullname"
+            className="mb-5"
+            label={t("admin_shop.authentication.signup.label_fullname")}
+            rules={[
+              {
+                required: true,
+              },
+              { min: 6 },
+            ]}
+          >
+            <Input placeholder={t("admin_shop.authentication.signup.p_fullname")} />
+          </Form.Item>
+          {/* SĐT */}
+          <Form.Item
+            hasFeedback
+            name="phone"
+            className="mb-5"
+            label={t("admin_shop.authentication.signup.label_phone")}
+            rules={[
+              {
+                required: true,
+              },
+              {
+                pattern: /(0[3|5|7|8|9])+([0-9]{8})\b/g,
+              },
+            ]}
+          >
+            <Input placeholder={t("admin_shop.authentication.signup.p_phone")} />
+          </Form.Item>
+          {/* Ngành hàng */}
+          <Form.Item
+            name="industry"
+            hasFeedback
+            className="mb-5"
+            tooltip={t("admin_shop.authentication.signup.tooltip_industry")}
+            label={t("admin_shop.authentication.signup.label_industry")}
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Select defaultValue="" options={DataIndustry} />
+          </Form.Item>
+          {/* Mật khẩu */}
+          <Form.Item
+            hasFeedback
+            name="password"
+            className="mb-5"
+            label={t("admin_shop.authentication.signup.label_password")}
+            rules={[
+              {
+                required: true,
+              },
+              { min: 6 },
+            ]}
+          >
+            <Input.Password placeholder={t("admin_shop.authentication.signup.p_password")} />
+          </Form.Item>
+          {/* Nhập lại */}
+          <Form.Item
+            name="repass"
+            hasFeedback
+            className="mb-5"
+            dependencies={["password"]}
+            label={t("admin_shop.authentication.signup.label_repass")}
+            rules={[
+              {
+                required: true,
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error(t("admin_shop.authentication.signup.err_repass")));
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Button block type="primary" htmlType="submit">
+            {t("admin_shop.authentication.signup.name")}
+          </Button>
+          <div className="text-center mt-5">
+            <p className="text-sm leading-4">
+              {t("admin_shop.authentication.signup.question")}
+              &nbsp;
+              <Link to="../admin/shop/auth/signin" className="text-[#1BA8FF]" style={{ textDecoration: "none" }}>
+                {t("admin_shop.authentication.signin.name")}
+              </Link>
+            </p>
           </div>
-        </form>
+        </Form>
       </S.FormRegister>
     </div>
   );
