@@ -1,34 +1,30 @@
 import { DownOutlined } from "@ant-design/icons";
+import { useDeleteMultiSupplierMutation } from "@app/store/slices/api/supplierApi";
+import { notifyError, notifySuccess } from "@app/utils/helper";
 import { Button, Dropdown, MenuProps, Space, Tooltip } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const UpdateData: React.FC<any> = ({ hasSelected }) => {
+const shopId = 1;
+const UpdateData: React.FC<any> = ({ hasSelected, selectedRowKeys }) => {
   const { t } = useTranslation();
-
+  const [deleteMultiSupplier] = useDeleteMultiSupplierMutation();
   const [open, setOpen] = useState<boolean>(false);
-
-  const handleUpdateQuantity = () => {
-    console.log("Update quantity");
-  };
-
-  const handleUpdateStatus = () => {
-    console.log("Update status");
-  };
-
-  const handleDelete = () => {
-    console.log("Delete");
+  const handleDelete = async () => {
+    try {
+      await deleteMultiSupplier({
+        suppliersId: selectedRowKeys,
+        shopId,
+      }).unwrap();
+      notifySuccess("Successfully", "Delete supplier successfully");
+    } catch (err) {
+      notifyError("Error", "Delete supplier failed");
+    }
   };
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
     switch (e.key) {
       case "1":
-        handleUpdateQuantity();
-        break;
-      case "2":
-        handleUpdateStatus();
-        break;
-      case "3":
         handleDelete();
         break;
       default:
@@ -42,16 +38,8 @@ const UpdateData: React.FC<any> = ({ hasSelected }) => {
 
   const items: MenuProps["items"] = [
     {
-      label: t("admin_shop.suppliers.dropdown_update_quantity"),
-      key: "1",
-    },
-    {
-      label: t("admin_shop.suppliers.dropdown_update_status"),
-      key: "2",
-    },
-    {
       label: t("admin_shop.suppliers.dropdown_delete"),
-      key: "3",
+      key: "1",
     },
   ];
 

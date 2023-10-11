@@ -10,13 +10,9 @@ import CreateSupplier from "./CreateSupplier";
 
 const searchType = (t: any) => {
   return [
-    { value: "supplier_code", label: t("admin_shop.suppliers.col_supplier_code") },
+    { value: "code", label: t("admin_shop.suppliers.col_supplier_code") },
     { value: "name", label: t("admin_shop.suppliers.col_name") },
     { value: "phone", label: t("admin_shop.suppliers.col_phone") },
-    { value: "email", label: t("admin_shop.suppliers.col_email") },
-    { value: "tag", label: t("admin_shop.suppliers.col_tag") },
-    { value: "address", label: t("admin_shop.suppliers.col_address") },
-    { value: "website", label: t("admin_shop.suppliers.col_website") },
   ];
 };
 const Supplier = () => {
@@ -54,14 +50,14 @@ const Supplier = () => {
                   </Button>
                   <Modal
                     centered
-                    className="w-full"
+                    className="w-[768px]"
                     title={t("admin_shop.suppliers.title")}
                     open={isModalOpen}
                     onOk={handleOk}
                     onCancel={handleCancel}
                     footer={[]}
                   >
-                    <CreateSupplier />
+                    <CreateSupplier onCancel={handleCancel} />
                   </Modal>
                 </Space>
               </Row>
