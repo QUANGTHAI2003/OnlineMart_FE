@@ -4,7 +4,8 @@ export interface ICategory {
   slug: string;
   thumbnail_url: string;
   parent_id: number | null;
-  status: number;
+  category_children: string;
+  status: string;
   shop_id: number | null;
   meta_title: string | null;
   meta_description: string | null;

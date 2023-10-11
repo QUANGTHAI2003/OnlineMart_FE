@@ -9,7 +9,6 @@ import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { v4 as uuidv4 } from "uuid";
 
-import { PaginateItem } from "../category/components";
 
 import { BrandItem, MainSortItem, PosterItem } from "./components";
 import * as S from "./UserSearch.styles";
@@ -100,7 +99,7 @@ const UserSearch = () => {
           )}
         </div>
 
-        <PaginateItem />
+        {/* <PaginateItem /> */}
 
         <S.Swiper>
           <span className="title">{t("user.search_page.viewed_products")}</span>

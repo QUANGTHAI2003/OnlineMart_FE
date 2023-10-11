@@ -1,27 +1,31 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
-import { Button, Col, Row, Select, Space, Typography } from "antd";
-import Input from "antd/es/input";
+import { useDebounce } from "@app/hooks";
+import { useGetCategoryListWithChildrenQuery } from "@app/store/slices/api/categoryApi";
+import { Button, Col, Row, Space, Typography } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import * as S from "./Category.styles";
-import CreateCategory from "./CreateCategory";
-import TableComponent from "./TableComponent";
 
-const options = [
-  {
-    value: "Đồ gia dụng",
-    label: "Đồ gia dụng",
-  },
-  {
-    value: "Điện tử",
-    label: "Điện tử",
-  },
-];
+import * as S from "./Category.styles";
+import { FilterComponent } from "./components";
+import TableComponent from "./components/TableComponent";
+import CreateCategory from "./CreateCategory";
+
+const searchType = (t: any) => {
+  return [
+    { value: "name", label: "Tên danh mục" },
+    { value: "category_children", label: "Danh mục cha" },
+  ];
+};
 const Category = () => {
   const { t } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [selectSearchType, setSelectSearchType] = useState<string>(searchType(t)[0].value);
+  const debouncedSearchValue = useDebounce(searchValue, 300);
+
+  const { data } = useGetCategoryListWithChildrenQuery(1);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -58,22 +62,21 @@ const Category = () => {
                     onCancel={handleCancel}
                     footer={[]}
                   >
-                    <CreateCategory />
+                    <CreateCategory data={data} setIsModalOpen={setIsModalOpen} />
                   </S.ModalForm>
                 </Space>
               </Row>
             </Col>
           </Row>
-          <S.SearchField>
-            <Space.Compact size="large">
-              <Select defaultValue="Tất cả" options={options} />
-              <Input placeholder={t("admin_shop.categories.p_search")} />
-            </Space.Compact>
-          </S.SearchField>
+          <FilterComponent
+            setSearchValue={setSearchValue}
+            setSelectSearchType={setSelectSearchType}
+            searchTypeData={searchType(t)}
+          />
         </section>
       </main>
       <div className="p-5 bg-[#f5f5f5]">
-        <TableComponent />
+        <TableComponent dataCategory={data} searchValue={debouncedSearchValue} searchType={selectSearchType} />
       </div>
     </div>
   );

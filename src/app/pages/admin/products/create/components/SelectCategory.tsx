@@ -5,10 +5,9 @@ import { Alert, Button, Cascader, Input } from "antd";
 import { DefaultOptionType } from "antd/es/cascader";
 import { useState } from "react";
 
-import { optionsSelect } from "../data";
 import * as S from "../ProductCreate.styles";
 
-const SelectCategory = ({ value = {}, onChange }: any) => {
+const SelectCategory = ({ value = {}, onChange, optionsSelect = [] }: any) => {
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<string[]>([]);
 

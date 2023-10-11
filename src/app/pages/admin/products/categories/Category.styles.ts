@@ -49,7 +49,7 @@ export const FormFieldRadio = styled(Form.Item).withConfig({
 `;
 
 export const WrapperTable = styled.div`
-  .om-table-selection-column {
+  /* .om-table-selection-column {
     padding-left: 15px !important;
-  }
+  } */
 `;
