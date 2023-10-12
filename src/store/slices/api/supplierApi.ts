@@ -1,7 +1,6 @@
 import { ISupplier } from "@app/types/suppliers.types";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { setCredentials } from "../authSlice";
 import baseQueryCustom from "../baseQueryCustom";
 
 export const supplierApi = createApi({
@@ -26,14 +25,6 @@ export const supplierApi = createApi({
         }
         return [{ type: "Supplier" as const, id: "LIST" }];
       },
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setCredentials(data));
-        } catch (error) {
-          console.log("error... ", error);
-        }
-      },
     }),
     // Lấy chi tiết một supplier
     getSupplierOnly: builder.query<ISupplier, number>({
@@ -52,14 +43,6 @@ export const supplierApi = createApi({
         };
       },
       invalidatesTags: (): any => [{ type: "Supplier", id: "LIST" }],
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setCredentials(data));
-        } catch (error) {
-          console.log("error... ", error);
-        }
-      },
     }),
     // Cập nhật supplier.
     updateSupplier: builder.mutation<ISupplier, Partial<ISupplier>>({
