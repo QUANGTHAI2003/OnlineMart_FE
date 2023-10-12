@@ -47,6 +47,7 @@ const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/product
 const AdminProductCreate = React.lazy(() => import("@app/app/pages/admin/products/create/ProductCreate"));
 const AdminSupplier = React.lazy(() => import("@app/app/pages/admin/products/suppliers/Supplier"));
 const AdminProductInventory = React.lazy(() => import("@app/app/pages/admin/products/inventory/ProductInventory"));
+const AdminProductPrintQRCode = React.lazy(() => import("@app/app/pages/admin/products/print_qr_code/PrintQRCode"));
 
 const RoleManage = React.lazy(() => import("@app/app/pages/admin/manage_seller/role/RoleManage"));
 
@@ -92,6 +93,7 @@ const AppRouter: React.FC = () => {
           <Route path="create" element={<AdminProductCreate />} />
           <Route path="review" element={<AdminProductReview />} />
           <Route path="inventory" element={<AdminProductInventory />} />
+          <Route path="print_qrcode" element={<AdminProductPrintQRCode />} />
         </Route>
         <Route path="categories" element={<AdminCategory />} />
         <Route path="suppliers" element={<AdminSupplier />} />

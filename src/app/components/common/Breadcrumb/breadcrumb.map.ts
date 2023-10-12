@@ -3,6 +3,7 @@ const breadcrumbNameMap: Record<string, string> = {
   "/products/create": "admin_shop.sidebar.product_create",
   "/products/review": "admin_shop.sidebar.product_review",
   "/products/inventory": "admin_shop.sidebar.product_inventory",
+  "/products/print_qrcode": "admin_shop.sidebar.print_qrcode",
   "/info-seller": "admin_shop.sidebar.info_seller",
   "/categories": "admin_shop.sidebar.product_categories",
   "/suppliers": "admin_shop.sidebar.suppliers",

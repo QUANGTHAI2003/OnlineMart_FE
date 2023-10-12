@@ -1,38 +1,35 @@
-import { removeDiacritics } from "@app/utils/helper";
-import { Card, Table, Tooltip, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
+import { formatCurrency, formatNumber, removeDiacritics } from "@app/utils/helper";
+import { Button, Card, Divider, Table, Tooltip, Typography } from "antd";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { InventoryListData } from "../data";
 
-import { StatusProductData } from ".";
+import { StatusProductData, UpdateData } from ".";
 
 const { Text } = Typography;
-
-interface IDataType {
-  id: number;
-  product_media: string;
-  name: string;
-  product_code: string;
-  sellable: number;
-  qty_inventory: number;
-  created_at: string;
-  retail_price: number;
-  import_price: number;
-  wholesale_price: number;
-  barcode: string;
-  supplier: string;
-  status: string;
-}
+// interface IDataType {
+//   id: number;
+//   product_media: string;
+//   name: string;
+//   product_code: string;
+//   sellable: number;
+//   qty_inventory: number;
+//   created_at: string;
+//   retail_price: number;
+//   import_price: number;
+//   wholesale_price: number;
+//   barcode: string;
+//   supplier: string;
+//   status: string;
+// }
 
 const TableComponent = React.memo(({ searchValue, searchType }: any) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
-  const columns: ColumnsType<IDataType> = [
+  const columns: any = [
     {
       title: t("admin_shop.inventory.table.image"),
       dataIndex: "product_media",
@@ -78,6 +75,9 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
         const numericB = parseFloat(b.sellable.replace(/,/g, ""));
         return numericA - numericB;
       },
+      render: (_: any, record: any) => {
+        return <div>{formatNumber(record.sellable)}</div>;
+      },
     },
     {
       title: t("admin_shop.inventory.table.inventory"),
@@ -90,6 +90,9 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
         return numericA - numericB;
       },
       width: 150,
+      render: (_: any, record: any) => {
+        return <div>{formatNumber(record.qty_inventory)}</div>;
+      },
     },
     {
       title: t("admin_shop.inventory.table.created_at"),
@@ -132,6 +135,9 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       key: "retail_price",
       align: "right",
       width: 150,
+      render: (_: any, record: any) => {
+        return <div>{formatCurrency(record.retail_price)}</div>;
+      },
     },
     {
       title: t("admin_shop.inventory.table.import_price"),
@@ -139,6 +145,9 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       key: "import_price",
       align: "right",
       width: 150,
+      render: (_: any, record: any) => {
+        return <div>{formatCurrency(record.import_price)}</div>;
+      },
     },
     {
       title: t("admin_shop.inventory.table.wholesale_price"),
@@ -146,9 +155,12 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       key: "wholesale_price",
       align: "right",
       width: 135,
+      render: (_: any, record: any) => {
+        return <div>{formatCurrency(record.wholesale_price)}</div>;
+      },
     },
     {
-      title: t("admin_shop.inventory.table.barcode"),
+      title: t("admin_shop.inventory.table.qrcode"),
       dataIndex: "barcode",
       key: "barcode",
       width: 130,
@@ -173,11 +185,30 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       align: "center",
       fixed: "right",
       width: 150,
-      render: (_, record: any) => {
+      render: (_: any, record: any) => {
         return <StatusProductData data={record} trans={t} />;
       },
     },
+    {
+      title: t("admin_shop.print_qrcode.site_header.print_qr_code"),
+      dataIndex: "print_qrcode",
+      key: "print_qrcode",
+      align: "center",
+      fixed: "right",
+      width: 120,
+      render: (_: any, record: any) => {
+        return (
+          <Link to={`/admin/shop/products/print_qrcode?product_id=${record.id}`} target="_blank">
+            <Button type="primary" ghost>
+              {t("admin_shop.inventory.table.print_code")}
+            </Button>
+          </Link>
+        );
+      },
+    },
   ];
+
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
@@ -206,18 +237,29 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
     return filterInventory;
   }, [searchType, searchValue]);
 
+  const handleSelectProducts = () => {
+    const selectedProducts = displayedInventory.filter((product: any) => selectedRowKeys.includes(product.id));
+    const selectedProductIds = selectedProducts.map((product: any) => product.id);
+
+    navigate(`/admin/shop/products/print_qrcode?product_id=${selectedProductIds}`);
+  };
+
   return (
     <Card>
-      <div className="mb-4">
+      <div className="mb-4 flex items-center">
         <Text>{`${t("admin_shop.inventory.table.number_of_stock")}:`}</Text>
         <Text strong className="px-2">
           {displayedInventory.length}
         </Text>
-        {hasSelected
-          ? `(${t("admin_shop.manage_seller.table_header.selected")} ${selectedRowKeys.length} ${t(
-              "admin_shop.manage_seller.table_header.items"
-            )})`
-          : ""}
+        <div>
+          {hasSelected
+            ? `(${t("admin_shop.manage_seller.table_header.selected")} ${selectedRowKeys.length} ${t(
+                "admin_shop.manage_seller.table_header.items"
+              )})`
+            : ""}
+        </div>
+        <Divider type="vertical" />
+        {<UpdateData hasSelected={hasSelected} handleSelectProducts={handleSelectProducts} />}
       </div>
       <div>
         <Table

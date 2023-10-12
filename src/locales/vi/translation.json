@@ -499,6 +499,7 @@
       "product_review": "Quản lý đánh giá",
       "management": "Quản lý",
       "product_inventory": "Quản lý kho",
+      "print_qrcode": "In mã QR",
       "product_categories": "Danh mục sản phẩm",
       "suppliers": "Nhà cung cấp",
       "orders": "Đơn hàng",
@@ -755,8 +756,8 @@
         "table": {
           "id_order": "Mã đơn hàng: ",
           "orders": "Đơn hàng: ",
-          "product": "Sản phẩm",
           "order": "Mã đơn hàng/ Ngày đặt hàng",
+          "product": "Sản phẩm",
           "status": "Trạng thái ",
           "confirm": "Hạn xác nhận",
           "quantity": "Số lượng/DT/GTĐH",
@@ -991,7 +992,7 @@
         "name": "Tên sản phẩm",
         "supplier": "Nhãn hiệu",
         "converted_product": "Sản phẩm quy đổi",
-        "print_barcode": "In tem mã",
+        "print_qrcode": "In tem mã",
         "categories": "Danh mục sản phẩm",
         "other_manage": "Quản lý khác",
         "in_process": "Đang giao dịch",
@@ -1020,10 +1021,43 @@
         "retail_price": "Giá bán lẻ",
         "import_price": "Giá nhập",
         "wholesale_price": "Giá bán buôn",
-        "barcode": "Mã vạch",
+        "qrcode": "Mã vạch",
         "supplier": "Nhãn hiệu",
         "status": "Trạng thái",
-        "number_of_stock": "Số sản phẩm trong kho"
+        "number_of_stock": "Số sản phẩm trong kho",
+        "please_select": "Hãy chọn sản phẩm trước",
+        "please_choose": "Hãy chọn sản phẩm muốn thao tác",
+        "select_action": "Chọn thao tác",
+        "print_qrcode": "In mã QR",
+        "check_inventory": "Kiểm tra tồn kho",
+        "apply_tax": "Áp dụng thuế",
+        "authorize_sale": "Cho phép bán",
+        "delete_version": "Xóa phiên bản sản phẩm",
+        "print_code": "In mã"
+      }
+    },
+    "print_qrcode": {
+      "site_header": {
+        "print_qr_code": "In mã QR"
+      },
+      "filter": {
+        "placeholder_input": "Tìm theo tên, mã SKU, hoặc quét mã QR code...",
+        "stock": "Tồn kho:",
+        "sellable": "Có thể bán:"
+      },
+      "table": {
+        "quantity": "Số lượng",
+        "delete": "Xóa"
+      },
+      "setting": {
+        "exit": "Thoát",
+        "export_pdf": "Xuất file PDF",
+        "export_excel": "Xuất file Excel",
+        "setup_template": "Thiết lập mẫu in tem",
+        "note": "Lưu ý:",
+        "note_text_1": "Trong trường hợp mã QR code in ra không đọc được, vui lòng sử dụng mẫu giấy lớn hơn hoặc rút ngắn mã QR code của sản phẩm.",
+        "note_text_2": "Các mã QR code in ra khó đọc bao gồm: QR code có chứa ký tự đặc biệt (@ * ^ , . / ~...) hoặc tiếng việt có dấu hoặc dài quá 15 ký tự. Bạn cần điều chỉnh các mã này trước khi in.",
+        "size_type": "Chọn khổ in và giấy in"
       }
     }
   }

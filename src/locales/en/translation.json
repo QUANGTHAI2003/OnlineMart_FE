@@ -499,6 +499,7 @@
       "product_review": "Review management",
       "management": "Management",
       "product_inventory": "Inventory management",
+      "print_qrcode": "Print QR Code",
       "product_categories": "Category",
       "suppliers": "Supplier",
       "orders": "Orders",
@@ -603,64 +604,6 @@
           "delete": "Delete selected products"
         }
       },
-      "review": {
-        "site_header": {
-          "suggestion": "Does the seller wish to have more product reviews from customers ?",
-          "connector": "Please try to create",
-          "link": "Product review strategy",
-          "review_management": "Review management",
-          "view_details": "View details",
-          "all_tab": "All"
-        },
-        "feedback": {
-          "action": "Action",
-          "comment": "Comment",
-          "close": "Close",
-          "send_a_response": "Send a response",
-          "joined": "Joined",
-          "ago": "days ago",
-          "comment_on": "Comment on",
-          "used_for": "Used for",
-          "days": "days"
-        },
-        "filter": {
-          "include_content": "Include content",
-          "include_media": "Include image / video",
-          "already_replied": "Already replied",
-          "not_yet_replied": "Not yet replied",
-          "filtering": "Filtering",
-          "content_type": "Content type",
-          "clear_all": "Clear all",
-          "apply": "Apply",
-          "seller_reply": "Seller's reply",
-          "status": "Status",
-          "approved": "Approved",
-          "reported": "Reported",
-          "reject": "Reject",
-          "review_date": "Review date"
-        },
-        "table_cpn": {
-          "total_review": "Total reviews",
-          "order_id": "Order ID",
-          "product": "Product",
-          "rating": "Rating",
-          "content": "Content",
-          "reviewer": "Reviewer",
-          "review_date": "Review date",
-          "seller_replies": "Seller's replies",
-          "status": "Status",
-          "action": "Action",
-          "title": "Title",
-          "sku": "SKU"
-        },
-        "rating_text": {
-          "abysmal": "Abysmal",
-          "bad": "Bad",
-          "normal": "Normal",
-          "exellent": "Exellent",
-          "very_good": "Very Good"
-        }
-      },
       "create": {
         "basic_info": "1. Basic Information",
         "product_desc": "2. Product Descriptions",
@@ -747,6 +690,64 @@
             "product_image_required": "Please select product image"
           }
         }
+      },
+      "review": {
+        "site_header": {
+          "suggestion": "Does the seller wish to have more product reviews from customers ?",
+          "connector": "Please try to create",
+          "link": "Product review strategy",
+          "review_management": "Review management",
+          "view_details": "View details",
+          "all_tab": "All"
+        },
+        "feedback": {
+          "action": "Action",
+          "comment": "Comment",
+          "close": "Close",
+          "send_a_response": "Send a response",
+          "joined": "Joined",
+          "ago": "days ago",
+          "comment_on": "Comment on",
+          "used_for": "Used for",
+          "days": "days"
+        },
+        "filter": {
+          "include_content": "Include content",
+          "include_media": "Include image / video",
+          "already_replied": "Already replied",
+          "not_yet_replied": "Not yet replied",
+          "filtering": "Filtering",
+          "content_type": "Content type",
+          "clear_all": "Clear all",
+          "apply": "Apply",
+          "seller_reply": "Seller's reply",
+          "status": "Status",
+          "approved": "Approved",
+          "reported": "Reported",
+          "reject": "Reject",
+          "review_date": "Review date"
+        },
+        "table_cpn": {
+          "total_review": "Total reviews",
+          "order_id": "Order ID",
+          "product": "Product",
+          "rating": "Rating",
+          "content": "Content",
+          "reviewer": "Reviewer",
+          "review_date": "Review date",
+          "seller_replies": "Seller's replies",
+          "status": "Status",
+          "action": "Action",
+          "title": "Title",
+          "sku": "SKU"
+        },
+        "rating_text": {
+          "abysmal": "Abysmal",
+          "bad": "Bad",
+          "normal": "Normal",
+          "exellent": "Exellent",
+          "very_good": "Very Good"
+        }
       }
     },
     "orders": {
@@ -756,9 +757,11 @@
           "id_order": "Order code: ",
           "orders": "Order: ",
           "order": "Order code/Order date",
+          "product": "Product",
           "status": "Status ",
           "confirm": "Confirm deadline",
           "quantity": "Quantity/Rev./Order value",
+          "infor_receiver": "Info Receiver",
           "delivery_by": "Delivered by: ",
           "pick_delivery": "Delivered by: ",
           "shipping_fee": "Shipping fee: ",
@@ -770,6 +773,8 @@
           "price": "Price: ",
           "print": "Print ballots",
           "action": "Actions",
+          "edit": "Edit",
+          "delete": "Delete",
           "selecting": "Selecting: {{count}}"
         },
         "status": {
@@ -925,6 +930,15 @@
         "detail": "Detail"
       }
     },
+    "header": {
+      "notifications": "Notifications",
+      "view_all": "View all",
+      "read_all": "Mark all as read",
+      "profile": "Profile",
+      "change_password": "Change password",
+      "add_another_account": "Add another account",
+      "logout": "Log out"
+    },
     "manage_seller": {
       "role_list_data": {
         "admin": "Admin",
@@ -978,7 +992,7 @@
         "name": "Product name",
         "supplier": "Supplier",
         "converted_product": "Converted product",
-        "print_barcode": "Print barcode label",
+        "print_qrcode": "Print QR label",
         "categories": "Product category",
         "other_manage": "Other management",
         "in_process": "In progress",
@@ -1007,124 +1021,43 @@
         "retail_price": "Retail price",
         "import_price": "Import price",
         "wholesale_price": "Wholesale price",
-        "barcode": "Barcode",
+        "qrcode": "QR Code",
         "supplier": "Supplier",
         "status": "Status",
-        "number_of_stock": "Number of products in stock"
+        "number_of_stock": "Number of products in stock",
+        "please_select": "Please select the product beforehand",
+        "please_choose": "Please choose the product you want to operate on",
+        "select_action": "Select the action",
+        "print_qrcode": "Print the QR code",
+        "check_inventory": "Check inventory",
+        "apply_tax": "Apply tax",
+        "authorize_sale": "Authorize sale",
+        "delete_version": "Delete product version",
+        "print_code": "Print code"
+      }
+    },
+    "print_qrcode": {
+      "site_header": {
+        "print_qr_code": "Print QR Code"
       },
-      "orders": {
-        "list": {
-          "add_order": "Add Order",
-          "table": {
-            "id_order": "Order code: ",
-            "orders": "Order: ",
-            "order": "Order code/Order date",
-            "status": "Status ",
-            "confirm": "Confirm deadline",
-            "quantity": "Quantity/Rev./Order value",
-            "delivery_by": "Delivered by: ",
-            "pick_delivery": "Delivered by: ",
-            "shipping_fee": "Shipping fee: ",
-            "order_label": "Order label ",
-            "qty": "Quantity: ",
-            "payment_method": "Payment Method",
-            "sale_price": "Sale Price",
-            "sub_total": "Sub total",
-            "price": "Price: ",
-            "print": "Print ballots",
-            "action": "Actions",
-            "selecting": "Selecting: {{count}}"
-          },
-          "status": {
-            "all": "All",
-            "awaiting": "Awaiting Confirmation",
-            "processing": "Processing",
-            "shipping": "Processing",
-            "delivered": "Delivered",
-            "canceled": "Canceled"
-          },
-          "filter": {
-            "type": {
-              "id": "Order code",
-              "sku": "SKU",
-              "infor_user": "Customer info"
-            },
-            "print": "In phiếu các sản đơn hàng được chọn",
-            "placeholder": "Enter max: 20 {{placeholder}} separated with ',' ",
-            "not_printed": "Not printed",
-            "need_invoice": "Need invoice required",
-            "order_label": "Order label",
-            "invoice_required": "Invoice required",
-            "invoice_issued": "Invoice issued",
-            "delivery": "Fulfillment Type",
-            "ghtk_delivery": "GHTK delivery",
-            "shop_delivery": "Seller delivery",
-            "om_delivery": "Online Mart delivery",
-            "other_filter": "Other filters",
-            "last_7": "Last 7 days",
-            "today": "Today",
-            "update_selected": "Update selected orders ",
-            "select_at_less": "Please select at least 1 order below",
-            "delete_filter": "Clear",
-            "last_30": "Last 30 days",
-            "all_time": "All time",
-            "custom": "Custom",
-            "order_date": "Order date"
-          }
-        }
+      "filter": {
+        "placeholder_input": "Search by name, SKU code, or scan QR code...",
+        "stock": "Stock:",
+        "sellable": "Sellable:"
       },
-      "inventory": {
-        "site_header": {
-          "inventory_manage": "Inventory management",
-          "product_list": "View product list"
-        },
-        "filter": {
-          "name": "Product name",
-          "supplier": "Supplier",
-          "converted_product": "Converted product",
-          "print_barcode": "Print barcode label",
-          "categories": "Product category",
-          "other_manage": "Other management",
-          "in_process": "In progress",
-          "suspended": "Suspended",
-          "warranty": "Warranty",
-          "yes": "Yes",
-          "no": "No",
-          "warranty_policy": "Warranty policy",
-          "12-month_warranty": "12-month warranty",
-          "24-month_warranty": "24-month warranty",
-          "36-month_warranty": "36-month warranty",
-          "selling": "Selling",
-          "allowing_sales": "Allowing sales",
-          "not_allowing_sales": "Not allowing sales",
-          "classifying": "classifying products",
-          "combo": "Combo",
-          "regular_product": "Regular product",
-          "creation_date": "Creation date"
-        },
-        "table": {
-          "image": "Image",
-          "product": "Product",
-          "sellable": "Sellable",
-          "inventory": "Inventory",
-          "created_at": "Creation date",
-          "retail_price": "Retail price",
-          "import_price": "Import price",
-          "wholesale_price": "Wholesale price",
-          "barcode": "Barcode",
-          "supplier": "Supplier",
-          "status": "Status",
-          "number_of_stock": "Number of products in stock"
-        }
+      "table": {
+        "quantity": "Quantity",
+        "delete": "Delete"
       },
-      "header": {
-        "notifications": "Notifications",
-        "view_all": "View all",
-        "read_all": "Mark all as read",
-        "profile": "Profile",
-        "change_password": "Change password",
-        "add_another_account": "Add another account",
-        "logout": "Log out"
+      "setting": {
+        "exit": "Exit",
+        "export_pdf": "Export to PDF",
+        "export_excel": "Export to Excel",
+        "setup_template": "Set up label printing template",
+        "note": "Note:",
+        "note_text_1": "In case the printed QR code is unreadable, please use a larger paper template or shorten the QR code of the product.",
+        "note_text_2": "Difficult-to-read QR codes include those containing special characters (@ * ^ , . / ~...) or Vietnamese characters with diacritics, or exceeding 15 characters in length. Please adjust these codes before printing.",
+        "size_type": "Select the print size and paper type"
       }
     }
   }

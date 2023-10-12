@@ -28,7 +28,7 @@ const ProductInventory = () => {
     setLoadingSkeleton(true);
     setTimeout(() => {
       setLoadingSkeleton(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   const items: MenuProps["items"] = [
@@ -84,8 +84,8 @@ const ProductInventory = () => {
             <S.ToolBox>
               <Space className="box_item">
                 <PrinterOutlined className="print_icon" />
-                <Link to="/admin/shop/products/print_barcode" className="link">
-                  {t("admin_shop.inventory.filter.print_barcode")}
+                <Link to="/admin/shop/products/print_qrcode" className="link">
+                  {t("admin_shop.inventory.filter.print_qrcode")}
                 </Link>
               </Space>
 
