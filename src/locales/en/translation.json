@@ -508,7 +508,10 @@
       "info_seller": "Seller information",
       "manage_seller": "Seller management",
       "manage_role": "Role management",
-      "manage_permission": "Permission management"
+      "manage_permission": "Permission management",
+      "report": "Report",
+      "profit": "Profit and loss report",
+      "sales": "Sales report"
     },
     "authentication": {
       "signin": {
@@ -1058,6 +1061,40 @@
         "note_text_1": "In case the printed QR code is unreadable, please use a larger paper template or shorten the QR code of the product.",
         "note_text_2": "Difficult-to-read QR codes include those containing special characters (@ * ^ , . / ~...) or Vietnamese characters with diacritics, or exceeding 15 characters in length. Please adjust these codes before printing.",
         "size_type": "Select the print size and paper type"
+      }
+    },
+    "reports": {
+      "sales": {
+        "piechart": {
+          "to_pay": "To pay",
+          "in_progress": "In progress",
+          "to_receive": "To receive",
+          "completed": "Completed",
+          "canceled": "Canceled",
+          "return_refund": "Return refund"
+        },
+        "dualchart": {
+          "store_revenue": "STORE REVENUE",
+          "revenue": "Revenue",
+          "profit" : "Profit",
+          "delivery_info": "DELIVERY INFORMATION"
+        },
+        "common": {
+          "7days": "Over the past 7 days",
+          "1month": "Over the past month",
+          "1quarter": "Over the past quarter",
+          "1year": "Over the past year",
+          "sales_report": "Sales report"
+        },
+        "order_status_data": {
+          "return": "RETURN",
+          "paid": "Paid",
+          "payment": "PAYMENT",
+          "qty_orders": "Quantity of orders",
+          "orders_uppercase": "ORDERS",
+          "orders_lowercase": "orders",
+          "not_options_yet": "No options available yet"
+        }
       }
     }
   }

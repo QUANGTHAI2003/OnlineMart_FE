@@ -5,6 +5,7 @@ import {
   ShoppingCartOutlined,
   UsergroupAddOutlined,
   ControlOutlined,
+  StockOutlined,
 } from "@ant-design/icons";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
 
@@ -100,6 +101,24 @@ export const adminShopRoutes: ISidebarMenu[] = [
         title: "admin_shop.sidebar.manage_permission",
         key: "manage_permission",
         url: "/admin/shop/manage-seller/permission",
+      },
+    ],
+  },
+  {
+    title: "admin_shop.sidebar.report",
+    key: "reports",
+    url: "/admin/shop/reports",
+    icon: <StockOutlined />,
+    children: [
+      {
+        title: "admin_shop.sidebar.profit",
+        key: "profit",
+        url: "/admin/shop/reports/profit",
+      },
+      {
+        title: "admin_shop.sidebar.sales",
+        key: "sales",
+        url: "/admin/shop/reports/sales",
       },
     ],
   },

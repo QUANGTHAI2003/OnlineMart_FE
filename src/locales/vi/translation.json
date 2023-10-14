@@ -508,7 +508,10 @@
       "info_seller": "Thông tin người bán",
       "manage_seller": "Quản lý người bán",
       "manage_role": "Quản lý vai trò",
-      "manage_permission": "Quản lý quyền"
+      "manage_permission": "Quản lý quyền",
+      "report": "Báo cáo",
+      "profit": "Báo cáo lãi lỗ",
+      "sales": "Báo cáo bán hàng"
     },
     "authentication": {
       "signin": {
@@ -1058,6 +1061,40 @@
         "note_text_1": "Trong trường hợp mã QR code in ra không đọc được, vui lòng sử dụng mẫu giấy lớn hơn hoặc rút ngắn mã QR code của sản phẩm.",
         "note_text_2": "Các mã QR code in ra khó đọc bao gồm: QR code có chứa ký tự đặc biệt (@ * ^ , . / ~...) hoặc tiếng việt có dấu hoặc dài quá 15 ký tự. Bạn cần điều chỉnh các mã này trước khi in.",
         "size_type": "Chọn khổ in và giấy in"
+      }
+    },
+    "reports": {
+      "sales": {
+        "piechart": {
+          "to_pay": "Chờ thanh toán",
+          "in_progress": "Đang xử lý",
+          "to_receive": "Đang vận chuyển",
+          "completed": "Đã giao",
+          "canceled": "Đã hủy",
+          "return_refund": "Hoàn tiền"
+        },
+        "dualchart": {
+          "store_revenue": "DOANH THU CỬA HÀNG",
+          "revenue": "Doanh thu",
+          "profit": "Lợi nhuận",
+          "delivery_info": "THÔNG TIN GIAO HÀNG"
+        },
+        "common": {
+          "7days": "Trong vòng 7 ngày qua",
+          "1month": "Trong vòng 1 tháng qua",
+          "1quarter": "Trong vòng 1 quý qua",
+          "1year": "Trong vòng 1 năm qua",
+          "sales_report": "Báo cáo bán hàng"
+        },
+        "order_status_data": {
+          "return": "TRẢ HÀNG",
+          "paid": "Đã thanh toán",
+          "payment": "THANH TOÁN",
+          "qty_orders": "Số đơn hàng",
+          "orders_uppercase": "ĐƠN HÀNG",
+          "orders_lowercase": "đơn",
+          "not_options_yet": "Chưa có tùy chọn nào"
+        }
       }
     }
   }
