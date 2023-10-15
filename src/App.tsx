@@ -14,21 +14,10 @@ const App = () => {
     colorPrimary: "#0a68ff",
   };
 
-  // const a = 0;
-  // notificationController.error({
-  //   message: "Thành công",
-  //   description: "Đăng nhập thành công",
-  // });
-
-  // const metaTitle = document.querySelector('meta[name="title"]');
-  // console.log(metaTitle);
-  // const metaKeywords = document.querySelector('meta[name="keywords"]');
-  // console.log(metaKeywords);
-  // const metaDescription = document.querySelector('meta[name="description"]');
-  // console.log(metaDescription);
+  const helmetContext = {};
 
   return (
-    <HelmetProvider>
+    <HelmetProvider context={helmetContext}>
       <ConfigProvider
         prefixCls="om"
         iconPrefixCls="om"

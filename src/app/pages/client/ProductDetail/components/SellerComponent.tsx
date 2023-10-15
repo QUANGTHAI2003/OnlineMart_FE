@@ -1,27 +1,25 @@
 import { RatingStar } from "@app/app/assets/icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import * as S from "../ProductDetail.styles";
 
 import { SellerSkeleton } from ".";
 
-const SellerComponent = () => {
-  const [isFollow, setIsFollow] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+interface ISellerProps {
+  sellerData: any;
+  isLoading: boolean;
+}
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+const SellerComponent: React.FC<ISellerProps> = ({ sellerData, isLoading }) => {
+  const [isFollow, setIsFollow] = useState<boolean>(false);
+
   const { t } = useTranslation();
 
   const handleFollowSeller = () => {
     setIsFollow(!isFollow);
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  });
 
   return (
     <S.SellerStyle>
@@ -31,33 +29,24 @@ const SellerComponent = () => {
         <div className="current-seller">
           <div className="seller-widget">
             <div className="seller-info">
-              <a
-                className="flex items-start"
-                href="/cua-hang/happy-phone?source_screen=product_detail&amp;source_engine=organic"
-              >
-                <img
-                  className="logo"
-                  src="https://vcdn.tikicdn.com/ts/seller/a6/a2/9f/2916b4b9c1c9adcfc55989c82a19f80a.png"
-                  alt="HAPPY PHONE"
-                  srcSet="https://vcdn.tikicdn.com/cache/w100/ts/seller/a6/a2/9f/2916b4b9c1c9adcfc55989c82a19f80a.png 1x, https://vcdn.tikicdn.com/cache/w100/ts/seller/a6/a2/9f/2916b4b9c1c9adcfc55989c82a19f80a.png 2x"
-                />
+              <Link className="flex items-start" to={`/cua-hang/${sellerData?.id}`}>
+                <img className="logo" src={sellerData?.avatar} alt={sellerData?.name} />
                 <div className="ml-3">
                   <span className="seller-name">
-                    <span>HAPPY PHONE</span>
+                    <span>{sellerData?.name}</span>
                     <img
                       className="badge-img"
                       src="https://salt.tikicdn.com/ts/upload/e8/6a/e3/7f998ef1eb5ab0536aac53f02a698c8a.png"
                       alt="seller-badge"
-                      srcSet="https://salt.tikicdn.com/cache/w100/ts/upload/e8/6a/e3/7f998ef1eb5ab0536aac53f02a698c8a.png 1x, https://salt.tikicdn.com/cache/w100/ts/upload/e8/6a/e3/7f998ef1eb5ab0536aac53f02a698c8a.png 2x"
                     />
                   </span>
                 </div>
-              </a>
+              </Link>
             </div>
             <div className="seller-detail">
               <div className="item review">
                 <div className="title">
-                  <span>4.8 / 5</span>
+                  <span>{`${sellerData?.rating} / 5`}</span>
                   <RatingStar />
                 </div>
                 <div className="sub-title">2.6k+</div>

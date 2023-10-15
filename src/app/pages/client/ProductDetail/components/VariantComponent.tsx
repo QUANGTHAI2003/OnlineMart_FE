@@ -1,86 +1,98 @@
 import { Radio } from "antd";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-import { product_detail } from "../data";
 import * as S from "../ProductDetail.styles";
 
 import { VariantSkeleton } from ".";
 
 interface IVariantOption {
-  code: string;
+  id: number;
   name: string;
-  show_preview_image: boolean;
   values: IValue[];
 }
 
 interface IValue {
+  id: any;
   label: string;
   image?: string;
+  is_image: boolean;
 }
 
-const ConfigureOptionData: IVariantOption[] = product_detail.configurable_options;
+interface IVariantComponentProps {
+  variant: IVariantOption[];
+  variantThumbnail: (isHaveImage: any, image: any) => void;
+  isFetching: boolean;
+}
 
-const VariantComponent = ({ variantThumbnail }: any) => {
-  const [selectedVariants, setSelectedVariants] = useState<{ [code: string]: string }>({});
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+const VariantComponent: React.FC<IVariantComponentProps> = ({ variant, variantThumbnail, isFetching }) => {
+  const location = useLocation();
+
+  const [selectedVariants, setSelectedVariants] = useState<{ [id: number]: string }>({});
 
   useEffect(() => {
-    const defaultSelectedVariants = ConfigureOptionData.reduce((acc, { code, values }) => {
-      const defaultValue = values.length > 0 ? values[0].label : "";
-      return { ...acc, [code]: defaultValue };
+    const spids = new URLSearchParams(location.search).get("spid");
+
+    if (spids) {
+      const selectedIds = spids.split(",");
+
+      const defaultSelectedVariants = variant?.reduce((acc, { id, values }) => {
+        const defaultValue = values.find((value) => selectedIds.includes(value.id))?.label;
+        return { ...acc, [id]: defaultValue };
+      }, {});
+
+      setSelectedVariants(defaultSelectedVariants);
+    }
+
+    const defaultSelectedVariants = variant?.reduce((acc, { id, values }) => {
+      const defaultValue = values.length > 0 ? values[0]?.label : "";
+      return { ...acc, [id]: defaultValue };
     }, {});
 
     setSelectedVariants(defaultSelectedVariants);
-  }, []);
+  }, [location.search, variant]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  });
-
-  const handleShowCurrentVariant = (optionCode: string, value: string) => {
+  const handleShowCurrentVariant = (optionCode: number, value: string) => {
     setSelectedVariants((prevSelectedVariants) => ({
       ...prevSelectedVariants,
       [optionCode]: value,
     }));
   };
 
-  const handleGetImageVariant = (isHaveImage: any, image: any) => {
+  // BÍ
+  const handleSyncVariantValue = (isHaveImage: boolean, image?: string): void => {
     variantThumbnail(isHaveImage, image);
   };
 
   return (
     <S.VariantStyle>
-      {isLoading ? (
+      {isFetching ? (
         <VariantSkeleton />
       ) : (
         <>
-          {ConfigureOptionData.map(({ code, name, values, show_preview_image }: IVariantOption) => {
-            const selectedVariant = selectedVariants[code] || "";
-            const defaultLabel = values.length > 0 ? values[0].label : "";
+          {variant.map(({ id: variantId, name, values }: IVariantOption) => {
+            const selectedVariant = selectedVariants && selectedVariants[variantId] ? selectedVariants[variantId] : 0;
+            const spids = new URLSearchParams(location.search).get("spid");
+            const defaultLabel =
+              (spids?.length && values.find((value) => spids?.includes(value.id))?.label) || values[0].label;
+
             return (
-              <div key={code}>
+              <div key={variantId}>
                 <p className="option-text">
                   {name}
                   :&nbsp;
                   <span>{selectedVariant}</span>
                 </p>
                 <Radio.Group
+                  name={name}
                   defaultValue={defaultLabel}
                   className="flex items-center flex-wrap gap-3"
-                  onChange={(e) => handleShowCurrentVariant(code, e.target.value)}
+                  onChange={(e) => handleShowCurrentVariant(variantId, e.target?.value)}
                 >
-                  {values.map(({ label, image }: IValue) => {
-                    const checked = selectedVariant === label;
+                  {values.map(({ id, label, image, is_image }: IValue) => {
                     return (
-                      <Radio.Button
-                        key={label}
-                        value={label}
-                        checked={checked}
-                        onClick={() => handleGetImageVariant(show_preview_image, image)}
-                      >
-                        {show_preview_image && (
+                      <Radio.Button key={id} value={label} onClick={() => handleSyncVariantValue(is_image, image)}>
+                        {is_image && (
                           <div className="option-figure">
                             <img src={image} alt="" />
                           </div>

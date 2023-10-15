@@ -22,7 +22,7 @@ export const DescriptionStyles = styled.div`
 
     .toggle-content-view:not(.expanded) {
       overflow: hidden;
-      height: 500px;
+      max-height: 500px;
     }
 
     .less #gradient {

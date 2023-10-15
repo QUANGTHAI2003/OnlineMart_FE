@@ -8,7 +8,7 @@ const PriceComponent = ({ isHotDeal }: any) => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 0);
   });
 
   return isLoading ? <PriceSkeleton /> : isHotDeal ? <SalePrice /> : <NormalPrice />;

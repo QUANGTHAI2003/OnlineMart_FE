@@ -1,5 +1,5 @@
 import { getLang } from "@app/utils/localstorage";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 interface IMeta {
   title: string;

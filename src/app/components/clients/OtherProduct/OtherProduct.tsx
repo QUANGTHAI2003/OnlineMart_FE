@@ -1,37 +1,32 @@
 import ProductCard from "@app/app/components/clients/ProductCard/ProductCard";
 import ProductCardSkeleton from "@app/app/components/clients/ProductCard/ProductCardSkeleton";
 import { Row } from "antd";
-import { useEffect, useState } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { v4 as uuidv4 } from "uuid";
 
 import * as S from "./OtherProduct.styles";
 
 interface IOtherProductProps {
   title?: string;
   data: IProductData[];
+  isLoading: boolean;
 }
 
-interface IProductData {
+export interface IProductData {
   id: number;
   name: string;
-  price: number;
+  slug: string;
+  current_price: number;
   discount_rate: number;
-  quantity_sold: number;
-  rating_average: number;
+  sold_count: number;
+  rating: number;
   thumbnail_url: string;
+  type: string;
+  variant_name: string[];
 }
 
-const OtherProduct = ({ title = "Sản phẩm tương tự", data }: IOtherProductProps) => {
-  const [loading, setLoading] = useState<boolean>(true);
+const OtherProduct = ({ title = "Sản phẩm tương tự", data, isLoading }: IOtherProductProps) => {
   const number = 6;
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-  });
 
   return (
     <S.OtherProductStyle>
@@ -63,20 +58,23 @@ const OtherProduct = ({ title = "Sản phẩm tương tự", data }: IOtherProdu
           },
         }}
       >
-        {loading ? (
+        {isLoading ? (
           <ProductCardSkeleton count={number} />
         ) : (
           <Row>
-            {data.map((item: any) => (
-              <SwiperSlide key={uuidv4()}>
+            {data.map((item: IProductData) => (
+              <SwiperSlide key={item.id}>
                 <ProductCard
                   id={item.id}
                   name={item.name}
-                  price={item.price}
+                  slug={item.slug}
+                  price={item.current_price}
                   discountRate={item.discount_rate}
-                  quantitySold={item.quantity_sold}
-                  ratingAverage={item.rating_average}
+                  quantitySold={item.sold_count}
+                  ratingAverage={item.rating}
                   thumbnailUrl={item.thumbnail_url}
+                  type={item.type}
+                  variant_name={item?.variant_name}
                 />
               </SwiperSlide>
             ))}

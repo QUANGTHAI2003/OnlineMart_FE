@@ -29,7 +29,7 @@ export interface IProductCategoryData {
   long_description: string;
   status: "0" | "1";
   type: "configurable" | "simple";
-  variant_name: string | null;
+  variant_name: string[] | [];
   shop_id: number;
   supplier_id: number;
   created_at: string;

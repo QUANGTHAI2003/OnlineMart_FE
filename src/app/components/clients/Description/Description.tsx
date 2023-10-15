@@ -16,10 +16,10 @@ const Description = ({
   title = "user.product_detail.description",
   scrollToBottom = false,
 }: IDescriptionProps) => {
+  const [lower, setLower] = useState<boolean>(true);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const contentRef = useRef<HTMLDivElement | null>(null);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
 
   const newDesc = description + '<div id="gradient"></div>';
@@ -33,6 +33,13 @@ const Description = ({
       contentRef.current?.classList.remove("expanded");
     }
   };
+
+  useEffect(() => {
+    if ((contentRef?.current?.clientHeight as number) < 500) {
+      setIsExpanded(true);
+      setLower(false);
+    }
+  }, []);
 
   useEffect(() => {
     const gradient = document.getElementById("gradient");
@@ -49,7 +56,7 @@ const Description = ({
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 1000);
   });
 
   return (
@@ -66,9 +73,11 @@ const Description = ({
                 ref={contentRef}
                 dangerouslySetInnerHTML={{ __html: newDesc }}
               ></div>
-              <Button className="btn-more" onClick={toggleDescription}>
-                {`${isExpanded ? "Thu gọn" : "Xem thêm"}`}
-              </Button>
+              {lower && (
+                <Button className="btn-more" onClick={toggleDescription}>
+                  {`${isExpanded ? "Thu gọn" : "Xem thêm"}`}
+                </Button>
+              )}
             </div>
           </div>
         </div>

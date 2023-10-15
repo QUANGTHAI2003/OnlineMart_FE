@@ -269,12 +269,14 @@ const ProductCategory = () => {
                     <ProductCard
                       id={item.id}
                       name={item.name}
+                      slug={item.slug}
                       price={item.current_price}
                       discountRate={item.discount_rate}
                       quantitySold={item.sold_count}
                       ratingAverage={item.rating}
                       thumbnailUrl={item.thumbnail_url}
                       type={item.type}
+                      variant_name={item?.variant_name}
                     />
                   </Col>
                 );

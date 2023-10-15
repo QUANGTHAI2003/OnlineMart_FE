@@ -263,10 +263,11 @@ export const VariantStyle = styled.div`
       font-weight: 500;
     }
   }
+
   .option-figure {
-    width: 60px;
-    height: 60px;
-    flex-shrink: 0;
+    margin: 2px 0;
+    width: 38px;
+    height: 38px;
 
     > img {
       width: 100%;
@@ -835,7 +836,7 @@ export const ProductDetailInfoStyle = styled.section`
 
       .toggle-content-view:not(.expanded) {
         overflow: hidden;
-        height: 500px;
+        max-height: 500px;
       }
 
       .less #gradient {

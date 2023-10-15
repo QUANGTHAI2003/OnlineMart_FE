@@ -4,8 +4,9 @@ import dayjs from "dayjs";
 import { getLang } from "./localstorage";
 import { notificationController } from "./notification";
 
-export const formatCurrency = (price: number, locale = "vi-VN", currency = "VND"): string => {
-  return price.toLocaleString(locale, {
+export const formatCurrency = (price?: number, locale = "vi-VN", currency = "VND"): string => {
+  const formattedPrice = price ?? 0;
+  return formattedPrice.toLocaleString(locale, {
     style: "currency",
     currency,
   });
@@ -30,6 +31,10 @@ export const formatDate = (dateString: string) => {
   const formatString = locale === "vi" ? "DD-MM-YYYY" : "YYYY-MM-DD";
   const formattedDate = dayjs(dayjs(dateString).format(formatString), formatString);
   return formattedDate;
+};
+
+export const formatPercent = (value?: number) => {
+  return `-${value}%`;
 };
 
 export const formatTimeAgo = (timestamp: number) => {

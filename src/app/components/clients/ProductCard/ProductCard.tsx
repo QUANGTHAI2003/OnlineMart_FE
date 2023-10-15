@@ -1,31 +1,36 @@
 import OfficialIcon from "@app/app/assets/images/official.png";
-import { formatCurrency, formatVNCurrency } from "@app/utils/helper";
+import { formatCurrency, formatPercent, formatVNCurrency } from "@app/utils/helper";
 import { Rate } from "antd";
 import { useLayoutEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import * as S from "./ProductCard.styles";
 
 interface IProductCardItem {
   id: number;
   name: string;
+  slug?: string;
   price: number;
   discountRate: number;
   quantitySold: number;
   ratingAverage: number;
   thumbnailUrl: string;
   type?: string;
+  variant_name?: string[];
 }
 
 const ProductCard: React.FC<IProductCardItem> = ({
   id,
   name,
+  slug,
   price,
   discountRate,
   quantitySold,
   ratingAverage,
   thumbnailUrl,
   type,
+  variant_name,
 }) => {
   const { t } = useTranslation();
   const productItemRef = useRef<HTMLDivElement>(null);
@@ -46,7 +51,7 @@ const ProductCard: React.FC<IProductCardItem> = ({
 
   return (
     <S.ProductItem ref={productItemRef}>
-      <a href={`/${id}`} className="product-item">
+      <Link to={`/product/${slug}/${id}`} className="product-item">
         <span className="flex flex-col w-full">
           <S.Thumbnail>
             <div className="w-full h-full absolute top-0 left-0">
@@ -81,16 +86,20 @@ const ProductCard: React.FC<IProductCardItem> = ({
                   <div className="price-discount__price">{formatCurrency(price)}</div>
                   {discountRate == 0 || (
                     <div className="price-discount__discount">
-                      <span>{`${discountRate} %`}</span>
+                      <span>{formatPercent(discountRate)}</span>
                     </div>
                   )}
                 </div>
               </div>
               {type === "configurable" && (
                 <div className="have-variant">
-                  <div className="variant-item">
-                    <div className="variant-item-text">Nhiều màu</div>
-                  </div>
+                  {variant_name?.map((variant, index) => {
+                    return (
+                      <div key={index} className="variant-item">
+                        <div className="variant-item-text">{`Nhiều ${variant}`}</div>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -101,7 +110,7 @@ const ProductCard: React.FC<IProductCardItem> = ({
             </S.DeliveryInfo>
           </S.Info>
         </span>
-      </a>
+      </Link>
     </S.ProductItem>
   );
 };

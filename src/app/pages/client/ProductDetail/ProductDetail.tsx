@@ -1,13 +1,15 @@
 import ProductImageGallery from "@app/app/components/clients/ImageGallery/ProductImageGallery";
 import ModalSelect from "@app/app/components/clients/SelectAddress/ModalSelect";
+import { useGetProductDetailQuery } from "@app/store/slices/api/user/productApi";
+import { setPrice } from "@app/store/slices/redux/productDetailSlice";
+import { useAppDispatch } from "@app/store/store";
 import { formatCurrency } from "@app/utils/helper";
 import { Rate } from "antd";
 import React, { useEffect, useState } from "react";
-
+import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
-
-import { useTranslation } from "react-i18next";
 
 import {
   AddToCartComponent,
@@ -25,14 +27,44 @@ import * as S from "./ProductDetail.styles";
 
 const ProductDetail = () => {
   const [variantThumbnail, setVariantThumbnail] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const nagigate = useNavigate();
 
   const { t } = useTranslation();
+  const { id } = useParams();
 
-  const productGallery = product_detail.images;
+  useEffect(() => {
+    window.scrollTo(120, 120);
+  }, [location.pathname]);
+
+  const { data: productDetail, isFetching, error } = useGetProductDetailQuery(parseInt(id as string));
+
+  const productGallery = productDetail?.gallery;
   const productQuantity = product_detail.stock_item.qty;
 
-  const handleScrollToTReview = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const errorStatus = (error as any)?.status;
+
+  useEffect(() => {
+    if (errorStatus === 404) {
+      nagigate("/404");
+    }
+  }, [errorStatus, location.pathname, nagigate]);
+
+  useEffect(() => {
+    if (productDetail) {
+      const price = {
+        current_price: productDetail?.current_price,
+        isSale: productDetail?.is_sale,
+        regular_price: productDetail?.regular_price,
+        sale_price: productDetail?.sale_price,
+        discount_rate: productDetail?.discount_rate,
+      };
+      dispatch(setPrice(price));
+    }
+  }, [productDetail, dispatch]);
+
+  const handleScrollToTReview = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     const targetElement = document.getElementById("customer-reviews");
     if (targetElement) {
@@ -40,17 +72,13 @@ const ProductDetail = () => {
     }
   };
 
-  const handleGetVariantImage = (isHaveImage: any, image: any) => {
+  const handleGetVariantImage = (isHaveImage: boolean, image: string) => {
     if (isHaveImage) {
       setVariantThumbnail(image);
+    } else {
+      setVariantThumbnail(productDetail?.thumbnail_url as string);
     }
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  });
 
   return (
     <S.DetailPageStyle>
@@ -58,14 +86,15 @@ const ProductDetail = () => {
         <S.ProductDetailStyle>
           <section className="main-thumbnail w-[450px]">
             <ProductImageGallery
+              isLoading={isFetching}
               galleryData={productGallery}
-              thumbnail={variantThumbnail || product_detail.thumbnail_url}
+              thumbnail={variantThumbnail || productDetail?.thumbnail_url}
             />
           </section>
           <div className="seperate"></div>
           <section className="product-content">
             <S.HeaderStyle>
-              {isLoading ? (
+              {isFetching ? (
                 <ProductNameSkeleton />
               ) : (
                 <>
@@ -74,26 +103,26 @@ const ProductDetail = () => {
                       <h6>
                         {t("user.product_detail.brand")}
                         :&nbsp;
-                        <a href="/thuong-hieu/anta.html">{product_detail.brand.name}</a>
+                        <a href="/thuong-hieu/anta.html">{productDetail?.supplier_name}</a>
                       </h6>
                     </span>
                   </div>
                   <div className="title">
-                    <h1>{product_detail.name}</h1>
+                    <h1>{productDetail?.name}</h1>
                   </div>
                   <div className="below-title">
                     <div className="flex flex-wrap">
                       <div className="review flex items-center">
-                        <Rate disabled allowHalf defaultValue={product_detail.rating_average} className="text-sm" />
+                        <Rate disabled allowHalf defaultValue={productDetail?.rating} className="text-sm" />
                         <div className="flex items-center">
                           <button className="number" onClick={handleScrollToTReview}>
-                            {t("user.product_detail.view_review", { count: product_detail.review_count })}
+                            {t("user.product_detail.view_review", { count: 3 })}
                           </button>
                           <div className="below-title-seperate"></div>
                         </div>
                       </div>
                       <div className="quantity-sold">
-                        {t("user.product_detail.sold", { count: product_detail.quantity_sold })}
+                        {t("user.product_detail.sold", { count: productDetail?.sold_count })}
                       </div>
                     </div>
                   </div>
@@ -103,10 +132,14 @@ const ProductDetail = () => {
             <div className="body">
               <S.ProductInfoStyle>
                 <PriceComponent isHotDeal={product_detail?.deal_specs} />
-                <VariantComponent variantThumbnail={handleGetVariantImage} />
+                <VariantComponent
+                  isFetching={isFetching}
+                  variant={(productDetail?.variants || []) as any}
+                  variantThumbnail={handleGetVariantImage}
+                />
                 <S.DeliveryStyle>
                   <ModalSelect />
-                  {isLoading ? (
+                  {isFetching ? (
                     <DeliverySkeleton />
                   ) : (
                     <>
@@ -156,14 +189,13 @@ const ProductDetail = () => {
                 </S.DeliveryStyle>
                 <AddToCartComponent quantity={productQuantity} />
               </S.ProductInfoStyle>
-              <SellerComponent />
+              <SellerComponent sellerData={productDetail?.shop} isLoading={isFetching} />
             </div>
           </section>
         </S.ProductDetailStyle>
         <ProductRelated />
-        <ProductDetailInfo description={product_detail.description} />
+        <ProductDetailInfo description={productDetail?.long_description} />
         <CustomerReview />
-        <section id="test"></section>
       </section>
     </S.DetailPageStyle>
   );
