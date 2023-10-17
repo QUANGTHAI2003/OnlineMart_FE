@@ -1,52 +1,84 @@
-import { Button, Form, Input, Select } from "antd";
-import { useEffect } from "react";
+import { useLoginMutation, useRegisterMutation } from "@app/store/slices/api/authApi";
+import { setCredentials } from "@app/store/slices/authSlice";
+import { useAppDispatch } from "@app/store/store";
+import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { Button, Form, Input } from "antd";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import * as S from "./SignupAdmin.styles";
 
-const DataIndustry = [
-  {
-    id: 1,
-    value: "Bách hóa Online",
-    label: "Bách hóa Online",
-  },
-  {
-    id: 2,
-    value: "Balo và Vali",
-    label: "Balo và Vali",
-  },
-  {
-    id: 3,
-    value: "Điện gia dụng",
-    label: "Điện gia dụng",
-  },
-  {
-    id: 4,
-    value: "Điện thoại - Máy tính bảng",
-    label: "Điện thoại - Máy tính bảng",
-  },
-  {
-    id: 5,
-    value: "Đồ chơi",
-    label: "Đồ chơi",
-  },
-  {
-    id: 6,
-    value: "Đồng hồ và Trang sức",
-    label: "Đồng hồ và Trang sức",
-  },
-  {
-    id: 7,
-    value: "Thời trang",
-    label: "Thời trang",
-  },
-];
+type FormValues = {
+  full_name: string;
+  email: string;
+  password: string;
+  confirm_password?: string;
+  rememberMe: boolean;
+  phone: string;
+};
+
+type ErrorMessage = {
+  [key: number]: string;
+};
+
 const SignupAdmin = () => {
   const { t } = useTranslation();
-  useEffect(() => {
-    console.log("render");
-  }, []);
+  const navigate = useNavigate();
+
+  const [register, registerResult] = useRegisterMutation();
+  const [login, { isLoading }] = useLoginMutation();
+
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (data: FormValues) => {
+    const full_name = data.full_name;
+    const email = data.email;
+    const password = data.password;
+    const confirm_password = data.confirm_password;
+    const phone = data.phone;
+
+    const values = {
+      full_name,
+      email,
+      password,
+      confirm_password,
+      phone,
+      type: "admin",
+    };
+
+    try {
+      await register(values).unwrap();
+      const userData = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...userData, email }));
+
+      notifySuccess("Successfully", "Register successfully");
+
+      isLoading || navigate("/admin/shop");
+    } catch (err: any) {
+      const status = err.status || 500;
+      const errorMessages: ErrorMessage = {
+        400: "Bad Request",
+        401: "Unauthorized",
+        500: "Internal Server Error",
+      };
+
+      const errorMessage = errorMessages[status];
+
+      notifyError("Register failed", errorMessage);
+    }
+  };
+
+  const errorForm: any = useMemo(() => {
+    const errorResult = registerResult.error;
+
+    if (isEntityError(errorResult)) {
+      return errorResult.data.errors;
+    }
+
+    return null;
+  }, [registerResult.error]);
+
   const validateMessages = {
     required: "${label} " + t("admin_shop.authentication.signup.err_null"),
     pattern: {
@@ -74,15 +106,9 @@ const SignupAdmin = () => {
           layout="vertical"
           className="md:text-sm sm:text-xs"
           autoComplete="off"
-          onFinish={(values) => {
-            console.log({ values });
-          }}
-          onFinishFailed={(error) => {
-            console.log({ error });
-          }}
+          onFinish={handleSubmit}
           validateMessages={validateMessages}
         >
-          {/* Email */}
           <Form.Item
             name="email"
             hasFeedback
@@ -100,10 +126,9 @@ const SignupAdmin = () => {
           >
             <Input placeholder={t("admin_shop.authentication.signup.p_email")} />
           </Form.Item>
-          {/* Họ và tên */}
           <Form.Item
             hasFeedback
-            name="fullname"
+            name="full_name"
             className="mb-5"
             label={t("admin_shop.authentication.signup.label_fullname")}
             rules={[
@@ -112,10 +137,11 @@ const SignupAdmin = () => {
               },
               { min: 6 },
             ]}
+            validateStatus={errorForm?.full_name && "error"}
+            help={errorForm?.full_name && errorForm?.full_name[0]}
           >
             <Input placeholder={t("admin_shop.authentication.signup.p_fullname")} />
           </Form.Item>
-          {/* SĐT */}
           <Form.Item
             hasFeedback
             name="phone"
@@ -129,23 +155,10 @@ const SignupAdmin = () => {
                 pattern: /(0[3|5|7|8|9])+([0-9]{8})\b/g,
               },
             ]}
+            validateStatus={errorForm?.phone && "error"}
+            help={errorForm?.phone && errorForm?.phone[0]}
           >
             <Input placeholder={t("admin_shop.authentication.signup.p_phone")} />
-          </Form.Item>
-          {/* Ngành hàng */}
-          <Form.Item
-            name="industry"
-            hasFeedback
-            className="mb-5"
-            tooltip={t("admin_shop.authentication.signup.tooltip_industry")}
-            label={t("admin_shop.authentication.signup.label_industry")}
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Select defaultValue="" options={DataIndustry} />
           </Form.Item>
           {/* Mật khẩu */}
           <Form.Item
@@ -159,12 +172,14 @@ const SignupAdmin = () => {
               },
               { min: 6 },
             ]}
+            validateStatus={errorForm?.password && "error"}
+            help={errorForm?.password && errorForm?.password[0]}
           >
             <Input.Password placeholder={t("admin_shop.authentication.signup.p_password")} />
           </Form.Item>
           {/* Nhập lại */}
           <Form.Item
-            name="repass"
+            name="confirm_password"
             hasFeedback
             className="mb-5"
             dependencies={["password"]}
@@ -182,6 +197,8 @@ const SignupAdmin = () => {
                 },
               }),
             ]}
+            validateStatus={errorForm?.confirm_password && "error"}
+            help={errorForm?.confirm_password && errorForm?.confirm_password[0]}
           >
             <Input.Password />
           </Form.Item>

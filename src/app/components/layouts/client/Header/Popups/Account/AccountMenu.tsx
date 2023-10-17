@@ -1,5 +1,5 @@
 import { AvatarImage } from "@app/app/components/Images";
-import { useLogoutUserMutation } from "@app/store/slices/api/authApi";
+import { useLogoutMutation } from "@app/store/slices/api/authApi";
 import { logOut } from "@app/store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@app/store/store";
 import { notifyError, notifySuccess } from "@app/utils/helper";
@@ -20,11 +20,11 @@ const AccountMenu: React.FC = () => {
   const user = useAppSelector((state) => state.userState.user);
   const dispatch = useAppDispatch();
 
-  const [logoutUser] = useLogoutUserMutation();
+  const [logout] = useLogoutMutation();
 
   const handleLogout = async () => {
     try {
-      await logoutUser();
+      await logout();
       dispatch(logOut());
 
       notifySuccess("Successfully", "Logout successfully");

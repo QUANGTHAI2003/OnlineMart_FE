@@ -60,15 +60,15 @@ const AppRouter: React.FC = () => {
     </RequireAuth>
   );
 
-  const protectedClientLayout = (
-    <RequireAuth type="client">
-      <UserMainLayout />
-    </RequireAuth>
-  );
+  // const protectedClientLayout = (
+  //   <RequireAuth type="client">
+  //     <UserMainLayout />
+  //   </RequireAuth>
+  // );
 
   return (
     <Routes>
-      <Route path="/" element={protectedClientLayout}>
+      <Route path="/" element={<UserMainLayout />}>
         <Route index element={<Home />} />
         <Route path="cua-hang" element={<StoreIndex />}></Route>
         <Route path="category/:slug/:id" element={<ProductCategory />} />

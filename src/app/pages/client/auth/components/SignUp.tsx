@@ -1,8 +1,7 @@
-import { useLoginUserMutation, useRegisterUserMutation } from "@app/store/slices/api/authApi";
+import { useLoginMutation, useRegisterMutation } from "@app/store/slices/api/authApi";
 import { setCredentials } from "@app/store/slices/authSlice";
 import { useAppDispatch } from "@app/store/store";
-import { isEntityError, notifyError } from "@app/utils/helper";
-import { notificationController } from "@app/utils/notification";
+import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,8 +25,8 @@ export default function SignUp() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [registerUser, registerResult] = useRegisterUserMutation();
-  const [loginUser, { isLoading }] = useLoginUserMutation();
+  const [register, registerResult] = useRegisterMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 
@@ -38,14 +37,11 @@ export default function SignUp() {
     const confirm_password = data.confirm;
 
     try {
-      await registerUser({ full_name, email, password, confirm_password }).unwrap();
-      const userData = await loginUser({ email, password }).unwrap();
+      await register({ full_name, email, password, confirm_password }).unwrap();
+      const userData = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...userData, email }));
 
-      notificationController.success({
-        message: "Successfully",
-        description: "Register successfully",
-      });
+      notifySuccess("Successfully", "Register successfully");
 
       isLoading || navigate("/");
     } catch (err: any) {
@@ -76,7 +72,7 @@ export default function SignUp() {
     <S.SignUpForm className="mt-4">
       <Form onFinish={handleSubmit} autoComplete="off">
         <Form.Item
-          name="fullname"
+          name="full_name"
           hasFeedback
           rules={[
             {

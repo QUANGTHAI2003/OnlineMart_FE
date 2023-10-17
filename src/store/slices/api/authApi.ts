@@ -9,9 +9,8 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: baseQueryCustom,
   endpoints: (builder) => ({
-    registerUser: builder.mutation<IUser, any>({
+    register: builder.mutation<IUser, any>({
       query(data) {
-        console.log({ data });
         return {
           url: "auth/register",
           method: "POST",
@@ -28,7 +27,7 @@ export const authApi = createApi({
         }
       },
     }),
-    loginUser: builder.mutation<IUser, any>({
+    login: builder.mutation<IUser, any>({
       query(data) {
         return {
           url: "auth/login",
@@ -46,7 +45,7 @@ export const authApi = createApi({
         }
       },
     }),
-    logoutUser: builder.mutation<void, void>({
+    logout: builder.mutation<void, void>({
       query() {
         return {
           url: "auth/logout",
@@ -58,4 +57,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation, useLogoutUserMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApi;

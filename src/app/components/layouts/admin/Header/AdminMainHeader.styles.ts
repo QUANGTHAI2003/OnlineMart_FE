@@ -83,12 +83,8 @@ export const AccountUl = styled.ul`
   .li {
     padding: 8px 16px;
 
-    a {
-      color: rgba(0, 0, 0, 0.85);
-
-      .icon {
-        margin-right: 8px;
-      }
+    .icon {
+      margin-right: 8px;
     }
   }
   .li:hover {

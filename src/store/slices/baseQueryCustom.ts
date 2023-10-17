@@ -9,6 +9,13 @@ const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrlApi,
+  // prepareHeaders: (headers) => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     headers.set("Authorization", `Bearer ${token}`);
+  //   }
+  //   return headers;
+  // },
 });
 
 const baseQueryCustom: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
@@ -50,6 +57,17 @@ const baseQueryCustom: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryEr
       // wait until the mutex is available without locking it
       await mutex.waitForUnlock();
       result = await baseQuery(args, api, extraOptions);
+    }
+  }
+
+  if (result?.error?.status === 401) {
+    const isAdmin = window.location.pathname.includes("admin/shop");
+
+    api.dispatch(logOut());
+    if (isAdmin) {
+      window.location.href = "/admin/shop/auth/switch";
+    } else {
+      window.location.href = "/auth";
     }
   }
 

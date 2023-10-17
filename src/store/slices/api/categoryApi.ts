@@ -18,7 +18,11 @@ export const categoryApi = createApi({
     }),
     // Get category list in shop page
     getCategoryList: builder.query<ICategory[], number>({
-      query: (id) => `categories/shop/${id}`,
+      query: (id) => ({
+        url: `categories/shop/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
       transformResponse: (response: { data: ICategory[] }) => {
         return response.data;
       },
@@ -33,7 +37,11 @@ export const categoryApi = createApi({
     }),
     // Get category list with children by shop
     getCategoryListWithChildren: builder.query<ICategory[], number>({
-      query: (id) => `categories/shop/tree/${id}`,
+      query: (id) => ({
+        url: `categories/shop/tree/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
       transformResponse: (response: { data: ICategory[] }) => {
         return response.data;
       },

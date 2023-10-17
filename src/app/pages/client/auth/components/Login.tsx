@@ -1,4 +1,4 @@
-import { useLoginUserMutation } from "@app/store/slices/api/authApi";
+import { useLoginMutation } from "@app/store/slices/api/authApi";
 import { setCredentials } from "@app/store/slices/authSlice";
 import { useAppDispatch } from "@app/store/store";
 import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
@@ -23,7 +23,7 @@ export default function Login() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [loginUser, { isLoading, error }] = useLoginUserMutation();
+  const [login, { isLoading, error }] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 
@@ -32,7 +32,7 @@ export default function Login() {
     const password = data.password;
 
     try {
-      const userData = await loginUser({ email, password }).unwrap();
+      const userData = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...userData, email }));
 
       notifySuccess("Successfully", "Login successfully");

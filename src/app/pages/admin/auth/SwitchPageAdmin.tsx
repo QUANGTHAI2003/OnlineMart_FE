@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import * as S from "./SignupAdmin.styles";
 
 const SwitchPageAdmin = () => {
@@ -13,14 +15,14 @@ const SwitchPageAdmin = () => {
             <span className="text-[#1890ff]"> doanh nghiệp</span>
           </h2>
           <div className="w-72">
-            <a href="signin">
+            <Link to="signin">
               <S.Button1>Đăng nhập</S.Button1>
-            </a>
+            </Link>
           </div>
           <div className="w-72">
-            <a href="signup">
+            <Link to="signup">
               <S.Button2>Đăng ký bán hàng trên Tiki</S.Button2>
-            </a>
+            </Link>
           </div>
         </S.FrameSelect>
       </div>

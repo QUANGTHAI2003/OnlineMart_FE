@@ -1,17 +1,77 @@
 import LogoFacebook from "@app/app/assets/images/logo_facebook.png";
 import LogoGoogle from "@app/app/assets/images/logo_google.jpg";
+import { useLoginMutation } from "@app/store/slices/api/authApi";
+import { setCredentials } from "@app/store/slices/authSlice";
+import { useAppDispatch } from "@app/store/store";
+import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
 import { Button, Divider, Form, Input } from "antd";
-import { useEffect } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import * as S from "./SignupAdmin.styles";
 
+type FormValues = {
+  fullname: string;
+  email: string;
+  phone: number;
+  password: string;
+  confirm?: string;
+};
+
+type ErrorMessage = {
+  [key: number]: string;
+};
+
 const SigninAdmin = () => {
   const { t } = useTranslation();
-  useEffect(() => {
-    console.log("render");
-  }, []);
+  const navigate = useNavigate();
+
+  const [login, { isLoading, error }] = useLoginMutation();
+
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (data: FormValues) => {
+    const email = data.email;
+    const password = data.password;
+
+    try {
+      const userData = await login({ email, password, type: "admin" }).unwrap();
+
+      if ((userData as any)?.data?.user?.type !== "admin") {
+        notifyError("Login failed", "You are not admin");
+      } else {
+        dispatch(setCredentials({ ...userData, email }));
+
+        notifySuccess("Successfully", "Login successfully");
+
+        isLoading || navigate("/admin/shop/categories");
+      }
+    } catch (err: any) {
+      const errorStatus = err.status || 500;
+
+      const errorMessages: ErrorMessage = {
+        400: "Bad Request",
+        401: "Email or password is incorrect",
+        403: "Invalid",
+        500: "Internal Server Error",
+      };
+
+      const errorMessage = errorMessages[errorStatus] || "Unknown Error";
+
+      notifyError("Login failed", errorMessage);
+    }
+  };
+
+  const errorForm: any = useMemo(() => {
+    const errorResult = error;
+
+    if (isEntityError(errorResult)) {
+      return errorResult.data.errors;
+    }
+
+    return null;
+  }, [error]);
 
   const validateMessages = {
     required: "${label} " + t("admin_shop.authentication.signin.err_null"),
@@ -44,24 +104,25 @@ const SigninAdmin = () => {
           <Form
             className="md:text-sm sm:text-xs"
             autoComplete="off"
-            onFinish={(values) => {
-              console.log({ values });
-            }}
+            onFinish={handleSubmit}
             onFinishFailed={(error) => {
               console.log({ error });
             }}
             validateMessages={validateMessages}
           >
             <S.FormItem
-              name="phone"
+              name="email"
               className="mb-5"
               label={t("admin_shop.authentication.signin.label_phone")}
               rules={[
                 {
                   required: true,
                 },
-                { pattern: /(0[3|5|7|8|9])+([0-9]{8})\b/g },
+                { type: "email" },
               ]}
+              hasFeedback
+              validateStatus={errorForm?.email && "error"}
+              help={errorForm?.email && errorForm?.email[0]}
             >
               <Input placeholder={t("admin_shop.authentication.signin.p_phone")} />
             </S.FormItem>
@@ -75,6 +136,9 @@ const SigninAdmin = () => {
                 },
                 { min: 6 },
               ]}
+              hasFeedback
+              validateStatus={errorForm?.password && "error"}
+              help={errorForm?.password && errorForm?.password[0]}
             >
               <Input.Password placeholder={t("admin_shop.authentication.signin.p_password")} />
             </S.FormItem>
