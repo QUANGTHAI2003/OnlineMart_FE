@@ -1,21 +1,23 @@
+import { getCookie } from "@app/utils/helper";
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
 
 import { logOut } from "./authSlice";
 
 const baseUrlApi = `${import.meta.env.VITE_API_BASE_URL as string}/api/`;
-// Create a new mutex
+// Create a new mutexp
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrlApi,
-  // prepareHeaders: (headers) => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     headers.set("Authorization", `Bearer ${token}`);
-  //   }
-  //   return headers;
-  // },
+  prepareHeaders: (headers) => {
+    const token = getCookie("access_token");
+
+    if (token) {
+      headers.set("authorization", `Bearer ${token}`);
+    }
+    return headers;
+  },
 });
 
 const baseQueryCustom: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (

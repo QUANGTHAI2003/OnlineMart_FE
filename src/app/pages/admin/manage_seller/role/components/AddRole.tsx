@@ -1,19 +1,20 @@
+
+import { useAddRoleMutation, useGetAllPermissionsQuery } from "@app/store/slices/api/admin/roleApi";
+import { IPermission } from "@app/types/roles.type";
+import { notifyError, notifySuccess } from "@app/utils/helper";
 import { Button, Form, Input, Modal, Select, message } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
-const OPTIONS = ["Apples", "Nails", "Bananas", "Helicopters"];
 
 const AddRole = () => {
   const { t } = useTranslation();
 
   const [visible, setVisible] = useState(false);
+  const { data: permissions } = useGetAllPermissionsQuery();
+  const [addRole, { isLoading }] = useAddRoleMutation();
+
   const showModal = () => {
     setVisible(true);
-  };
-
-  const handleOk = () => {
-    // console.log(values)
   };
 
   const handleCancel = () => {
@@ -22,8 +23,23 @@ const AddRole = () => {
 
   const [form] = Form.useForm();
 
-  const onFinish = () => {
-    message.success("Submit success!");
+  const handleSubmit = async (fieldValues: any) => {
+    console.log("🚀 ~ file: AddRole.tsx:27 ~ handleSubmit ~ fieldValues:", fieldValues);
+
+    try {
+      await addRole({
+        name: fieldValues.name,
+        description: fieldValues.description,
+        permissions: fieldValues.permission,
+      }).unwrap();
+
+      setVisible(false);
+      form.resetFields();
+
+      notifySuccess("Thêm mới thành công", "Thành công");
+    } catch (err) {
+      notifyError("Thêm mới thất bại", "Thất bại");
+    }
   };
 
   const onFinishFailed = () => {
@@ -31,7 +47,7 @@ const AddRole = () => {
   };
 
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const filteredOptions = OPTIONS.filter((option) => !selectedItems.includes(option));
+  const filteredOptions = permissions?.filter((option: IPermission) => !selectedItems.includes(option.name));
 
   return (
     <>
@@ -41,22 +57,21 @@ const AddRole = () => {
       <Modal
         open={visible}
         title={<div className="flex justify-center">{t("admin_shop.manage_seller.site_header.add_roles_title")}</div>}
-        onOk={handleOk}
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
             {t("admin_shop.manage_seller.site_header.cancel")}
           </Button>,
-          <Button key="submit" form="myForm" type="primary" htmlType="submit" onClick={handleOk}>
+          <Button key="submit" loading={isLoading} form="addRoleForm" type="primary" htmlType="submit">
             {t("admin_shop.manage_seller.site_header.add_new")}
           </Button>,
         ]}
       >
         <Form
           form={form}
-          id="myForm"
+          id="addRoleForm"
           name="nest-messages"
-          onFinish={onFinish}
+          onFinish={handleSubmit}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
           style={{ maxWidth: 500 }}
@@ -71,10 +86,10 @@ const AddRole = () => {
               placeholder={t("admin_shop.manage_seller.table_header.multiple_permission")}
               value={selectedItems}
               onChange={setSelectedItems}
-              style={{ width: "100%" }}
-              options={filteredOptions.map((item) => ({
-                value: item,
-                label: item,
+              className="w-full"
+              options={filteredOptions?.map((item: IPermission) => ({
+                value: item?.id,
+                label: item?.name,
               }))}
             />
           </Form.Item>

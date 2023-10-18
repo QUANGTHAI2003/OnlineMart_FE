@@ -15,12 +15,12 @@ const SwitchPageAdmin = () => {
             <span className="text-[#1890ff]"> doanh nghiệp</span>
           </h2>
           <div className="w-72">
-            <Link to="signin">
+            <Link to="/admin/shop/auth/signin">
               <S.Button1>Đăng nhập</S.Button1>
             </Link>
           </div>
           <div className="w-72">
-            <Link to="signup">
+            <Link to="/admin/shop/auth/signup">
               <S.Button2>Đăng ký bán hàng trên Tiki</S.Button2>
             </Link>
           </div>

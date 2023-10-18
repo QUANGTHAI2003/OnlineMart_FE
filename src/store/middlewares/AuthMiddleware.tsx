@@ -1,4 +1,4 @@
-import { Spin } from "antd";
+import CustomLoading from "@app/utils/Loading/CustomLoading";
 import React from "react";
 import { useCookies } from "react-cookie";
 
@@ -16,7 +16,7 @@ const AuthMiddleware: React.FC<IAuthMiddleware> = ({ children }) => {
   });
 
   if (isLoading) {
-    return <Spin />;
+    return <CustomLoading />;
   }
 
   return children;

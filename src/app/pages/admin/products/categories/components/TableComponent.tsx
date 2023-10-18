@@ -1,4 +1,5 @@
 import { ExclamationCircleFilled } from "@ant-design/icons";
+import { Can, PermissionsSwitch } from "@app/app/components/common/Permissions";
 import { AdminTable } from "@app/app/components/common/Table/AdminTable";
 import {
   useDeleteCategoryMutation,
@@ -26,6 +27,7 @@ const shopId = 1;
 
 const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
   const { t } = useTranslation();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sortedInfo, setSortedInfo] = useState<SorterResult<ICategory>>({});
   const [editingCategoryId, setEditingCategoryId] = useState<number | null>(null);
@@ -132,12 +134,27 @@ const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
       sorter: (a, b) => a.name.length - b.name.length,
       sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
       render: (_, { id, status }) => (
-        <Switch
-          checkedChildren="Hiện"
-          onChange={() => handleChangeStatus(id)}
-          defaultChecked={status === "1" ? true : false}
-          unCheckedChildren="Ẩn"
-        />
+        <PermissionsSwitch>
+          <Can
+            permissions={"Update category"}
+            style={{ backgroundColor: "gray", display: "inline-block", pointerEvents: "none" }}
+          >
+            <Switch
+              checkedChildren="Hiện"
+              onChange={() => handleChangeStatus(id)}
+              defaultChecked={status === "1" ? true : false}
+              unCheckedChildren="Ẩn"
+            />
+          </Can>
+          <Can>View</Can>
+        </PermissionsSwitch>
+
+        // <Switch
+        //   checkedChildren="Hiện"
+        //   onChange={() => handleChangeStatus(id)}
+        //   defaultChecked={status === "1" ? true : false}
+        //   unCheckedChildren="Ẩn"
+        // />
       ),
     },
     {

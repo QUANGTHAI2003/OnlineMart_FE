@@ -1,3 +1,5 @@
+import { IPermission } from "./roles.type";
+
 export interface IUser {
   id: number;
   user_name: string | null;
@@ -11,4 +13,5 @@ export interface IUser {
   email_verified_at: string | null;
   created_at: string;
   updated_at: string;
+  permissions: IPermission[];
 }

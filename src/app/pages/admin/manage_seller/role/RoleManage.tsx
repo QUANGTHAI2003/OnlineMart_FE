@@ -26,7 +26,7 @@ const RoleManage = () => {
     setLoadingSkeletonCount(true);
     setTimeout(() => {
       setLoadingSkeletonCount(false);
-    }, 2000);
+    }, 100);
   }, []);
 
   const [searchValue, setSearchValue] = useState<string>("");

@@ -1,3 +1,4 @@
+import { roleApi } from "./api/admin/roleApi";
 import { authApi } from "./api/authApi";
 import { categoryApi } from "./api/categoryApi";
 import { productCategoryApi } from "./api/producCategoryApi";
@@ -17,6 +18,7 @@ export const rootReducer: any = {
   [productApi.reducerPath]: productApi.reducer,
   [productCategoryApi.reducerPath]: productCategoryApi.reducer,
   [supplierApi.reducerPath]: supplierApi.reducer,
+  [roleApi.reducerPath]: roleApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
   productDetail: productDetailSlice,
@@ -30,5 +32,6 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     categoryApi.middleware,
     productApi.middleware,
     productCategoryApi.middleware,
-    supplierApi.middleware
+    supplierApi.middleware,
+    roleApi.middleware
   );

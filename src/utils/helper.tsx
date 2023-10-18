@@ -25,12 +25,35 @@ export const formatVNCurrency = (number: number) => {
   return number.toFixed(0) + suffixes[suffixIndex];
 };
 
+export const getCookie = (cookieName: string) => {
+  const cookies = document.cookie.split(";");
+  for (const cookie of cookies) {
+    const [name, value] = cookie.trim().split("=");
+    if (name === cookieName) {
+      return decodeURIComponent(value);
+    }
+  }
+  return null; // Cookie not found
+};
+
 export const formatDate = (dateString: string) => {
   const locale = getLang();
 
   const formatString = locale === "vi" ? "DD-MM-YYYY" : "YYYY-MM-DD";
   const formattedDate = dayjs(dayjs(dateString).format(formatString), formatString);
   return formattedDate;
+};
+
+export const formatDateTime = (dateStr: any) => {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
+  return new Date(dateStr).toLocaleDateString(undefined, options);
 };
 
 export const formatPercent = (value?: number) => {

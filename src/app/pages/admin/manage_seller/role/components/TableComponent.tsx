@@ -1,10 +1,9 @@
-import { removeDiacritics } from "@app/utils/helper";
+import { useGetAllRoleQuery } from "@app/store/slices/api/admin/roleApi";
+import { formatDateTime, removeDiacritics } from "@app/utils/helper";
 import { Card, Col, Table, Typography } from "antd";
 import { ColumnsType } from "antd/es/table/interface";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-
-import { RoleListData } from "../data";
 
 import { DeleteRole, EditRole, ViewPermissions } from ".";
 
@@ -21,7 +20,7 @@ const { Text } = Typography;
 const TableComponent = React.memo(({ searchValue, searchType }: any) => {
   const { t } = useTranslation();
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const { data: roles, isFetching } = useGetAllRoleQuery();
 
   const columns: ColumnsType<IDataType> = [
     {
@@ -47,7 +46,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       sorter: (a: { created_at: string }, b: { created_at: string }) =>
         new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
       render: (_: any, record: any) => {
-        return <div>{record.created_at}</div>;
+        return <>{formatDateTime(record?.created_at)}</>;
       },
     },
     {
@@ -58,7 +57,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       sorter: (a: { updated_at: string }, b: { updated_at: string }) =>
         new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime(),
       render: (_: any, record: any) => {
-        return <div>{record.updated_at}</div>;
+        return <>{formatDateTime(record?.updated_at)}</>;
       },
     },
     {
@@ -70,35 +69,20 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       render: (_: any, record: any) => {
         return (
           <div className="flex justify-center gap-1">
-            <ViewPermissions />
+            <ViewPermissions id={record.id} permissions={record.permissions} />
             <EditRole data={record} />
-            <DeleteRole />
+            <DeleteRole id={record.id} />
           </div>
         );
       },
     },
   ];
 
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-
-  const hasSelected = selectedRowKeys.length > 0;
-
-  useEffect(() => {
-    // console.log("Table component rendered");
-  });
-
   const displayedRoles: any = useMemo(() => {
-    let filterRoles = RoleListData(t);
+    let filterRoles = roles;
 
     if (searchValue) {
-      filterRoles = filterRoles.filter((role: any) => {
+      filterRoles = filterRoles?.filter((role: any) => {
         const fieldValue = role[searchType];
         const searchValueString = searchValue.toString();
 
@@ -109,7 +93,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
     }
 
     return filterRoles;
-  }, [searchType, searchValue, t]);
+  }, [roles, searchType, searchValue]);
 
   return (
     <Col span={24}>
@@ -117,17 +101,13 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
         <div className="mb-4">
           <Text className="pr-2">{t("admin_shop.manage_seller.table_header.tolal_roles")}</Text>
           <Text strong className="pr-2">
-            {displayedRoles.length}
+            {displayedRoles?.length}
           </Text>
-          {hasSelected
-            ? `(${t("admin_shop.manage_seller.table_header.selected")} ${selectedRowKeys.length} ${t(
-                "admin_shop.manage_seller.table_header.items"
-              )})`
-            : ""}
         </div>
         <div>
           <Table
-            rowSelection={rowSelection}
+            bordered
+            loading={isFetching}
             dataSource={displayedRoles}
             rowKey={(record) => record.id}
             columns={columns}

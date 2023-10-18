@@ -15,13 +15,14 @@ export const ViewPermissions = styled(Modal)`
   flex-wrap: wrap;
 
   .om-modal-body {
-    padding-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 0.5rem;
+    margin-top: 1rem;
   }
   .permission_item {
     border-radius: 50px;
     line-height: 0;
     padding: 13px;
-    margin-right: 5px;
-    margin-bottom: 5px;
   }
 `;

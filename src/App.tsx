@@ -3,10 +3,11 @@ import enUS from "antd/lib/locale/en_US";
 import viVN from "antd/lib/locale/vi_VN";
 import { HelmetProvider } from "react-helmet-async";
 
+import { PermissionsProvider } from "./app/components/common/Permissions";
 import AppRouter from "./AppRouter";
 import { useLanguage } from "./hooks";
+import { useAppSelector } from "./store/store";
 const App = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { language } = useLanguage();
 
   const defaultTheme = {
@@ -15,6 +16,7 @@ const App = () => {
   };
 
   const helmetContext = {};
+  const userPermissions = useAppSelector((state) => state.userState?.user?.permissions);
 
   return (
     <HelmetProvider context={helmetContext}>
@@ -24,7 +26,9 @@ const App = () => {
         theme={{ token: { colorPrimary: defaultTheme.colorPrimary, borderRadius: defaultTheme.borderRadius } }}
         locale={language === "en" ? enUS : viVN}
       >
-        <AppRouter />
+        <PermissionsProvider permissions={userPermissions}>
+          <AppRouter />
+        </PermissionsProvider>
       </ConfigProvider>
     </HelmetProvider>
   );
