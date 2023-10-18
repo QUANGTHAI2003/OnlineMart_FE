@@ -511,7 +511,9 @@
       "manage_permission": "Permission management",
       "report": "Report",
       "profit": "Profit and loss report",
-      "sales": "Sales report"
+      "sales": "Sales report",
+      "ships": "Ship",
+      "overview": "Overview"
     },
     "authentication": {
       "signin": {
@@ -818,6 +820,33 @@
         }
       }
     },
+    "ship": {
+      "overview": "Shipping overview",
+      "delivery": "Delivery situation and control",
+      "title_status": "DELIVERY SITUATION",
+      "waiting_for": "Waiting for payment",
+      "processing": "IN PROCESSING",
+      "transit": "In transit",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled",
+      "returned": "Returned",
+      "orders": "orders",
+      "poetry": "poetry",
+      "order_number": "Order number",
+      "shipping_fee": "Shipping fee",
+      "shipping_indicators": "Shipping indicators",
+      "tota_way": "TOTAL WAYBILL AND PARTNER FEES",
+      "show_by": "Show by: ",
+      "no_data": "No data",
+      "data_aggregated": "Data is aggregated in",
+      "selected": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "sevenDaysAgo": "Seven Days Ago",
+        "thirtyDaysAgo": "Thirty Days Ago",
+        "thisMonth": "This Month"
+      }
+    },
     "categories": {
       "name": "Category",
       "title": "Add new",
@@ -1076,7 +1105,7 @@
         "dualchart": {
           "store_revenue": "STORE REVENUE",
           "revenue": "Revenue",
-          "profit" : "Profit",
+          "profit": "Profit",
           "delivery_info": "DELIVERY INFORMATION"
         },
         "common": {

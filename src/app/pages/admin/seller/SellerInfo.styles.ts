@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const SellerInfoHeader = styled.div`
   background-color: #fff;
-  padding: 16px !important;
+  padding: 24px !important;
   .title {
     font-size: 20px;
     font-weight: 500;
@@ -12,7 +12,7 @@ export const SellerInfoHeader = styled.div`
 `;
 
 export const SellerInfoBody = styled.div`
-  margin: 12px;
+  margin: 24px;
   .om-card-body {
     padding: 12px !important;
   }

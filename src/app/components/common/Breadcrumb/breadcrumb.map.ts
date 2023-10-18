@@ -9,6 +9,7 @@ const breadcrumbNameMap: Record<string, string> = {
   "/suppliers": "admin_shop.sidebar.suppliers",
   "/manage-seller/role": "admin_shop.sidebar.manage_role",
   "/orders": "admin_shop.sidebar.orders",
+  "/ships": "admin_shop.sidebar.ships",
   "/reports": "admin_shop.sidebar.report",
   "/reports/profit": "admin_shop.sidebar.profit",
   "/reports/sales": "admin_shop.sidebar.sales",

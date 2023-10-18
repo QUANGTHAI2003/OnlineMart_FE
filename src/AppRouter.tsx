@@ -48,6 +48,7 @@ const AdminProductCreate = React.lazy(() => import("@app/app/pages/admin/product
 const AdminSupplier = React.lazy(() => import("@app/app/pages/admin/products/suppliers/Supplier"));
 const AdminProductInventory = React.lazy(() => import("@app/app/pages/admin/products/inventory/ProductInventory"));
 const AdminProductPrintQRCode = React.lazy(() => import("@app/app/pages/admin/products/print_qr_code/PrintQRCode"));
+const AdminShipOverview = React.lazy(() => import("@app/app/pages/admin/ships/ShipOverview"));
 // const AdminReportProfit = React.lazy(() => import("@app/app/pages/admin/reports/profit"));
 const AdminReportSales = React.lazy(() => import("@app/app/pages/admin/reports/sales/SalesReport"));
 
@@ -107,6 +108,9 @@ const AppRouter: React.FC = () => {
         <Route path="manage-seller">
           <Route path="role" element={<RoleManage />} />
         </Route>
+       <Route path="ships">
+        <Route index element={<AdminShipOverview />}></Route>
+       </Route>
         <Route path="reports">
           {/* <Route path="profit" element={<AdminReportProfit />} /> */}
           <Route path="sales" element={<AdminReportSales />} />

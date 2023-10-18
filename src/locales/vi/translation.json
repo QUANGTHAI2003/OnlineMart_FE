@@ -509,6 +509,8 @@
       "manage_seller": "Quản lý người bán",
       "manage_role": "Quản lý vai trò",
       "manage_permission": "Quản lý quyền",
+      "ships": "Vận chuyển",
+      "overview": "Tổng quan",
       "report": "Báo cáo",
       "profit": "Báo cáo lãi lỗ",
       "sales": "Báo cáo bán hàng"
@@ -816,6 +818,33 @@
           "custom": "Tùy chỉnh",
           "order_date": "Ngày đặt hàng "
         }
+      }
+    },
+    "ship": {
+      "overview": "Tổng quan vận chuyển",
+      "delivery": "Tình hình giao hàng và đối soát",
+      "title_status": "TÌNH HÌNH GIAO HÀNG",
+      "waiting_for": "Chờ thanh toán",
+      "processing": "Đang xử lý",
+      "transit": "Đang vận chuyển",
+      "delivered": "Đã giao",
+      "cancelled": "Đã hủy",
+      "returned": "Đã trả hàng",
+      "orders": "đơn",
+      "poetry": "phí",
+      "order_number": "Số đơn",
+      "shipping_fee": "Phí vận chuyển",
+      "shipping_indicators": "Các chỉ số vận chuyển",
+      "tota_way": "TỔNG SỐ VẬN ĐƠN VÀ PHÍ TRẢ ĐỐI TÁC",
+      "show_by": "Hiển thị theo: ",
+      "no_data": "Không có dữ iệu",
+      "data_aggregated": "Dữ liệu được tổng hợp trong",
+      "selected": {
+        "today": "Ngày hôm nay",
+        "yesterday": "Ngày hôm qua",
+        "sevenDaysAgo": "7 ngày trước",
+        "thirtyDaysAgo": "30 ngày trước",
+        "thisMonth": "Tháng này"
       }
     },
     "categories": {

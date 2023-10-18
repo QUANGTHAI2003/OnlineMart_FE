@@ -2,10 +2,11 @@ import {
   ControlOutlined,
   DashboardOutlined,
   LaptopOutlined,
+  SendOutlined,
   ShopOutlined,
   ShoppingCartOutlined,
-  StockOutlined,
   UsergroupAddOutlined,
+  StockOutlined,
 } from "@ant-design/icons";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
 
@@ -16,6 +17,42 @@ export const adminShopRoutes: ISidebarMenu[] = [
     url: "/admin/shop",
     permission: "all",
     icon: <DashboardOutlined />,
+  },
+  {
+    title: "admin_shop.sidebar.orders",
+    key: "orders",
+    url: "/admin/shop/orders",
+    permission: ["View orders", "View bill"],
+    icon: <ShoppingCartOutlined />,
+    children: [
+      {
+        title: "admin_shop.sidebar.order_list",
+        key: "order_list",
+        permission: "View orders",
+        url: "/admin/shop/orders",
+      },
+      {
+        title: "admin_shop.sidebar.order_bill",
+        key: "order_bill",
+        permission: "View bill",
+        url: "/admin/shop/orders/bill",
+      },
+    ],
+  },
+  {
+    title: "admin_shop.sidebar.ships",
+    key: "ships",
+    url: "/admin/shop/ships",
+    permission: ["View shipping"],
+    icon: <SendOutlined />,
+    children: [
+      {
+        title: "admin_shop.sidebar.overview",
+        key: "overview",
+        permission: "View shipping",
+        url: "/admin/shop/ships",
+      },
+    ],
   },
   {
     title: "admin_shop.sidebar.products",
@@ -68,27 +105,6 @@ export const adminShopRoutes: ISidebarMenu[] = [
         key: "product_inventory",
         permission: "View inventory",
         url: "/admin/shop/products/inventory",
-      },
-    ],
-  },
-  {
-    title: "admin_shop.sidebar.orders",
-    key: "orders",
-    url: "/admin/shop/orders",
-    permission: ["View orders", "View bill"],
-    icon: <ShoppingCartOutlined />,
-    children: [
-      {
-        title: "admin_shop.sidebar.order_list",
-        key: "order_list",
-        permission: "View orders",
-        url: "/admin/shop/orders",
-      },
-      {
-        title: "admin_shop.sidebar.order_bill",
-        key: "order_bill",
-        permission: "View bill",
-        url: "/admin/shop/orders/bill",
       },
     ],
   },
