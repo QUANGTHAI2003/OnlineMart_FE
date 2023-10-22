@@ -171,6 +171,12 @@ export const adminShopRoutes: ISidebarMenu[] = [
         permission: "View reports",
         url: "/admin/shop/dev_center/traffic_website",
       },
+        {
+            title: "admin_shop.sidebar.operational_efficiency",
+            key: "operational_efficiency",
+            permission: "View reports",
+            url: "/admin/shop/dev_center/operational_efficiency",
+        },
     ],
   },
 ];

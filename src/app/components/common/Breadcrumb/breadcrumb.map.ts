@@ -19,6 +19,7 @@ const breadcrumbNameMap: Record<string, string> = {
   "/dev_center": "admin_shop.sidebar.dev_center",
   "/dev_center/biz_efficiency": "admin_shop.sidebar.biz_efficiency",
   "/dev_center/traffic_website": "admin_shop.sidebar.traffic_website",
+  "/dev_center/operational_efficiency": "admin_shop.sidebar.operational_efficiency",
 };
 
 const updatedBreadcrumbNameMap: Record<string, string> = {

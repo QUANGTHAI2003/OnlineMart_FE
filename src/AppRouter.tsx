@@ -58,6 +58,9 @@ const AdminBusinessEfficiency = React.lazy(
   () => import("@app/app/pages/admin/dev_center/biz_efficiency/BusinessEfficiency")
 );
 const AdminTrafficWebsite = React.lazy(() => import("@app/app/pages/admin/dev_center/traffic_website/TrafficWebsite"));
+const AdminOperationalEfficiency = React.lazy(
+  () => import("@app/app/pages/admin/dev_center/operational_efficiency/OperationalEfficiency")
+);
 const RoleManage = React.lazy(() => import("@app/app/pages/admin/manage_seller/role/RoleManage"));
 
 // super admin
@@ -137,8 +140,10 @@ const AppRouter: React.FC = () => {
           <Route path="biz_efficiency" element={<AdminBusinessEfficiency />} />
           <Route path="traffic_website" element={<AdminTrafficWebsite />} />
           <Route path="product_insight" element={<div>Chỉ số sản phẩm</div>} />
+            <Route path="operational_efficiency" element={<AdminOperationalEfficiency />} />
         </Route>
       </Route>
+
       <Route path="/admin/super" element={protectedSuperAdminLayout}>
         <Route index element={<DashboardSuperAdmin />} />
         <Route path="review" element={<Shops />} />

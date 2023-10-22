@@ -525,7 +525,8 @@
       "sales": "Báo cáo bán hàng",
       "dev_center": "Trung tâm phát triển",
       "biz_efficiency": "Hiệu quả kinh doanh",
-      "traffic_website": "Chỉ số lượt truy cập"
+      "traffic_website": "Chỉ số lượt truy cập",
+      "operational_efficiency": "Hiệu quả vận hành"
     },
     "authentication": {
       "signin": {
@@ -1259,6 +1260,37 @@
           "phone": "Điện thoại",
           "computer": "Máy tính"
         }
+      },
+      "operational_efficiency": {
+        "name": "Hiệu quả vận hành",
+        "title_card": "Điểm chất lượng vận hành",
+        "num_late_orders": "Số đơn xử lý trễ hạn:",
+        "num_ontime_orders": "Số đơn xử lý đúng hạn: ",
+        "num_canceled_orders": "Số đơn bị hủy: ",
+        "num_awaiting_orders": "Số đơn chờ kết quả xử lý:",
+        "total_num_orders": "Tổng số đơn đã nhận: ",
+        "score_0": "Rất tiếc! chúng tôi phải tắt gian hàng hàng vĩnh viễn.Đây đã là lần thứ 3 bạn đạt điểm vận hành bằng 0! Vì vậy, chúng tôi rất tiếc phải tắt gian hàng vĩnh viễn.",
+        "score_1": "Đây đã là lần thứ 2 bạn đạt điểm vận hành bằng 0! chúng tôi phải tạm tắt gian hàng trong 14 ngày. Lưu ý: Sau 2 lần bị khóa gian do điểm vận hành, lần thứ 3 gian hàng của bạn sẽ bị khóa vĩnh viễn.",
+        "score_2": "Rất tiếc! chúng tôi phải tạm tắt gian hàng trong 7 ngày. Hãy tham khảo các giải pháp cải thiện điểm số và chất lượng vận hành tại đây để sẵn sàng khi gian hàng mở cửa trở lại nhé!",
+        "score_3": "Ôi không… Hiệu suất vận hành của bạn đang không ổn. Hãy tập trung cải thiện tốc độ xử lý đơn hàng nhé! Lưu ý: Nếu điểm số vận hành của bạn giảm xuống mức 0 ở tuần tiếp theo, chúng tôi sẽ tạm tắt gian hàng trong 7 ngày để bạn có thời gian cải thiện lại quy trình vận hành.",
+        "score_4": "Bạn đang xử lý đơn hàng khá tốt! Tăng tốc độ thêm 1 chút xíu nữa để trở thành Nhà Bán xử lý đơn hàng xuất sắc và tối ưu tỷ lệ chuyển đổi nhé!",
+        "score_5": "Tuyệt vời! Bạn đang xử lý đơn hàng xuất sắc trong tuần vừa qua! Hãy giữ vững phong độ để có thêm thật nhiều đánh giá 5 sao và nhận thêm nhiều đặc quyền từ chúng tôi nhé!",
+        "operational_metrics": "Chỉ số vận hành",
+        "card_cancel_orders": "Tỉ lệ huỷ đơn",
+        "export_cancel_orders": "Xuất các đơn bị hủy",
+        "card_fullfill_orders": "Tỉ lệ xử lý đơn đúng hạn",
+        "card_return_orders": "Tỉ lệ đổi trả ",
+        "product_return": "Số sản phẩm đổi trả ",
+        "product_sold": "Số sản phẩm đã bán ",
+        "card_rating_orders": "Đánh giá sản phẩm ",
+        "view_details": "Xem chi tiết",
+        "reiview": "Đánh giá",
+        "interaction_metrics": "Chỉ số tương tác với khách hàng",
+        "chat_response_rate": "Tỉ lệ phản hồi chat",
+        "chat_respose": "Lượt phản hồi chat",
+        "chat_received": "Lượt chat nhận được",
+        "average_response": "Thời gian phản hồi trung bình",
+        "target": "Chỉ tiêu"
       }
     },
     "dashboard": {

@@ -518,14 +518,15 @@
       "manage_seller": "Seller management",
       "manage_role": "Role management",
       "manage_permission": "Permission management",
+      "sales": "Sales report",
       "report": "Report",
       "profit": "Profit and loss report",
-      "sales": "Sales report",
       "ships": "Ship",
       "overview": "Overview",
       "dev_center": "Developer center",
       "biz_efficiency": "Business efficiency",
-      "traffic_website": "Traffic website"
+      "traffic_website": "Traffic website",
+      "operational_efficiency": "Operational Efficiency"
     },
     "authentication": {
       "signin": {
@@ -1260,6 +1261,37 @@
           "phone": "Phone",
           "computer": "Computer"
         }
+      },
+      "operational_efficiency": {
+        "name": "Operational Performance",
+        "title_card": "Seller operational score",
+        "num_late_orders": "Number of late orders:",
+        "num_ontime_orders": "Number of on-time orders: ",
+        "num_canceled_orders": "Number of canceled orders:",
+        "num_awaiting_orders": "Number of orders awaiting processing results:",
+        "total_num_orders": "Total number of orders received:",
+        "score_0": "Sorry! We had to turn off the store permanently. This is the 3rd time you have reached an operating score of 0! Therefore, we regret having to close the store permanently.",
+        "score_1": "This is the second time you have achieved an operating score of 0! We have to temporarily close the store for 14 days. Note: After being locked 2 times by the operating point, the 3rd time your booth will be locked permanently.",
+        "score_2": "Sorry! We have to temporarily close the store for 7 days. Please refer to solutions to improve scores and operational quality here to be ready when the store reopens!",
+        "score_3": "Oh no… Your performance is not good. Let's focus on improving order processing speed! Note: If your operations score drops to 0 next week, we will temporarily disable your store for 7 days to give you time to improve your operations.",
+        "score_4": "You are handling orders quite well! Speed up a little more to become an excellent order processing seller and optimize conversion rate!",
+        "score_5": "Great! You're doing an excellent job processing orders this past week! Keep up the good work to get more 5-star reviews and receive more perks from us!",
+        "operational_metrics": "Operational metrics",
+        "card_cancel_orders": "Cancellation rate",
+        "export_cancel_orders": "Download cancelled orders",
+        "card_fullfill_orders": "On-time fulfillment rate",
+        "card_return_orders": "Return rate ",
+        "product_return": "Returned items",
+        "product_sold": "Sold items ",
+        "card_rating_orders": "Product rating ",
+        "view_details": "View details",
+        "reiview": "reiview",
+        "interaction_metrics": "Customer interaction metrics",
+        "chat_response_rate": "Chat response rate",
+        "chat_respose": "Responded chat",
+        "chat_received": "Received chat",
+        "average_response": "Average response time",
+        "target": "Target "
       }
     },
     "dashboard": {
