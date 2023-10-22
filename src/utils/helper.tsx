@@ -144,7 +144,7 @@ export const formatTimeAgo = (timestamp: number) => {
 };
 
 export const formatNumber = (number: number): string => {
-  return number.toLocaleString("en-IN");
+  return number.toLocaleString("en-US");
 };
 
 export const formatShortenNumber = (number: number) => {
@@ -174,6 +174,10 @@ export const formatShortenNumber = (number: number) => {
     suffixIndex++;
   }
   return number + suffixes[suffixIndex];
+};
+
+export const formatPercentage = (value: number) => {
+  return `${value}%`;
 };
 
 export const removeDiacritics = (str: string) => {

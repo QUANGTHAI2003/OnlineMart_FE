@@ -513,7 +513,9 @@
       "overview": "Tổng quan",
       "report": "Báo cáo",
       "profit": "Báo cáo lãi lỗ",
-      "sales": "Báo cáo bán hàng"
+      "sales": "Báo cáo bán hàng",
+      "dev_center": "Trung tâm phát triển",
+      "biz_efficiency": "Hiệu quả kinh doanh"
     },
     "authentication": {
       "signin": {
@@ -1123,6 +1125,57 @@
           "orders_uppercase": "ĐƠN HÀNG",
           "orders_lowercase": "đơn",
           "not_options_yet": "Chưa có tùy chọn nào"
+        }
+      }
+    },
+    "dev_center": {
+      "biz_efficiency": {
+        "common": {
+          "today": "Hôm nay",
+          "yesterday": "Hôm qua",
+          "past_7days": "7 ngày qua",
+          "past_30days": "30 ngày qua",
+          "on_current_day": "Trong ngày hôm nay",
+          "within_a_day": "Trong 1 ngày",
+          "within_7days": "Trong 7 ngày",
+          "within_30days": "Trong 30 ngày",
+          "within": "Trong",
+          "days": "ngày",
+          "reporting_time": "Thời gian báo cáo:",
+          "last_updated": "Lần cập nhật cuối",
+          "select_time_report": "Hãy chọn thời gian cho báo cáo",
+          "from": "Từ",
+          "to": "đến",
+          "see_more_link": "Xem thêm",
+          "no_data": "Không có dữ liệu. Hãy chọn thời gian báo cáo khác.",
+          "compare_with": "So sánh với",
+          "primary_index": "Chỉ số chính:",
+          "download": "Tải dữ liệu",
+          "biz_efficiency": "Hiệu quả kinh doanh",
+          "revenue": "Doanh thu",
+          "orders": "Đơn hàng",
+          "net_revenue": "Doanh thu thuần",
+          "views": "Lượt xem",
+          "conversion_rate": "Tỷ lệ chuyển đổi",
+          "average_order": "Giá trị trung bình",
+          "cancelled_orders": "Đơn hàng hủy",
+          "tooltip": {
+            "revenue": "Tổng giá trị của các đơn hàng được xác nhận trong khoảng thời gian đã chọn, bao gồm doanh số từ các đơn hủy và đơn Trả hàng/Hoàn tiền.",
+            "orders": "Tổng số lượng đơn hàng được xác nhận trong khoảng thời gian đã chọn.",
+            "net_revenue": "Tổng doanh thu của các đơn hàng giao thành công. (Doanh thu = Giá trị hàng hoá - NB giảm giá - Phí trả Online Mart).",
+            "views": "Tổng số lượt xem trang sản phẩm và trang gian hàng trong khoảng thời gian đã chọn.",
+            "conversion_rate": "Tổng số khách truy cập và có đơn đã xác nhận chia tổng số khách truy cập trong khoảng thời gian đã chọn.",
+            "average_order": "Doanh số trung bình mỗi đơn hàng trong khoảng thời gian đã chọn.",
+            "cancelled_orders": "Tổng số lượng đơn hàng hủy trong khoảng thời gian đã chọn."
+          }
+        },
+        "top_box": {
+          "top_products": "Top 5 sản phẩm (theo doanh số)",
+          "top_cities": "Top 5 thành phố (theo doanh số)",
+          "tooltip": {
+            "top_products": "Doanh số bằng tổng giá trị của các đơn hàng được xác nhận trong khoảng thời gian đã chọn.",
+            "top_cities": "Doanh số bằng tổng giá trị của các đơn hàng được xác nhận trong khoảng thời gian đã chọn."
+          }
         }
       }
     }

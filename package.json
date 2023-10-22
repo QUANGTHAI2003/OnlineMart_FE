@@ -18,6 +18,7 @@
     "@ant-design/charts": "^1.4.2",
     "@ant-design/icons": "^5.1.0",
     "@ant-design/plots": "^1.2.5",
+    "@antv/util": "^3.3.5",
     "@chatscope/chat-ui-kit-react": "^1.10.1",
     "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@fortawesome/fontawesome-free": "^6.4.0",

@@ -7,6 +7,7 @@ import {
   ShoppingCartOutlined,
   UsergroupAddOutlined,
   StockOutlined,
+  AreaChartOutlined,
 } from "@ant-design/icons";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
 
@@ -148,6 +149,19 @@ export const adminShopRoutes: ISidebarMenu[] = [
         key: "sales",
         permission: "View reports",
         url: "/admin/shop/reports/sales",
+      },
+    ],
+  },
+  {
+    title: "admin_shop.sidebar.dev_center",
+    key: "development_center",
+    url: "/admin/shop/dev_center",
+    icon: <AreaChartOutlined />,
+    children: [
+      {
+        title: "admin_shop.sidebar.biz_efficiency",
+        key: "biz_efficiency",
+        url: "/admin/shop/dev_center/biz_efficiency",
       },
     ],
   },

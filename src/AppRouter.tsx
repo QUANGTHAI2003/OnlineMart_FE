@@ -51,6 +51,9 @@ const AdminProductPrintQRCode = React.lazy(() => import("@app/app/pages/admin/pr
 const AdminShipOverview = React.lazy(() => import("@app/app/pages/admin/ships/ShipOverview"));
 // const AdminReportProfit = React.lazy(() => import("@app/app/pages/admin/reports/profit"));
 const AdminReportSales = React.lazy(() => import("@app/app/pages/admin/reports/sales/SalesReport"));
+const AdminBusinessEfficiency = React.lazy(
+  () => import("@app/app/pages/admin/dev_center/biz_efficiency/BusinessEfficiency")
+);
 
 const RoleManage = React.lazy(() => import("@app/app/pages/admin/manage_seller/role/RoleManage"));
 
@@ -114,6 +117,10 @@ const AppRouter: React.FC = () => {
         <Route path="reports">
           {/* <Route path="profit" element={<AdminReportProfit />} /> */}
           <Route path="sales" element={<AdminReportSales />} />
+        </Route>
+        <Route path="dev_center">
+          <Route path="biz_efficiency" element={<AdminBusinessEfficiency />} />
+          <Route path="product_insight" element={<div>Chỉ số sản phẩm</div>} />
         </Route>
       </Route>
 

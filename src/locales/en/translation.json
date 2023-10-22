@@ -513,7 +513,9 @@
       "profit": "Profit and loss report",
       "sales": "Sales report",
       "ships": "Ship",
-      "overview": "Overview"
+      "overview": "Overview",
+      "dev_center": "Developer center",
+      "biz_efficiency": "Business efficiency"
     },
     "authentication": {
       "signin": {
@@ -1123,6 +1125,57 @@
           "orders_uppercase": "ORDERS",
           "orders_lowercase": "orders",
           "not_options_yet": "No options available yet"
+        }
+      }
+    },
+    "dev_center": {
+      "biz_efficiency": {
+        "common": {
+          "today": "Today",
+          "yesterday": "Yesterday",
+          "past_7days": "The past 7 days",
+          "past_30days": "The past 30 days",
+          "on_current_day": "On the current day",
+          "within_a_day": "Within a day",
+          "within_7days": "Within 7 days",
+          "within_30days": "Within 30 days",
+          "within": "Within",
+          "days": "days",
+          "reporting_time": "Reporting time:",
+          "last_updated": "Last updated",
+          "select_time_report": "Select the time for the report",
+          "from": "From",
+          "to": "to",
+          "see_more_link": "See more",
+          "no_data": "No data available. Please choose another reporting time.",
+          "compare_with": "Compare with",
+          "primary_index": "Primary index:",
+          "download": "Download",
+          "biz_efficiency": "Business effectiveness",
+          "revenue": "Revenue",
+          "orders": "Orders",
+          "net_revenue": "Net revenue",
+          "views": "Views",
+          "conversion_rate": "Conversion rate",
+          "average_order": "Average order value",
+          "cancelled_orders": "Cancelled orders",
+          "tooltip": {
+            "revenue": "Total value of confirmed orders within the selected timeframe, including revenue from canceled orders and returns/refunds.",
+            "orders": "Total number of confirmed orders within the selected timeframe.",
+            "net_revenue": "Total revenue from successfully delivered orders. (Revenue = Product value - Discount amount - Online Mart fee).",
+            "views": "Total number of views on product pages and store pages within the selected timeframe.",
+            "conversion_rate": "The total number of visitors with confirmed orders divided by the total number of visitors within the selected timeframe.",
+            "average_order": "Average revenue per order within the selected timeframe.",
+            "cancelled_orders": "Total number of canceled orders within the selected timeframe."
+          }
+        },
+        "top_box": {
+          "top_products": "Top 5 products (by revenue)",
+          "top_cities": "Top 5 cities (by revenue)",
+          "tooltip": {
+            "top_products": "Revenue is the sum of the values of confirmed orders within the selected timeframe.",
+            "top_cities": "Revenue is the sum of the values of confirmed orders within the selected timeframe."
+          }
         }
       }
     }
