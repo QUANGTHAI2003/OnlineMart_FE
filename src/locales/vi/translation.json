@@ -515,7 +515,8 @@
       "profit": "Báo cáo lãi lỗ",
       "sales": "Báo cáo bán hàng",
       "dev_center": "Trung tâm phát triển",
-      "biz_efficiency": "Hiệu quả kinh doanh"
+      "biz_efficiency": "Hiệu quả kinh doanh",
+      "traffic_website": "Chỉ số lượt truy cập"
     },
     "authentication": {
       "signin": {
@@ -1176,6 +1177,31 @@
             "top_products": "Doanh số bằng tổng giá trị của các đơn hàng được xác nhận trong khoảng thời gian đã chọn.",
             "top_cities": "Doanh số bằng tổng giá trị của các đơn hàng được xác nhận trong khoảng thời gian đã chọn."
           }
+        }
+      },
+      "traffic_website": {
+        "common": {
+          "traffic_website": "Chỉ số lượt truy cập",
+          "primary_index": "Chỉ số chính",
+          "total_views": "Tổng lượt xem",
+          "conversion_rate": "Tỷ lệ chuyển đổi",
+          "total_viewers": "Tổng số người xem",
+          "total_buyers": "Tổng khách mua hàng",
+          "tooltip": {
+            "total_views": "Tổng số lượt xem trang sản phẩm và trang gian hàng trong khoảng thời gian đã chọn.",
+            "conversion_rate": "Tổng số khách truy cập và có đơn đã xác nhận chia tổng số khách truy cập trong khoảng thời gian đã chọn.",
+            "total_viewers": "Tổng số khách truy cập đã xem trang sản phẩm và trang gian hàng trong khoảng thời gian đã chọn. Mỗi khách xem một trang sản phẩm hoặc trang gian hàng nhiều lần được tính một lần duy nhất.",
+            "total_buyers": "Tổng số khách hàng mua sản phẩm, tính trên các đơn hàng được xác nhận trong khoảng thời gian đã chọn."
+          }
+        },
+        "select": {
+          "pages": "Trang",
+          "all":  "Tất cả",
+          "products": "Các trang sản phẩm",
+          "shop": "Trang gian hàng",
+          "devices": "Thiết bị",
+          "phone": "Điện thoại",
+          "computer": "Máy tính"
         }
       }
     }

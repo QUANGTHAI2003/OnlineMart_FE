@@ -163,6 +163,11 @@ export const adminShopRoutes: ISidebarMenu[] = [
         key: "biz_efficiency",
         url: "/admin/shop/dev_center/biz_efficiency",
       },
+      {
+        title: "admin_shop.sidebar.traffic_website",
+        key: "traffic_website",
+        url: "/admin/shop/dev_center/traffic_website",
+      },
     ],
   },
 ];

@@ -54,7 +54,7 @@ const AdminReportSales = React.lazy(() => import("@app/app/pages/admin/reports/s
 const AdminBusinessEfficiency = React.lazy(
   () => import("@app/app/pages/admin/dev_center/biz_efficiency/BusinessEfficiency")
 );
-
+const AdminTrafficWebsite = React.lazy(() => import("@app/app/pages/admin/dev_center/traffic_website/TrafficWebsite"));
 const RoleManage = React.lazy(() => import("@app/app/pages/admin/manage_seller/role/RoleManage"));
 
 const AppRouter: React.FC = () => {
@@ -120,6 +120,7 @@ const AppRouter: React.FC = () => {
         </Route>
         <Route path="dev_center">
           <Route path="biz_efficiency" element={<AdminBusinessEfficiency />} />
+          <Route path="traffic_website" element={<AdminTrafficWebsite />} />
           <Route path="product_insight" element={<div>Chỉ số sản phẩm</div>} />
         </Route>
       </Route>

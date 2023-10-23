@@ -515,7 +515,8 @@
       "ships": "Ship",
       "overview": "Overview",
       "dev_center": "Developer center",
-      "biz_efficiency": "Business efficiency"
+      "biz_efficiency": "Business efficiency",
+      "traffic_website": "Traffic website"
     },
     "authentication": {
       "signin": {
@@ -1176,6 +1177,31 @@
             "top_products": "Revenue is the sum of the values of confirmed orders within the selected timeframe.",
             "top_cities": "Revenue is the sum of the values of confirmed orders within the selected timeframe."
           }
+        }
+      },
+      "traffic_website": {
+        "common": {
+          "traffic_website": "Traffic website",
+          "primary_index": "Primary index",
+          "total_views": "Total views",
+          "conversion_rate": "Conversion rate",
+          "total_viewers": "Total viewers",
+          "total_buyers": "Total buyers",
+          "tooltip": {
+            "total_views": "Total views of product pages and store pages within the selected timeframe.",
+            "conversion_rate": "Total visitors with confirmed orders divided by the total number of visitors within the selected timeframe.",
+            "total_viewers": "Total unique visitors who viewed product pages and store pages within the selected timeframe. Each visitor viewing a product page or store page multiple times is counted only once.",
+            "total_buyers": "Total number of customers who purchased products, calculated based on confirmed orders within the selected timeframe."
+          }
+        },
+        "select": {
+          "pages": "Pages",
+          "all":  "All",
+          "products": "Product pages",
+          "shop": "Shop pages",
+          "devices": "Devices",
+          "phone": "Phone",
+          "computer": "Computer"
         }
       }
     }
