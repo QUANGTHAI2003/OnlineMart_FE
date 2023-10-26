@@ -15,7 +15,7 @@ import Payment from "./app/pages/client/home/Payment";
 // Components
 
 // Pages
-const Dashboard = React.lazy(() => import("@app/app/pages/admin/Dashboard"));
+const Dashboard = React.lazy(() => import("@app/app/pages/admin/dashboard/Dashboard"));
 const AuthUser = React.lazy(() => import("@app/app/pages/client/auth/AuthUser"));
 const CheckOtp = React.lazy(() => import("@app/app/pages/client/auth/CheckOtp"));
 const ChangePass = React.lazy(() => import("@app/app/pages/client/auth/ChangePass"));
@@ -111,9 +111,9 @@ const AppRouter: React.FC = () => {
         <Route path="manage-seller">
           <Route path="role" element={<RoleManage />} />
         </Route>
-       <Route path="ships">
-        <Route index element={<AdminShipOverview />}></Route>
-       </Route>
+        <Route path="ships">
+          <Route index element={<AdminShipOverview />}></Route>
+        </Route>
         <Route path="reports">
           {/* <Route path="profit" element={<AdminReportProfit />} /> */}
           <Route path="sales" element={<AdminReportSales />} />

@@ -1196,13 +1196,48 @@
         },
         "select": {
           "pages": "Pages",
-          "all":  "All",
+          "all": "All",
           "products": "Product pages",
           "shop": "Shop pages",
           "devices": "Devices",
           "phone": "Phone",
           "computer": "Computer"
         }
+      }
+    },
+    "dashboard": {
+      "profile_completed": "Seller's profile completion",
+      "today": "Today",
+      "this_month": "This month",
+      "this_year": "This year",
+      "recent_act": "Recent Activities",
+      "all": "All",
+      "pending_orders": "ORDERS PENDING PROCESSING",
+      "title": {
+        "account_store_info": "Account & store information",
+        "warehouse_address": "Warehouse address",
+        "legal_paperwork": "Legal paperwork",
+        "profile_act": "Profile activation",
+        "bank_account": "Bank account",
+        "revenue": "Revenue",
+        "new_orders": "New Orders",
+        "refund_orders": "Refund Orders",
+        "cancelled_orders": "Cancelled Orders",
+        "awaiting_confirmation": "Awaiting Confirmation",
+        "in_progress": "In Progress",
+        "in_transit": "In Transit",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      },
+      "caption": {
+        "provide": "Please provide",
+        "complete_all": "Complete all requirements to activate the profile."
+      },
+      "link_title": {
+        "warehouse_address": "pick-up and return warehouse address."
+      },
+      "status": {
+        "completed": "Completed!"
       }
     }
   }

@@ -1196,13 +1196,48 @@
         },
         "select": {
           "pages": "Trang",
-          "all":  "Tất cả",
+          "all": "Tất cả",
           "products": "Các trang sản phẩm",
           "shop": "Trang gian hàng",
           "devices": "Thiết bị",
           "phone": "Điện thoại",
           "computer": "Máy tính"
         }
+      }
+    },
+    "dashboard": {
+      "profile_completed": "Hồ sơ nhà bán đã hoàn thành",
+      "today": "Hôm nay",
+      "this_month": "Tháng này",
+      "this_year": "Năm nay",
+      "recent_act": "Hoạt động gần đây",
+      "all": "Tất cả",
+      "pending_orders": "ĐƠN HÀNG CHỜ XỬ LÝ",
+      "title": {
+        "account_store_info": "Tài khoản & thông tin cửa hàng",
+        "warehouse_address": "Địa chỉ kho hàng",
+        "legal_paperwork": "Giấy tờ pháp lý",
+        "profile_act": "Kích hoạt hồ sơ",
+        "bank_account": "Tài khoản ngân hàng",
+        "revenue": "Doanh thu",
+        "new_orders": "Đơn hàng mới",
+        "refund_orders": "Đơn hàng trả",
+        "cancelled_orders": "Đơn hủy",
+        "awaiting_confirmation": "Chờ xác nhận",
+        "in_progress": "Đang xử lý",
+        "in_transit": "Đang vận chuyển",
+        "delivered": "Đã giao hàng",
+        "cancelled": "Đã hủy"
+      },
+      "caption": {
+        "provide": "Vui lòng cung cấp",
+        "complete_all": "Hoàn thành tất cả yêu cầu để có thể kích hoạt hồ sơ."
+      },
+      "link_title": {
+        "warehouse_address": "địa chỉ kho lấy và trả hàng"
+      },
+      "status": {
+        "completed": "Hoàn thành!"
       }
     }
   }
