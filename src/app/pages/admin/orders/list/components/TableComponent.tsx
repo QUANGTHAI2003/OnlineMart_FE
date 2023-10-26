@@ -128,16 +128,15 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
         );
       },
     },
-
     {
       title: t("admin_shop.orders.list.table.action"),
       key: "action",
       align: "center",
       render: (_, record: any) => (
         <Space size="middle" direction="vertical">
-          <Link to={`edit/${record.id}`}>
+          <Link to={`/admin/shop/orders/${record.id}`}>
             <Button type="primary" ghost className="w-full">
-              {t("admin_shop.orders.list.table.print")}
+              {t("admin_shop.orders.list.table.detail")}
             </Button>
           </Link>
         </Space>

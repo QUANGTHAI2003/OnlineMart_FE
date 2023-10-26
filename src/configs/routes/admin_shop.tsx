@@ -156,16 +156,19 @@ export const adminShopRoutes: ISidebarMenu[] = [
     title: "admin_shop.sidebar.dev_center",
     key: "development_center",
     url: "/admin/shop/dev_center",
+    permission: "View reports",
     icon: <AreaChartOutlined />,
     children: [
       {
         title: "admin_shop.sidebar.biz_efficiency",
         key: "biz_efficiency",
+        permission: "View reports",
         url: "/admin/shop/dev_center/biz_efficiency",
       },
       {
         title: "admin_shop.sidebar.traffic_website",
         key: "traffic_website",
+        permission: "View reports",
         url: "/admin/shop/dev_center/traffic_website",
       },
     ],

@@ -125,7 +125,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
 
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange,
+    onChange: onSelectChange, 
   };
   const hasSelected = selectedRowKeys.length > 0;
 

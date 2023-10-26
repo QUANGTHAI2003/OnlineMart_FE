@@ -41,6 +41,7 @@ const SwitchPageAdmin = React.lazy(() => import("@app/app/pages/admin/auth/Switc
 const SigninAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SigninAdmin"));
 const SignupAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SignupAdmin"));
 const AdminOrderList = React.lazy(() => import("@app/app/pages/admin/orders/list/Order"));
+const AdminOrderDetail = React.lazy(() => import("@app/app/pages/admin/orders/detail/OrderDetail"));
 const AdminProductList = React.lazy(() => import("@app/app/pages/admin/products/list/Product"));
 const AdminCategory = React.lazy(() => import("@app/app/pages/admin/products/categories/Category"));
 const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/products/review/ProductReview"));
@@ -105,6 +106,7 @@ const AppRouter: React.FC = () => {
         <Route path="suppliers" element={<AdminSupplier />} />
         <Route path="orders">
           <Route index element={<AdminOrderList />} />
+          <Route path=":id" element={<AdminOrderDetail />} />
           <Route path="bill" element={<div>Order Bill</div>} />
         </Route>
         <Route path="info-seller" element={<SellerInfo />} />

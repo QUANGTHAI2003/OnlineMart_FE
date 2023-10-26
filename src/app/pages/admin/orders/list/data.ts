@@ -45,6 +45,7 @@ export const OrderDataAdmin = [
     label_order: "X Chưa in phiếu",
     order_date: "12/08/2021  - 11:10:06",
     confirm_date: "12/08/2021  - 11:10:06",
+    type: "cod",  
     items: [
       {
         id: 1,
@@ -357,7 +358,7 @@ export const OrderDataAdmin = [
         grand_total: 138000,
         thumbnail_url:
           "https://salt.tikicdn.com/cache/200x200/ts/product/4d/07/69/fee34463b2c954eb24ef46604cbe6b8e.png",
-        current_seller: [
+        current_seller: [ 
           {
             id: 1,
             name: "Shop ty",
