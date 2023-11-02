@@ -15,7 +15,7 @@ const PaginateItem = () => {
   }, []);
 
   return (
-    <S.PaginateItem>
+    <S.SortPaginateItem>
       {loadingSkeletonCount ? (
         <PaginateSkeleton count={1} />
       ) : (
@@ -23,7 +23,7 @@ const PaginateItem = () => {
           <Pagination defaultCurrent={1} total={100} />
         </div>
       )}
-    </S.PaginateItem>
+    </S.SortPaginateItem>
   );
 };
 

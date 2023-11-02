@@ -1,6 +1,5 @@
 import ModalSelect from "@app/app/components/clients/SelectAddress/ModalSelect";
 import { PriceItem, SpreadPriceItem } from "@app/app/components/layouts/client/Sidebar/SortProductSidebar/components";
-import { formatCurrency } from "@app/utils/helper";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Space } from "antd";
@@ -21,45 +20,44 @@ const rating = [
   {
     id: 1,
     content: "Từ 1 sao",
+    value: 1,
   },
   {
     id: 2,
     content: "Từ 4 sao",
+    value: 4,
   },
   {
     id: 3,
     content: "Từ 5 sao",
-  },
-  {
-    id: 4,
-    content: "Từ 5 sao",
+    value: 5,
   },
 ];
 const price = [
   {
     id: 1,
-    lowest: formatCurrency(2000),
-    best: formatCurrency(2000),
+    lowest: 2000,
+    best: 2000,
   },
   {
     id: 2,
-    lowest: formatCurrency(20000),
-    best: formatCurrency(200000),
+    lowest: 20000,
+    best: 200000,
   },
   {
     id: 3,
-    lowest: formatCurrency(2000645645600),
-    best: formatCurrency(200787400500),
+    lowest: 2000645645600,
+    best: 200787400500,
   },
   {
     id: 4,
-    lowest: formatCurrency(2000645645600),
-    best: formatCurrency(200787400500),
+    lowest: 2000645645600,
+    best: 200787400500,
   },
   {
     id: 5,
-    lowest: formatCurrency(2000645645600),
-    best: formatCurrency(200787400500),
+    lowest: 2000645645600,
+    best: 200787400500,
   },
 ];
 const variant: any = [
@@ -294,7 +292,7 @@ const MainSortItem = () => {
               <Space direction="vertical">
                 <Space wrap>
                   {rating.map((item) => {
-                    return <RatingItem key={uuidv4()} content={item.content} />;
+                    return <RatingItem key={uuidv4()} value={item.value} />;
                   })}
                 </Space>
               </Space>
@@ -305,7 +303,7 @@ const MainSortItem = () => {
             <p className="price_title">{t("user.product_category_page.price")}</p>
             <div className="flex flex-row flex-wrap gap-2">
               {price.map((item) => {
-                return <PriceItem key={uuidv4()} lowest={item.lowest} best={item.best} />;
+                return <PriceItem key={uuidv4()} min={item.lowest} max={item.best} />;
               })}
             </div>
             <div className="spread_price flex flex-col gap-2">

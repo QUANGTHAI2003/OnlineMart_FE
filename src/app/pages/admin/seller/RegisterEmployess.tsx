@@ -26,12 +26,13 @@ const RegisterEmployess = () => {
   const handleCancel = () => {
     setOpen(false);
   };
-  type FieldType = {
-    name?: string;
-    email?: string;
-    phone?: number;
-    password?: string;
-  };
+  // type FieldType = {
+  //   name?: string;
+  //   email?: string;
+  //   phone?: number;
+  //   password?: string;
+  // };
+
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
@@ -87,7 +88,7 @@ const RegisterEmployess = () => {
           >
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item<FieldType>
+                <Form.Item
                   name={t("admin_shop.seller.register.form.name")}
                   label={t("admin_shop.seller.register.form.name")}
                   rules={[
@@ -101,7 +102,7 @@ const RegisterEmployess = () => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item<FieldType>
+                <Form.Item
                   name={t("admin_shop.seller.register.form.email")}
                   label={t("admin_shop.seller.register.form.email")}
                   rules={[{ required: true }, { type: "email" }]}
@@ -111,7 +112,7 @@ const RegisterEmployess = () => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item<FieldType>
+                <Form.Item
                   name="right"
                   label={t("admin_shop.seller.register.form.right")}
                   rules={[{ required: true }]}
@@ -135,7 +136,7 @@ const RegisterEmployess = () => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item<FieldType>
+                <Form.Item
                   name="position"
                   label={t("admin_shop.seller.register.form.position")}
                   rules={[{ required: true }]}
@@ -160,7 +161,7 @@ const RegisterEmployess = () => {
               </Col>
 
               <Col span={12}>
-                <Form.Item<FieldType>
+                <Form.Item
                   name={t("admin_shop.seller.register.form.phone")}
                   label={t("admin_shop.seller.register.form.phone")}
                   rules={[
@@ -177,7 +178,7 @@ const RegisterEmployess = () => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item<FieldType>
+                <Form.Item
                   name={t("admin_shop.seller.register.form.password")}
                   label={t("admin_shop.seller.register.form.password")}
                   rules={[

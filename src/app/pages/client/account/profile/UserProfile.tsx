@@ -1,6 +1,6 @@
 import { EditOutlined } from "@ant-design/icons";
-import facebookImg from "@app/app/assets/icons/facebook.png";
-import googleImg from "@app/app/assets/icons/google.png";
+import facebookImg from "@app/app/assets/images/facebook.png";
+import googleImg from "@app/app/assets/images/google.png";
 import { useDeleteUserAvatarMutation, useUpdateUserMutation } from "@app/store/slices/api/userApi";
 import { useAppSelector } from "@app/store/store";
 import { formatDate, isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
@@ -180,7 +180,7 @@ const UserProfile = () => {
               <Col xs={24} sm={24} md={24} lg={19} xl={18} className="col_rightProfile">
                 <Row gutter={[0, 12]}>
                   <Col span={24}>
-                    <Form.Item<FieldType>
+                    <Form.Item
                       label={t("user.account_user_page.name")}
                       name="full_name"
                       hasFeedback
@@ -201,7 +201,7 @@ const UserProfile = () => {
                   </Col>
 
                   <Col span={24}>
-                    <Form.Item<FieldType>
+                    <Form.Item
                       label={t("user.account_user_page.nickname")}
                       name="user_name"
                       hasFeedback
@@ -221,7 +221,7 @@ const UserProfile = () => {
               <Col className="col_bottomProfile">
                 <Row justify="start" gutter={[0, 12]}>
                   <Col span={24}>
-                    <Form.Item<FieldType>
+                    <Form.Item
                       label={t("user.account_user_page.birthday")}
                       name="birthday"
                       hasFeedback
@@ -234,7 +234,7 @@ const UserProfile = () => {
                     </Form.Item>
                   </Col>
                   <Col span={24}>
-                    <Form.Item<FieldType>
+                    <Form.Item
                       label={t("user.account_user_page.gender")}
                       name="gender"
                       labelCol={{ span: 6 }}

@@ -108,7 +108,7 @@ const OptionItem = () => {
               return (
                 <SwiperSlide key={item.id} className="swiper_slide">
                   <Checkbox className="checkbox">
-                    <RatingItem content={item.content} value={item.value} />
+                    <RatingItem value={item.value} />
                   </Checkbox>
                 </SwiperSlide>
               );
