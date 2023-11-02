@@ -496,6 +496,7 @@
       "products": "Sản phẩm",
       "product_list": "Danh sách sản phẩm",
       "product_create": "Tạo sản phẩm",
+      "product_edit": "Sửa sản phẩm",
       "product_review": "Quản lý đánh giá",
       "management": "Quản lý",
       "product_inventory": "Quản lý kho",
@@ -661,6 +662,8 @@
         "option": {
           "label": {
             "selling_price": "Giá bán",
+            "sale_price":"Giảm giá",
+            "quantity":"Số lượng",
             "product_code": "Mã sản phẩm",
             "add_variant": "Thêm lựa chọn hàng để giúp khách hàng tìm kiếm sản phẩm và dễ dàng thêm mới lựa chọn",
             "variant": "Tên lựa chọn {{count}}",
@@ -681,6 +684,8 @@
           },
           "placeholder": {
             "selling_price": "Vui lòng nhập giá bán",
+            "sale_price": "Vui lòng nhập giá giảm giá",
+            "quantity": "Vui lòng nhập số lượng",
             "product_code": "Vui lòng nhập mã sản phẩm",
             "variant_name": "Nhập tên lựa chọn",
             "variant_for": "Chọn lựa chọn cho {{name}}",

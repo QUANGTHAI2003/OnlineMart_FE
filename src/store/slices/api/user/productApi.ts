@@ -7,6 +7,7 @@ import baseQueryCustom from "../../baseQueryCustom";
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: baseQueryCustom,
+  keepUnusedDataFor: 1,
   endpoints: (builder) => ({
     // Get product in category page
     getProductDetail: builder.query<IProductDetail, number>({

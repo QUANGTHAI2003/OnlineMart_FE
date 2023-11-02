@@ -3,7 +3,7 @@ import { Button, Divider, Input, InputRef, Select, Space, message } from "antd";
 import { useRef, useState } from "react";
 
 interface ISelectedOrCreateProps {
-  initValue?: string[];
+  initValue?: any[];
   isMultiple?: boolean;
   placeholder: string;
   buttonText?: string;
@@ -11,13 +11,13 @@ interface ISelectedOrCreateProps {
 }
 
 const SelectOrCreate: React.FC<ISelectedOrCreateProps> = ({
-  initValue,
+  initValue = [],
   isMultiple,
   placeholder,
   buttonText = "Add item",
   onSelected,
 }) => {
-  const [items, setItems] = useState<string[]>(initValue || []);
+  const [items, setItems] = useState<string[]>(initValue);
 
   const [name, setName] = useState<string>("");
   const inputRef = useRef<InputRef | null>(null);
@@ -40,6 +40,7 @@ const SelectOrCreate: React.FC<ISelectedOrCreateProps> = ({
   return (
     <Select
       onChange={onSelected}
+      defaultValue={isMultiple && (initValue?.map((item) => ({ label: item, value: item })) as any)}
       mode={isMultiple ? "multiple" : undefined}
       placeholder={placeholder}
       dropdownRender={(menu) => (

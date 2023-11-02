@@ -1,3 +1,4 @@
+import { formatDateTime } from "@app/utils/helper";
 import { Button, Card, Col, Divider, Pagination, Row, Space } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -6,7 +7,7 @@ import { ProductTableDataName } from ".";
 
 interface IProductDataTabletProps {
   data: any;
-  showConfirm: (id: number) => void;
+  showConfirm: (id: number, name: string) => void;
 }
 
 const ProductDataTablet: React.FC<IProductDataTabletProps> = ({ data, showConfirm }) => {
@@ -15,15 +16,15 @@ const ProductDataTablet: React.FC<IProductDataTabletProps> = ({ data, showConfir
   return (
     <>
       <Row gutter={[16, 16]}>
-        {data.map((item: any) => {
+        {data?.map((item: any) => {
           return (
-            <Col key={item.id} xs={24} lg={12}>
+            <Col key={item?.id} xs={24} lg={12}>
               <Card
                 hoverable
                 actions={[
                   <Button
                     className="w-full border-none shadow-none text-red-500"
-                    onClick={() => showConfirm(data.id)}
+                    onClick={() => showConfirm(data?.id, item?.name)}
                     key="delete"
                   >
                     {t("admin_shop.product.list.table.delete")}
@@ -42,13 +43,13 @@ const ProductDataTablet: React.FC<IProductDataTabletProps> = ({ data, showConfir
                     <Col span={8}>
                       <Space direction="vertical">
                         <div className="secondary-description">{`${t("admin_shop.product.list.table.category")}:`}</div>
-                        {item.category}
+                        {item?.category}
                       </Space>
                     </Col>
                     <Col span={8}>
                       <Space direction="vertical">
                         <div className="secondary-description">{`${t("admin_shop.product.list.table.brand")}:`}</div>
-                        {item.brand}
+                        {item?.brand}
                       </Space>
                     </Col>
                     <Col span={8}>
@@ -56,7 +57,7 @@ const ProductDataTablet: React.FC<IProductDataTabletProps> = ({ data, showConfir
                         <div className="secondary-description">
                           {`${t("admin_shop.product.list.table.updated_at")}:`}
                         </div>
-                        {item.updated_at}
+                        {formatDateTime(item?.updated_at)}
                       </Space>
                     </Col>
                   </Row>

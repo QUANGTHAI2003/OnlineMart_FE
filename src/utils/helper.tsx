@@ -238,3 +238,44 @@ export function isEntityError(error: unknown): error is IEntityError {
     !(error.data instanceof Array)
   );
 }
+type ErrorMessage = {
+  [key: number]: string;
+};
+
+export const handleApiError = (err: any, titleMessage = "Error occurred"): void => {
+  const errorStatus = err.status || 500;
+
+  const errorMessages: ErrorMessage = {
+    400: "Bad Request",
+    401: "Unauthorized",
+    403: "Forbidden",
+    404: "Not Found",
+    429: "Too Many Requests",
+    500: "Internal Server Error",
+  };
+
+  const errorMessage = errorMessages[errorStatus] || "Unknown Error";
+
+  switch (errorStatus) {
+    case 400:
+      notifyError(errorMessage, "The request is invalid. Please check your input.");
+      break;
+    case 401:
+      notifyError(errorMessage, "Authentication failed. Please check your credentials.");
+      break;
+    case 403:
+      notifyError(errorMessage, "Access to this resource is forbidden.");
+      break;
+    case 404:
+      notifyError(errorMessage, "The requested resource was not found.");
+      break;
+    case 429:
+      notifyError(errorMessage, "Too many requests. Please try again later.");
+      break;
+    case 500:
+      notifyError(errorMessage, "Internal server error. Please try again later.");
+      break;
+    default:
+      notifyError(titleMessage, errorMessage);
+  }
+};

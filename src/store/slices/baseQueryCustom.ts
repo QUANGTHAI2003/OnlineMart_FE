@@ -16,8 +16,10 @@ const baseQuery = fetchBaseQuery({
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
+
     return headers;
   },
+  timeout: 10000,
 });
 
 const baseQueryCustom: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (

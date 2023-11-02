@@ -2,6 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { adminShopRoutes } from "@app/configs/routes/admin_shop";
 import { useDebounce, useResponsive } from "@app/hooks";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
+import { useAppSelector } from "@app/store/store";
 import { Input, Layout, Menu } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -59,6 +60,8 @@ const AdminMainSidebar: React.FC<IAdminMainSidebarProps> = ({ isCollapsed }) => 
   const location = useLocation();
   const { isDesktop, mobileOnly, tabletOnly } = useResponsive();
 
+  const shopData = useAppSelector((state) => state.userState.user)?.shop;
+
   const [searchSidebar, setSearchSidebar] = useState<string>("");
   const debouncedSearchSidebar = useDebounce(searchSidebar, 200);
   const [openKeys, setOpenKeys] = useState<string[] | undefined>([""]);
@@ -112,12 +115,15 @@ const AdminMainSidebar: React.FC<IAdminMainSidebarProps> = ({ isCollapsed }) => 
       <S.LogoStyle className="logo">
         <Link to="">
           <img
-            src="https://salt.tikicdn.com/cache/w32/ts/sellercenterFE/93/76/03/2a08fa4ae6a024a752fbba87d145bce8.png"
-            alt="Seller Center"
+            src={
+              shopData?.avatar ||
+              "https://salt.tikicdn.com/cache/w32/ts/sellercenterFE/93/76/03/2a08fa4ae6a024a752fbba87d145bce8.png"
+            }
+            alt={shopData?.name}
             width="32"
             height="32"
           />
-          <h1>Seller Center</h1>
+          <h1>{shopData?.name}</h1>
         </Link>
       </S.LogoStyle>
       {(isDesktop ? !isCollapsed : isCollapsed) && (

@@ -6,7 +6,7 @@ import countryList from "country-list";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as S from "../ProductCreate.styles";
+import * as S from "../ProductEdit.styles";
 
 import { SelectCategory } from ".";
 
@@ -16,7 +16,7 @@ const ProductGeneral = ({ errorForm }: any) => {
   const shopId = useAppSelector((state) => state.userState.user)?.shop?.id;
 
   const { data: categoriesList } = useGetCategoryListWithChildrenQuery(shopId);
-  const { data: supplier, isLoading: loadingSupplier } = useGetSupplierForSelectQuery(shopId);
+  const { data: supplier } = useGetSupplierForSelectQuery(shopId);
 
   const [countName, setCountName] = useState<number>(0);
 
@@ -74,7 +74,7 @@ const ProductGeneral = ({ errorForm }: any) => {
         rules={[
           {
             validator: (_, value) => {
-              if (!value || value.length === 0) {
+              if (!value || value?.length === 0) {
                 return Promise.reject(new Error(t("admin_shop.product.create.basic.rules.category_required")));
               }
               return Promise.resolve();
@@ -104,7 +104,6 @@ const ProductGeneral = ({ errorForm }: any) => {
               onSearch={onSearch}
               filterOption={filterOption}
               options={supplier}
-              loading={loadingSupplier}
             />
           </Form.Item>
         </Col>

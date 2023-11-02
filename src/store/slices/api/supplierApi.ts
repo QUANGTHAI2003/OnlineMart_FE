@@ -33,6 +33,26 @@ export const supplierApi = createApi({
         return response.data;
       },
     }),
+    getSupplierForSort: builder.query<any, any>({
+      query: (shopId) => {
+        return {
+          url: `suppliers/shop/${shopId}/sort`,
+        };
+      },
+      transformResponse: (response: { data: any }) => {
+        return response.data;
+      },
+    }),
+    getSupplierForSelect: builder.query<any, any>({
+      query: (shopId) => {
+        return {
+          url: `suppliers/shop/${shopId}/select`,
+        };
+      },
+      transformResponse: (response: { data: any }) => {
+        return response.data;
+      },
+    }),
     // Thêm một supplier
     createSupplier: builder.mutation<ISupplier, any>({
       query(data) {
@@ -84,6 +104,8 @@ export const {
   useCreateSupplierMutation,
   useUpdateSupplierMutation,
   useGetSupplierOnlyQuery,
+  useGetSupplierForSortQuery,
+  useGetSupplierForSelectQuery,
   useDeleteSupplierMutation,
   useDeleteMultiSupplierMutation,
 } = supplierApi;

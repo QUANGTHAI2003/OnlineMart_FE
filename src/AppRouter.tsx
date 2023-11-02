@@ -43,9 +43,10 @@ const SignupAdmin = React.lazy(() => import("@app/app/pages/admin/auth/SignupAdm
 const AdminOrderList = React.lazy(() => import("@app/app/pages/admin/orders/list/Order"));
 const AdminOrderDetail = React.lazy(() => import("@app/app/pages/admin/orders/detail/OrderDetail"));
 const AdminProductList = React.lazy(() => import("@app/app/pages/admin/products/list/Product"));
+const AdminProductCreate = React.lazy(() => import("@app/app/pages/admin/products/create/ProductCreate"));
+const AdminProductEdit = React.lazy(() => import("@app/app/pages/admin/products/edit/ProductEdit"));
 const AdminCategory = React.lazy(() => import("@app/app/pages/admin/products/categories/Category"));
 const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/products/review/ProductReview"));
-const AdminProductCreate = React.lazy(() => import("@app/app/pages/admin/products/create/ProductCreate"));
 const AdminSupplier = React.lazy(() => import("@app/app/pages/admin/products/suppliers/Supplier"));
 const AdminProductInventory = React.lazy(() => import("@app/app/pages/admin/products/inventory/ProductInventory"));
 const AdminProductPrintQRCode = React.lazy(() => import("@app/app/pages/admin/products/print_qr_code/PrintQRCode"));
@@ -98,6 +99,7 @@ const AppRouter: React.FC = () => {
         <Route path="products">
           <Route index element={<AdminProductList />} />
           <Route path="create" element={<AdminProductCreate />} />
+          <Route path="edit/:id" element={<AdminProductEdit />} />
           <Route path="review" element={<AdminProductReview />} />
           <Route path="inventory" element={<AdminProductInventory />} />
           <Route path="print_qrcode" element={<AdminProductPrintQRCode />} />

@@ -1,9 +1,9 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Form, Upload, UploadFile, UploadProps } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as S from "../ProductCreate.styles";
+import * as S from "../ProductEdit.styles";
 
 import { ProductOptionPrice, ProductTableVariants } from ".";
 
@@ -12,10 +12,15 @@ const { Dragger } = Upload;
 const ProductOptions = ({ form }: any) => {
   const { t } = useTranslation();
 
-  const [isVariant, setIsVariant] = useState<boolean>(true);
+  const [isVariant, setIsVariant] = useState<boolean>(false);
   const [currentVariantValues, setCurrentVariantValues] = useState<any>({});
   const [, setFile] = useState<UploadFile>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  useEffect(() => {
+    const isVariant = form.getFieldValue("isVariant");
+    setIsVariant(isVariant);
+  }, [form]);
 
   const props: UploadProps = {
     onRemove: () => {
@@ -26,8 +31,24 @@ const ProductOptions = ({ form }: any) => {
 
       return false;
     },
-    listType: "picture-card",
+    accept: ".jpg,.jpeg,.png,.webp",
+    listType: "picture",
+    defaultFileList: [
+      { uid: "-1", name: "product_thumbnail.jpg", status: "done", url: form.getFieldValue("product_image") },
+    ],
   };
+
+  useEffect(() => {
+    const gallery = form.getFieldValue("gallery_images");
+    const defaultFileListGallery = gallery?.map((image: any, index: number) => ({
+      uid: index,
+      name: image,
+      status: "done",
+      url: image,
+    }));
+
+    setFileList(defaultFileListGallery);
+  }, [form]);
 
   const propsMultiple: UploadProps = {
     multiple: true,
@@ -53,8 +74,6 @@ const ProductOptions = ({ form }: any) => {
   };
 
   const normFile = (e: any) => {
-    console.log("Upload event:", e);
-
     if (Array.isArray(e)) {
       return e;
     }
@@ -74,7 +93,7 @@ const ProductOptions = ({ form }: any) => {
       {isVariant && (
         <S.ProductSectionWrapper>
           <div className="title">{t("admin_shop.product.create.option.label.variant_operation")}</div>
-          {<ProductTableVariants form={form} currentVariantValues={currentVariantValues} />}
+          <ProductTableVariants form={form} currentVariantValues={currentVariantValues} />
         </S.ProductSectionWrapper>
       )}
       <S.ProductSectionWrapper>
@@ -91,7 +110,7 @@ const ProductOptions = ({ form }: any) => {
           valuePropName="file"
           getValueFromEvent={normFile}
         >
-          <Dragger {...props} accept=".jpg,.jpeg,.png,.webp">
+          <Dragger {...props}>
             <p className="om-upload-drag-icon">
               <UploadOutlined />
             </p>
@@ -102,7 +121,7 @@ const ProductOptions = ({ form }: any) => {
         <Form.Item
           label={t("admin_shop.product.create.option.label.gallery_images")}
           name="gallery_images"
-          valuePropName="fileList"
+          valuePropName="gallery_images"
           getValueFromEvent={(e) => {
             return e?.fileList;
           }}

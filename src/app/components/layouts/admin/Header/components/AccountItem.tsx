@@ -16,6 +16,7 @@ const AccountItem = () => {
   const navigate = useNavigate();
 
   const user = useAppSelector((state) => state.userState.user);
+
   const dispatch = useAppDispatch();
 
   const [logout, { isLoading }] = useLogoutMutation();

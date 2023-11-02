@@ -1,19 +1,21 @@
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
 import { useResponsive } from "@app/hooks";
-import { useAddProductMutation } from "@app/store/slices/api/admin/productApi";
-import { setFormError } from "@app/store/slices/redux/admin/productAdminSlice";
-import { useAppDispatch, useAppSelector } from "@app/store/store";
+import { useGetProductDetailQuery, useUpdateProductMutation } from "@app/store/slices/api/admin/productApi";
+import { useAppSelector } from "@app/store/store";
 import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
-import { Badge, Button, Card, Col, Collapse, Form, message, Row, Spin, Steps, Typography } from "antd";
+import { Badge, Button, Card, Col, Collapse, Form, message, Row, Spin, Steps, Tag, Typography } from "antd";
 import { FormInstance } from "antd/lib/form";
 import { TFunction } from "i18next";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { ProductDescription, ProductGeneral, ProductOptions } from "./components";
-import * as S from "./ProductCreate.styles";
+import { ProductDescription, ProductGeneral, ProductOptions } from "../edit/components";
+import * as S from "../edit/ProductEdit.styles";
+import { getStatusTagColor } from "../list/components/ProductTableDataName";
+
+const baseImage = import.meta.env.VITE_BASE_IMAGE_URL + "/";
 
 interface IInputData {
   [key: string]: number | string;
@@ -24,37 +26,38 @@ interface ITransformedRecord {
 }
 
 const collapseData = (t: TFunction<"translation", undefined>, form: FormInstance, errorForm: any) => {
+  // TODO: Add force render and make variant work
   const items = [
     {
       key: "1",
       label: <b>{t("admin_shop.product.create.basic_info")}</b>,
       children: <ProductGeneral errorForm={errorForm} />,
-      forceRender: true,
+      // forceRender: true,
     },
     {
       key: "2",
       label: <b>{t("admin_shop.product.create.product_desc")}</b>,
       children: <ProductDescription form={form} errorForm={errorForm} />,
-      forceRender: true,
+      // forceRender: true,
     },
     {
       key: "3",
       label: <b>{t("admin_shop.product.create.option_operaton")}</b>,
       children: <ProductOptions form={form} errorForm={errorForm} />,
-      forceRender: true,
+      // forceRender: true,
     },
   ];
 
   return items;
 };
 
-const ProductCreate = () => {
+const ProductEdit = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { isSmallDesktop } = useResponsive();
   const [form] = Form.useForm();
 
-  const dispatch = useAppDispatch();
+  const { id } = useParams();
 
   const [expandCollapse, setExpandCollapse] = useState(false);
   const [activeCollapse, setActiveCollapse] = useState<string[]>([]);
@@ -63,7 +66,14 @@ const ProductCreate = () => {
 
   const shopId = useAppSelector((state) => state.userState.user)?.shop?.id;
 
-  const [addProduct, { isLoading, error }] = useAddProductMutation();
+  const productId: number = parseInt(id || "0");
+  const { data: product_detail, isFetching } = useGetProductDetailQuery(productId, {
+    skip: !productId,
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  });
+
+  const [updateProduct, { isLoading, error }] = useUpdateProductMutation();
 
   const handleExpandCollapse = () => {
     setExpandCollapse(!expandCollapse);
@@ -111,10 +121,11 @@ const ProductCreate = () => {
     for (const variant in variants) {
       const variantName = variants[variant].variant[0];
       const variantValues = variants[variant].variant[1];
+
       const variantValuesObject: Record<string, any> = {};
 
       for (let i = 0; i < variantValues.length; i++) {
-        variantValuesObject[variantValues[i]] = null;
+        variantValuesObject[variantValues[i]] = compare[variantValues[i]];
       }
 
       variantFormated[variantName] = {
@@ -182,11 +193,10 @@ const ProductCreate = () => {
     });
 
     const isNormal = !!data.price;
-
     const basis_info = {
       name: data.name,
-      category_id: data.category_id,
-      supplier_id: data.supplier_id,
+      category: data.category_id,
+      brand: data.supplier_id,
       origin: data.origin,
     };
 
@@ -195,7 +205,7 @@ const ProductCreate = () => {
       description: data.description,
     };
 
-    const option_operation_normal: any = {
+    const option_operation_normal = {
       price: data.price,
       sale_price: data.sale_price,
       stock: data.stock,
@@ -205,10 +215,6 @@ const ProductCreate = () => {
     const option_operation_variants: any = {
       variants: createProductVariants(data, newtransformedData),
     };
-    console.log(
-      "🚀 ~ file: ProductCreate.tsx:208 ~ handleSubmit ~ option_operation_variants: any.variants:",
-      option_operation_variants.variants
-    );
 
     const product = {
       basis_info,
@@ -226,12 +232,16 @@ const ProductCreate = () => {
       formData.append("type", isNormal ? "normal" : "variant");
       formData.append("shop_id", shopId);
       formData.append("name", product.basis_info.name);
-      formData.append("category_id", product.basis_info.category_id.at(-1));
-      formData.append("supplier_id", product.basis_info.supplier_id);
+      formData.append("category_id", product.basis_info.category);
+      formData.append("supplier_id", product.basis_info.brand);
       formData.append("origin", product.basis_info.origin);
       formData.append("description", product.product_desc.description);
       formData.append("status", product.status);
-      formData.append("thumbnail_url", product.product_image);
+
+      // !FIX: can't upload thumbnail in edit
+      if (!(typeof data.product_image === "string" && /^https?:\/\//.test(data.product_image))) {
+        formData.append("thumbnail_url", data.product_image);
+      }
 
       if (galleryArray.length > 0) {
         galleryArray.forEach((file: any, index: number) => {
@@ -242,16 +252,22 @@ const ProductCreate = () => {
       if (isNormal) {
         formData.append("regular_price", product.option_operation.price);
         formData.append("sale_price", product.option_operation.sale_price);
-        formData.append("stock", product.option_operation.stock);
+        formData.append("stock_qty", product.option_operation.stock);
         formData.append("sku", product.option_operation.product_code);
-      } else {
-        formData.append("variants", JSON.stringify(product.option_operation.variants));
+      }
+      formData.append("variants", JSON.stringify(product.option_operation.variants));
+
+      const values: any = {};
+      for (const pair of formData.entries()) {
+        values[pair[0]] = pair[1];
+        console.log(pair[0] + ", " + pair[1]);
       }
 
-      await addProduct(formData).unwrap();
-      notifySuccess("Added product", "Successfully");
-
-      form.resetFields();
+      await updateProduct({
+        body: values,
+        id: productId,
+      }).unwrap();
+      notifySuccess("Success", "Updated successfully");
 
       isLoading || navigate("/admin/shop/products");
     } catch (err: any) {
@@ -269,20 +285,36 @@ const ProductCreate = () => {
     return null;
   }, [error]);
 
-  useEffect(() => {
-    dispatch(setFormError(errorForm));
-  }, [dispatch, errorForm]);
-
   const handleSubmitFailed = () => {
     message.error("Please complete the required information");
   };
+
+  useEffect(() => {
+    form.setFieldsValue({
+      name: product_detail?.name,
+      category_id: product_detail?.all_category_id,
+      supplier_id: 1,
+      origin: product_detail?.origin,
+      description: "Product Details",
+      price: product_detail?.price,
+      sale_price: product_detail?.sale_price,
+      stock: product_detail?.stock,
+      product_code: product_detail?.sku,
+      product_image: baseImage + product_detail?.thumbnail_url,
+      gallery_images: product_detail?.gallery.map((url: string) => baseImage + url),
+      isVariant: product_detail?.isVariant,
+      variants: product_detail?.variants,
+      variant_values: product_detail?.variant_values,
+    });
+  }, [product_detail, form]);
+  const [statusColor, statusText] = getStatusTagColor(product_detail?.status, t);
 
   const handleValuesChange = (_: any, allValues: any) => {
     setFieldValue(allValues);
   };
 
   return (
-    <Spin spinning={isLoading}>
+    <Spin spinning={isFetching || isLoading}>
       <S.ProductCreateStyle>
         <header className="bg-white p-6">
           <AdminBreadcrumb />
@@ -290,8 +322,11 @@ const ProductCreate = () => {
             <Link to="/admin/shop/products">
               <ArrowLeftOutlined className="text-lg text-black" />
             </Link>
-            <Typography.Title className="mb-0" level={3}>
-              {t("admin_shop.sidebar.product_create")}
+            <Typography.Title className="mb-0" level={4}>
+              {product_detail?.name}
+              <Tag className="ml-3" color={statusColor}>
+                {statusText}
+              </Tag>
             </Typography.Title>
           </section>
         </header>
@@ -305,7 +340,6 @@ const ProductCreate = () => {
             onFinish={handleSubmit}
             onFinishFailed={handleSubmitFailed}
             autoComplete="off"
-            initialValues={{ sale_price: 0, stock: 0 }}
             className="form-with-bold-label"
           >
             <Row gutter={16}>
@@ -332,9 +366,9 @@ const ProductCreate = () => {
                           type="primary"
                           htmlType="submit"
                           ghost
-                          onClick={() => form.setFieldsValue({ status: "draft" })}
+                          onClick={() => form.setFieldsValue({ status: product_detail?.status })}
                         >
-                          {t("admin_shop.product.create.save_draft")}
+                          Cập nhật
                         </Button>
                       </Form.Item>
                       <Form.Item name="status">
@@ -375,15 +409,13 @@ const ProductCreate = () => {
                     <StepComponent t={t} form={form} current={current} onChange={onChange} fieldValue={fieldValue} />
                   </Card>
                 ) : (
-                  <Steps
+                  <StepComponent
                     direction="vertical"
+                    t={t}
+                    form={form}
                     current={current}
                     onChange={onChange}
-                    items={[
-                      { title: "" },
-                      { title: t("admin_shop.product.create.product_desc") },
-                      { title: t("admin_shop.product.create.option_operaton") },
-                    ]}
+                    fieldValue={fieldValue}
                   />
                 )}
               </Col>
@@ -395,9 +427,9 @@ const ProductCreate = () => {
   );
 };
 
-export default ProductCreate;
+export default ProductEdit;
 
-const StepComponent = ({ t, form, current, onChange, fieldValue }: any) => {
+const StepComponent: React.FC<any> = ({ t, form, current, onChange, fieldValue }, props) => {
   const [errorCounts, setErrorCounts] = useState({
     basis: 0,
     desc: 0,
@@ -407,14 +439,23 @@ const StepComponent = ({ t, form, current, onChange, fieldValue }: any) => {
   useEffect(() => {
     const getFieldsError = (fields: string[]) => form.getFieldsError(fields);
 
-    const basisCount = getFieldsError(["name", "category_id", "supplier_id", "origin"]).filter(
+    const basisCount = getFieldsError(["name", "category", "brand", "origin"]).filter(
       (error: any) => error.errors.length > 0
     ).length;
 
     const descCount = getFieldsError(["video", "description"]).filter((error: any) => error.errors.length > 0).length;
-    const optionCount = getFieldsError(["price", "sale_price", "product_code", "stock", "product_image"]).filter(
-      (error: any) => error.errors.length > 0
-    ).length;
+    const optionCount = getFieldsError([
+      "price",
+      "product_code",
+      "operation",
+      "weight",
+      "length_width_height",
+      "length",
+      "height",
+      "width",
+      "product_image",
+      "gallery_images",
+    ]).filter((error: any) => error.errors.length > 0).length;
 
     setErrorCounts((prevCounts) => ({
       ...prevCounts,
@@ -445,5 +486,7 @@ const StepComponent = ({ t, form, current, onChange, fieldValue }: any) => {
     },
   ];
 
-  return <Steps direction="vertical" size="small" current={current} onChange={onChange} items={stepsConfig} />;
+  return (
+    <Steps {...props} direction="vertical" size="small" current={current} onChange={onChange} items={stepsConfig} />
+  );
 };

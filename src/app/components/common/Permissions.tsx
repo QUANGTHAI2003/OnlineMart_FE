@@ -14,7 +14,7 @@ interface ICanProps {
   permissions?: Permission | Permission[];
 }
 
-const checkMatch = (userPermissions: Permission[], canProps: ICanProps) => {
+export const checkMatch = (userPermissions: Permission[], canProps: ICanProps) => {
   let match = false;
   const { permissions = [] } = canProps;
   const permissionsArr = Array.isArray(permissions) ? permissions : [permissions];

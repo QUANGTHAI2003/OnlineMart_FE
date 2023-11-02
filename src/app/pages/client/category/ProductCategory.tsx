@@ -104,6 +104,8 @@ const ProductCategory = () => {
     },
     {
       skip: !id,
+      refetchOnMountOrArgChange: true,
+      refetchOnReconnect: true,
     }
   );
 

@@ -1,6 +1,5 @@
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import SelectOrCreate from "@app/app/components/common/Select/SelectOrCreate";
-import { useAppSelector } from "@app/store/store";
 import { Button, Col, Form, Input, InputNumber, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,11 +13,36 @@ interface IOptionPrice {
 
 const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVariant, setCurrentVariantValues }) => {
   const { t } = useTranslation();
+  console.log({ isVariant });
 
   const [dynamicFormName, setDynamicFormName] = useState<string[]>([]);
   const [currentVariants, setCurrentVariants] = useState<{ [key: string]: string }>({});
 
-  const errorForm = useAppSelector((state) => state.productAdmin.errorForm);
+  useEffect(() => {
+    const variants = form.getFieldValue("variants");
+
+    if (variants && variants.length > 0) {
+      const variants = form.getFieldValue("variants");
+      if (variants && variants.length > 0) {
+        const dynamicFormName = variants.map((variant: any) => `variant-${variant.key + 1}`);
+        setDynamicFormName(dynamicFormName);
+
+        const currentVariants: any = {};
+
+        variants.forEach((variant: any, index: number) => {
+          currentVariants[`variant-${index + 1}`] = variant.variation_name;
+
+          form.setFieldsValue({
+            [`product_code_variant-${index + 1}`]: variant.variation_value.map(
+              (item: any) => item.variation_value_name
+            ),
+            [`variant-${index + 1}`]: variant.variation_name,
+          });
+        });
+        setCurrentVariants(currentVariants);
+      }
+    }
+  }, [form]);
 
   const maxDynamicForms = 2;
 
@@ -44,6 +68,7 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
     form.setFieldsValue({
       [`product_code_${field}`]: content,
     });
+
     setCurrentVariantValues((prevValues: any) => ({ ...prevValues, [field]: content }));
   };
 
@@ -70,46 +95,49 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
   }, [dynamicFormName.length, setIsVariant]);
 
   const renderVariantFields = () => {
-    return dynamicFormName.map((field: string, index: number) => (
-      <React.Fragment key={field}>
-        <Col span={11}>
-          <Form.Item
-            hasFeedback
-            label={t("admin_shop.product.create.option.label.variant", { count: index + 1 })}
-            name={field}
-            colon={false}
-            rules={[{ required: true, message: t("admin_shop.product.create.option.rules.variant_required") }]}
-          >
-            <Input
-              type="text"
-              placeholder="Enter variant"
-              onChange={(e) => handleSelectedVariant(field, e.target.value)}
-            />
-          </Form.Item>
-        </Col>
-        <Col span={11}>
-          {currentVariants[field] && (
+    return dynamicFormName.map((field: string, index: number) => {
+      return (
+        <React.Fragment key={field}>
+          <Col span={11}>
             <Form.Item
               hasFeedback
-              label={t("admin_shop.product.create.option.label.variant_for", { name: currentVariants[field] })}
-              name={`product_code_${field}`}
+              label={t("admin_shop.product.create.option.label.variant", { count: index + 1 })}
+              name={field}
               colon={false}
+              rules={[{ required: true, message: t("admin_shop.product.create.option.rules.variant_required") }]}
             >
-              <SelectOrCreate
-                isMultiple
-                placeholder={t("admin_shop.product.create.option.placeholder.variant_for", {
-                  name: currentVariants[field],
-                })}
-                onSelected={(content: any) => handleGetCurrentVariantValue(content, field)}
+              <Input
+                type="text"
+                placeholder="Enter variant"
+                onChange={(e) => handleSelectedVariant(field, e.target.value)}
               />
             </Form.Item>
-          )}
-        </Col>
-        <Col span={2} className="text-right">
-          <DeleteOutlined className="text-red-500 text-lg" onClick={() => handleDeleteVariant(field)} />
-        </Col>
-      </React.Fragment>
-    ));
+          </Col>
+          <Col span={11}>
+            {currentVariants[field] && (
+              <Form.Item
+                hasFeedback
+                label={t("admin_shop.product.create.option.label.variant_for", { name: currentVariants[field] })}
+                name={`product_code_${field}`}
+                colon={false}
+              >
+                <SelectOrCreate
+                  isMultiple
+                  initValue={form.getFieldValue(`product_code_${field}`)}
+                  placeholder={t("admin_shop.product.create.option.placeholder.variant_for", {
+                    name: currentVariants[field],
+                  })}
+                  onSelected={(content: any) => handleGetCurrentVariantValue(content, field)}
+                />
+              </Form.Item>
+            )}
+          </Col>
+          <Col span={2} className="text-right">
+            <DeleteOutlined className="text-red-500 text-lg" onClick={() => handleDeleteVariant(field)} />
+          </Col>
+        </React.Fragment>
+      );
+    });
   };
 
   const isAddButtonDisabled = dynamicFormName.length < maxDynamicForms;
@@ -136,8 +164,6 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
                 name="price"
                 colon={false}
                 rules={[{ required: true, message: t("admin_shop.product.create.option.rules.selling_price") }]}
-                validateStatus={errorForm?.regular_price && "error"}
-                help={errorForm?.regular_price && errorForm?.regular_price[0]}
               >
                 <InputNumber
                   className="block"
@@ -154,8 +180,6 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
                 label={t("admin_shop.product.create.option.label.sale_price")}
                 name="sale_price"
                 colon={false}
-                validateStatus={errorForm?.sale_price && "error"}
-                help={errorForm?.sale_price && errorForm?.sale_price[0]}
               >
                 <InputNumber
                   className="block"
@@ -172,21 +196,19 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
                 label={t("admin_shop.product.create.option.label.quantity")}
                 name="stock"
                 colon={false}
-                validateStatus={errorForm?.stock && "error"}
-                help={errorForm?.stock && errorForm?.stock[0]}
               >
-                <Input type="text" placeholder={t("admin_shop.product.create.option.placeholder.quantity")} />
+                <InputNumber
+                  className="w-full"
+                  placeholder={t("admin_shop.product.create.option.placeholder.quantity")}
+                />
               </Form.Item>
             </Col>
-
             <Col xs={24} md={12}>
               <Form.Item
                 hasFeedback
                 label={t("admin_shop.product.create.option.label.product_code")}
                 name="product_code"
                 colon={false}
-                validateStatus={errorForm?.sku && "error"}
-                help={errorForm?.sku && errorForm?.sku[0]}
               >
                 <Input type="text" placeholder={t("admin_shop.product.create.option.placeholder.product_code")} />
               </Form.Item>
@@ -195,7 +217,7 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
         )}
         {isAddButtonDisabled && (
           <Col span={24}>
-            <Button onClick={handleAddVariant} className="variant-btn justify-center" type="dashed" size="large" block>
+            <Button onClick={handleAddVariant} className="variant-btn" type="dashed" size="large" block>
               <PlusOutlined />
               {t("admin_shop.product.create.option.label.add_variant")}
             </Button>

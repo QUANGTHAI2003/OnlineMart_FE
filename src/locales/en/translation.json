@@ -496,6 +496,7 @@
       "products": "Products",
       "product_list": "Product list",
       "product_create": "Create product",
+      "product_edit": "Edit product",
       "product_review": "Review management",
       "management": "Management",
       "product_inventory": "Inventory management",
@@ -661,6 +662,8 @@
         "option": {
           "label": {
             "selling_price": "Selling price",
+            "sale_price": "Sale price",
+            "quantity": "Quantity",
             "product_code": "Product code",
             "add_variant": "Add variation(s) to make it easier for customers to find the product and add new variant",
             "variant": "Variant {{count}}",
@@ -681,6 +684,8 @@
           },
           "placeholder": {
             "selling_price": "Enter selling price",
+            "sale_price": "Enter sale price",
+            "quantity": "Enter quantity",
             "product_code": "Enter product code",
             "variant_name": "Enter variant name",
             "variant_for": "Select variant(s) for {{name}}",

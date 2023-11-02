@@ -35,6 +35,16 @@ export const categoryApi = createApi({
         return [{ type: "Category" as const, id: "LIST" }];
       },
     }),
+    getCategoryForSort: builder.query<any, number>({
+      query: (id) => ({
+        url: `categories/shop/${id}/sort`,
+        method: "GET",
+        credentials: "include",
+      }),
+      transformResponse: (response: { data: any }) => {
+        return response.data;
+      },
+    }),
     // Get category list with children by shop
     getCategoryListWithChildren: builder.query<ICategory[], number>({
       query: (id) => ({
@@ -150,6 +160,7 @@ export const {
   useGetCategoryListQuery,
   useGetCategoryListWithChildrenQuery,
   useGetCategoryByIdQuery,
+  useGetCategoryForSortQuery,
   useAddCategoryMutation,
   useUpdateCategoryMutation,
   useUpdateStatusMutation,

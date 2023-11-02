@@ -2,7 +2,7 @@ import { DeleteOutlined, InfoCircleFilled } from "@ant-design/icons";
 import { AdminTable } from "@app/app/components/common/Table/Table.styles";
 import { Button, Form, Input, InputNumber } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IDataType {
   key?: number;
@@ -15,14 +15,51 @@ interface IProductTableVariants {
 }
 
 const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVariantValues }) => {
+  const [tableDataCurrent, setTableDataCurrent] = useState<IDataType[]>([]);
+  const [flattenCurrentVariantValues, setFlattenCurrentVariantValues] = useState<any[]>([]);
   const [deletedRowKeys, setDeletedRowKeys] = useState<any[]>([]);
 
-  const flattenCurrentVariantValues = Object.values(currentVariantValues).flat();
+  useEffect(() => {
+    const variants = form.getFieldValue("variants");
 
-  const tableData = flattenCurrentVariantValues.map((variant: any, index: number) => ({
-    key: index + 1,
-    variants: variant,
-  }));
+    const flattenCurrentVariantValues = Object.values(currentVariantValues).flat();
+
+    if (variants && variants.length > 0) {
+      const allVariationValueName: any[] = [];
+
+      variants.forEach((variant: any) => {
+        variant.variation_value.forEach((variationValue: any) => {
+          allVariationValueName.push(variationValue.variation_value_name);
+        });
+      });
+
+      allVariationValueName.push(...flattenCurrentVariantValues);
+
+      const newVariantValue = [...new Set(allVariationValueName)];
+      setFlattenCurrentVariantValues(newVariantValue);
+
+      console.log({ newVariantValue });
+
+      const tableData = newVariantValue.map((variant: any, index: number) => ({
+        key: index + 1,
+        variants: variant,
+      }));
+
+      setTableDataCurrent(tableData);
+    }
+  }, [currentVariantValues, form]);
+
+  useEffect(() => {
+    const variant_values = form.getFieldValue("variant_values");
+    variant_values.forEach((variant: any, index: number) => {
+      form.setFieldsValue({
+        [`offer[${index}].quantity`]: variant.stock_qty,
+        [`offer[${index}].selling_price`]: variant.regular_price,
+        [`offer[${index}].sale_price`]: variant.sale_price,
+        [`offer[${index}].product_code`]: variant.sku,
+      });
+    });
+  }, [form]);
 
   const sharedOnCell = (record: IDataType) => {
     if (deletedRowKeys.includes(record.key)) {
@@ -88,7 +125,7 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
     {
       title: (
         <Form.Item label="Inventory quantity" name="inventory_quantity">
-          <InputNumber className="w-full" min={1} placeholder="Enter for all" onChange={handleOnChangeInventory} />
+          <InputNumber className="w-full" min={0} placeholder="Enter for all" onChange={handleOnChangeInventory} />
         </Form.Item>
       ),
       dataIndex: "inventory_quantity",
@@ -110,7 +147,7 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
                 </i>
               ) : (
                 <Form.Item name={`offer[${record.key - 1}].quantity`}>
-                  <InputNumber className="w-full" min={1} />
+                  <InputNumber className="w-full" min={0} />
                 </Form.Item>
               )}
             </div>
@@ -169,20 +206,20 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
             <Form.Item
               name={`offer[${record.key - 1}].sale_price`}
               dependencies={["sale_price"]}
-              rules={[
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    console.log({ value });
+              // rules={[
+              //   ({ getFieldValue }) => ({
+              //     validator(_, value) {
+              //       console.log({ value });
 
-                    if (getFieldValue("sale_price") > 1000) {
-                      return Promise.resolve();
-                    } else if (value === null) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(new Error("Price must be greater than 1000"));
-                  },
-                }),
-              ]}
+              //       if (getFieldValue("sale_price") >= 1000) {
+              //         return Promise.resolve();
+              //       } else if (value === null) {
+              //         return Promise.resolve();
+              //       }
+              //       return Promise.reject(new Error("Price must be greater than 1000"));
+              //     },
+              //   }),
+              // ]}
             >
               <InputNumber className="w-full" min={1} />
             </Form.Item>
@@ -228,7 +265,7 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
     },
   ];
 
-  return <AdminTable bordered columns={columns} dataSource={tableData} pagination={false} />;
+  return <AdminTable bordered columns={columns} dataSource={tableDataCurrent} pagination={false} />;
 };
 
 export default ProductTableVariants;

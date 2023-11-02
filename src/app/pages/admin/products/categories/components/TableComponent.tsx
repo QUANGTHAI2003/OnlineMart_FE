@@ -136,8 +136,8 @@ const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
       render: (_, { id, status }) => (
         <PermissionsSwitch>
           <Can
-            permissions={"Update category"}
-            style={{ backgroundColor: "gray", display: "inline-block", pointerEvents: "none" }}
+            permissions={["Update cateory"]}
+            // style={{ backgroundColor: "gray", display: "inline-block", pointerEvents: "none" }}
           >
             <Switch
               checkedChildren="Hiện"
@@ -146,7 +146,7 @@ const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
               unCheckedChildren="Ẩn"
             />
           </Can>
-          <Can>View</Can>
+          <Can>{status === "1" ? "Hiện" : "Ẩn"}</Can>
         </PermissionsSwitch>
 
         // <Switch

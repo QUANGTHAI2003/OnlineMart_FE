@@ -34,6 +34,7 @@ export const AdminBreadcrumb: React.FC<BreadcrumbProps> = ({ children, ...props 
   ];
 
   const lastItem = extraBreadcrumbItems[extraBreadcrumbItems.length - 1];
+
   if (lastItem) {
     breadcrumbItems[breadcrumbItems.length - 1] = {
       ...lastItem,

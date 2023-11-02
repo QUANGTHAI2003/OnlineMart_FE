@@ -1,9 +1,10 @@
 import RichText from "@app/app/components/common/Form/RichText";
 import AdminUpload from "@app/app/components/common/Upload/AdminUpload";
 import { Form, UploadProps, message } from "antd";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as S from "../ProductCreate.styles";
+import * as S from "../ProductEdit.styles";
 
 const props: UploadProps = {
   name: "file",
@@ -37,6 +38,16 @@ const props: UploadProps = {
 
 const ProductDescription = ({ form }: any) => {
   const { t } = useTranslation();
+  const [description, setDescription] = useState<string>("");
+
+  useEffect(() => {
+    const description = form.getFieldValue("description");
+    setDescription(description);
+  }, [description, form, setDescription]);
+
+  const handleGetValue = (e: any) => {
+    return e;
+  };
 
   return (
     <S.ProductSectionWrapper>
@@ -62,8 +73,9 @@ const ProductDescription = ({ form }: any) => {
             message: t("admin_shop.product.create.description.rules.product_desc_required"),
           },
         ]}
+        getValueFromEvent={handleGetValue}
       >
-        <RichText onChange={(content: any) => form.setFieldsValue({ description: content })} />
+        <RichText onChange={(content: any) => form.setFieldsValue({ description: content })} initValue={description} />
       </Form.Item>
     </S.ProductSectionWrapper>
   );

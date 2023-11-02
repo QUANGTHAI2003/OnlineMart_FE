@@ -1,30 +1,42 @@
 import { AdminTabs } from "@app/app/components/common/Tabs/Tabs.styles";
 import { useSyncUrlWithTab } from "@app/hooks";
+import { IProduct } from "@app/types/product.types";
 import { Alert, TabsProps } from "antd";
 import { useTranslation } from "react-i18next";
 
 import { ProductListTab } from "../data";
 
-const TabComponent = () => {
+const TabComponent: React.FC<any> = ({ productList }) => {
   const { t } = useTranslation();
 
-  const itemData = ProductListTab(t).map((productTabData: any) => ({
-    key: productTabData.tab,
-    label: productTabData.name + " (0)",
-    children: (
-      <Alert
-        message={
-          <>
-            <b>{`${productTabData.name}: `}</b>
-            {productTabData.alert}
-          </>
-        }
-        type="info"
-        showIcon
-        closable
-      />
-    ),
-  }));
+  const itemData = ProductListTab(t).map((productTabData: any) => {
+    const tabKey = productTabData.tab;
+    let productCount;
+
+    if (tabKey === "all") {
+      productCount = productList?.length;
+    } else {
+      productCount = productList?.filter((product: IProduct) => product?.status === tabKey)?.length || 0;
+    }
+
+    return {
+      key: tabKey,
+      label: productTabData.name + ` (${productCount})`,
+      children: (
+        <Alert
+          message={
+            <>
+              <b>{`${productTabData.name}: `}</b>
+              {productTabData.alert}
+            </>
+          }
+          type="info"
+          showIcon
+          closable
+        />
+      ),
+    };
+  });
 
   const items: TabsProps["items"] = itemData;
 

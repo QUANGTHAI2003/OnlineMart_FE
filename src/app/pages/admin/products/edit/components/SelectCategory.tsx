@@ -3,17 +3,18 @@ import { useDebounce } from "@app/hooks";
 import { removeDiacritics } from "@app/utils/helper";
 import { Alert, Button, Cascader, Input } from "antd";
 import { DefaultOptionType } from "antd/es/cascader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import * as S from "../ProductCreate.styles";
+import * as S from "../ProductEdit.styles";
 
 const SelectCategory = ({ value = [], onChange, optionsSelect = [] }: any) => {
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<any[]>(value);
-
+  useEffect(() => {
+    setSelectedValue(value);
+  }, [value]);
   const [searchCategory, setSearchCategory] = useState<string>("");
   const debouncedSearchCategory = useDebounce(searchCategory, 500);
-
   const filter = (inputValue: string, path: DefaultOptionType[]) =>
     path.some(
       (option) =>

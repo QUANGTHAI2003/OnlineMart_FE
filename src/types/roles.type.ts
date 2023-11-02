@@ -14,6 +14,8 @@ export interface IPermission {
 export type Permission =
   | "View products"
   | "Create product"
+  | "Update product"
+  | "Delete product"
   | "View categories"
   | "View suppliers"
   | "Create categories"

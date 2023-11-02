@@ -1,4 +1,4 @@
-import { Drawer, Row } from "antd";
+import { Drawer } from "antd";
 import styled from "styled-components";
 
 export const SearchStyle = styled.section``;
@@ -48,33 +48,53 @@ export const TableStyle = styled.section`
   }
 `;
 
-export const TableCellProductStyle = styled(Row).withConfig({
-  shouldForwardProp: () => true,
-})`
+export const TableCellProductStyle = styled.div`
   .thumbnail {
+    position: relative;
     margin-right: 12px;
-    width: 64px;
+    width: 84px;
+    height: 100%;
     -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
     flex-shrink: 0;
-  }
 
-  .name {
-    width: 212px;
-    display: block;
-    color: inherit;
-    line-height: 1.5em;
-    max-height: 3em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
-    overflow-wrap: anywhere;
+    .off-product {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.35);
+      z-index: 1;
+      color: #fff;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      font-size: 20px;
+    }
   }
 
   .om-typography {
     color: #8c8c8c;
     font-size: 12px;
     white-space: nowrap;
+  }
+
+  .variant {
+    background-color: #595959;
+    color: #fff;
+    font-size: 9px;
+    padding: 4px;
+    text-align: center;
   }
 `;
 

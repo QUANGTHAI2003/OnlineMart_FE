@@ -1,13 +1,16 @@
 import { Editor } from "@tinymce/tinymce-react";
-import { FC, useCallback } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 
 interface IRichTextProps {
   onChange: (content: string) => void;
+  initValue?: string;
 }
 
 const API_KEY = import.meta.env.VITE_TINYMCE_API_KEY as string;
 
-const RichText: FC<IRichTextProps> = ({ onChange }) => {
+const RichText: FC<IRichTextProps> = ({ onChange, initValue }) => {
+  const [key, setKey] = useState<number>(0);
+
   const handleEditorChange = useCallback(
     (content: string) => {
       onChange(content);
@@ -15,10 +18,16 @@ const RichText: FC<IRichTextProps> = ({ onChange }) => {
     [onChange]
   );
 
+  useEffect(() => {
+    setKey((prevKey) => prevKey + 1);
+  }, []);
+
   return (
     <Editor
       apiKey={API_KEY}
       id="editor"
+      key={key}
+      initialValue={initValue}
       init={{
         plugins:
           "preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons",
