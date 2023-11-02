@@ -9,6 +9,7 @@ export const UserWishListProduct = styled.div`
   font-size: 14px;
   border-radius: 5px;
   background-color: white;
+
   .line {
     background-color: #e8e8e8;
     height: 100%;
@@ -18,12 +19,12 @@ export const UserWishListProduct = styled.div`
   .left {
     width: 70% !important;
     margin: 0 0 0 16px;
-  }
-  .left > div:first-child {
-    width: 30% !important;
-  }
-  .left > div:last-child {
-    width: 70% !important;
+    & > div:first-child {
+      width: 30% !important;
+    }
+    & > div:last-child {
+      width: 70% !important;
+    }
   }
   @media screen and (max-width: 1024px) {
     padding: 10px 5px !important;
@@ -47,20 +48,22 @@ export const UserWishListProduct = styled.div`
     }
     .left {
       margin: 0 !important;
+      & > div:first-child {
+        width: 30% !important;
+      }
+      & > div:last-child {
+        width: 70% !important;
+        margin-left: 4px !important;
+      }
     }
-    .left > div:first-child {
-      width: 30% !important;
-    }
-    .left > div:last-child {
-      width: 70% !important;
-      margin-left: 4px !important;
-    }
-    .right > div {
-      margin-right: 8px !important;
-    }
-    .right > button > svg {
-      font-size: 12px !important;
-      display: block !important;
+    .right {
+      & > div {
+        margin-right: 8px !important;
+      }
+      & > button > svg {
+        font-size: 12px !important;
+        display: block !important;
+      }
     }
     .line {
       margin: 0 4px;

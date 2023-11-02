@@ -5,6 +5,7 @@ import { productCategoryApi } from "./api/producCategoryApi";
 import { supplierApi } from "./api/supplierApi";
 import { addressApi } from "./api/user/addressApi";
 import { productApi } from "./api/user/productApi";
+import { wishlistApi } from "./api/user/wishlistApi";
 import { userApi } from "./api/userApi";
 import authSlice from "./authSlice";
 import productDetailSlice from "./redux/productDetailSlice";
@@ -19,6 +20,7 @@ export const rootReducer: any = {
   [productCategoryApi.reducerPath]: productCategoryApi.reducer,
   [supplierApi.reducerPath]: supplierApi.reducer,
   [roleApi.reducerPath]: roleApi.reducer,
+  [wishlistApi.reducerPath]: wishlistApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
   productDetail: productDetailSlice,
@@ -33,5 +35,6 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     productApi.middleware,
     productCategoryApi.middleware,
     supplierApi.middleware,
+    wishlistApi.middleware,
     roleApi.middleware
   );
