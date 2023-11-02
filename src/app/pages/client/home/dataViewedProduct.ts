@@ -6,7 +6,8 @@ const dataViewedProduct = [
     discount_rate: 40,
     quantity_sold: 14074,
     rating_average: 4.45,
-    thumbnail_url: "https://salt.tikicdn.com/cache/280x280/ts/product/e3/d7/fc/79a47ccdf47161da71ba769c8cca786d.jpg.webp",
+    thumbnail_url:
+      "https://salt.tikicdn.com/cache/280x280/ts/product/e3/d7/fc/79a47ccdf47161da71ba769c8cca786d.jpg.webp",
   },
   {
     id: 6771909,

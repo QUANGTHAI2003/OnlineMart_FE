@@ -1,10 +1,10 @@
+import * as S from "@app/app/pages/admin/seller/SellerInfo.styles";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Space, Tag } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import * as S from "@app/app/pages/admin/seller/SellerInfo.styles";
 
 interface IShowPermissionProps {
   id: number;

@@ -1,7 +1,7 @@
-import {Select} from "antd";
-import axios, {AxiosRequestConfig} from "axios";
-import React, {useCallback, useEffect, useMemo, useState} from "react";
-import {useTranslation} from "react-i18next";
+import { Select } from "antd";
+import axios, { AxiosRequestConfig } from "axios";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ICity {
   Id: string;

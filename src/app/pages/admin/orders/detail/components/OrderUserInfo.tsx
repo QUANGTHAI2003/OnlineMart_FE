@@ -1,8 +1,9 @@
 import { formatCurrency } from "@app/utils/helper";
 import { Input } from "antd";
-import { Link } from "react-router-dom";
-import * as S from "../OrderDetail.styles";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
+import * as S from "../OrderDetail.styles";
 
 const OrderUserInfo = () => {
   const { t } = useTranslation();

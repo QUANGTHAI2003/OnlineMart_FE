@@ -10,10 +10,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Input } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import * as S from "./StoreHeader.styles";
+
 import { dataSeller } from "./data";
 import Products from "./product/Product";
 import Profile from "./profile/Profile";
+import * as S from "./StoreHeader.styles";
 import Store from "./widget/Store";
 
 const StoreIndex = () => {

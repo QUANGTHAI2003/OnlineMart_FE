@@ -215,7 +215,7 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
 
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange, 
+    onChange: onSelectChange,
   };
 
   const hasSelected = selectedRowKeys.length > 0;

@@ -2,6 +2,7 @@ import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+
 import { SelectPostionRegisterEmployees, SelectRightRegisterEmployees } from "./data";
 
 const { Option } = Select;

@@ -1,11 +1,12 @@
-import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
-import * as S from "./ShipOverview.styles";
-import { Select } from "antd";
-import { Link } from "react-router-dom";
 import { Fulfilled, Received, FulfillCanncelling, Packed, FulfillCanced, ShippingCancel } from "@app/app/assets/icons";
-import ShipOverviewChart from "./ShipOverviewChart";
+import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
+import { Select } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
+import * as S from "./ShipOverview.styles";
+import ShipOverviewChart from "./ShipOverviewChart";
 
 const option = (t: any) => {
   return [
@@ -40,7 +41,9 @@ const ShipOverview = () => {
           <div className="header">
             <div>
               <div className="title">{t("admin_shop.ship.title_status")}</div>
-              <div className="description capitalize">{`${t("admin_shop.ship.data_aggregated")} ${selectedOption}`}</div>
+              <div className="description capitalize">
+                {`${t("admin_shop.ship.data_aggregated")} ${selectedOption}`}
+              </div>
             </div>
             <Select
               size="middle"

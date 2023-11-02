@@ -1,13 +1,14 @@
+import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
 import { Button, Col, Row, Steps, Tag } from "antd";
-import * as S from "./OrderDetail.styles";
-import OrderUserInfo from "./components/OrderUserInfo";
+import { useTranslation } from "react-i18next";
+
+import OrderDetailPrintPDF from "./components/OrderDetailPrintPDF";
 import OrderFullPayment from "./components/OrderFullPayment";
 import OrderInfo from "./components/OrderInfo";
+import OrderUserInfo from "./components/OrderUserInfo";
 import TableComponent from "./components/TableComponent";
-import { useTranslation } from "react-i18next";
-import OrderDetailPrintPDF from "./components/OrderDetailPrintPDF";
-import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
-  
+import * as S from "./OrderDetail.styles";
+
 const items = (t: any) => {
   return [
     {

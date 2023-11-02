@@ -10,7 +10,9 @@ import { faComment, faStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Popover, Row } from "antd";
 import { useTranslation } from "react-i18next";
+
 import { dataSeller } from "../data";
+
 import * as S from "./Profile.styles";
 
 const Profile = () => {

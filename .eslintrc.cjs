@@ -62,10 +62,10 @@ module.exports = {
         checkFragmentShorthand: true,
       },
     ],
-    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-unused-vars': 'error',
     'react/jsx-fragments': ['warn', 'syntax'],
     'no-unused-vars': [
-      'warn',
+      'error',
       {
         vars: 'all',
         args: 'after-used',

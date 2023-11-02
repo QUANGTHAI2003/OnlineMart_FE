@@ -79,7 +79,13 @@ const WidgetList = () => {
                             <div className="text-center relative w-full flex ">
                               <img src={item.thumbnail_url} alt="" width="124" height="124" className="object-cover" />
                               <div className="absolute z-10">
-                                <img className="object-contain" src={item.icon_authentic_brand} alt="bagde icon" width="72" height="20" />
+                                <img
+                                  className="object-contain"
+                                  src={item.icon_authentic_brand}
+                                  alt="bagde icon"
+                                  width="72"
+                                  height="20"
+                                />
                               </div>
                             </div>
                           </div>

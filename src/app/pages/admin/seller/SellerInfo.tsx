@@ -3,19 +3,20 @@ import { useDebounce } from "@app/hooks";
 import { Card } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import * as S from "./SellerInfo.styles";
+
 import FilterComponent from "./components/FilterComponent";
 import TableComponent from "./components/TableComponent";
 import RegisterEmployess from "./RegisterEmployess";
+import * as S from "./SellerInfo.styles";
 const searchType = (t: any) => {
   return [
-    { value: "name", label: t("admin_shop.seller.filter.type.info_seller")},
+    { value: "name", label: t("admin_shop.seller.filter.type.info_seller") },
     { value: "code", label: t("admin_shop.seller.filter.type.code") },
   ];
 };
 const statusType = (t: any) => {
   return [
-    { value: "Tất cả", label:  t("admin_shop.seller.filter.type.all") },
+    { value: "Tất cả", label: t("admin_shop.seller.filter.type.all") },
     { value: "Hoạt động", label: t("admin_shop.seller.filter.type.activity") },
     { value: "Không hoạt động", label: t("admin_shop.seller.filter.type.inactive") },
   ];

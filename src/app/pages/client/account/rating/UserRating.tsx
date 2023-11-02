@@ -11,7 +11,8 @@ const UserRating = () => {
       id: 1,
       title: "Sách Tài Chính Cá Nhân Cho Người Việt Nam - Tặng Khóa học Online về Tài chính",
       rating_average: 4,
-      comment: "Những bài viết về tài chính của anh Chánh được đăng trên nhiều báo: Kinh tế Sài Gòn, Đầu tư Chứng khoán, Nhịp cầu đầu tư, CafeF, CafeBiz, Bizlive, The Leader, TheBank, Chuyện thương trường.",
+      comment:
+        "Những bài viết về tài chính của anh Chánh được đăng trên nhiều báo: Kinh tế Sài Gòn, Đầu tư Chứng khoán, Nhịp cầu đầu tư, CafeF, CafeBiz, Bizlive, The Leader, TheBank, Chuyện thương trường.",
       thumbnail_url:
         "https://salt.tikicdn.com/cache/280x280/ts/product/90/49/97/ec88ab408c1997378344486c94dbac40.jpg.webp",
     },
@@ -19,7 +20,8 @@ const UserRating = () => {
       id: 2,
       title: "Sách Tài Chính Cá Nhân Cho Người Việt Nam - Tặng Khóa học Online về Tài chính",
       rating_average: 4,
-      comment: "Những bài viết về tài chính của anh Chánh được đăng trên nhiều báo: Kinh tế Sài Gòn, Đầu tư Chứng khoán, Nhịp cầu đầu tư, CafeF, CafeBiz, Bizlive, The Leader, TheBank, Chuyện thương trường.",
+      comment:
+        "Những bài viết về tài chính của anh Chánh được đăng trên nhiều báo: Kinh tế Sài Gòn, Đầu tư Chứng khoán, Nhịp cầu đầu tư, CafeF, CafeBiz, Bizlive, The Leader, TheBank, Chuyện thương trường.",
       thumbnail_url:
         "https://salt.tikicdn.com/cache/280x280/ts/product/90/49/97/ec88ab408c1997378344486c94dbac40.jpg.webp",
     },

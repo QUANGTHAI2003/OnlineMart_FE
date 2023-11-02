@@ -1,4 +1,4 @@
-import { IWishlist } from "@app/types/wishlist.types"
+import { IWishlist } from "@app/types/wishlist.types";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import baseQueryCustom from "../../baseQueryCustom";
@@ -36,10 +36,7 @@ export const wishlistApi = createApi({
       },
       invalidatesTags: (): any => [{ type: "Wishlist", id: "LIST" }],
     }),
-  })
+  }),
 });
 
-export const {
-  useGetWishlistRootQuery,
-  useDeleteWishlistMutation,
-} = wishlistApi;
+export const { useGetWishlistRootQuery, useDeleteWishlistMutation } = wishlistApi;

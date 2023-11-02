@@ -5,20 +5,20 @@ import ImageTodayRes from "@app/app/assets/images/store/today-res.svg";
 import ImageToday from "@app/app/assets/images/store/today.svg";
 import ProductCardSale from "@app/app/components/clients/ProductCard/ProductCardSale";
 import ProductCardSkeleton from "@app/app/components/clients/ProductCard/ProductCardSkeleton";
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { v4 as uuidv4 } from "uuid";
-import * as SC from "./Store.styles";
-
-import * as S from "@app/app/pages/client/home/Home.styles";
 import CountdownComponent from "@app/app/pages/client/home/components/CountdownComponent";
 import data from "@app/app/pages/client/home/data";
-
+import * as S from "@app/app/pages/client/home/Home.styles";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { v4 as uuidv4 } from "uuid";
+
+import * as SC from "./Store.styles";
+
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
 
 const StockToday = React.memo(() => {
   const { t } = useTranslation();

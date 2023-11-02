@@ -1,4 +1,3 @@
-
 import { useAddRoleMutation, useGetAllPermissionsQuery } from "@app/store/slices/api/admin/roleApi";
 import { IPermission } from "@app/types/roles.type";
 import { notifyError, notifySuccess } from "@app/utils/helper";

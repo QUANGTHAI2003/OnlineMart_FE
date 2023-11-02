@@ -1,5 +1,5 @@
 export const OrderDataAdmin = [
-  { 
+  {
     id: 285849382,
     status: "Đang vận chuyển",
     status_slug: "shipping",

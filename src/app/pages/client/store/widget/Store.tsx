@@ -10,6 +10,7 @@ import { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+
 import StockToday from "./StockToday";
 import * as S from "./Store.styles";
 import Widget from "./Widget";
@@ -79,7 +80,7 @@ const Store = () => {
                       <div className="title">
                         <h4>
                           {`${t("user.seller.discount")}
-                          ${formatVNCurrency(item.discount_amount)}${item.type === "by_percent" ? "%" : "" }`}
+                          ${formatVNCurrency(item.discount_amount)}${item.type === "by_percent" ? "%" : ""}`}
                         </h4>
                       </div>
                       <p>

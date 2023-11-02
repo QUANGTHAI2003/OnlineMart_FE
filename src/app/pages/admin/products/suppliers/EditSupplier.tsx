@@ -1,10 +1,10 @@
 import SelectAddress from "@app/app/components/clients/SelectAddress/SelectAddress";
 import { useGetSupplierOnlyQuery, useUpdateSupplierMutation } from "@app/store/slices/api/supplierApi";
+import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
 import { Button, Col, Form, Input } from "antd";
+import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
-import { useEffect, useMemo } from "react";
 import * as S from "./Supplier.styles";
 
 type FieldType = {

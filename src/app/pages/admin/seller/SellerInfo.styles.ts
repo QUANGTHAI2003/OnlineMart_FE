@@ -51,10 +51,10 @@ export const TableComponent = styled.div`
 export const ModalPermission = styled(Modal).withConfig({
   shouldForwardProp: () => true,
 })`
-.om-modal-body {
-  text-align: center;
-  margin: 20px 0 !important;
-}
+  .om-modal-body {
+    text-align: center;
+    margin: 20px 0 !important;
+  }
 `;
 
 export const FilterTypeSpace = styled(Space).withConfig({

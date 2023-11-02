@@ -8,4 +8,3 @@ export { default as useResponsive } from "./useResponsive";
 export { default as useSyncToURL } from "./useSyncToURL";
 export { default as useSyncUrlWithTab } from "./useSyncUrlWithTab";
 export { default as useToggle } from "./useToggle";
-

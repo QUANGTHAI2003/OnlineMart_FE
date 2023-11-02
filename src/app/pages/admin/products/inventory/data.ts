@@ -1,5 +1,3 @@
-import { formatCurrency, formatNumber } from "@app/utils/helper";
-
 export const ProductListFilterCategory = [
   {
     id: 1,
@@ -100,7 +98,8 @@ export const InventoryListData = [
     product_media:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7_nx-EEBpDiX_mgLv9aQ5_1QBXdKVup_eSg&usqp=CAU",
     name: "Bánh trung thu dafdsf asdfasdf rer eerasfs dasfsadfasdf dffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    product_code: "111OM123-M-GREENBEAN ASDFSADF ASAFSDFSAFASDFADSADFffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    product_code:
+      "111OM123-M-GREENBEAN ASDFSADF ASAFSDFSAFASDFADSADFffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
     sellable: 2000,
     qty_inventory: 5000000,
     created_at: "10/8/2023",

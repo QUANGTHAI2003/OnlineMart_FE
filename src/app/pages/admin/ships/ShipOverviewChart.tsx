@@ -5,8 +5,9 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import customParseFormat from "dayjs/plugin/localizedFormat";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import { data } from "./data";
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -45,64 +46,67 @@ const ShipOverviewChart = () => {
   const [chartData, setChartData] = useState<IShipOverviewChartProps[]>([]);
   const [hasData, setHasData] = useState(true);
 
-  const filterDataByOption = (option: any) => {
-    switch (option) {
-      case "today":
-        return data.filter((item) => isSameDate(item.date, today));
-      case "yesterday":
-        return data.filter((item) => isSameDate(item.date, yesterday));
-      case "sevenDaysAgo":
-        return data.filter((item) => isAfterDate(item.date, sevenDaysAgo) && isBeforeDate(item.date, today));
-      case "thirtyDaysAgo":
-        return data.filter((item) => isAfterDate(item.date, thirtyDaysAgo) && isBeforeDate(item.date, today));
-      case "thisMonth":
-        return data.filter((item) => isSameMonth(item.date, thisMonth));
-      default:
-        return [];
-    }
-  };
-  useEffect(() => {
-    const filteredData = filterDataByOption(selectedOption);
-    setOriginalData(filteredData);
-    const dataForChart: IShipOverviewChartProps[] = filteredData
-      .sort((a, b) => dayjs(a.date).diff(dayjs(b.date)))
-      .map((item) => ({
-        date: dayjs(item.date).format("DD / MM"),
-        shipment: item.shipment,
-        fee: item.fee,
-      }));
-    if (dataForChart.length === 0) {
-      setHasData(false);
-    } else {
-      setHasData(true);
-      setChartData(dataForChart);
-    }
-  }, [selectedOption]);
-
-  const handleOptionChange = (value: any) => {
-    setSelectedOption(value);
-    const filteredData = filterDataByOption(value);
-    setOriginalData(filteredData);
-    const dataForChart: IShipOverviewChartProps[] = filteredData
-      .sort((a, b) => dayjs(a.date).diff(dayjs(b.date)))
-      .map((item) => ({
-        date: dayjs(item.date).format("DD / MM"),
-        shipment: item.shipment,
-        fee: item.fee,
-      }));
-    if (dataForChart.length === 0) {
-      setHasData(false);
-    } else {
-      setHasData(true);
-      setChartData(dataForChart);
-    }
-  };
-  const [_, setOriginalData] = useState(data);
   const today = dayjs();
   const yesterday = today.subtract(1, "day");
   const sevenDaysAgo = today.subtract(7, "day");
   const thisMonth = dayjs().startOf("month");
   const thirtyDaysAgo = today.subtract(30, "day");
+
+  const filterDataByOption = useCallback(
+    (option: any) => {
+      switch (option) {
+        case "today":
+          return data.filter((item) => isSameDate(item.date, today));
+        case "yesterday":
+          return data.filter((item) => isSameDate(item.date, yesterday));
+        case "sevenDaysAgo":
+          return data.filter((item) => isAfterDate(item.date, sevenDaysAgo) && isBeforeDate(item.date, today));
+        case "thirtyDaysAgo":
+          return data.filter((item) => isAfterDate(item.date, thirtyDaysAgo) && isBeforeDate(item.date, today));
+        case "thisMonth":
+          return data.filter((item) => isSameMonth(item.date, thisMonth));
+        default:
+          return [];
+      }
+    },
+    [sevenDaysAgo, thirtyDaysAgo, thisMonth, today, yesterday]
+  );
+
+  useEffect(() => {
+    const filteredData = filterDataByOption(selectedOption);
+    // setOriginalData(filteredData);
+    const dataForChart: IShipOverviewChartProps[] = filteredData
+      .sort((a, b) => dayjs(a.date).diff(dayjs(b.date)))
+      .map((item) => ({
+        date: dayjs(item.date).format("DD / MM"),
+        shipment: item.shipment,
+        fee: item.fee,
+      }));
+    if (dataForChart.length === 0) {
+      setHasData(false);
+    } else {
+      setHasData(true);
+      setChartData(dataForChart);
+    }
+  }, [filterDataByOption, selectedOption]);
+
+  const handleOptionChange = (value: any) => {
+    setSelectedOption(value);
+    const filteredData = filterDataByOption(value);
+    const dataForChart: IShipOverviewChartProps[] = filteredData
+      .sort((a, b) => dayjs(a.date).diff(dayjs(b.date)))
+      .map((item) => ({
+        date: dayjs(item.date).format("DD / MM"),
+        shipment: item.shipment,
+        fee: item.fee,
+      }));
+    if (dataForChart.length === 0) {
+      setHasData(false);
+    } else {
+      setHasData(true);
+      setChartData(dataForChart);
+    }
+  };
 
   const options = {
     title: {

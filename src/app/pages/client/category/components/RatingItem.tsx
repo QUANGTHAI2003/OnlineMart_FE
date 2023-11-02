@@ -12,6 +12,8 @@ const RatingItem: React.FC<IRatingItem> = ({ apply, value }) => {
   const syncToURL = useSyncToURL();
 
   const handleSyncRating = (value: number) => {
+    console.log("apply in src/app/pages/client/category/components/RatingItem.tsx not used", apply);
+
     syncToURL({ rating: `${value}` });
   };
 

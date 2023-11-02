@@ -1,9 +1,10 @@
-import * as S from "../OrderDetail.styles";
 import { CheckCircleTwoTone } from "@ant-design/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatCurrency } from "@app/utils/helper";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
+
+import * as S from "../OrderDetail.styles";
 
 const OrderFullPayment = () => {
   const { t } = useTranslation();

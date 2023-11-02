@@ -3,6 +3,7 @@ import { Button } from "antd";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useReactToPrint } from "react-to-print";
+
 import ComponentDetailPrintPDF from "./ComponentDetailPrintPDF";
 
 const OrderDetailPrintPDF = () => {

@@ -3,13 +3,16 @@ import type { TabsProps } from "antd";
 import { Tabs } from "antd";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+
+import { VoucherData, VoucherTab } from "./data";
 import * as S from "./Discount.styles";
 import DiscountItem from "./DiscountItem";
 import EmptyDiscount from "./EmptyDiscount";
-import { VoucherData, VoucherTab } from "./data";
 
 const Discount = () => {
   const { t } = useTranslation();
+  const location = useLocation();
   const itemData = VoucherTab(t).map((VoucherTabData: any) => ({
     key: VoucherTabData.tab,
     label: VoucherTabData.name,

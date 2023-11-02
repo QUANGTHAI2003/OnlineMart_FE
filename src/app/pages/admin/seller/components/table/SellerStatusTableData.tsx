@@ -1,6 +1,6 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Tag } from "antd";
-import { TFunction, } from "i18next";
+import { TFunction } from "i18next";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -30,7 +30,9 @@ const SellerStatusTableData: React.FC<ISellerStatusTableDataProps> = ({ data, tr
         <dd>{data.kam_email}</dd>
       </dl>
       <div className="leading-3">
-      <Tag className="rounded-full" icon={<UserOutlined />}>Nhà bán cá nhân</Tag>
+        <Tag className="rounded-full" icon={<UserOutlined />}>
+          Nhà bán cá nhân
+        </Tag>
       </div>
     </div>
   );

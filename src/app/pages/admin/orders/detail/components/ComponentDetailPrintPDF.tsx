@@ -1,4 +1,5 @@
 import { formatCurrency } from "@app/utils/helper";
+
 import * as S from "../OrderDetail.styles";
 
 const ComponentDetailPrintPDF = ({ innerRef }: any) => {

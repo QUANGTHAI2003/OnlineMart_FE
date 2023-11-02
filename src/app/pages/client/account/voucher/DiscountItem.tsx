@@ -2,6 +2,7 @@ import { CopyIcon, IconCheck } from "@app/app/assets/icons";
 import useCopyToClipboard from "@app/hooks/useCopyToClipboard";
 import { formatVNCurrency } from "@app/utils/helper";
 import { useTranslation } from "react-i18next";
+
 import * as S from "./Discount.styles";
 
 interface ITicketItem {

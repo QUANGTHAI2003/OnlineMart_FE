@@ -9,7 +9,6 @@ import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { v4 as uuidv4 } from "uuid";
 
-
 import { BrandItem, MainSortItem, PosterItem } from "./components";
 import * as S from "./UserSearch.styles";
 

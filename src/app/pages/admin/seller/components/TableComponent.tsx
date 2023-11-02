@@ -4,9 +4,11 @@ import { removeDiacritics } from "@app/utils/helper";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router-dom";
-import * as S from "../SellerInfo.styles";
+import { Link } from "react-router-dom";
+
 import { SellerData } from "../data";
+import * as S from "../SellerInfo.styles";
+
 import SellerInfoTableData from "./table/SellerInfoTableData";
 import SellerStatusTableData from "./table/SellerStatusTableData";
 import ShowPermission from "./table/ShowPermission";
@@ -22,7 +24,6 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
     hotline: string;
     email: string;
   }
-  const location = useLocation();
   const columns: ColumnsType<IDataType> = [
     {
       title: t("admin_shop.seller.table.seller_info"),
@@ -71,9 +72,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       width: 100,
       fixed: "right",
       render: (_, record: any) => {
-        return (
-          <ShowPermission id={record.id} data={record.permission} />
-        );
+        return <ShowPermission id={record.id} data={record.permission} />;
       },
     },
   ];
@@ -89,7 +88,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       });
     }
     return filteredProducts;
-  }, [location.search, searchType, searchValue]);
+  }, [searchType, searchValue]);
 
   const handleChange: TableProps<IDataType>["onChange"] = (pagination, filters) => {
     console.log("Various parameters", pagination, filters);

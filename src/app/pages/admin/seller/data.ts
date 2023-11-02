@@ -39,42 +39,41 @@ export const SellerData = [
       //   id: 2,
       //   name: "Quản lý sản phẩm",
       // },
-      
     ],
   },
 ];
 
 export const SelectRightRegisterEmployees = [
-      {
-        id: 1,
-        value: "quản lý",
-        lable: "quản lý",
-      },
-      {
-        id: 2,
-        value: "nhân viên",
-        lable: "nhân viên",
-      },
-      {
-        id: 3,
-        value: "vận hành",
-        lable: "vận hành",
-      }
+  {
+    id: 1,
+    value: "quản lý",
+    lable: "quản lý",
+  },
+  {
+    id: 2,
+    value: "nhân viên",
+    lable: "nhân viên",
+  },
+  {
+    id: 3,
+    value: "vận hành",
+    lable: "vận hành",
+  },
 ];
 export const SelectPostionRegisterEmployees = [
-      {
-        id: 1,
-        value: "người bán",
-        lable: "người bán",
-      },
-      {
-        id: 2,
-        value: "người xem",
-        lable: "người xem",
-      },
-      {
-        id: 2,
-        value: "người sửa",
-        lable: "người sửa",
-      }
+  {
+    id: 1,
+    value: "người bán",
+    lable: "người bán",
+  },
+  {
+    id: 2,
+    value: "người xem",
+    lable: "người xem",
+  },
+  {
+    id: 2,
+    value: "người sửa",
+    lable: "người sửa",
+  },
 ];

@@ -15,4 +15,3 @@ export { default as PriceSkeleton } from "./skeleton/PriceSkeleton";
 export { default as ProductNameSkeleton } from "./skeleton/ProductNameSkeleton";
 export { default as SellerSkeleton } from "./skeleton/SellerSkeleton";
 export { default as VariantSkeleton } from "./skeleton/VariantSkeleton";
-

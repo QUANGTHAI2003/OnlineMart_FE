@@ -2,9 +2,10 @@ import { AdminTable } from "@app/app/components/common/Table/Table.styles";
 import { formatCurrency } from "@app/utils/helper";
 import { Image, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { Link } from "react-router-dom";
-import * as S from "../OrderDetail.styles";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
+import * as S from "../OrderDetail.styles";
 
 interface IOrderDetail {
   id: number;
