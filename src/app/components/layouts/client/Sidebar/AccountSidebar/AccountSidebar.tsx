@@ -33,6 +33,7 @@ const AccountSidebar = ({ onSidebar }: any) => {
       id: 2,
       icon: <AccountBell />,
       title: t("user.account_user.account_notification"),
+      badge: true,
       url: "notifications",
     },
     {
@@ -88,6 +89,7 @@ const AccountSidebar = ({ onSidebar }: any) => {
                 icon={item.icon}
                 url={item.url}
                 onClickSidebar={onSidebar}
+                badge={item.badge}
               />
             );
           })}

@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
 import Mascot from "@app/app/assets/images/mascot.png";
+import { useTranslation } from "react-i18next";
 const EmptyNotification = () => {
   const { t } = useTranslation();
   return (

@@ -5,12 +5,14 @@ import { categoryApi } from "./api/categoryApi";
 import { productCategoryApi } from "./api/producCategoryApi";
 import { supplierApi } from "./api/supplierApi";
 import { addressApi } from "./api/user/addressApi";
+import { notificationApi } from "./api/user/notificationApi";
 import { productApi } from "./api/user/productApi";
 import { wishlistApi } from "./api/user/wishlistApi";
 import { userApi } from "./api/userApi";
 import authSlice from "./authSlice";
 import productAdminSlice from "./redux/admin/productAdminSlice";
 import productDetailSlice from "./redux/productDetailSlice";
+import showNotificationSlice from "./redux/showNotificationSlice";
 import sortSidebarSlice from "./sortSidebarSlice";
 
 export const rootReducer: any = {
@@ -24,10 +26,12 @@ export const rootReducer: any = {
   [roleApi.reducerPath]: roleApi.reducer,
   [wishlistApi.reducerPath]: wishlistApi.reducer,
   [productAdminApi.reducerPath]: productAdminApi.reducer,
+  [notificationApi.reducerPath]: notificationApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
   productDetail: productDetailSlice,
   productAdmin: productAdminSlice,
+  isNotify: showNotificationSlice,
 };
 
 export const apiMiddleware = (getDefaultMiddleware: any) =>
@@ -41,5 +45,7 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     supplierApi.middleware,
     wishlistApi.middleware,
     roleApi.middleware,
-    productAdminApi.middleware
+    productAdminApi.middleware,
+    roleApi.middleware,
+    notificationApi.middleware
   );

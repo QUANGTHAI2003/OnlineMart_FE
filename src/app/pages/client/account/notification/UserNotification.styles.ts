@@ -27,15 +27,16 @@ export const ContentNoti = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.65rem;
+
   & > div:first-child {
     width: 60%;
   }
-  .title {
+  .content_item {
     font-size: 14px;
     font-weight: 400;
-    color: #000;
-    text-align: start;
-    line-height: 125%;
+    color: #666;
+    line-height: 25px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -43,9 +44,7 @@ export const ContentNoti = styled.div`
     word-break: break-word;
     white-space: break-spaces;
   }
-  img {
-    width: 28px;
-  }
+
   @media screen and (max-width: 1024px) {
     flex-direction: column;
     align-items: end;
@@ -54,13 +53,7 @@ export const ContentNoti = styled.div`
       width: 100%;
     }
     .date {
-      margin-right: 10px !important;
-    }
-    img {
-      width: 18px;
-    }
-    .title-content {
-      margin-left: 10px !important;
+      margin-left: 15px;
     }
   }
 `;
