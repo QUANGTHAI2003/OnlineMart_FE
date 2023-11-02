@@ -14,7 +14,7 @@ import * as S from "./UserNotification.styles";
 
 const UserNotificationItem = ({ notificationData: initialNotification, onUpdate }: any) => {
   const { t } = useTranslation();
-  const [notificationData, setNotification] = useState(initialNotification);
+  const [notificationData, setNotification] = useState(initialNotification || []);
   const formattedDate = dayjs(notificationData.created_at).format("DD/MM/YYYY");
   const [updateStatusNotification] = useUpdateStatusNotificationMutation();
   const [deleteNotification] = useDeleteNotificationMutation();

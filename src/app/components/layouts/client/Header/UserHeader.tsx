@@ -45,14 +45,14 @@ const UserHeader = () => {
         <nav className="hidden xl:flex justify-between items-center h-[35px]">
           <ul className="mt-[5px]">
             <li className="inline-block mx-1 relative after:content-[''] after:block after:absolute after:w-[1px] after:h-[15px] after:bg-black after:right-[-5px] after:top-[50%] after:transform after:translate-y-[-50%]">
-              <a href="/#" className="text-black">
+              <Link to="/admin/shop" className="text-black">
                 {t("user.header.seller_home")}
-              </a>
+              </Link>
             </li>
             <li className="inline-block mx-2 relative after:content-[''] after:block after:absolute after:w-[1px] after:h-[15px] after:bg-black after:right-[-5px] after:top-[50%] after:transform after:translate-y-[-50%]">
-              <a href="/#" className="text-black">
+              <Link to="/admin/shop" className="text-black">
                 {t("user.header.seller")}
-              </a>
+              </Link>
             </li>
             <li className="inline-block mx-1">
               <div className="text-black inline-flex items-center">
@@ -69,9 +69,7 @@ const UserHeader = () => {
 
           <ul className="flex items-center mt-[5px]">
             <li className="inline-block">
-              <a href="/#">
-                <Notification />
-              </a>
+              <Notification />
             </li>
             <li className="inline-block">
               <div>

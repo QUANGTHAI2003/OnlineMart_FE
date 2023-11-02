@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import { useGetNotificationsByUserQuery } from "@app/store/slices/api/user/notificationApi";
 import { useAppSelector } from "@app/store/store";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
@@ -36,7 +35,7 @@ function Notification() {
     <div className="notification-popover-content mx-auto">
       <div className="text-left text-lg mb-2 text-gray-500">{t("user.notifications.notifications")}</div>
       <div className="notification-items-container flex flex-col flex-wrap gap-1">
-        {notifications.slice(0, showLess ? 4 : notifications.length).map((notification: any) => (
+        {notifications?.slice(0, showLess ? 4 : notifications?.length)?.map((notification: any) => (
           <Link
             to={""}
             className="notification-item flex items-center gap-2 py-1 hover:bg-[#f0f9ff]"

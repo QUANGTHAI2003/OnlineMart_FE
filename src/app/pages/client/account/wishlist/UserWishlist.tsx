@@ -4,6 +4,7 @@ import { useAppSelector } from "@app/store/store";
 import { IWishlist } from "@app/types/wishlist.types";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+
 import * as S from "./UserWishlist.style";
 import WishlistItem from "./WishlistItem";
 

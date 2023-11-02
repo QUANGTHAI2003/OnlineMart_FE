@@ -12,6 +12,7 @@ import "./i18n";
 import "@app/app/assets/styles/styles.scss";
 
 import App from "./App";
+import AuthMiddleware from "./store/middlewares/AuthMiddleware";
 import CustomLoading from "./utils/Loading/CustomLoading";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -20,9 +21,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
       <BrowserRouter>
         <CookiesProvider>
-          {/* <AuthMiddleware> */}
+          <AuthMiddleware>
             <App />
-          {/* </AuthMiddleware> */}
+          </AuthMiddleware>
         </CookiesProvider>
       </BrowserRouter>
     </Provider>

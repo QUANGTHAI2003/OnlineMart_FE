@@ -7,7 +7,6 @@ export const notificationApi = createApi({
   reducerPath: "notificationApi",
   baseQuery: baseQueryCustom,
   tagTypes: ["Notification"],
-  keepUnusedDataFor: 1,
   endpoints: (builder) => ({
     getNotificationRoot: builder.query<INotification[], void>({
       query: () => "notifications/root",
