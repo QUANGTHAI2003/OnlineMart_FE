@@ -13,7 +13,7 @@ export const productApi = createApi({
     getProductDetail: builder.query<IProductDetail, number>({
       query: (id) => {
         return {
-          url: `product/${id}`,
+          url: `product/detail/${id}`,
         };
       },
       transformResponse: (response: { data: IProductDetail }) => {

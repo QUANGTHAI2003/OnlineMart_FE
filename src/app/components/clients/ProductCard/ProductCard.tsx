@@ -1,5 +1,5 @@
-import OfficialIcon from "@app/app/assets/images/official.png";
-import { formatCurrency, formatPercent, formatVNCurrency } from "@app/utils/helper";
+import { OfficialIcon } from "@app/app/assets/images";
+import { baseImageUrl, formatCurrency, formatPercent, formatVNCurrency } from "@app/utils/helper";
 import { Rate } from "antd";
 import { useLayoutEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -56,7 +56,7 @@ const ProductCard: React.FC<IProductCardItem> = ({
           <S.Thumbnail>
             <div className="w-full h-full absolute top-0 left-0">
               <div className="thumbnail">
-                <img src={thumbnailUrl} className="w-full h-full object-contain block" alt="Img" />
+                <img src={`${baseImageUrl}/${thumbnailUrl}`} className="w-full h-full object-contain block" alt="Img" />
               </div>
             </div>
           </S.Thumbnail>

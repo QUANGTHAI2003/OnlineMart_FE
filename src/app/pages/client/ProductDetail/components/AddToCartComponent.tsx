@@ -12,9 +12,9 @@ interface IQuantity {
 }
 
 const AddToCartComponent = ({ quantity }: IQuantity) => {
-  const [quantityInput, setQuantityInput] = useState<number>(3);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const [quantityInput, setQuantityInput] = useState<number>(1);
   const { t } = useTranslation();
+  console.log(quantity);
 
   const handleIncrease = () => {
     setQuantityInput((prevQuantity) => Math.min(prevQuantity + 1, quantity ?? 1));

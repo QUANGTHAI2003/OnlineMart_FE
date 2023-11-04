@@ -11,6 +11,7 @@ export interface IProductDetail {
   sku: string;
   status: "enabled" | "disabled";
   rating: number;
+  stock_qty: number;
   view_count: number;
   sold_count: number;
   thumbnail_url: string | null;
@@ -18,8 +19,7 @@ export interface IProductDetail {
     id: number;
     image: string;
   }[];
-  short_description: string;
-  long_description: string;
+  description: string;
   meta_title: string | null;
   meta_keyword: string | null;
   meta_description: string | null;
@@ -42,4 +42,5 @@ export interface IProductDetail {
       is_image: boolean;
     }[];
   }[];
+  info_detail: any;
 }

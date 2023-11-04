@@ -1,3 +1,4 @@
+import { baseImageUrl } from "@app/utils/helper";
 import { Image } from "antd";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -51,15 +52,15 @@ const ProductImageGallery = ({ galleryData, thumbnail, isLoading }: any) => {
               tabIndex={0}
             >
               <img
-                src={currentThumbnail}
+                src={`${baseImageUrl}/${currentThumbnail}`}
                 alt={thumbnail}
-                className="object-cover w-full aspect-square rounded-md"
+                className="object-cover w-full aspect-square rounded-md min-h-[400px]"
                 ref={mainThumbnail}
               />
             </div>
           </div>
           <div className="mt-4 hidden lg:block">
-            <div className="flex items-center justify-start gap-x-2">
+            <div className="grid grid-cols-6  gap-x-2">
               {showGallery?.map((item: any, index: any) => (
                 <S.ImageGallery key={item.id} ref={galleryImage} className={activeIndex === index ? "active" : ""}>
                   <div

@@ -1,11 +1,25 @@
 import Description from "@app/app/components/clients/Description/Description";
+import { getName } from "country-list";
 import { useTranslation } from "react-i18next";
 
 import * as S from "../ProductDetail.styles";
 
-const ProductDetailInfo = ({ description }: any) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+const ProductDetailInfo = ({ info, description, isFetching }: any) => {
   const { t } = useTranslation();
+
+  const getTextFromCode = (code: string) => {
+    switch (code) {
+      case "origin":
+        return "Xuất xứ";
+      case "category":
+        return "Danh mục";
+      case "supplier":
+        return "Nhà cung cấp";
+      default:
+        return "";
+    }
+  };
+
   return (
     <S.ProductDetailInfoStyle>
       <div className="left">
@@ -14,41 +28,22 @@ const ProductDetailInfo = ({ description }: any) => {
           <div className="content has-table">
             <table>
               <tbody>
-                <tr>
-                  <td>Thương hiệu</td>
-                  <td>Biti&apos;s</td>
-                </tr>
-                <tr>
-                  <td>Xuất xứ thương hiệu</td>
-                  <td>Việt Nam</td>
-                </tr>
-                <tr>
-                  <td>Chất liệu</td>
-                  <td>
-                    <p>Eva, cao su</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Hàng chính hãng</td>
-                  <td>Có</td>
-                </tr>
-                <tr>
-                  <td>Xuất xứ</td>
-                  <td>Việt Nam</td>
-                </tr>
-                <tr>
-                  <td>Sản phẩm có được bảo hành không?</td>
-                  <td>Có</td>
-                </tr>
-                <tr>
-                  <td>Thời gian bảo hành</td>
-                  <td>3</td>
-                </tr>
+                {info?.map((info: any) => {
+                  if (info?.value !== null) {
+                    return (
+                      <tr key={info.code}>
+                        <td>{getTextFromCode(info?.code)}</td>
+                        <td>{info?.code == "origin" ? getName(info?.value) : info?.value}</td>
+                      </tr>
+                    );
+                  }
+                  return null;
+                })}
               </tbody>
             </table>
           </div>
         </div>
-        <Description description={description} />
+        <Description description={description} isFetching={isFetching} />
       </div>
       <div className="right"></div>
     </S.ProductDetailInfoStyle>

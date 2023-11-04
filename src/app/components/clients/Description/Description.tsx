@@ -9,20 +9,20 @@ interface IDescriptionProps {
   description: string;
   title?: string;
   scrollToBottom?: boolean;
+  isFetching?: boolean;
 }
 
 const Description = ({
   description,
   title = "user.product_detail.description",
   scrollToBottom = false,
+  isFetching = false,
 }: IDescriptionProps) => {
-  const [lower, setLower] = useState<boolean>(true);
+  const [lower, setLower] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [desc, setDesc] = useState<string>(description);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation();
-
-  const newDesc = description + '<div id="gradient"></div>';
 
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);
@@ -36,10 +36,14 @@ const Description = ({
 
   useEffect(() => {
     if ((contentRef?.current?.clientHeight as number) < 500) {
-      setIsExpanded(true);
       setLower(false);
+      setDesc(description);
+    } else {
+      setLower(true);
+      const newDesc = description + `<div id="gradient"></div>`;
+      setDesc(newDesc);
     }
-  }, []);
+  }, [desc, description]);
 
   useEffect(() => {
     const gradient = document.getElementById("gradient");
@@ -53,15 +57,9 @@ const Description = ({
     }
   }, [isExpanded, scrollToBottom]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  });
-
   return (
     <S.DescriptionStyles>
-      {isLoading ? (
+      {isFetching ? (
         <DescriptionSkeleton />
       ) : (
         <div className="group" id="desc-top">
@@ -71,7 +69,7 @@ const Description = ({
               <div
                 className={`toggle-content-view relative ${isExpanded ? "expanded" : "less"}`}
                 ref={contentRef}
-                dangerouslySetInnerHTML={{ __html: newDesc }}
+                dangerouslySetInnerHTML={{ __html: desc }}
               ></div>
               {lower && (
                 <Button className="btn-more" onClick={toggleDescription}>

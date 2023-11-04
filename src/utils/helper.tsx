@@ -279,3 +279,5 @@ export const handleApiError = (err: any, titleMessage = "Error occurred"): void 
       notifyError(titleMessage, errorMessage);
   }
 };
+
+export const baseImageUrl = import.meta.env.VITE_BASE_IMAGE_URL as string;

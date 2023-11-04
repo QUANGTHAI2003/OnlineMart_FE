@@ -41,7 +41,7 @@ const ProductDetail = () => {
   const { data: productDetail, isFetching, error } = useGetProductDetailQuery(parseInt(id as string));
 
   const productGallery = productDetail?.gallery;
-  const productQuantity = product_detail.stock_item.qty;
+  const productQuantity = productDetail?.stock_qty || 0;
 
   const errorStatus = (error as any)?.status;
 
@@ -194,7 +194,11 @@ const ProductDetail = () => {
           </section>
         </S.ProductDetailStyle>
         <ProductRelated />
-        <ProductDetailInfo description={productDetail?.long_description} />
+        <ProductDetailInfo
+          info={productDetail?.info_detail}
+          description={productDetail?.description}
+          isFetching={isFetching}
+        />
         <CustomerReview />
       </section>
     </S.DetailPageStyle>
