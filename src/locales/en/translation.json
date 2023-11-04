@@ -1297,5 +1297,37 @@
         "completed": "Completed!"
       }
     }
+  },
+  "admin_super": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "review": "Review",
+      "shop_list": "Shop list"
+    },
+    "shop_list": {
+      "filter": {
+        "code": "Code",
+        "name": "Name",
+        "phone": "Phone",
+        "email": "Email",
+        "status": "Status",
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      },
+      "table": {
+        "shop_code": "Code",
+        "shop_name": "Name",
+        "shop_email": "Email",
+        "shop_phone": "Phone",
+        "shop_status": "Status",
+        "action": "Action",
+        "shop_detail": "Detail",
+        "approve": "Approve",
+        "cancel": "Cancel",
+        "notification": "Notification",
+        "confirm": "Confirm",
+        "text_area": "Enter content"
+      }
+    }
   }
 }

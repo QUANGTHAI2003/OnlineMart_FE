@@ -5,8 +5,9 @@ import AdminMainLayout from "./app/components/layouts/admin/AdminMainLayout";
 import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
-import SellerInfo from "./app/pages/admin/seller/SellerInfo";
+import AdminSuperMainLayout from "./app/components/layouts/super_admin/AdminSuperMainLayout";
 import AI from "./app/pages/AI";
+import SellerInfo from "./app/pages/admin/seller/SellerInfo";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
@@ -59,10 +60,20 @@ const AdminBusinessEfficiency = React.lazy(
 const AdminTrafficWebsite = React.lazy(() => import("@app/app/pages/admin/dev_center/traffic_website/TrafficWebsite"));
 const RoleManage = React.lazy(() => import("@app/app/pages/admin/manage_seller/role/RoleManage"));
 
+// super admin
+const DashboardSuperAdmin = React.lazy(() => import("@app/app/pages/super_admin/Dashboard"));
+const Shops = React.lazy(() => import("@app/app/pages/super_admin/shops/list/Shops"));
+
 const AppRouter: React.FC = () => {
   const protectedAdminLayout = (
     <RequireAuth type="adminShop">
       <AdminMainLayout />
+    </RequireAuth>
+  );
+
+  const protectedSuperAdminLayout = (
+    <RequireAuth type="superAdmin">
+      <AdminSuperMainLayout />
     </RequireAuth>
   );
 
@@ -127,6 +138,10 @@ const AppRouter: React.FC = () => {
           <Route path="traffic_website" element={<AdminTrafficWebsite />} />
           <Route path="product_insight" element={<div>Chỉ số sản phẩm</div>} />
         </Route>
+      </Route>
+      <Route path="/admin/super" element={protectedSuperAdminLayout}>
+        <Route index element={<DashboardSuperAdmin />} />
+        <Route path="review" element={<Shops />} />
       </Route>
 
       <Route element={<AuthLayout />}>

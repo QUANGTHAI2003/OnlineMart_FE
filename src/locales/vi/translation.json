@@ -670,8 +670,8 @@
         "option": {
           "label": {
             "selling_price": "Giá bán",
-            "sale_price":"Giảm giá",
-            "quantity":"Số lượng",
+            "sale_price": "Giảm giá",
+            "quantity": "Số lượng",
             "product_code": "Mã sản phẩm",
             "add_variant": "Thêm lựa chọn hàng để giúp khách hàng tìm kiếm sản phẩm và dễ dàng thêm mới lựa chọn",
             "variant": "Tên lựa chọn {{count}}",
@@ -1294,6 +1294,38 @@
       },
       "status": {
         "completed": "Hoàn thành!"
+      }
+    }
+  },
+  "admin_super": {
+    "sidebar": {
+      "dashboard": "Trang chủ",
+      "review": "Xét duyệt",
+      "shop_list": "Danh sách nhà bán"
+    },
+    "shop_list": {
+      "filter": {
+        "code": "Mã nhà bán",
+        "name": "Tên nhà bán",
+        "phone": "Số điện thoại",
+        "email": "Email nhà bán",
+        "status": "Trạng thái ",
+        "enabled": "Đã duyệt",
+        "disabled": "Chưa được duyệt"
+      },
+      "table": {
+        "shop_code": "Mã nhà bán",
+        "shop_name": "Tên nhà bán",
+        "shop_email": "Email",
+        "shop_phone": "Số điện thoại",
+        "shop_status": "Trạng thái",
+        "action": "Hành động",
+        "shop_detail": "Chi tiết",
+        "approve": "Duyệt",
+        "cancel": "Hủy",
+        "notification": "Thông báo",
+        "confirm": "Xác nhận",
+        "text_area": "Nhập nội dung"
       }
     }
   }
