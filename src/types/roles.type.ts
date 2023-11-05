@@ -19,4 +19,8 @@ export type Permission =
   | "View categories"
   | "View suppliers"
   | "Create categories"
-  | "Update category";
+  | "Update category"
+  | "View vouchers"
+  | "Create voucher"
+  | "Update voucher"
+  | "Delete voucher";

@@ -1,5 +1,6 @@
 import { productAdminApi } from "./api/admin/productApi";
 import { roleApi } from "./api/admin/roleApi";
+import { voucherApi } from "./api/admin/voucherApi";
 import { authApi } from "./api/authApi";
 import { categoryApi } from "./api/categoryApi";
 import { productCategoryApi } from "./api/producCategoryApi";
@@ -27,6 +28,7 @@ export const rootReducer: any = {
   [wishlistApi.reducerPath]: wishlistApi.reducer,
   [productAdminApi.reducerPath]: productAdminApi.reducer,
   [notificationApi.reducerPath]: notificationApi.reducer,
+  [voucherApi.reducerPath]: voucherApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
   productDetail: productDetailSlice,
@@ -47,5 +49,6 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     roleApi.middleware,
     productAdminApi.middleware,
     roleApi.middleware,
-    notificationApi.middleware
+    notificationApi.middleware,
+    voucherApi.middleware
   );

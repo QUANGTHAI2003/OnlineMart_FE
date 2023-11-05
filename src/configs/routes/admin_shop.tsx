@@ -1,12 +1,13 @@
 import {
   ControlOutlined,
   DashboardOutlined,
+  GroupOutlined,
   LaptopOutlined,
   SendOutlined,
   ShopOutlined,
   ShoppingCartOutlined,
-  UsergroupAddOutlined,
   StockOutlined,
+  UsergroupAddOutlined,
   AreaChartOutlined,
 } from "@ant-design/icons";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
@@ -91,6 +92,21 @@ export const adminShopRoutes: ISidebarMenu[] = [
         key: "suppliers",
         permission: "View suppliers",
         url: "/admin/shop/suppliers",
+      },
+    ],
+  },
+  {
+    title: "admin_shop.sidebar.evouncher",
+    key: "evoucher",
+    url: "/admin/shop/evoucher",
+    permission: ["View evouncher", "Create product", "View reviews"],
+    icon: <GroupOutlined />,
+    children: [
+      {
+        title: "admin_shop.sidebar.list_voucher",
+        key: "list_voucher",
+        permission: "View voucher",
+        url: "/admin/shop/evoucher",
       },
     ],
   },
