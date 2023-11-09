@@ -7,10 +7,10 @@ interface ISellerInfoDataTabletProps {
 const SellerInfoTableData = ({ data }: ISellerInfoDataTabletProps) => {
   return (
     <div>
-      <Link className="font-semibold" target="_blank" to={`#/${data.id}`}>
-        {data.code}
+      <Link className="font-semibold" to={`#/${data.id}`}>
+        {`#${data?.id}`}
       </Link>
-      <dd>{data.name}</dd>
+      <dd>{data?.name}</dd>
     </div>
   );
 };

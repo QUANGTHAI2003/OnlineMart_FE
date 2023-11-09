@@ -14,7 +14,7 @@ const TabComponent: React.FC<any> = ({ productList }) => {
     let productCount;
 
     if (tabKey === "all") {
-      productCount = productList?.length;
+      productCount = productList?.length || 0;
     } else {
       productCount = productList?.filter((product: IProduct) => product?.status === tabKey)?.length || 0;
     }

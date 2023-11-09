@@ -1,16 +1,14 @@
 import * as S from "@app/app/pages/admin/seller/SellerInfo.styles";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Space, Tag } from "antd";
+import { Button } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 interface IShowPermissionProps {
-  id: number;
-  data?: any;
+  permissions?: any;
 }
-const ShowPermission = ({ id, data }: IShowPermissionProps) => {
+const ShowPermission = ({ permissions }: IShowPermissionProps) => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -24,34 +22,27 @@ const ShowPermission = ({ id, data }: IShowPermissionProps) => {
   };
   return (
     <>
-      <div className="flex flex-col justify-center items-center">
-        <Link target="_blank" to={`#/${id}`}>
-          {t("admin_shop.seller.table.detail")}
-        </Link>
-        <Button type="link" onClick={showModal}>
-          <Tag color="gold" className="m-0">
-            <FontAwesomeIcon icon={faEye} />
-          </Tag>
-        </Button>
-      </div>
+      <Button type="primary" ghost onClick={showModal}>
+        <FontAwesomeIcon icon={faEye} />
+      </Button>
       <S.ModalPermission
         title={t("admin_shop.seller.title_permissions")}
+        centered
+        className="max-w-[800px] w-full"
         footer={null}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Space size={[20, 13]} wrap>
-          {data && data.length ? (
-            data.map((permissions: any) => (
-              <Button key={permissions.id} className="permission_item">
-                {permissions.name}
-              </Button>
-            ))
-          ) : (
-            <p>{t("admin_shop.seller.no_permissions")}</p>
-          )}
-        </Space>
+        {permissions?.length ? (
+          permissions?.map((permission: any) => (
+            <Button key={permission?.id} className="permission_item">
+              {permission?.name}
+            </Button>
+          ))
+        ) : (
+          <p>{t("admin_shop.seller.no_permissions")}</p>
+        )}
       </S.ModalPermission>
     </>
   );

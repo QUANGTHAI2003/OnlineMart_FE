@@ -3,7 +3,7 @@ import LogoGoogle from "@app/app/assets/images/logo_google.jpg";
 import { useLoginMutation } from "@app/store/slices/api/authApi";
 import { setCredentials } from "@app/store/slices/authSlice";
 import { useAppDispatch } from "@app/store/store";
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
 import { Button, Divider, Form, Input } from "antd";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,10 +19,6 @@ type FormValues = {
   confirm?: string;
 };
 
-type ErrorMessage = {
-  [key: number]: string;
-};
-
 const SigninAdmin = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -36,30 +32,19 @@ const SigninAdmin = () => {
     const password = data.password;
 
     try {
-      const userData = await login({ email, password, type: "admin" }).unwrap();
+      const userData = await login({ email, password, type: "adminShop" }).unwrap();
 
-      if ((userData as any)?.data?.user?.type !== "admin") {
+      if ((userData as any)?.data?.user?.type !== "adminShop") {
         notifyError("Login failed", "You are not admin");
       } else {
         dispatch(setCredentials({ ...userData, email }));
 
         notifySuccess("Successfully", "Login successfully");
 
-        isLoading || navigate("/admin/shop/categories");
+        isLoading || navigate("/admin/shop");
       }
     } catch (err: any) {
-      const errorStatus = err.status || 500;
-
-      const errorMessages: ErrorMessage = {
-        400: "Bad Request",
-        401: "Email or password is incorrect",
-        403: "Invalid",
-        500: "Internal Server Error",
-      };
-
-      const errorMessage = errorMessages[errorStatus] || "Unknown Error";
-
-      notifyError("Login failed", errorMessage);
+      handleApiError(err);
     }
   };
 
@@ -153,7 +138,7 @@ const SigninAdmin = () => {
               </span>
             </div>
 
-            <Button block htmlType="submit" className="bg-[#fdd835]">
+            <Button loading={isLoading} block htmlType="submit" className="bg-[#fdd835]">
               {t("admin_shop.authentication.signin.submit")}
             </Button>
 

@@ -1039,7 +1039,7 @@
     },
     "seller": {
       "list": "Danh sách nhà bán",
-      "link_register": "Tạo link đăng ký",
+      "link_register": "Thêm nhân viên",
       "title_permissions": "Danh sách quyền",
       "no_permissions": "Không có quyền nào",
       "filter": {
@@ -1050,18 +1050,8 @@
           "condition": "Trạng thái",
           "activity": "Hoạt động",
           "inactive": "Không hoạt động",
-          "profile_status": "Trạng thái hồ sơ",
-          "incomplete": "Chưa hoàn thành hồ sơ",
-          "waiting": "Chờ nhà bán bổ sung",
-          "peding": "Đang chờ duyệt",
           "other": "Bộ lọc khác",
-          "type_of": "Loại nhà bán",
-          "sale_country": "Nhà bán trong nước",
-          "international": "Nhà bán quốc tế",
-          "sale_segment": "Phân khúc nhà bán",
-          "seller_admin": "Nhà bán OM",
-          "shop_admin": "Chỉ gồm shop OM",
-          "not_shop_admin": "Không gồm shop OM"
+          "permission": "Quyền"
         },
         "placeholder": "Nhập vào {{placeholder}} ...",
         "reset_btn": "Thiết lập lại",
@@ -1079,12 +1069,13 @@
           "name": "Tên nhân viên",
           "placeholder": "Nhập vào",
           "email": "Email",
-          "right": "Quyền",
-          "position": "Vai trò",
+          "permission": "Quyền",
+          "role": "Vai trò",
           "placeholder_select": "Lựa chọn",
           "phone": "Số diện thoại",
           "password": "Mật khẩu",
-          "btn_submit": "Đăng ký"
+          "btn_submit": "Đăng ký",
+          "edit_permisions": "Sửa quyền của {{name}}"
         }
       },
       "table": {
@@ -1095,7 +1086,10 @@
         "tag_inactive": "Không hoạt động",
         "charge": "Người phụ trách",
         "creator": "Người tạo cửa hàng",
-        "detail": "Chi tiết"
+        "detail": "Chi tiết",
+        "edit": "Sửa",
+        "delete": "Xóa nhà bán",
+        "edit_admin": "Không được thay đổi tài khoản admin"
       }
     },
     "header": {

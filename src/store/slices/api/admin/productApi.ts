@@ -13,6 +13,7 @@ export const productAdminApi = createApi({
       query: () => {
         return {
           url: `product`,
+          credentials: "include",
         };
       },
       transformResponse: (response: { data: IProduct[] }) => {
@@ -31,6 +32,7 @@ export const productAdminApi = createApi({
       query: (id) => {
         return {
           url: `product/${id}`,
+          credentials: "include",
         };
       },
       transformResponse: (response: { data: any }) => {
@@ -44,6 +46,7 @@ export const productAdminApi = createApi({
           url: `product`,
           method: "POST",
           body,
+          credentials: "include",
         };
       },
       invalidatesTags: [{ type: "Product", id: "LIST" }],
@@ -54,6 +57,7 @@ export const productAdminApi = createApi({
           url: `product/${data.id}`,
           method: "PATCH",
           body: data.body,
+          credentials: "include",
         };
       },
       invalidatesTags: [{ type: "Product", id: "LIST" }],
@@ -63,6 +67,7 @@ export const productAdminApi = createApi({
         return {
           url: `product/${productId}`,
           method: "DELETE",
+          credentials: "include",
         };
       },
       invalidatesTags: [{ type: "Product", id: "LIST" }],
@@ -72,6 +77,7 @@ export const productAdminApi = createApi({
         return {
           url: `product/${productId}/delete-multiple`,
           method: "DELETE",
+          credentials: "include",
         };
       },
       invalidatesTags: [{ type: "Product", id: "LIST" }],
@@ -81,6 +87,7 @@ export const productAdminApi = createApi({
         return {
           url: `product/${productId}/${status}/status`,
           method: "PATCH",
+          credentials: "include",
         };
       },
       invalidatesTags: [{ type: "Product", id: "LIST" }],

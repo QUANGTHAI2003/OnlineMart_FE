@@ -1039,8 +1039,8 @@
       "btn_delete": "Delete"
     },
     "seller": {
-      "list": "List of houses for sale",
-      "link_register": "Create a registration link",
+      "list": "List of Sellers",
+      "link_register": "Add seller",
       "title_permissions": "List of permissions",
       "no_permissions": "No rights",
       "filter": {
@@ -1052,17 +1052,8 @@
           "activity": "Activity",
           "inactive": "Inactive",
           "profile_status": "Profile status",
-          "incomplete": "Incomplete profile",
-          "waiting": "Waiting for additional sellers",
-          "peding": "Pending approval",
           "other": "Other filters",
-          "type_of": "Type of house for sale",
-          "sale_country": "Houses for sale in the country",
-          "international": "International Seller",
-          "sale_segment": "House for sale segment",
-          "seller_admin": "OM Seller",
-          "shop_admin": "Only OM shop",
-          "not_shop_admin": "Not includign OM shop"
+          "permission": "Permission"
         },
         "placeholder": "Enter {{placeholder}} ...",
         "reset_btn": "Reset",
@@ -1080,12 +1071,13 @@
           "name": "Staff's name",
           "placeholder": "Enter",
           "email": "Email",
-          "right": "Rights",
-          "position": "Positions",
+          "permission": "Permission",
+          "role": "Roles",
           "placeholder_select": "Select",
           "phone": "Phone number",
           "password": "Your password",
-          "btn_submit": "Register"
+          "btn_submit": "Register",
+          "edit_permisions": "Edit {{name}}'s permissions"
         }
       },
       "table": {
@@ -1096,7 +1088,10 @@
         "tag_inactive": "Inactive",
         "charge": "Person in charge",
         "creator": "Store creator",
-        "detail": "Detail"
+        "detail": "Detail",
+        "edit": "Edit",
+        "delete": "Delete",
+        "edit_admin": "Do not edit administration's role"
       }
     },
     "header": {

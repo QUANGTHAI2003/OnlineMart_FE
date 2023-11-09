@@ -31,7 +31,13 @@ const baseQueryCustom: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryEr
 
   let result = await baseQuery(args, api, extraOptions);
 
+  if ((result?.error as any)?.message === "You are not admin") {
+    console.log("You are not admin");
+    window.location.href = "/auth";
+  }
+
   if ((result?.error as any)?.originalStatus === 403) {
+    console.log("You are not admin");
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
 

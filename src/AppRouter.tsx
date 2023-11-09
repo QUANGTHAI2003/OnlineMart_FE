@@ -6,8 +6,8 @@ import AuthLayout from "./app/components/layouts/auth/AuthLayout";
 import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
 import AdminSuperMainLayout from "./app/components/layouts/super_admin/AdminSuperMainLayout";
-import AI from "./app/pages/AI";
 import SellerInfo from "./app/pages/admin/seller/SellerInfo";
+import AI from "./app/pages/AI";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
@@ -127,8 +127,8 @@ const AppRouter: React.FC = () => {
           <Route path=":id" element={<AdminOrderDetail />} />
           <Route path="bill" element={<div>Order Bill</div>} />
         </Route>
-        <Route path="info-seller" element={<SellerInfo />} />
         <Route path="manage-seller">
+          <Route index element={<SellerInfo />} />
           <Route path="role" element={<RoleManage />} />
         </Route>
         <Route path="ships">

@@ -1,28 +1,50 @@
-import { Can, PermissionsSwitch } from "@app/app/components/common/Permissions";
 import { useGetAllRoleQuery } from "@app/store/slices/api/admin/roleApi";
-import { useAddSellerMutation } from "@app/store/slices/api/admin/sellerApi";
-import { handleApiError, isEntityError } from "@app/utils/helper";
+import { useUpdateSellerMutation } from "@app/store/slices/api/admin/sellerApi";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
 import { Button, Col, Form, Input, Modal, Row, Select, Spin } from "antd";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const RegisterEmployess = ({ permissionList }: any) => {
+interface IEditPermissionProps {
+  data: any;
+  permissions: any;
+  isFetching: boolean;
+  disabled?: boolean;
+}
+const EditPermission = ({ data, permissions, isFetching, disabled = false }: IEditPermissionProps) => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
 
-  const { data: roles } = useGetAllRoleQuery();
+  const { data: roles, isFetching: isFetchingRole } = useGetAllRoleQuery();
+  const [updateSeller, { isLoading, error }] = useUpdateSellerMutation();
 
-  const [addSeller, { isLoading, error }] = useAddSellerMutation();
+  useEffect(() => {
+    form.setFieldsValue({
+      name: data?.name,
+      email: data?.email,
+      phone: data?.phone,
+      permissions: data?.permissions.map((item: any) => item.id),
+      role: data?.roles.map((item: any) => item.id),
+    });
+  }, [data?.email, data?.name, data?.permissions, data?.phone, data?.roles, form]);
 
   const handleSubmit = async (fieldValues: any) => {
     try {
       const values = {
         ...fieldValues,
+        phone: data?.phone,
+        email: data?.email,
       };
-      await addSeller(values).unwrap();
+
+      await updateSeller({
+        id: data?.id,
+        body: values,
+      }).unwrap();
+
+      notifySuccess("Update seller successfully");
+
       !isLoading && handleCancel();
-      form.resetFields();
     } catch (error) {
       handleApiError(error);
     }
@@ -49,6 +71,7 @@ const RegisterEmployess = ({ permissionList }: any) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
+
   const validateMessages = {
     required: "${label} " + t("admin_shop.seller.register.form.validate_required"),
     types: {
@@ -65,28 +88,20 @@ const RegisterEmployess = ({ permissionList }: any) => {
 
   return (
     <>
-      <PermissionsSwitch>
-        <Can permissions={["Authorizations"]}>
-          <Button type="primary" onClick={showModal}>
-            {t("admin_shop.seller.link_register")}
-          </Button>
-        </Can>
-        <Can>
-          <Button disabled type="primary">
-            {t("admin_shop.seller.link_register")}
-          </Button>
-        </Can>
-      </PermissionsSwitch>
-
+      <Button disabled={disabled} type="primary" ghost onClick={showModal}>
+        {t("admin_shop.seller.table.edit")}
+      </Button>
       <Modal
-        title={t("admin_shop.seller.register.title")}
+        title={t("admin_shop.seller.register.form.edit_permisions", {
+          name: data?.name,
+        })}
         open={open}
         width={700}
         centered
         onCancel={handleCancel}
         footer={null}
       >
-        <Spin spinning={isLoading} className="p-5">
+        <Spin spinning={isFetching || isLoading} className="p-5">
           <Form
             form={form}
             name="register"
@@ -98,7 +113,7 @@ const RegisterEmployess = ({ permissionList }: any) => {
             className="w-full p-4 border border-[#ebebf0] border-solid rounded-md"
           >
             <Row gutter={16}>
-              <Col span={12}>
+              <Col span={24}>
                 <Form.Item
                   name="name"
                   label={t("admin_shop.seller.register.form.name")}
@@ -111,22 +126,15 @@ const RegisterEmployess = ({ permissionList }: any) => {
                   validateStatus={errorForm?.name && "error"}
                   help={errorForm?.name && errorForm?.name[0]}
                 >
-                  <Input size="middle" placeholder={t("admin_shop.seller.register.form.placeholder")} />
+                  <Input
+                    disabled
+                    readOnly
+                    size="middle"
+                    placeholder={t("admin_shop.seller.register.form.placeholder")}
+                  />
                 </Form.Item>
               </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="email"
-                  label={t("admin_shop.seller.register.form.email")}
-                  rules={[{ required: true }, { type: "email" }]}
-                  hasFeedback
-                  validateStatus={errorForm?.email && "error"}
-                  help={errorForm?.email && errorForm?.email[0]}
-                >
-                  <Input size="middle" placeholder={t("admin_shop.seller.register.form.placeholder")} />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
+              <Col span={24}>
                 <Form.Item
                   name="permissions"
                   label={t("admin_shop.seller.register.form.permission")}
@@ -150,14 +158,14 @@ const RegisterEmployess = ({ permissionList }: any) => {
                     mode="multiple"
                     allowClear
                     placeholder={t("admin_shop.seller.register.form.placeholder_select")}
-                    options={permissionList?.map((item: any) => ({
+                    options={permissions?.map((item: any) => ({
                       value: item.id,
                       label: item.name,
                     }))}
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={24}>
                 <Form.Item
                   name="role"
                   label={t("admin_shop.seller.register.form.role")}
@@ -177,6 +185,7 @@ const RegisterEmployess = ({ permissionList }: any) => {
                   help={errorForm?.role && errorForm?.role[0]}
                 >
                   <Select
+                    loading={isFetchingRole}
                     size="middle"
                     allowClear
                     mode="multiple"
@@ -186,44 +195,6 @@ const RegisterEmployess = ({ permissionList }: any) => {
                       label: item.name,
                     }))}
                   />
-                </Form.Item>
-              </Col>
-
-              <Col span={12}>
-                <Form.Item
-                  name="phone"
-                  label={t("admin_shop.seller.register.form.phone")}
-                  rules={[
-                    {
-                      required: true,
-                    },
-                    {
-                      pattern: /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/,
-                    },
-                  ]}
-                  hasFeedback
-                  validateStatus={errorForm?.phone && "error"}
-                  help={errorForm?.phone && errorForm?.phone[0]}
-                >
-                  <Input size="middle" placeholder={t("admin_shop.seller.register.form.placeholder")} />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="password"
-                  label={t("admin_shop.seller.register.form.password")}
-                  rules={[
-                    {
-                      required: true,
-                    },
-                    { min: 6 },
-                    { max: 16 },
-                  ]}
-                  hasFeedback
-                  validateStatus={errorForm?.password && "error"}
-                  help={errorForm?.password && errorForm?.password[0]}
-                >
-                  <Input.Password size="middle" placeholder={t("admin_shop.seller.register.form.placeholder")} />
                 </Form.Item>
               </Col>
             </Row>
@@ -238,5 +209,4 @@ const RegisterEmployess = ({ permissionList }: any) => {
     </>
   );
 };
-
-export default RegisterEmployess;
+export default EditPermission;

@@ -1,14 +1,13 @@
 import {
+  AreaChartOutlined,
   ControlOutlined,
   DashboardOutlined,
   GroupOutlined,
   LaptopOutlined,
   SendOutlined,
-  ShopOutlined,
   ShoppingCartOutlined,
   StockOutlined,
   UsergroupAddOutlined,
-  AreaChartOutlined,
 } from "@ant-design/icons";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
 
@@ -126,19 +125,18 @@ export const adminShopRoutes: ISidebarMenu[] = [
     ],
   },
   {
-    title: "admin_shop.sidebar.info_seller",
-    key: "info_seller",
-    url: "/admin/shop/info-seller",
-    permission: "Info seller",
-    icon: <ShopOutlined />,
-  },
-  {
     title: "admin_shop.sidebar.manage_seller",
     key: "manage_seller",
     url: "/admin/shop/manage-seller",
     permission: "Authorizations",
     icon: <UsergroupAddOutlined />,
     children: [
+      {
+        title: "admin_shop.sidebar.info_seller",
+        key: "info_seller",
+        url: "/admin/shop/manage-seller",
+        permission: "Info seller",
+      },
       {
         title: "admin_shop.sidebar.manage_role",
         key: "manage_role",
@@ -187,12 +185,12 @@ export const adminShopRoutes: ISidebarMenu[] = [
         permission: "View reports",
         url: "/admin/shop/dev_center/traffic_website",
       },
-        {
-            title: "admin_shop.sidebar.operational_efficiency",
-            key: "operational_efficiency",
-            permission: "View reports",
-            url: "/admin/shop/dev_center/operational_efficiency",
-        },
+      {
+        title: "admin_shop.sidebar.operational_efficiency",
+        key: "operational_efficiency",
+        permission: "View reports",
+        url: "/admin/shop/dev_center/operational_efficiency",
+      },
     ],
   },
 ];

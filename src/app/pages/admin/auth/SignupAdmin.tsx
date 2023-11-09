@@ -1,7 +1,7 @@
 import { useLoginMutation, useRegisterMutation } from "@app/store/slices/api/authApi";
 import { setCredentials } from "@app/store/slices/authSlice";
 import { useAppDispatch } from "@app/store/store";
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
 import { Button, Form, Input } from "antd";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,16 +18,12 @@ type FormValues = {
   phone: string;
 };
 
-type ErrorMessage = {
-  [key: number]: string;
-};
-
 const SignupAdmin = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [register, registerResult] = useRegisterMutation();
-  const [login, { isLoading }] = useLoginMutation();
+  const [register, { isLoading: isLoadingRegister, error }] = useRegisterMutation();
+  const [login, { isLoading: isLoadingLogin }] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 
@@ -44,7 +40,7 @@ const SignupAdmin = () => {
       password,
       confirm_password,
       phone,
-      type: "admin",
+      type: "adminShop",
     };
 
     try {
@@ -54,30 +50,21 @@ const SignupAdmin = () => {
 
       notifySuccess("Successfully", "Register successfully");
 
-      isLoading || navigate("/admin/shop");
+      isLoadingRegister || isLoadingLogin || navigate("/admin/shop");
     } catch (err: any) {
-      const status = err.status || 500;
-      const errorMessages: ErrorMessage = {
-        400: "Bad Request",
-        401: "Unauthorized",
-        500: "Internal Server Error",
-      };
-
-      const errorMessage = errorMessages[status];
-
-      notifyError("Register failed", errorMessage);
+      handleApiError(err);
     }
   };
 
   const errorForm: any = useMemo(() => {
-    const errorResult = registerResult.error;
+    const errorResult = error;
 
     if (isEntityError(errorResult)) {
       return errorResult.data.errors;
     }
 
     return null;
-  }, [registerResult.error]);
+  }, [error]);
 
   const validateMessages = {
     required: "${label} " + t("admin_shop.authentication.signup.err_null"),

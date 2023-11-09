@@ -23,4 +23,5 @@ export type Permission =
   | "View vouchers"
   | "Create voucher"
   | "Update voucher"
-  | "Delete voucher";
+  | "Delete voucher"
+  | "Authorizations";

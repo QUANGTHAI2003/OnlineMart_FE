@@ -17,11 +17,12 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ children, type }) => {
   const { isLoading, isFetching } = userApi.endpoints.getMe.useQuery(null, {
     skip: false,
     refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
   });
 
   const loading = isLoading || isFetching;
 
-  const user = userApi.endpoints.getMe.useQueryState(null, {
+  const user: any = userApi.endpoints.getMe.useQueryState(null, {
     selectFromResult: (data) => {
       return data;
     },
@@ -33,15 +34,18 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ children, type }) => {
 
   const checkType = {
     client: "/auth",
-    adminShop: "/admin/shop/login",
-    superAdmin: "/admin/super/login",
+    adminShop: "/admin/shop/auth/switch",
+    superAdmin: "/admin/super",
   }[type];
 
-  return cookies.logged_in || user ? (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>{children}</>
-  ) : (
-    <Navigate to={checkType} state={{ form: location }} replace />
+  return (
+    (cookies.logged_in || user) &&
+    (type === (user?.data?.data?.type as string) ? (
+      // eslint-disable-next-line react/jsx-no-useless-fragment
+      <>{children}</>
+    ) : (
+      <Navigate to={checkType} state={{ form: location }} replace />
+    ))
   );
 };
 

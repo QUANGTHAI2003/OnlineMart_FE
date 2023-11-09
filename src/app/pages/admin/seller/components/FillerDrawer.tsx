@@ -1,114 +1,89 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Col, Drawer, Form, Row, Select } from "antd";
-import React, { useState } from "react";
+import { setPermission, setStatusType } from "@app/store/slices/redux/admin/sellerAdminSlice";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
+import { Button, Drawer, Form, Select } from "antd";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const FillerDrawer = React.memo(
-  ({ statusTypeData, profileStatusTypeData, sellerTypeData, sellerAdminTypeData }: any) => {
-    const [open, setOpen] = useState(false);
-    const { t } = useTranslation();
-    const showDrawer = () => {
-      setOpen(true);
-    };
-    const onClose = () => {
-      setOpen(false);
-    };
-    return (
-      <>
-        <Button onClick={showDrawer}>
-          {t("admin_shop.seller.filter.type.other")}
-          <PlusOutlined />
-        </Button>
-        <Drawer
-          title={t("admin_shop.seller.filter.type.other")}
-          placement="right"
-          footer={
-            <div className="flex justify-end">
-              <Button className="mr-2" onClick={onClose}>
-                {t("admin_shop.seller.filter.filter")}
-              </Button>
-              <Button type="primary" onClick={onClose}>
-                {t("admin_shop.seller.filter.apply")}
-              </Button>
-            </div>
-          }
-          onClose={onClose}
-          open={open}
-          closable={false}
-        >
-          <Form layout="vertical" autoComplete="off">
-            <Form.Item
-              name={t("admin_shop.seller.filter.type.condition")}
-              label={t("admin_shop.seller.filter.type.condition")}
-            >
-              <Select
-                className="w-full"
-                placeholder={t("admin_shop.seller.filter.type.condition")}
-                dropdownMatchSelectWidth={false}
-                size="middle"
-                options={statusTypeData}
-              />
-            </Form.Item>
-            <Form.Item
-              name={t("admin_shop.seller.filter.type.profile_status")}
-              label={t("admin_shop.seller.filter.type.profile_status")}
-            >
-              <Select
-                className="w-full"
-                placeholder={t("admin_shop.seller.filter.type.profile_status")}
-                dropdownMatchSelectWidth={false}
-                size="middle"
-                options={profileStatusTypeData}
-              />
-            </Form.Item>
-            <Form.Item
-              name={t("admin_shop.seller.filter.type.type_of")}
-              label={t("admin_shop.seller.filter.type.type_of")}
-            >
-              <Select
-                className="w-full"
-                placeholder={t("admin_shop.seller.filter.type.type_of")}
-                dropdownMatchSelectWidth={false}
-                size="middle"
-                options={sellerTypeData}
-              />
-            </Form.Item>
-            <Form.Item
-              name={t("admin_shop.seller.filter.type.sale_segment")}
-              label={t("admin_shop.seller.filter.type.sale_segment")}
-            >
-              <Row>
-                <Col span={12}>
-                  <Checkbox value="1P">1P</Checkbox>
-                </Col>
-                <Col span={12}>
-                  <Checkbox value="Strategic Partners">Strategic Partners</Checkbox>
-                </Col>
-                <Col span={12}>
-                  <Checkbox value="Incubation">Incubation</Checkbox>
-                </Col>
-                <Col span={12}>
-                  <Checkbox value="Long-tail">Long-tail</Checkbox>
-                </Col>
-              </Row>
-            </Form.Item>
-            <Form.Item
-              name={t("admin_shop.seller.filter.type.seller_admin")}
-              label={t("admin_shop.seller.filter.type.seller_admin")}
-            >
-              <Select
-                className="w-full"
-                placeholder={t("admin_shop.seller.filter.type.seller_admin")}
-                dropdownMatchSelectWidth={false}
-                size="middle"
-                options={sellerAdminTypeData}
-              />
-            </Form.Item>
-          </Form>
-        </Drawer>
-      </>
-    );
-  }
-);
+const FillerDrawer = React.memo(({ statusTypeData, permissionList }: any) => {
+  const { t } = useTranslation();
+  const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
+
+  const [open, setOpen] = useState(false);
+
+  const statusType = useAppSelector((state) => state.sellerAdmin.filteredValue.statusType) || "all";
+  const permissionsFilter = useAppSelector((state) => state.sellerAdmin.filteredValue.permissionFilter);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    form.setFieldsValue({
+      statusType: statusType,
+      permissions: permissionsFilter,
+    });
+  }, [form, permissionsFilter, statusType]);
+
+  const handleApplySort = (values: any) => {
+    const { statusType, permissions } = values;
+    console.log("🚀 ~ file: FillerDrawer.tsx:34 ~ handleApplySort ~ permissions:", permissions);
+    dispatch(setStatusType(statusType));
+    dispatch(setPermission(permissions));
+  };
+
+  return (
+    <>
+      <Button block onClick={showDrawer}>
+        {t("admin_shop.seller.filter.type.other")}
+        <PlusOutlined />
+      </Button>
+      <Drawer
+        title={t("admin_shop.seller.filter.type.other")}
+        placement="right"
+        footer={
+          <div className="flex justify-end">
+            <Button className="mr-2" onClick={onClose}>
+              {t("admin_shop.seller.filter.filter")}
+            </Button>
+            <Button type="primary" form="sellerDrawerSort" htmlType="submit" onClick={onClose}>
+              {t("admin_shop.seller.filter.apply")}
+            </Button>
+          </div>
+        }
+        onClose={onClose}
+        open={open}
+      >
+        <Form form={form} id="sellerDrawerSort" onFinish={handleApplySort} layout="vertical" autoComplete="off">
+          <Form.Item name="statusType" label={t("admin_shop.seller.filter.type.condition")}>
+            <Select
+              className="w-full"
+              placeholder={t("admin_shop.seller.filter.type.condition")}
+              popupMatchSelectWidth={false}
+              size="middle"
+              options={statusTypeData}
+            />
+          </Form.Item>
+          <Form.Item name="permissions" label={t("admin_shop.seller.register.form.permission")}>
+            <Select
+              mode="multiple"
+              className="w-full"
+              placeholder={t("admin_shop.seller.filter.type.condition")}
+              popupMatchSelectWidth={false}
+              size="middle"
+              options={permissionList?.map((item: any) => {
+                return { label: item.name, value: item.name };
+              })}
+            />
+          </Form.Item>
+        </Form>
+      </Drawer>
+    </>
+  );
+});
 
 export default FillerDrawer;
