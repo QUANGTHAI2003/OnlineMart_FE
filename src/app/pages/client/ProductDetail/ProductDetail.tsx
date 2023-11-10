@@ -1,7 +1,8 @@
 import ProductImageGallery from "@app/app/components/clients/ImageGallery/ProductImageGallery";
 import ModalSelect from "@app/app/components/clients/SelectAddress/ModalSelect";
+import MetaHeader from "@app/app/components/Meta/MetaHeader";
 import { useGetProductDetailQuery } from "@app/store/slices/api/user/productApi";
-import { setPrice } from "@app/store/slices/redux/productDetailSlice";
+import { setDataCart, setPrice } from "@app/store/slices/redux/productDetailSlice";
 import { useAppDispatch } from "@app/store/store";
 import { formatCurrency } from "@app/utils/helper";
 import { Rate } from "antd";
@@ -33,23 +34,15 @@ const ProductDetail = () => {
 
   const { t } = useTranslation();
   const { id } = useParams();
+  const spid = new URLSearchParams(window.location.search).get("spid");
+
+  const { data: productDetail, isFetching, error } = useGetProductDetailQuery(parseInt(id as string));
+  const productGallery = productDetail?.gallery;
+  const variants = productDetail?.variants;
 
   useEffect(() => {
     window.scrollTo(120, 120);
   }, [location.pathname]);
-
-  const { data: productDetail, isFetching, error } = useGetProductDetailQuery(parseInt(id as string));
-
-  const productGallery = productDetail?.gallery;
-  const productQuantity = productDetail?.stock_qty || 0;
-
-  const errorStatus = (error as any)?.status;
-
-  useEffect(() => {
-    if (errorStatus === 404) {
-      nagigate("/404");
-    }
-  }, [errorStatus, location.pathname, nagigate]);
 
   useEffect(() => {
     if (productDetail) {
@@ -63,6 +56,43 @@ const ProductDetail = () => {
       dispatch(setPrice(price));
     }
   }, [productDetail, dispatch]);
+
+  useEffect(() => {
+    if (spid && variants) {
+      const variantValue = variants
+        .map((item: any) => item?.values.find((value: any) => value?.id === parseInt(spid)))
+        .filter(Boolean)[0];
+
+      dispatch(
+        setDataCart({
+          productName: productDetail?.name + " - " + variantValue?.label,
+          productImage: variantValue?.image || productDetail.thumbnail_url,
+          regularPrice: variantValue?.regular_price,
+          salePrice: variantValue?.sale_price,
+          stock: variantValue?.stock,
+        })
+      );
+    } else {
+      const productValue = {
+        productName: productDetail?.name,
+        productImage: productDetail?.thumbnail_url,
+        regularPrice: productDetail?.regular_price,
+        salePrice: productDetail?.sale_price,
+        stock: productDetail?.stock_qty,
+      };
+
+      dispatch(setDataCart(productValue));
+    }
+  }, [
+    dispatch,
+    productDetail?.name,
+    productDetail?.regular_price,
+    productDetail?.sale_price,
+    productDetail?.stock_qty,
+    productDetail?.thumbnail_url,
+    spid,
+    variants,
+  ]);
 
   const handleScrollToTReview = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
@@ -80,8 +110,17 @@ const ProductDetail = () => {
     }
   };
 
+  const errorStatus = (error as any)?.status;
+
+  useEffect(() => {
+    if (errorStatus === 404) {
+      nagigate("/404");
+    }
+  }, [errorStatus, location.pathname, nagigate]);
+
   return (
     <S.DetailPageStyle>
+      <MetaHeader title={`Mua ${productDetail?.name} tại ${productDetail?.shop?.name}`} />
       <section className="flex flex-col gap-y-4 sm:max-w-[768px] md:max-w-full mx-auto">
         <S.ProductDetailStyle>
           <section className="main-thumbnail w-[450px]">
@@ -131,7 +170,7 @@ const ProductDetail = () => {
             </S.HeaderStyle>
             <div className="body">
               <S.ProductInfoStyle>
-                <PriceComponent isHotDeal={product_detail?.deal_specs} />
+                <PriceComponent isHotDeal={product_detail?.deal_specs} variants={productDetail?.variants} />
                 <VariantComponent
                   isFetching={isFetching}
                   variant={(productDetail?.variants || []) as any}
@@ -187,7 +226,7 @@ const ProductDetail = () => {
                     </>
                   )}
                 </S.DeliveryStyle>
-                <AddToCartComponent quantity={productQuantity} />
+                <AddToCartComponent />
               </S.ProductInfoStyle>
               <SellerComponent sellerData={productDetail?.shop} isLoading={isFetching} />
             </div>

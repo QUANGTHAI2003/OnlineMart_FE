@@ -1,3 +1,4 @@
+import { useSyncToURL } from "@app/hooks";
 import { Radio } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -27,6 +28,7 @@ interface IVariantComponentProps {
 
 const VariantComponent: React.FC<IVariantComponentProps> = ({ variant, variantThumbnail, isFetching }) => {
   const location = useLocation();
+  const syncToURL = useSyncToURL();
 
   const [selectedVariants, setSelectedVariants] = useState<{ [id: number]: string }>({});
 
@@ -34,10 +36,8 @@ const VariantComponent: React.FC<IVariantComponentProps> = ({ variant, variantTh
     const spids = new URLSearchParams(location.search).get("spid");
 
     if (spids) {
-      const selectedIds = spids.split(",");
-
       const defaultSelectedVariants = variant?.reduce((acc, { id, values }) => {
-        const defaultValue = values.find((value) => selectedIds.includes(value.id))?.label;
+        const defaultValue = values.find((value) => value.id === parseInt(spids))?.label;
         return { ...acc, [id]: defaultValue };
       }, {});
 
@@ -59,9 +59,9 @@ const VariantComponent: React.FC<IVariantComponentProps> = ({ variant, variantTh
     }));
   };
 
-  // BÍ
-  const handleSyncVariantValue = (isHaveImage: boolean, image?: string): void => {
+  const handleSyncVariantValue = (id: string, isHaveImage: boolean, image?: string): void => {
     variantThumbnail(isHaveImage, image);
+    syncToURL({ spid: id });
   };
 
   return (
@@ -91,7 +91,7 @@ const VariantComponent: React.FC<IVariantComponentProps> = ({ variant, variantTh
                 >
                   {values.map(({ id, label, image, is_image }: IValue) => {
                     return (
-                      <Radio.Button key={id} value={label} onClick={() => handleSyncVariantValue(is_image, image)}>
+                      <Radio.Button key={id} value={label} onClick={() => handleSyncVariantValue(id, is_image, image)}>
                         {is_image && (
                           <div className="option-figure">
                             <img src={image} alt="" />

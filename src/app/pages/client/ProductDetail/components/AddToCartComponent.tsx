@@ -1,23 +1,42 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { setDataCart } from "@app/store/slices/redux/productDetailSlice";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
 import { Button, InputNumber } from "antd";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as S from "../ProductDetail.styles";
 
 type quantityNumber = number | null | undefined;
 
-interface IQuantity {
-  quantity: number;
-}
-
-const AddToCartComponent = ({ quantity }: IQuantity) => {
+const AddToCartComponent = () => {
   const [quantityInput, setQuantityInput] = useState<number>(1);
   const { t } = useTranslation();
-  console.log(quantity);
+  const dispatch = useAppDispatch();
+
+  const dataCart = useAppSelector((state) => state.productDetail.dataCart);
+
+  const handleSetCartQuantity = useCallback(
+    (value: quantityNumber) => {
+      const parsedValue = typeof value === "number" ? value : 1;
+      dispatch(
+        setDataCart({
+          ...dataCart,
+          cartQuantity: parsedValue,
+        })
+      );
+    },
+    [dataCart, dispatch]
+  );
+
+  useEffect(() => {
+    if (quantityInput !== dataCart?.cartQuantity) {
+      handleSetCartQuantity(quantityInput);
+    }
+  }, [handleSetCartQuantity, quantityInput, dataCart]);
 
   const handleIncrease = () => {
-    setQuantityInput((prevQuantity) => Math.min(prevQuantity + 1, quantity ?? 1));
+    setQuantityInput((prevQuantity) => Math.min(prevQuantity + 1, dataCart?.stock ?? 1));
   };
 
   const handleDecrease = () => {
@@ -26,6 +45,21 @@ const AddToCartComponent = ({ quantity }: IQuantity) => {
 
   const handleQuantityChange = (value: quantityNumber) => {
     setQuantityInput(value ?? 1);
+    handleSetCartQuantity(value);
+  };
+
+  const handleAddToCart = (cartData: any) => {
+    const { productName, productImage, regularPrice, salePrice, cartQuantity } = cartData;
+    const currentPrice = salePrice > 0 ? salePrice : regularPrice;
+
+    const cartItem = {
+      productName,
+      productImage,
+      currentPrice,
+      cartQuantity,
+    };
+
+    console.log({ cartItem });
   };
 
   return (
@@ -44,7 +78,7 @@ const AddToCartComponent = ({ quantity }: IQuantity) => {
             <InputNumber
               className="quantity-input"
               min={1}
-              max={quantity}
+              max={dataCart?.stock}
               value={quantityInput}
               onChange={handleQuantityChange}
             />
@@ -52,16 +86,22 @@ const AddToCartComponent = ({ quantity }: IQuantity) => {
               type="primary"
               className="increase-btn"
               icon={<PlusOutlined />}
-              disabled={quantityInput === quantity}
+              disabled={quantityInput === dataCart?.stock}
               onClick={handleIncrease}
             />
           </div>
         </div>
       </div>
       <div className="group-button">
-        <Button type="primary" className="add-to-cart">
-          {t("user.product_detail.purchase")}
-        </Button>
+        {dataCart?.stock > 0 ? (
+          <Button type="primary" className="add-to-cart" onClick={() => handleAddToCart(dataCart)}>
+            {t("user.product_detail.purchase")}
+          </Button>
+        ) : (
+          <Button type="primary" className={`add-to-cart ${dataCart?.stock === 0 ? "disabled" : ""}`}>
+            Hết hàng
+          </Button>
+        )}
       </div>
     </S.AddToCartStyle>
   );

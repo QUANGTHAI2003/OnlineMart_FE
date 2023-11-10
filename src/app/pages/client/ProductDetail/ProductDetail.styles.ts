@@ -519,6 +519,12 @@ export const AddToCartStyle = styled.div`
         color: rgb(255, 255, 255);
         background-color: rgb(255, 57, 69);
 
+        &.disabled {
+          background-color: rgb(236, 236, 236);
+          color: rgb(142, 142, 142);
+          cursor: not-allowed;
+        }
+
         &:hover {
           opacity: 0.8;
         }

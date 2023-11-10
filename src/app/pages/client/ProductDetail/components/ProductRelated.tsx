@@ -5,9 +5,12 @@ import { useParams } from "react-router-dom";
 const ProductRelated = () => {
   const { id } = useParams();
 
-  const { data, isFetching } = useGetRelatedProductsQuery(parseInt(id as string));
+  const { data: productRelated, isFetching } = useGetRelatedProductsQuery(parseInt(id as string));
 
-  return <OtherProduct data={data || []} isLoading={isFetching} />;
+  if (productRelated !== undefined) {
+    return <OtherProduct data={productRelated || []} isLoading={isFetching} />;
+  }
+  return null;
 };
 
 export default ProductRelated;

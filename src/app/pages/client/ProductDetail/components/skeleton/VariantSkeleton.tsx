@@ -5,9 +5,9 @@ const VariantSkeleton = () => {
     <>
       {[...Array(2)].map((_, index: any) => (
         <div key={index} className="animate-pulse">
-          <p className="option-text">
+          <div className="option-text">
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 my-2"></div>
-          </p>
+          </div>
           <Radio.Group className="flex items-center flex-wrap gap-3">
             {[...Array(2)].map((_, index: any) => (
               <Radio.Button
