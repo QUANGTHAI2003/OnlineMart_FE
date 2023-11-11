@@ -261,6 +261,7 @@
       "name": "Mã giảm giá",
       "discount": "Giảm giá",
       "range": "Cho đơn hàng từ ",
+      "max": "giảm tối đa ",
       "all": "Tất cả",
       "shop": "Nhà bán",
       "payment-offer": "Ưu đãi nhà bán",
@@ -513,7 +514,7 @@
       "suppliers": "Nhà cung cấp",
       "orders": "Đơn hàng",
       "evouncher": "Mã giảm giá",
-      "list_voucher":"Danh sách mã giảm giá",
+      "list_voucher": "Danh sách mã giảm giá",
       "order_list": "Danh sách đơn hàng",
       "order_bill": "Quản lý hóa đơn",
       "info_seller": "Thông tin người bán",
@@ -773,77 +774,76 @@
           "very_good": "Rất tốt"
         }
       },
-      "evouncher":{
-        "add_vouncher":"Thêm mã giảm giá",
-        "evouncher":"Mã giảm giá",
-        "successfully":"Thành công",
-        "valid":"Còn hạn",
-        "expired":"Hết hạn",
-        "not_activated":"Chưa kích hoạt",
-        "select_at_less":"Vui lòng chọn ít nhất 1 mã giảm giá bên dưới",
-        "update_selected":"Cập nhật mã giảm giá được chọn",
-        "create_successfully":"Tạo mã giảm giá thành công",
-        "update_successfully":"Cập nhật mã giảm giá thành công",
-        "update_data":"Cập nhật mã giảm giá hàng loạt",
-        "delete_muitiple":"Xóa các mã giảm giá được chọn",
-        "delete_successfully":"Xóa mã giảm giá thành công",
-        "error":"lỗi",
-        "delete_error":"Xóa mã giảm giá lỗi",
-        "form":{
-          "activation_time":"Thời gian kích hoạt",
-          "status":"Trạng thái",
-          "discount":"Giá giảm",
-          "search":"Tìm kiếm",
-         
-          "refresh":"Làm mới",
-          "update_voucher":"Cập nhật mã giảm giá",
-          "select":{
-            "all":"Tất cả",
-            "expired":"Hết hạn",
-            "valid":"Còn hạn",
-            "discount":"Chọn giá giảm",
-            "status":"Chọn trạng thái",
-            "date":"Chọn ngày"
+      "evouncher": {
+        "add_vouncher": "Thêm mã giảm giá",
+        "evouncher": "Mã giảm giá",
+        "successfully": "Thành công",
+        "valid": "Còn hạn",
+        "expired": "Hết hạn",
+        "not_activated": "Chưa kích hoạt",
+        "select_at_less": "Vui lòng chọn ít nhất 1 mã giảm giá bên dưới",
+        "update_selected": "Cập nhật mã giảm giá được chọn",
+        "create_successfully": "Tạo mã giảm giá thành công",
+        "update_successfully": "Cập nhật mã giảm giá thành công",
+        "update_data": "Cập nhật mã giảm giá hàng loạt",
+        "delete_muitiple": "Xóa các mã giảm giá được chọn",
+        "delete_successfully": "Xóa mã giảm giá thành công",
+        "error": "lỗi",
+        "delete_error": "Xóa mã giảm giá lỗi",
+        "form": {
+          "activation_time": "Thời gian kích hoạt",
+          "status": "Trạng thái",
+          "discount": "Giá giảm",
+          "search": "Tìm kiếm",
+
+          "refresh": "Làm mới",
+          "update_voucher": "Cập nhật mã giảm giá",
+          "select": {
+            "all": "Tất cả",
+            "expired": "Hết hạn",
+            "valid": "Còn hạn",
+            "discount": "Chọn giá giảm",
+            "status": "Chọn trạng thái",
+            "date": "Chọn ngày"
           },
-          "validate":{
-            "id_product":"ID sản phẩm là số, phân cách bởi dấu phẩy",
-            "sku":"SKU là số, phân cách bởi dấu phẩy"
+          "validate": {
+            "id_product": "ID sản phẩm là số, phân cách bởi dấu phẩy",
+            "sku": "SKU là số, phân cách bởi dấu phẩy"
           }
         },
-        "table":{
-          "title":"Mã giảm giá",
-          "id_vouncher":"Mã giảm giá",
-          "usage_limit":"Số lần dùng",
-          "discount":"Giảm giá",
-          "min_discount_amount":"Đơn tối thiểu",
-          "max_discount_amount":"Giảm tối đa",
-          "date":"Ngày",
-          "unit":"Đơn vị",
-          "start_date":"Ngày bắt đầu",
-          "expiration_date":"Ngày kết thúc",
-          "status":"Trạng thái ",
-          "actions":"Thao tác",
-          "delete_cf":"Bạn có muốn xóa mã giảm giá không?",
-          "delete":"Xóa",
-          "yes":"Có",
-          "no":"Không",
-          "update_data":{
-            "update":"Cập nhật kho hàng loạt"
+        "table": {
+          "title": "Mã giảm giá",
+          "id_vouncher": "Mã giảm giá",
+          "usage_limit": "Số lần dùng",
+          "discount": "Giảm giá",
+          "min_discount_amount": "Đơn tối thiểu",
+          "max_discount_amount": "Giảm tối đa",
+          "date": "Ngày",
+          "unit": "Đơn vị",
+          "start_date": "Ngày bắt đầu",
+          "expiration_date": "Ngày kết thúc",
+          "status": "Trạng thái ",
+          "actions": "Thao tác",
+          "delete_cf": "Bạn có muốn xóa mã giảm giá không?",
+          "delete": "Xóa",
+          "yes": "Có",
+          "no": "Không",
+          "update_data": {
+            "update": "Cập nhật kho hàng loạt"
           }
         },
-        "validate":{
-          "required":"Vui lòng không bỏ trống",
-          "special_char":"Không nhập kí tự đặc biệt",
-          "least_5":"Vui lòng nhập ít nhất 5 kí tự",
-          "limit_10":"Nhập tối đa 10 ký tự",
-          "number":"Vui lòng nhập số",
-          "min_value":"Vui lòng nhập số lớn hơn 1.000",
-          "min_value_10000":"Vui lòng nhập số lớn hơn 10.000",
-          "lease_0":" Vui lòng không nhập số nhỏ hơn 0",
-          "maximum_100":"Không nhập lớn hơn 100%",
-          "compare_min":"Giảm tối thiếu không được lớn hơn giảm tối đa",
-          "compare_max":"Giảm tối đa không được nhỏ hơn giảm tối thiểu"
-          
+        "validate": {
+          "required": "Vui lòng không bỏ trống",
+          "special_char": "Không nhập kí tự đặc biệt",
+          "least_5": "Vui lòng nhập ít nhất 5 kí tự",
+          "limit_10": "Nhập tối đa 10 ký tự",
+          "number": "Vui lòng nhập số",
+          "min_value": "Vui lòng nhập số lớn hơn 1.000",
+          "min_value_10000": "Vui lòng nhập số lớn hơn 10.000",
+          "lease_0": " Vui lòng không nhập số nhỏ hơn 0",
+          "maximum_100": "Không nhập lớn hơn 100%",
+          "compare_min": "Giảm tối thiếu không được lớn hơn giảm tối đa",
+          "compare_max": "Giảm tối đa không được nhỏ hơn giảm tối thiểu"
         }
       }
     },
@@ -982,7 +982,7 @@
         "thisMonth": "Tháng này"
       }
     },
-   
+
     "categories": {
       "name": "Danh mục sản phẩm",
       "title": "Thêm danh mục sản phẩm",

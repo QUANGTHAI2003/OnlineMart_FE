@@ -9,6 +9,7 @@ import { supplierApi } from "./api/supplierApi";
 import { addressApi } from "./api/user/addressApi";
 import { notificationApi } from "./api/user/notificationApi";
 import { productApi } from "./api/user/productApi";
+import { voucherUserApi } from "./api/user/voucherApi";
 import { wishlistApi } from "./api/user/wishlistApi";
 import { userApi } from "./api/userApi";
 import authSlice from "./authSlice";
@@ -31,6 +32,7 @@ export const rootReducer: any = {
   [productAdminApi.reducerPath]: productAdminApi.reducer,
   [notificationApi.reducerPath]: notificationApi.reducer,
   [voucherApi.reducerPath]: voucherApi.reducer,
+  [voucherUserApi.reducerPath]: voucherUserApi.reducer,
   [sellerApi.reducerPath]: sellerApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
@@ -55,5 +57,6 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     roleApi.middleware,
     notificationApi.middleware,
     voucherApi.middleware,
-    sellerApi.middleware
+    sellerApi.middleware,
+    voucherUserApi.middleware
   );

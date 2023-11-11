@@ -1,64 +1,68 @@
-import { useSyncUrlWithTab } from "@app/hooks";
-import type { TabsProps } from "antd";
-import { Tabs } from "antd";
-import { useMemo } from "react";
+// import { useSyncUrlWithTab } from "@app/hooks";
+// import { useGetVoucherRootQuery } from "@app/store/slices/api/admin/voucherApi";
+import { useGetVoucherRootQuery } from "@app/store/slices/api/user/voucherApi";
+import { useAppSelector } from "@app/store/store";
+// import type { TabsProps } from "antd";
+// import { Tabs } from "antd";
+// import { useMemo } from "react";
+import { IUserVoucher } from "@app/types/voucher.types";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
-import { VoucherData, VoucherTab } from "./data";
+// import { VoucherTab } from "./data";
 import * as S from "./Discount.styles";
 import DiscountItem from "./DiscountItem";
-import EmptyDiscount from "./EmptyDiscount";
+// import EmptyDiscount from "./EmptyDiscount";
 
 const Discount = () => {
   const { t } = useTranslation();
-  const location = useLocation();
-  const itemData = VoucherTab(t).map((VoucherTabData: any) => ({
-    key: VoucherTabData.tab,
-    label: VoucherTabData.name,
-  }));
+  const id = useAppSelector((state) => state.userState.user)?.shop?.id;
+  const { data: voucherUserData } = useGetVoucherRootQuery(id);
 
-  const items: TabsProps["items"] = itemData;
-  const inititalTab = VoucherTab(t)[0].tab;
-  const { tabFiltered, handleChangeTab } = useSyncUrlWithTab(inititalTab, "tab");
+  // console.log(data);
+  // const location = useLocation();
+  // const itemData = VoucherTab(t).map((VoucherTabData: any) => ({
+  //   key: VoucherTabData.tab,
+  //   label: VoucherTabData.name,
+  // }));
 
-  const displayedVouchers = useMemo(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const tabParam = queryParams.get("tab");
+  // const items: TabsProps["items"] = itemData;
+  // const inititalTab = VoucherTab(t)[0].tab;
+  // const { tabFiltered, handleChangeTab } = useSyncUrlWithTab(inititalTab, "tab");
 
-    const filteredVouchers =
-      tabParam === "all"
-        ? VoucherData
-        : VoucherData.filter((voucher) => {
-            return voucher.status === tabParam;
-          });
+  // const displayedVouchers = useMemo(() => {
+  //   const queryParams = new URLSearchParams(location.search);
+  //   const tabParam = queryParams.get("tab");
 
-    return filteredVouchers;
-  }, [location.search]);
+  //   const filteredVouchers =
+  //     tabParam === "all"
+  //       ? VoucherData
+  //       : VoucherData.filter((voucher) => {
+  //           return voucher.status === tabParam;
+  //         });
+
+  //   return filteredVouchers;
+  // }, [location.search]);
 
   return (
     <div className="bg-[#f5f5fa]">
       <span className="text-base font-normal">{t("user.voucher.name")}</span>
-      <Tabs defaultActiveKey="1" items={items} activeKey={tabFiltered} onChange={handleChangeTab} />
+      {/* <Tabs defaultActiveKey="1" items={items} /> */}
       <S.DiscountTab>
-        {displayedVouchers.length > 0 ? (
-          displayedVouchers.map((item: any) => {
-            return (
-              <DiscountItem
-                key={item.id}
-                id={item.id}
-                icon_url={item.icon_url}
-                icon_name={item.icon_name}
-                discount_amount={item.discount_amount}
-                min_amount={item.min_amount}
-                coupon_code={item.coupon_code}
-                period={item.period}
-              />
-            );
-          })
-        ) : (
-          <EmptyDiscount />
-        )}
+        {/* {voucherUserData?.map((item: {voucher: IUserVoucher}:any) => { */}
+        {voucherUserData?.map((item: IUserVoucher) => {
+          return (
+            <DiscountItem
+              key={item.id}
+              id={item.id}
+              discount={item.discount}
+              min_discount_amount={item?.min_discount_amount}
+              max_discount_amount={item?.max_discount_amount}
+              code={item?.code}
+              expired_date={item?.expired_date}
+            />
+          );
+        })}
       </S.DiscountTab>
     </div>
   );

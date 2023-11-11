@@ -1,21 +1,13 @@
 import { CopyIcon, IconCheck } from "@app/app/assets/icons";
 import useCopyToClipboard from "@app/hooks/useCopyToClipboard";
+import { IUserVoucher } from "@app/types/voucher.types";
 import { formatVNCurrency } from "@app/utils/helper";
+import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 import * as S from "./Discount.styles";
 
-interface ITicketItem {
-  id: number;
-  icon_url: string;
-  icon_name: string;
-  discount_amount: number;
-  min_amount: number;
-  coupon_code: string;
-  period: string;
-}
-
-const DiscountItem = ({ icon_url, icon_name, discount_amount, min_amount, coupon_code, period }: ITicketItem) => {
+const DiscountItem = ({ discount, min_discount_amount, max_discount_amount, code, expired_date }: IUserVoucher) => {
   const { t } = useTranslation();
   const [copiedText, copyToClipboard] = useCopyToClipboard();
   const hasCopiedText = Boolean(copiedText);
@@ -41,8 +33,8 @@ const DiscountItem = ({ icon_url, icon_name, discount_amount, min_amount, coupon
       </S.DiscountTicket>
       <S.DiscountImage>
         <div className="flex flex-col items-center gap-1">
-          <img className="w-16 h-16 rounded-md" src={icon_url} alt={icon_name} />
-          <h4 className=" lg:text-[13px] md:text-xs leading-5 font-normal">{icon_name}</h4>
+          <img className="w-16 h-16 rounded-md" src="https://source.unsplash.com/random" alt="Tên mã" />
+          <h4 className=" lg:text-[13px] md:text-xs leading-5 font-normal">Tên mã</h4>
         </div>
       </S.DiscountImage>
       <S.DiscountName>
@@ -50,18 +42,30 @@ const DiscountItem = ({ icon_url, icon_name, discount_amount, min_amount, coupon
           <p className="lg:text-base md:text-sm font-semibold">
             {t("user.voucher.discount")}
             &nbsp;
-            <span>{formatVNCurrency(discount_amount)}</span>
+            <span>{formatVNCurrency(discount)}</span>
           </p>
           <p className="text-[13px] text-gray-500">
-            {t("user.voucher.range")}
-            <span>{formatVNCurrency(min_amount)}</span>
+            {max_discount_amount ? (
+              <div>
+                {t("user.voucher.range")}
+                <span>{formatVNCurrency(min_discount_amount)}</span>
+                <br />
+                {t("user.voucher.max")}
+                <span>{formatVNCurrency(max_discount_amount)}</span>
+              </div>
+            ) : (
+              <div>
+                {t("user.voucher.range")}
+                <span>{formatVNCurrency(min_discount_amount)}</span>
+              </div>
+            )}
           </p>
         </div>
         <div className="cursor-pointer">
           <button
             className="border-0 bg-transparent cursor-pointer"
             disabled={hasCopiedText}
-            onClick={() => copyToClipboard(coupon_code)}
+            onClick={() => copyToClipboard(code)}
           >
             {hasCopiedText ? <IconCheck /> : <CopyIcon />}
           </button>
@@ -71,7 +75,7 @@ const DiscountItem = ({ icon_url, icon_name, discount_amount, min_amount, coupon
         <p className=" text-[13px] text-gray-500">
           {t("user.voucher.expiry")}
           :&nbsp;
-          <span>{period}</span>
+          <span>{dayjs(expired_date).format("DD/MM/YYYY")}</span>
         </p>
       </S.DiscountPeriod>
     </S.DiscountFrame>

@@ -22,7 +22,7 @@ export const formatVNCurrency = (number: number) => {
     suffixIndex++;
   }
 
-  return number.toFixed(0) + suffixes[suffixIndex];
+  return number?.toFixed(0) + suffixes[suffixIndex];
 };
 
 export const getCookie = (cookieName: string) => {

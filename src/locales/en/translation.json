@@ -260,7 +260,8 @@
     "voucher": {
       "name": "My voucher",
       "discount": "Discount",
-      "range": "for orders form",
+      "range": "for orders form ",
+      "max": "maximum ",
       "all": "All",
       "shop": "Shop",
       "payment-offer": "Payment offer",
@@ -513,7 +514,7 @@
       "suppliers": "Supplier",
       "orders": "Orders",
       "evouncher": "E-Vouncher ",
-      "list_voucher":"Evoucher List",
+      "list_voucher": "Evoucher List",
       "order_list": "Forwarding orders",
       "order_bill": "invoice",
       "info_seller": "Seller information",
@@ -624,76 +625,75 @@
           "delete": "Delete selected products"
         }
       },
-      "evouncher":{
-        "add_vouncher":"Add vouncher",
-        "evouncher":"E-Voucher",
-        "successfully":"Successfully",
-        "valid":"Valid",
-        "expired":"Expired",
+      "evouncher": {
+        "add_vouncher": "Add vouncher",
+        "evouncher": "E-Voucher",
+        "successfully": "Successfully",
+        "valid": "Valid",
+        "expired": "Expired",
         "not_activated": "Not activated",
-        "update_selected":"Update selected vouchers ",
-        "create_successfully":"Create voucher successfully",
-        "update_successfully":"Update voucher successfully",
-        "update_data":"Mass update voucher",
-        "delete_muitiple":"Delete selected discount voucher",
-        "select_at_less":"Please select at least 1 voucher below",
-        "delete_successfully":"Delete voucher successfully",
-        "error":"Error",
-        "delete_error":"Delete voucher error",
-        "form":{
-          "activation_time":"Activation time",
-          "status":"Status",
-          "discount":"Discount",
-          "search":"Search",
-          "refresh":"Refresh",
-          "update_voucher":"Update voucher",
-          "select":{
-            "all":"All",
-            "expired":"Expired",
-            "valid":"Valid",
-            "discount":"Choose a reduced price",
-            "status":"Choose status",
-            "date":"Choose date"
+        "update_selected": "Update selected vouchers ",
+        "create_successfully": "Create voucher successfully",
+        "update_successfully": "Update voucher successfully",
+        "update_data": "Mass update voucher",
+        "delete_muitiple": "Delete selected discount voucher",
+        "select_at_less": "Please select at least 1 voucher below",
+        "delete_successfully": "Delete voucher successfully",
+        "error": "Error",
+        "delete_error": "Delete voucher error",
+        "form": {
+          "activation_time": "Activation time",
+          "status": "Status",
+          "discount": "Discount",
+          "search": "Search",
+          "refresh": "Refresh",
+          "update_voucher": "Update voucher",
+          "select": {
+            "all": "All",
+            "expired": "Expired",
+            "valid": "Valid",
+            "discount": "Choose a reduced price",
+            "status": "Choose status",
+            "date": "Choose date"
           },
-          "validate":{
-            "id_product":"Product ID is number, seperated by comma",
-            "sku":"SKU is number, seperated by comma"
+          "validate": {
+            "id_product": "Product ID is number, seperated by comma",
+            "sku": "SKU is number, seperated by comma"
           }
         },
-        "table":{
-        "title":"Evoucher",
-        "id_vouncher":"ID vouncher",
-          "usage_limit":"Usage limit",
-          "discount":"Discount",
-          "min_discount_amount":"Minium order",
-          "max_discount_amount":"Max discount amount",
-          "date":"Date",
-          "unit":"Unit",
-          "start_date":"Start date",
-          "expiration_date":"Expired date",
-          "status":"Status",
-          "actions":"Actions",
-          "delete_cf":"Do you want to delete the voucher?",
-          "delete":"Delete",
-          "yes":"Yes",
-          "no":"No",
-          "update_data":{
-            "update":"Mass update stock"
+        "table": {
+          "title": "Evoucher",
+          "id_vouncher": "ID vouncher",
+          "usage_limit": "Usage limit",
+          "discount": "Discount",
+          "min_discount_amount": "Minium order",
+          "max_discount_amount": "Max discount amount",
+          "date": "Date",
+          "unit": "Unit",
+          "start_date": "Start date",
+          "expiration_date": "Expired date",
+          "status": "Status",
+          "actions": "Actions",
+          "delete_cf": "Do you want to delete the voucher?",
+          "delete": "Delete",
+          "yes": "Yes",
+          "no": "No",
+          "update_data": {
+            "update": "Mass update stock"
           }
         },
-        "validate":{
-          "required":"Please enter",
-          "special_chars":"Do not enter special characters",
-          "least_5":"Enter at least 5 characters",
-          "limit_10":"Enter up to 10 characters",
-          "lease_0":" Please do not enter a number less than 0",
-          "number":"Please only enter numbers",
-          "min_value":"Please enter greater than 1.000",
-          "min_value_10000":"Please enter greater than 10.000",
-          "maximum_100":"Please do not enter a number greater than 100%",
-          "compare_min":"Min discount amount cannot be greater than max discount amount",
-          "compare_max":"Max discount amount cannot be less than min discount amount"
-
+        "validate": {
+          "required": "Please enter",
+          "special_chars": "Do not enter special characters",
+          "least_5": "Enter at least 5 characters",
+          "limit_10": "Enter up to 10 characters",
+          "lease_0": " Please do not enter a number less than 0",
+          "number": "Please only enter numbers",
+          "min_value": "Please enter greater than 1.000",
+          "min_value_10000": "Please enter greater than 10.000",
+          "maximum_100": "Please do not enter a number greater than 100%",
+          "compare_min": "Min discount amount cannot be greater than max discount amount",
+          "compare_max": "Max discount amount cannot be less than min discount amount"
         }
       },
       "create": {
@@ -785,7 +785,6 @@
             "dimension_value": "Please enter dimension value greater than 0",
             "product_image_required": "Please select product image"
           }
-
         }
       },
       "review": {
@@ -982,7 +981,6 @@
         "thirtyDaysAgo": "Thirty Days Ago",
         "thisMonth": "This Month"
       }
-     
     },
     "categories": {
       "name": "Category",
