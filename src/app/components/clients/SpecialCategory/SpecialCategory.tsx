@@ -59,7 +59,6 @@ const SpecialCategoryData = [
 ];
 
 const SpecialCategory = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   useEffect(() => {

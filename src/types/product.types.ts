@@ -13,3 +13,16 @@ export interface IProduct {
   num_of_variant: number;
   updated_at: string;
 }
+
+export interface IProductUser {
+  id: number;
+  slug: string;
+  thumbnail_url: string | null;
+  name: string;
+  sale_price: number;
+  discount_rate: number;
+  rating: number;
+  sold_count: number;
+  type: string;
+  variant_name: string[];
+}

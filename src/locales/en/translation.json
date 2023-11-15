@@ -232,6 +232,9 @@
       "see_more": "See more",
       "collapse": "Collapse"
     },
+    "special_category": {
+      "name": "Special category"
+    },
     "search_page": {
       "financed": "Tài trợ bởi",
       "see_more": "Xem thêm",
