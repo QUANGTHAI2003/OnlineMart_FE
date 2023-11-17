@@ -80,7 +80,7 @@ const ModalCoupon = ({ isCartPage, isOpenModal, handleCloseModal }: any) => {
     >
       <div className="h-full flex flex-col">
         {isCartPage && (
-          <div className="rounded block">
+          <div className="rounded flex">
             <div className="w-[calc(100%_-_97px)] inline-block align-top mr-2 relative">
               <img src={couponInput} alt="icon" className="absolute top-2 left-3" />
               <input

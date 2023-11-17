@@ -5,6 +5,7 @@ import ImageProductNew from "@app/app/assets/images/store/product-new.png";
 import ImageStartIcon from "@app/app/assets/images/store/start.png";
 import TimeNew from "@app/app/assets/images/store/time-new.png";
 import data from "@app/app/pages/client/home/data";
+import { useAppSelector } from "@app/store/store";
 import { formatShortenNumber } from "@app/utils/helper";
 import { faComment, faStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +18,10 @@ import * as S from "./Profile.styles";
 
 const Profile = () => {
   const { t } = useTranslation();
+
+  const information = useAppSelector((state) => state.shopInformation.information) || {};
+  const founded_year = new Date(information.created_at).getFullYear().toString();
+
   return (
     <div className="rounded-lg">
       <S.RowStyled className="items-center p-4 bg-white">
@@ -61,7 +66,7 @@ const Profile = () => {
               <span className="store-info w-full ml-1 ">{t("user.seller.info.members")}</span>
             </Col>
             <Col lg={{ span: 16 }} xs={{ span: 12 }} className="store-des">
-              {dataSeller.founded_year}
+              {founded_year}
             </Col>
           </Row>
           <Row className="w-full p-4">
@@ -79,7 +84,7 @@ const Profile = () => {
               <span className="store-info w-full ml-1 ">{t("user.seller.info.store")}</span>
             </Col>
             <Col lg={{ span: 16 }} sm={{ span: 12 }} className="xs:mt-2 lg:mt-0">
-              {t("user.seller.info.buy") + dataSeller.seller_name + t("user.seller.info.reputation")}
+              {t("user.seller.info.buy") + information.name + t("user.seller.info.reputation")}
             </Col>
           </Row>
           <Row className="w-full p-4">
@@ -88,7 +93,7 @@ const Profile = () => {
               <span className="store-info w-full ml-1 ">{t("user.seller.info.assess")}</span>
             </Col>
             <Col lg={{ span: 16 }} xs={{ span: 12 }} className="store-des flex items-center">
-              <span>{`${dataSeller.rating} / 5`}</span>
+              <span>{`${information.rating} / 5`}</span>
               <img src={ImageStartIcon} alt="start" width="20" />
               <span className="ml-1">{`(${formatShortenNumber(dataSeller.total_rating)})`}</span>
             </Col>

@@ -174,7 +174,7 @@
         "million": "  million+",
         "follow": "Followers",
         "buy": "Buy online products of ",
-        "reputation": "store on Tiki.vn. ✓ High quality, reputable, good price ✓ Genuine ✓ Nationwide delivery",
+        "reputation": " store on Tiki.vn. ✓ High quality, reputable, good price ✓ Genuine ✓ Nationwide delivery",
         "feedback": "Chat Response"
       }
     },
@@ -523,7 +523,9 @@
       "info_seller": "Seller information",
       "manage_seller": "Seller management",
       "manage_role": "Role management",
+      "settings": "Settings",
       "manage_permission": "Permission management",
+
       "sales": "Sales report",
       "report": "Report",
       "profit": "Profit and loss report",
@@ -1399,6 +1401,57 @@
       },
       "status": {
         "completed": "Completed!"
+      }
+    },
+    "settings": {
+      "placeholder": "Search by configuration name or function of the configuration name",
+      "setup_shop": {
+        "title": "Settings a store",
+        "item": {
+          "information_shop": "Information shop",
+          "description_shop": "Manage contact information and address of the store",
+          "staff": "Employees and permissions",
+          "description_staff": "Employee account management and permissions"
+        }
+      },
+      "setup_sale": {
+        "title": "Setting up sales",
+        "item": {
+          "sale": "Sales configuration",
+          "description_sale": "Configuring sales settings",
+          "return": "Reason for return",
+          "description_return": "Manage and adjust reasons for order returns",
+          "managers_product": "Inventory and product management",
+          "description_product": "Configuring product information management"
+        }
+      },
+      "diary": {
+        "title": "Diary",
+        "item": {
+          "managers_file": "Export/ Import File",
+          "description_file": "Track and manage the import and export of files for the store.",
+          "activity_log": "Activity log",
+          "description_log": "Manage operations, activity log of the store"
+        }
+      },
+      "logs": {
+        "title": "Logs",
+        "records": "item",
+        "record_item": "of",
+        "detail": " Detail",
+        "filter": {
+          "placeholder": "Enter name author or action...",
+          "time": "Time",
+          "select_author": "Select author",
+          "select_action": "Select action"
+        },
+        "table": {
+          "author": "Author",
+          "action": "Action",
+          "action_date": "Date",
+          "description": "Description",
+          "detail": "Detail"
+        }
       }
     }
   },

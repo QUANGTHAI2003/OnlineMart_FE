@@ -10,6 +10,8 @@ import {
   UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const adminShopRoutes: ISidebarMenu[] = [
   {
@@ -192,5 +194,11 @@ export const adminShopRoutes: ISidebarMenu[] = [
         url: "/admin/shop/dev_center/operational_efficiency",
       },
     ],
+  },
+  {
+    title: "admin_shop.sidebar.settings",
+    key: "settings",
+    url: "/admin/shop/settings",
+    icon: <FontAwesomeIcon icon={faGear} />,
   },
 ];

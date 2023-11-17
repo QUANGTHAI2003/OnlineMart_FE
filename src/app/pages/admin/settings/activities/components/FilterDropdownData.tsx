@@ -4,7 +4,7 @@ import { Button, Checkbox, Input } from "antd";
 import { forwardRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as S from "../ProductInventory.styles";
+import * as S from "../Log.styles";
 
 interface IFilterDropdownDataProps {
   name: string;
@@ -22,7 +22,6 @@ const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilter
   const [filteredData, setFilteredData] = useState<IFilterDropdownDataProps["data"]>(data);
   const [searchInput, setSearchInput] = useState<string>("");
   const [checkedList, setCheckedList] = useState<string[]>([]);
-  console.log("🚀 ~ checkedList:", checkedList);
 
   const debouncedSearchInput = useDebounce(searchInput, 300);
 

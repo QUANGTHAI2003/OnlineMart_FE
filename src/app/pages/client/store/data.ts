@@ -121,7 +121,7 @@ export const dataCategories = [
     name: "Giày - Dép nữ",
     path: "1/2/1703",
     slug: "giay-nam-nu",
-    thumbnail_url: "https://salt.tikicdn.com/ts/category/cf/ed/e1/96216aae6dd0e2beeb5e91d301649d28.png",
+    thumbnail_url: "https://salt.tikicdn.com/ts/  category/cf/ed/e1/96216aae6dd0e2beeb5e91d301649d28.png",
   },
   {
     seller_id: 1,

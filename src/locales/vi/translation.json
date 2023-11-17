@@ -524,6 +524,7 @@
       "manage_seller": "Quản lý người bán",
       "manage_role": "Quản lý vai trò",
       "manage_permission": "Quản lý quyền",
+      "settings": "Cài đặt",
       "ships": "Vận chuyển",
       "overview": "Tổng quan",
       "report": "Báo cáo",
@@ -1399,6 +1400,57 @@
       },
       "status": {
         "completed": "Hoàn thành!"
+      }
+    },
+    "settings": {
+      "placeholder": "Tìm kiếm theo tên cấu hình hoặc chức năng của tên cấu hình",
+      "setup_shop": {
+        "title": "Thiết lập cửa hàng",
+        "item": {
+          "information_shop": "Thiết lập cửa hàng",
+          "description_shop": "Quản lý thông tin liên hệ và địa chỉ của cửa hàng",
+          "staff": "Nhân viên và phân quyền",
+          "description_staff": "Quản lý & phân quyền tài khoản nhân viên"
+        }
+      },
+      "setup_sale": {
+        "title": "Thiết lập bán hàng",
+        "item": {
+          "sale": "Cấu hình bán hàng",
+          "description_sale": "Thiết lập quản lý thông tin về sản phẩm",
+          "return": "Lý do hủy trả",
+          "description_return": "Thêm và điều chỉnh lý do khi hủy trả đơn hàng",
+          "managers_product": "Quản lý kho & Sản phẩm",
+          "description_product": "Thiết lập quản lý thông tin về sản phẩm"
+        }
+      },
+      "diary": {
+        "title": "Nhật ký",
+        "item": {
+          "managers_file": "Xuất/ nhập file",
+          "description_file": "Theo dõi và quản lý xuất nhập file của cửa hàng",
+          "activity_log": "Nhật ký hoạt động",
+          "description_log": "Quản lý thao tác, nhật ký hoạt động của cửa hàng"
+        }
+      },
+      "logs": {
+        "title": "Nhật ký hoạt động",
+        "records": "kết quả",
+        "record_item": "trên",
+        "detail": "Chi tiết hoạt động",
+        "filter": {
+          "placeholder": "Tìm kiếm theo người thao tác hoặc thao tác...",
+          "time": "Thời gian",
+          "select_author": "Vui lòng chọn người thao tác",
+          "select_action": "Vui lòng chọn thao tác"
+        },
+        "table": {
+          "author": "Người thao tác",
+          "action": "Thao tác",
+          "action_date": "Thời gian",
+          "description": "Nội dung",
+          "detail": " Chi tiết"
+        }
       }
     }
   },

@@ -7,6 +7,8 @@ import RequireAuth from "./app/components/layouts/auth/RequireAuth";
 import UserMainLayout from "./app/components/layouts/client/UserMainLayout";
 import AdminSuperMainLayout from "./app/components/layouts/super_admin/AdminSuperMainLayout";
 import SellerInfo from "./app/pages/admin/seller/SellerInfo";
+import Logs from "./app/pages/admin/settings/activities/Logs";
+import SettingMain from "./app/pages/admin/settings/main/SettingMain";
 import AI from "./app/pages/AI";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
@@ -93,6 +95,8 @@ const AppRouter: React.FC = () => {
         <Route index element={<Home />} />
         <Route path="cua-hang" element={<StoreIndex />}></Route>
         <Route path="category/:slug/:id" element={<ProductCategory />} />
+        <Route path="store/:id" element={<StoreIndex />} />
+        <Route path="category" element={<ProductCategory />} />
         <Route path="ai" element={<AI />} />
         <Route path="checkout" element={<Cart />} />
         <Route path="checkout/payment" element={<Payment />} />
@@ -142,7 +146,11 @@ const AppRouter: React.FC = () => {
           <Route path="biz_efficiency" element={<AdminBusinessEfficiency />} />
           <Route path="traffic_website" element={<AdminTrafficWebsite />} />
           <Route path="product_insight" element={<div>Chỉ số sản phẩm</div>} />
-            <Route path="operational_efficiency" element={<AdminOperationalEfficiency />} />
+          <Route path="operational_efficiency" element={<AdminOperationalEfficiency />} />
+        </Route>
+        <Route path="settings">
+          <Route index element={<SettingMain />} />
+          <Route path="logs" element={<Logs />} />
         </Route>
       </Route>
 

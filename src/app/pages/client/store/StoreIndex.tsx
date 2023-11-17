@@ -2,6 +2,9 @@ import { SearchOutlined } from "@ant-design/icons";
 import { RatingStar } from "@app/app/assets/icons";
 import FollowIcon from "@app/app/assets/images/store/follow.png";
 import { useSyncUrlWithTab } from "@app/hooks";
+import { useGetShopQuery } from "@app/store/slices/api/shopApi";
+import { setInformation } from "@app/store/slices/shopSlice";
+import { useAppDispatch } from "@app/store/store";
 import { formatShortenNumber } from "@app/utils/helper";
 import { getAccessToken } from "@app/utils/localstorage";
 import { notificationController } from "@app/utils/notification";
@@ -10,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Input } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { dataSeller } from "./data";
 import Products from "./product/Product";
@@ -19,6 +23,22 @@ import Store from "./widget/Store";
 
 const StoreIndex = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
+
+  const { data, error } = useGetShopQuery(id);
+
+  if (error && (error as { status?: number }).status === 404) {
+    navigate("/404");
+  }
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setInformation(data));
+    }
+  }, [data, dispatch]);
 
   const items = [
     {
@@ -43,8 +63,8 @@ const StoreIndex = () => {
     },
   ];
 
-  const inititalTab = items[0].key;
-  const { tabFiltered, handleChangeTab } = useSyncUrlWithTab(inititalTab, "t");
+  const initialTab = items[0].key;
+  const { tabFiltered, handleChangeTab } = useSyncUrlWithTab(initialTab, "t");
 
   const [isSave, setIsSave] = useState(false);
   const [isChat, setIsChat] = useState(true);
@@ -89,10 +109,10 @@ const StoreIndex = () => {
         <div className="header-wrapper flex items-center">
           <div className="flex items-center">
             <div className="seller-logo">
-              <img src={dataSeller.seller_avatar} alt={dataSeller.seller_name} className="object-cover" />
+              <img src={`${baseImage}/${data?.avatar}`} alt={data?.name} className="object-cover" />
             </div>
             <S.StoreInfo className="store-info flex flex-col justify-center">
-              <h1 className="store-name mb-1">{dataSeller.seller_name}</h1>
+              <h1 className="store-name mb-1">{data?.name}</h1>
               <div className="store-badge mb-1 flex flex-row items-center">
                 <img src={dataSeller.certification} alt="certification" />
               </div>
@@ -101,7 +121,7 @@ const StoreIndex = () => {
                   <div className="mr-1 mt-1">
                     <RatingStar />
                   </div>
-                  <S.TextInfo>{`${dataSeller.rating} / 5`}</S.TextInfo>
+                  <S.TextInfo>{`${data?.rating || 0} / 5`}</S.TextInfo>
                 </div>
                 <div className="line"></div>
                 <div className="flex items-center flex-row mr-1">
@@ -154,7 +174,7 @@ const StoreIndex = () => {
           onChange={handleChangeTab}
           tabBarGutter={60}
           items={items}
-          defaultActiveKey={inititalTab}
+          defaultActiveKey={initialTab}
           animated={false}
           tabBarExtraContent={
             <div className="mr-14 xl:block hidden">
