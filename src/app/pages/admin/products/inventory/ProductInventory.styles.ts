@@ -8,6 +8,7 @@ export const SiteHeader = styled.div`
   gap: 1rem;
   background-color: #fff;
 `;
+
 export const ToolBox = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -51,6 +52,7 @@ export const ToolBox = styled.div`
     }
   }
 `;
+
 export const FilterDropdownStyle = styled.section`
   min-width: 280px;
   max-width: 380px;
@@ -79,6 +81,7 @@ export const FilterDropdownStyle = styled.section`
     }
   }
 `;
+
 export const DrawerStyle = styled(Drawer).withConfig({
   shouldForwardProp: () => true,
 })`
@@ -114,6 +117,39 @@ export const DrawerStyle = styled(Drawer).withConfig({
     }
     .range_picker {
       width: 100%;
+    }
+  }
+`;
+
+export const SortDataItemStyle = styled.div`
+  .sort-item {
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    font-size: 14px;
+    color: rgb(38, 38, 38);
+    line-height: 22px;
+    border: 1px solid rgb(24, 144, 255);
+    box-sizing: border-box;
+    position: relative;
+    padding: 4px 15px;
+    margin: 0;
+    background: rgb(230, 247, 255);
+
+    > span {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 250px;
+    }
+
+    .om-close-circle {
+      color: rgb(105, 192, 255);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+      cursor: pointer;
     }
   }
 `;

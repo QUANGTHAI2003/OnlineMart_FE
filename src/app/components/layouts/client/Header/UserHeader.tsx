@@ -1,4 +1,4 @@
-import logo from "@app/app/assets/images/Logo.svg";
+import logo from "@app/app/assets/images/OM_header.jpg";
 import { useResponsive } from "@app/hooks";
 import { useAppSelector } from "@app/store/store";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
@@ -98,8 +98,9 @@ const UserHeader = () => {
 
         {isDesktop && (
           <div className="px-3 flex xl:flex items-center justify-between h-[calc(120px_-_35px)]">
-            <Link to="/" className="hidden xl:w-[200px] xl:flex items-center">
-              <img src={logo} alt="logo-svg" className="w-[150px]" />
+            <Link to="/" className="hidden xl:w-[200px] xl:flex items-center flex-col gap-1 pr-12">
+              <img src={logo} alt="logo-svg" className="w-[90px] h-[53px]" />
+              <p className="font-bold text-[#003ea1]">Tốt & Nhanh</p>
             </Link>
             {haveBtnCallback && (
               <div className="xl:hidden h-10 min-w-10 w-10 flex items-center justify-center">

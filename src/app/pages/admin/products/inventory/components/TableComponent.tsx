@@ -1,45 +1,72 @@
+import { Can, PermissionsSwitch } from "@app/app/components/common/Permissions";
+import { useDebounce } from "@app/hooks";
+import { useAppSelector } from "@app/store/store";
 import { formatCurrency, formatNumber, removeDiacritics } from "@app/utils/helper";
-import { Button, Card, Divider, Table, Tooltip, Typography } from "antd";
+import { Button, Card, Divider, QRCode, Table, Tooltip, Typography } from "antd";
+import { ColumnsType, TableProps } from "antd/es/table";
+import { SorterResult } from "antd/lib/table/interface";
+import dayjs from "dayjs";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
-import { InventoryListData } from "../data";
-
-import { StatusProductData, UpdateData } from ".";
+import { SortData, StatusProductData, UpdateData } from ".";
 
 const { Text } = Typography;
-// interface IDataType {
-//   id: number;
-//   product_media: string;
-//   name: string;
-//   product_code: string;
-//   sellable: number;
-//   qty_inventory: number;
-//   created_at: string;
-//   retail_price: number;
-//   import_price: number;
-//   wholesale_price: number;
-//   barcode: string;
-//   supplier: string;
-//   status: string;
-// }
+interface IDataType {
+  id: number;
+  thumbnail_url: string;
+  name: string;
+  variant: number;
+  stock_qty: number;
+  created_at: string;
+  regular_price: number;
+  sale_price: number;
+  qr_link: string;
+  supplier_name: string;
+  status: string;
+  print_qrcode: string;
+  category: string;
+  brand: string;
+}
 
-const TableComponent = React.memo(({ searchValue, searchType }: any) => {
+const base_url = import.meta.env.VITE_BASE_URL;
+
+const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const columns: any = [
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [sortedInfo, setSortedInfo] = useState<SorterResult<IDataType>>({});
+
+  const filteredValue = useAppSelector((state) => state.inventoryAdmin.filteredValue);
+  const isFilteredValueEmpty = Object.values(filteredValue).every(
+    (value) => !value || (Array.isArray(value) && value.length === 0)
+  );
+
+  const searchValue = useAppSelector((state) => state.inventoryAdmin.searchValue);
+  const debouncedValue = useDebounce(searchValue, 300);
+  const searchType = useAppSelector((state) => state.inventoryAdmin.selectSearchType) || "name";
+
+  const columns: ColumnsType<IDataType> = [
+    {
+      title: "STT",
+      dataIndex: "index",
+      key: "index",
+      align: "center",
+      width: 70,
+      render: (_, __, index) => index + 1,
+    },
     {
       title: t("admin_shop.inventory.table.image"),
-      dataIndex: "product_media",
-      key: "product_media",
+      dataIndex: "thumbnail_url",
+      key: "thumbnail_url",
       align: "center",
       width: 100,
-      render: (_: any, record: any) => {
+      render: (_, record: any) => {
         return (
           <div>
-            <img src={record.product_media} alt="Media" />
+            <img src={record?.thumbnail_url} alt="Media" />
           </div>
         );
       },
@@ -48,50 +75,36 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       title: t("admin_shop.inventory.table.product"),
       dataIndex: "name",
       key: "name",
-      width: 300,
-      render: (_: any, record: any) => {
+      width: 260,
+      render: (_, record: any) => {
         return (
           <div className="flex flex-col gap-1.5">
-            <Tooltip title={record.name} placement="topLeft">
-              <Link to={`/admin/shop/products/${record.product_code}`} className="line-clamp-1">
-                {record.name}
+            <Tooltip title={record?.name} placement="topLeft">
+              <Link to={`/admin/shop/products/${record?.variant}`} className="line-clamp-1">
+                {record?.name}
               </Link>
             </Tooltip>
             <Text type="secondary" className="text-[13px] line-clamp-1">
-              {record.product_code}
+              {record?.variant}
             </Text>
           </div>
         );
       },
     },
     {
-      title: t("admin_shop.inventory.table.sellable"),
-      dataIndex: "sellable",
-      key: "sellable",
-      align: "center",
-      width: 150,
-      sorter: (a: any, b: any) => {
-        const numericA = parseFloat(a.sellable.replace(/,/g, ""));
-        const numericB = parseFloat(b.sellable.replace(/,/g, ""));
-        return numericA - numericB;
-      },
-      render: (_: any, record: any) => {
-        return <div>{formatNumber(record.sellable)}</div>;
-      },
-    },
-    {
       title: t("admin_shop.inventory.table.inventory"),
-      dataIndex: "qty_inventory",
-      key: "qty_inventory",
+      dataIndex: "stock_qty",
+      key: "stock_qty",
       align: "center",
       sorter: (a: any, b: any) => {
-        const numericA = parseFloat(a.qty_inventory.replace(/,/g, ""));
-        const numericB = parseFloat(b.qty_inventory.replace(/,/g, ""));
+        const numericA = parseFloat(a.stock_qty.replace(/,/g, ""));
+        const numericB = parseFloat(b.stock_qty.replace(/,/g, ""));
         return numericA - numericB;
       },
+      sortOrder: sortedInfo.columnKey === "stock_qty" ? sortedInfo.order : null,
       width: 150,
-      render: (_: any, record: any) => {
-        return <div>{formatNumber(record.qty_inventory)}</div>;
+      render: (_, record: any) => {
+        return <div>{formatNumber(record?.stock_qty)}</div>;
       },
     },
     {
@@ -99,83 +112,51 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       dataIndex: "created_at",
       key: "created_at",
       width: 150,
-      sorter: (a: any, b: any) => {
-        const parseDate = (dateString: string) => {
-          const regex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-          const match = dateString.match(regex);
-
-          if (match) {
-            const [, month, day, year] = match;
-            const numericMonth = parseInt(month, 10);
-            const numericDay = parseInt(day, 10);
-
-            if (numericMonth >= 1 && numericMonth <= 12 && numericDay >= 1 && numericDay <= 31) {
-              const formattedDate = `${numericMonth}/${numericDay}/${year}`;
-              return new Date(formattedDate);
-            }
-            console.error(`Invalid date: ${dateString}`);
-            return null;
-          }
-          console.error(`Invalid date format: ${dateString}`);
-          return null;
-        };
-
-        const dateA = parseDate(a.created_at);
-        const dateB = parseDate(b.created_at);
-
-        if (dateA && dateB) {
-          return dateA.getTime() - dateB.getTime();
-        }
-        return dateA ? -1 : dateB ? 1 : 0;
-      },
+      align: "center",
+      render: (date: string) => dayjs(date).format("DD/MM/YYYY h:mm:ss A"),
     },
     {
       title: t("admin_shop.inventory.table.retail_price"),
-      dataIndex: "retail_price",
-      key: "retail_price",
+      dataIndex: "regular_price",
+      key: "regular_price",
       align: "right",
       width: 150,
-      render: (_: any, record: any) => {
-        return <div>{formatCurrency(record.retail_price)}</div>;
+      render: (_, record: any) => {
+        return <div>{formatCurrency(record?.regular_price)}</div>;
       },
     },
     {
       title: t("admin_shop.inventory.table.import_price"),
-      dataIndex: "import_price",
-      key: "import_price",
+      dataIndex: "sale_price",
+      key: "sale_price",
       align: "right",
       width: 150,
-      render: (_: any, record: any) => {
-        return <div>{formatCurrency(record.import_price)}</div>;
-      },
-    },
-    {
-      title: t("admin_shop.inventory.table.wholesale_price"),
-      dataIndex: "wholesale_price",
-      key: "wholesale_price",
-      align: "right",
-      width: 135,
-      render: (_: any, record: any) => {
-        return <div>{formatCurrency(record.wholesale_price)}</div>;
+      render: (_, record: any) => {
+        return <div>{formatCurrency(record?.sale_price)}</div>;
       },
     },
     {
       title: t("admin_shop.inventory.table.qrcode"),
-      dataIndex: "barcode",
-      key: "barcode",
-      width: 130,
-      render: (_: any, record: any) => {
-        return <span className="line-clamp-1">{record.barcode}</span>;
+      dataIndex: "qr_link",
+      key: "qr_link",
+      width: 155,
+      align: "center",
+      render: (_, record: any) => {
+        return (
+          <span className="line-clamp-1">
+            <QRCode errorLevel="Q" value={`${base_url}/${record?.qr_link}`} size={122} />
+          </span>
+        );
       },
     },
     {
       title: t("admin_shop.inventory.table.supplier"),
-      dataIndex: "supplier",
-      key: "supplier",
+      dataIndex: "supplier_name",
+      key: "supplier_name",
       align: "center",
       width: 130,
-      render: (_: any, record: any) => {
-        return <span className="line-clamp-2">{record.supplier}</span>;
+      render: (_, record: any) => {
+        return <span className="line-clamp-2">{record?.supplier_name}</span>;
       },
     },
     {
@@ -185,7 +166,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       align: "center",
       fixed: "right",
       width: 150,
-      render: (_: any, record: any) => {
+      render: (_, record: any) => {
         return <StatusProductData data={record} trans={t} />;
       },
     },
@@ -196,37 +177,48 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       align: "center",
       fixed: "right",
       width: 120,
-      render: (_: any, record: any) => {
+      render: (_, record: any) => {
         return (
-          <Link to={`/admin/shop/products/print_qrcode?product_id=${record.id}`} target="_blank">
-            <Button type="primary" ghost>
-              {t("admin_shop.inventory.table.print_code")}
-            </Button>
-          </Link>
+          <PermissionsSwitch>
+            <Can permissions={["Print QR"]}>
+              <Link to={`/admin/shop/products/print_qrcode?product_id=${record?.id}`} target="_blank">
+                <Button type="primary" ghost>
+                  {t("admin_shop.inventory.table.print_code")}
+                </Button>
+              </Link>
+            </Can>
+            <Can>
+              <Button type="primary" ghost disabled>
+                {t("admin_shop.inventory.table.print_code")}
+              </Button>
+            </Can>
+          </PermissionsSwitch>
         );
       },
     },
   ];
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
+  const onSelectChange = (newselectedRowKeys: React.Key[]) => {
+    setSelectedRowKeys(newselectedRowKeys);
   };
 
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
   };
+
   const hasSelected = selectedRowKeys.length > 0;
+  const categoryData = useAppSelector((state) => state.inventoryAdmin.filteredValue.categoryFilter);
+  const brandData = useAppSelector((state) => state.inventoryAdmin.filteredValue.brandFilter);
+  const dateData = useAppSelector((state) => state.inventoryAdmin.filteredValue.dateFilter);
 
-  const displayedInventory: any = useMemo(() => {
-    let filterInventory = InventoryListData;
+  const displayedInventory = useMemo(() => {
+    let filterInventory = productList;
 
-    if (searchValue) {
-      filterInventory = filterInventory.filter((product: any) => {
+    if (debouncedValue) {
+      filterInventory = filterInventory?.filter((product: any) => {
         const fieldValue = product[searchType];
-        const searchValueString = searchValue.toString();
+        const searchValueString = debouncedValue.toString();
 
         return removeDiacritics(fieldValue.toString())
           .toLowerCase()
@@ -234,22 +226,50 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       });
     }
 
+    if (categoryData.length > 0) {
+      filterInventory = filterInventory?.filter((product: any) => {
+        const fieldValue = product?.category;
+
+        return categoryData.includes(fieldValue);
+      });
+    }
+
+    if (brandData.length > 0) {
+      filterInventory = filterInventory?.filter((product: any) => {
+        const fieldValue = product?.brand;
+
+        return brandData.includes(fieldValue);
+      });
+    }
+
+    if (dateData) {
+      filterInventory = filterInventory?.filter((product: any) => {
+        const fieldValue = product?.created_at;
+        const productDate = dayjs(fieldValue).format("DD/MM/YYYY");
+
+        return productDate === dateData;
+      });
+    }
+
     return filterInventory;
-  }, [searchType, searchValue]);
+  }, [brandData, categoryData, dateData, debouncedValue, productList, searchType]);
+
+  const handleChange: TableProps<IDataType>["onChange"] = (_, __, sorter) => {
+    setSortedInfo(sorter as SorterResult<IDataType>);
+  };
 
   const handleSelectProducts = () => {
-    const selectedProducts = displayedInventory.filter((product: any) => selectedRowKeys.includes(product.id));
-    const selectedProductIds = selectedProducts.map((product: any) => product.id);
-
-    navigate(`/admin/shop/products/print_qrcode?product_id=${selectedProductIds}`);
+    const selectedIds = selectedRowKeys.map((key: any) => key.split("_")[0]);
+    navigate(`/admin/shop/products/print_qrcode?product_id=${selectedIds}`);
   };
 
   return (
     <Card>
+      {!isFilteredValueEmpty && <SortData />}
       <div className="mb-4 flex items-center">
         <Text>{`${t("admin_shop.inventory.table.number_of_stock")}:`}</Text>
         <Text strong className="px-2">
-          {displayedInventory.length}
+          {displayedInventory?.length}
         </Text>
         <div>
           {hasSelected
@@ -259,15 +279,25 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
             : ""}
         </div>
         <Divider type="vertical" />
-        {<UpdateData hasSelected={hasSelected} handleSelectProducts={handleSelectProducts} />}
+        <UpdateData
+          hasSelected={hasSelected}
+          selectedRowKeys={selectedRowKeys}
+          handleSelectProducts={handleSelectProducts}
+        />
       </div>
       <div>
         <Table
-          dataSource={displayedInventory}
-          rowKey={(record) => record.id}
-          columns={columns}
           rowSelection={rowSelection}
+          rowKey={(record) => `${record?.id}_${record?.name}`}
+          columns={columns}
+          dataSource={displayedInventory}
           bordered
+          onChange={handleChange}
+          loading={isFetching}
+          pagination={{
+            pageSize: 10,
+            hideOnSinglePage: true,
+          }}
           scroll={{ x: 1300 }}
         />
       </div>

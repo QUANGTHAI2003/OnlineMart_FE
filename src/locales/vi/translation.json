@@ -626,7 +626,8 @@
           "select_at_less": "Vui lòng chọn ít nhất 1 sản phẩm bên dưới",
           "update_quantity": "Update quantity products",
           "update_status": "On/Off products status",
-          "delete": "Delete selected products"
+          "delete": "Delete selected products",
+          "date": "Ngày tạo"
         }
       },
       "create": {
@@ -1161,8 +1162,6 @@
         "print_qrcode": "In tem mã",
         "categories": "Danh mục sản phẩm",
         "other_manage": "Quản lý khác",
-        "in_process": "Đang giao dịch",
-        "suspended": "Ngừng giao dịch",
         "warranty": "Bảo hành sản phẩm",
         "yes": "Có",
         "no": "Không",
@@ -1173,9 +1172,6 @@
         "selling": "Bán hàng",
         "allowing_sales": "Cho phép bán",
         "not_allowing_sales": "Không cho phép bán",
-        "classifying": "Phân loại sản phẩm",
-        "combo": "Combo",
-        "regular_product": "Sản phẩm thường",
         "creation_date": "Ngày tạo sản phẩm"
       },
       "table": {

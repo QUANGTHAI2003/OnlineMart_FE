@@ -8,9 +8,11 @@ interface IDropdownSelectProps {
   name: string;
   data: { id: number; label: string; value: string }[];
   placement: "bottomLeft" | "bottom" | "bottomRight" | "topLeft" | "top" | "topRight";
+  onChange: (value: any) => void;
+  currentValue?: any;
 }
 
-const DropdownSelect: React.FC<IDropdownSelectProps> = ({ name, data, placement }) => {
+const DropdownSelect: React.FC<IDropdownSelectProps> = ({ name, data, placement, onChange, currentValue }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
 
@@ -19,7 +21,16 @@ const DropdownSelect: React.FC<IDropdownSelectProps> = ({ name, data, placement 
   };
 
   const renderDropdown = () => {
-    return <FilterDropdownData name={name} data={data} setLoading={setLoading} setOpen={setOpen} />;
+    return (
+      <FilterDropdownData
+        name={name}
+        data={data}
+        setLoading={setLoading}
+        setOpen={setOpen}
+        onChange={onChange}
+        currentValue={currentValue}
+      />
+    );
   };
 
   return (

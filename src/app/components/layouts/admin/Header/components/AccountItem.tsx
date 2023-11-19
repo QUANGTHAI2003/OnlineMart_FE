@@ -1,5 +1,5 @@
 import { DownOutlined, EditOutlined, LogoutOutlined, PlusCircleOutlined, UserOutlined } from "@ant-design/icons";
-import avatarAdmin from "@app/app/assets/images/avatar_admin.png";
+import avatarAdmin from "@app/app/assets/images/OM_reverse.png";
 import { useLogoutMutation } from "@app/store/slices/api/authApi";
 import { logOut } from "@app/store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@app/store/store";

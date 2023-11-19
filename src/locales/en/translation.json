@@ -627,7 +627,8 @@
           "select_at_less": "Please select at least 1 product below",
           "update_quantity": "Update quantity products",
           "update_status": "On/Off products status",
-          "delete": "Delete selected products"
+          "delete": "Delete selected products",
+          "date": "Date created"
         }
       },
       "evouncher": {
@@ -1162,8 +1163,6 @@
         "print_qrcode": "Print QR label",
         "categories": "Product category",
         "other_manage": "Other management",
-        "in_process": "In progress",
-        "suspended": "Suspended",
         "warranty": "Warranty",
         "yes": "Yes",
         "no": "No",
@@ -1174,9 +1173,6 @@
         "selling": "Selling",
         "allowing_sales": "Allowing sales",
         "not_allowing_sales": "Not allowing sales",
-        "classifying": "classifying products",
-        "combo": "Combo",
-        "regular_product": "Regular product",
         "creation_date": "Creation date"
       },
       "table": {

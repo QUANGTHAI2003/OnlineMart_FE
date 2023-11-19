@@ -24,4 +24,6 @@ export type Permission =
   | "Create voucher"
   | "Update voucher"
   | "Delete voucher"
+  | "View inventory"
+  | "Print QR"
   | "Authorizations";

@@ -1,4 +1,5 @@
 import { SearchOutlined } from "@ant-design/icons";
+import logo from "@app/app/assets/images/OM_reverse.png";
 import { adminShopRoutes } from "@app/configs/routes/admin_shop";
 import { useDebounce, useResponsive } from "@app/hooks";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
@@ -115,10 +116,11 @@ const AdminMainSidebar: React.FC<IAdminMainSidebarProps> = ({ isCollapsed }) => 
       <S.LogoStyle className="logo">
         <Link to="">
           <img
-            src={
-              shopData?.avatar ||
-              "https://salt.tikicdn.com/cache/w32/ts/sellercenterFE/93/76/03/2a08fa4ae6a024a752fbba87d145bce8.png"
-            }
+            // src={
+            //   shopData?.avatar ||
+            //   "https://salt.tikicdn.com/cache/w32/ts/sellercenterFE/93/76/03/2a08fa4ae6a024a752fbba87d145bce8.png"
+            // }
+            src={logo}
             alt={shopData?.name}
             width="32"
             height="32"

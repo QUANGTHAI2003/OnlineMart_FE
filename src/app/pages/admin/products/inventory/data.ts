@@ -50,6 +50,7 @@ export const ProductListFilterCategory = [
     value: "Nhà Cửa - Đời Sống",
   },
 ];
+
 export const ProductListFilterBrand = [
   {
     id: 1,
@@ -92,6 +93,7 @@ export const ProductListFilterBrand = [
     value: "LadolVita",
   },
 ];
+
 export const InventoryListData = [
   {
     id: 1,

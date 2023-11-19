@@ -1,4 +1,5 @@
 import { CaretDownOutlined } from "@ant-design/icons";
+import logo from "@app/app/assets/images/OM_reverse.png";
 import {
   Button,
   Col,
@@ -48,14 +49,14 @@ const SettingUpQRPrint: React.FC = () => {
     const result = [];
     if (InventoryListData && InventoryListData.length > 0) {
       result.push(["ID", "Image", "QR Code", "Name", "Quantity", "Price"]);
-      InventoryListData.map((item) => {
+      InventoryListData.map((item: any) => {
         const arr = [];
         arr[0] = item.id;
-        arr[1] = item.product_media;
-        arr[2] = item.barcode;
+        arr[1] = item.thumbnail_url;
+        arr[2] = item.qr_link;
         arr[3] = item.name;
-        arr[4] = item.qty_inventory;
-        arr[5] = item.retail_price;
+        arr[4] = item.stock_qty;
+        arr[5] = item.regular_price;
         result.push(arr);
       });
 
@@ -93,15 +94,10 @@ const SettingUpQRPrint: React.FC = () => {
 
           <div className="qrcode_item" ref={componentRef}>
             <div className="qrcode overflow-x-scroll">
-              {InventoryListData.map((item) => {
+              {InventoryListData.map((item: any) => {
                 return (
                   <div key={item.id} className="">
-                    <QRCode
-                      key={item.id}
-                      errorLevel="H"
-                      value={selectedProduct?.barcode || ""}
-                      icon="https:encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7_nx-EEBpDiX_mgLv9aQ5_1QBXdKVup_eSg&usqp=CAU"
-                    />
+                    <QRCode key={item.id} errorLevel="H" value={selectedProduct?.qr_link || ""} icon={logo} />
                   </div>
                 );
               })}

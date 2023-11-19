@@ -1,33 +1,39 @@
 import { DownOutlined } from "@ant-design/icons";
+import { Can, PermissionsSwitch } from "@app/app/components/common/Permissions";
+import usePermissions from "@app/hooks/usePermissions";
 import { Button, Dropdown, MenuProps, Space, Tooltip, Typography } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const { Link } = Typography;
 
-const UpdateData: React.FC<any> = ({ hasSelected, handleSelectProducts }) => {
+interface IUpdateDataProps {
+  hasSelected: boolean;
+  selectedRowKeys: React.Key[];
+  handleSelectProducts: any;
+}
+
+const UpdateData: React.FC<IUpdateDataProps> = ({ hasSelected, handleSelectProducts }) => {
   const { t } = useTranslation();
+  const [, setSelected] = useState(false);
+  const [completeAction, setCompleteAction] = useState(false);
+  const { permissions } = usePermissions();
 
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    setSelected(hasSelected);
+  }, [hasSelected]);
+
+  useEffect(() => {
+    if (completeAction) {
+      setSelected(false);
+      setCompleteAction(false);
+    }
+  }, [completeAction]);
+
   const handlePrintQRCode = () => {
-    // console.log("Print QR Code");
-  };
-
-  const handleCheckingInventory = () => {
-    // console.log("Checking inventory");
-  };
-
-  const handleApplyingTaxes = () => {
-    // console.log("Applying taxes");
-  };
-
-  const handlePermissionSale = () => {
-    // console.log("Granting permission to sell");
-  };
-
-  const handleDeleteVersions = () => {
-    // console.log("Deleting product versions");
+    // console.log();
   };
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
@@ -35,18 +41,7 @@ const UpdateData: React.FC<any> = ({ hasSelected, handleSelectProducts }) => {
       case "1":
         handlePrintQRCode();
         break;
-      case "2":
-        handleCheckingInventory();
-        break;
-      case "3":
-        handleApplyingTaxes();
-        break;
-      case "4":
-        handlePermissionSale();
-        break;
-      case "5":
-        handleDeleteVersions();
-        break;
+
       default:
         break;
     }
@@ -60,51 +55,40 @@ const UpdateData: React.FC<any> = ({ hasSelected, handleSelectProducts }) => {
     {
       label: <Link onClick={handleSelectProducts}>{t("admin_shop.inventory.table.print_qrcode")}</Link>,
       key: "1",
-    },
-    {
-      label: t("admin_shop.inventory.table.check_inventory"),
-      key: "2",
-    },
-    {
-      label: t("admin_shop.inventory.table.apply_tax"),
-      key: "3",
-    },
-    {
-      label: t("admin_shop.inventory.table.authorize_sale"),
-      key: "4",
-    },
-    {
-      label: t("admin_shop.inventory.table.delete_version"),
-      key: "5",
+      disabled: !permissions.includes("Print QR"),
     },
   ];
 
   return (
     <Space direction="horizontal" align="center">
-      <Dropdown
-        menu={{
-          items,
-          onClick: handleMenuClick,
-        }}
-        trigger={["click"]}
-        onOpenChange={handleOpenChange}
-        open={open}
-        disabled={!hasSelected}
-      >
-        {hasSelected ? (
-          <Button>
-            {t("admin_shop.inventory.table.select_action")}
-            <DownOutlined />
-          </Button>
-        ) : (
-          <Tooltip title={t("admin_shop.inventory.table.please_choose")}>
-            <Button disabled>
-              {t("admin_shop.inventory.table.please_select")}
-              <DownOutlined />
-            </Button>
-          </Tooltip>
-        )}
-      </Dropdown>
+      <PermissionsSwitch>
+        <Can permissions={["Print QR"]}>
+          <Dropdown
+            menu={{
+              items,
+              onClick: handleMenuClick,
+            }}
+            trigger={["click"]}
+            onOpenChange={handleOpenChange}
+            open={open}
+            disabled={!hasSelected}
+          >
+            {hasSelected ? (
+              <Button>
+                {t("admin_shop.inventory.table.select_action")}
+                <DownOutlined />
+              </Button>
+            ) : (
+              <Tooltip title={t("admin_shop.inventory.table.please_choose")}>
+                <Button disabled>
+                  {t("admin_shop.inventory.table.please_select")}
+                  <DownOutlined />
+                </Button>
+              </Tooltip>
+            )}
+          </Dropdown>
+        </Can>
+      </PermissionsSwitch>
     </Space>
   );
 };
