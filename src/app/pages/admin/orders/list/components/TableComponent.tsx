@@ -1,24 +1,28 @@
 import { BankOutlined, MessageTwoTone } from "@ant-design/icons";
 import { AdminTable } from "@app/app/components/common/Table/AdminTable";
+import { useDebounce } from "@app/hooks";
+import { useGetOrderQueryRootQuery } from "@app/store/slices/api/admin/orderApi";
+import { useAppSelector } from "@app/store/store";
+import { IOrder } from "@app/types/order.types";
 import { formatCurrency, removeDiacritics } from "@app/utils/helper";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Card, Divider, Space, Tag } from "antd";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { SorterResult } from "antd/lib/table/interface";
+import dayjs from "dayjs";
 import { TFunction } from "i18next";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
-import { OrderDataAdmin } from "../data";
 import * as S from "../Order.styles";
-import { IOrderAdmin } from "../OrderDataAdmin.interface";
 
 import OrderTableDataName from "./OrderTableDataName";
+import UpdateData from "./UpdateData";
 
-import { ProductTableDataName, SortData, UpdateData } from ".";
+import { ProductTableDataName, SortData } from ".";
+
 const getStatusTagColor = (status: any, t: TFunction<"translation", undefined>) => {
   switch (status) {
     case "awaiting":
@@ -36,32 +40,48 @@ const getStatusTagColor = (status: any, t: TFunction<"translation", undefined>) 
   }
 };
 
-const TableComponent = React.memo(({ searchValue, searchType }: any) => {
+const TableComponent = React.memo(() => {
   const { t } = useTranslation();
   const location = useLocation();
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [sortedInfo, setSortedInfo] = useState<SorterResult<IOrderAdmin>>({});
+  const filteredValue = useAppSelector((state) => state.orderAdmin.filteredValue);
 
-  const columns: ColumnsType<IOrderAdmin> = [
+  const isFilteredValueEmpty = Object.values(filteredValue).every(
+    (value) => !value || (Array.isArray(value) && value.length === 0)
+  );
+
+  const [sortedInfo, setSortedInfo] = useState<SorterResult<IOrder>>({});
+  const { data: orderData, isFetching } = useGetOrderQueryRootQuery();
+  const columns: ColumnsType<IOrder> = [
     {
       title: t("admin_shop.orders.list.table.order"),
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "id",
+      key: "id",
       sorter: (a, b) => a.id - b.id,
-      sortOrder: sortedInfo.columnKey === "name" ? sortedInfo.order : null,
-      render: (_, record: any) => {
+      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
+      render: (_: any, record: any) => {
         return <OrderTableDataName data={record} trans={t} />;
       },
     },
     {
       title: t("admin_shop.orders.list.table.status"),
-      dataIndex: "status",
+      dataIndex: "shipping_unit",
       key: "status",
       sorter: (a: any, b: any) => a.status.length - b.status.length,
       sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
-      render: (_id, record) => {
-        const [statusColor, statusText] = getStatusTagColor(record.status_slug, t);
-        console.log(record.status);
+      render: (_: any, record: any) => {
+        const [statusColor, statusText] = getStatusTagColor(
+          record?.status === "awaiting"
+            ? "awaiting"
+            : record?.status === "processing"
+            ? "processing"
+            : record?.status === "shipping"
+            ? "shipping"
+            : record?.status === "canceled"
+            ? "canceled"
+            : "delivered",
+          t
+        );
         return (
           <div>
             <div>
@@ -71,10 +91,10 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
             </div>
             <div>
               <span>{t("admin_shop.orders.list.table.pick_delivery")}</span>
-              <span className="text-orange-500 mr-2">{record.shipping[0].delivery_name}</span>
+              <span className="text-orange-500 mr-2">{record.shipping_unit}</span>
               <span>
                 {`(${t("admin_shop.orders.list.table.shipping_fee")}
-                ${formatCurrency(record.shipping[0].method_fee_text)})`}
+                ${formatCurrency(22000)})`}
               </span>
             </div>
           </div>
@@ -82,30 +102,14 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       },
     },
     {
-      title: t("admin_shop.orders.list.table.confirm"),
-      dataIndex: "confirm_date",
-      key: "confirm_date",
-      sorter: (a: any, b: any) => a.confirm_date.length - b.confirm_date.length,
-      sortOrder: sortedInfo.columnKey === "confirm" ? sortedInfo.order : null,
-      render: (confirm_date: string) => {
-        return <span>{confirm_date}</span>;
-      },
-    },
-    {
       title: t("admin_shop.orders.list.table.quantity"),
-      dataIndex: "qty",
-      key: "qty",
-      sorter: (a: any, b: any) => a.qty_total - b.qty_total,
-      sortOrder: sortedInfo.columnKey === "qty" ? sortedInfo.order : null,
-      render: (_id, record) => (
+      dataIndex: "grand_total",
+      key: "grand_total",
+      sorter: (a, b) => a.grand_total - b.grand_total,
+      sortOrder: sortedInfo.columnKey === "grand_total" ? sortedInfo.order : null,
+      render: (_: any, record: any) => (
         <div>
           <div>
-            <span>{t("admin_shop.orders.list.table.qty")}</span>
-            <span className=" mr-2">{record.total_qty}</span>
-            <p>
-              DT(tt):&nbsp;
-              {formatCurrency(record.dt)}
-            </p>
             <p>
               GTĐH:&nbsp;
               {formatCurrency(record.grand_total)}
@@ -113,20 +117,6 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
           </div>
         </div>
       ),
-    },
-    {
-      title: t("admin_shop.orders.list.table.order_label"),
-      dataIndex: "label_order",
-      key: "label_order",
-      sorter: (a: any, b: any) => a.label_order - b.label_order,
-      sortOrder: sortedInfo.columnKey === "label_order" ? sortedInfo.order : null,
-      render: (label_order: string) => {
-        return (
-          <Tag color="warning" className=" p-1">
-            {label_order}
-          </Tag>
-        );
-      },
     },
     {
       title: t("admin_shop.orders.list.table.action"),
@@ -143,47 +133,36 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       ),
     },
   ];
-  const columnsProduct: ColumnsType<IOrderAdmin> = [
+  const columnsProduct: ColumnsType<IOrder> = [
     {
       title: t("admin_shop.orders.list.table.product"),
-      dataIndex: "product_name",
-      key: "product_name",
+      dataIndex: "product",
+      key: "product",
       render: (_, record: any) => {
-        return <ProductTableDataName data={record} trans={t} />;
+        console.log(record?.order_item[0]?.product);
+        return <ProductTableDataName data={record?.order_item[0]?.product} trans={t} />;
       },
     },
     {
       title: t("admin_shop.orders.list.table.qty"),
-      dataIndex: "qty",
-      key: "qty",
-      render: (record) => {
+      dataIndex: "product_quantity",
+      key: "product_quantity",
+      render: (_: any, record: any) => {
         return (
           <div>
-            <span className="mr-2">{`x${record}`}</span>
+            <span className="mr-2">{`x${record?.order_item[0]?.product?.product_quantity}`}</span>
           </div>
         );
       },
     },
     {
       title: t("admin_shop.orders.list.table.sale_price"),
-      dataIndex: "sale_price",
-      key: "sale_price",
-      render: (record) => {
+      dataIndex: "product_sale",
+      key: "product_sale",
+      render: (_: any, record: any) => {
         return (
           <div>
-            <span className="mr-2">{formatCurrency(record)}</span>
-          </div>
-        );
-      },
-    },
-    {
-      title: t("admin_shop.orders.list.table.sub_total"),
-      dataIndex: "subtotal",
-      key: "subtotal",
-      render: (record) => {
-        return (
-          <div>
-            <span className="mr-2">{formatCurrency(record)}</span>
+            <span className="mr-2">{formatCurrency(record?.order_item[0]?.product?.product_sale)}</span>
           </div>
         );
       },
@@ -199,41 +178,69 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
   };
   const hasSelected = selectedRowKeys.length > 0;
 
+  const searchValue = useAppSelector((state) => state.orderAdmin.searchValue);
+  const debouncedValue = useDebounce(searchValue, 300);
+  const searchType = useAppSelector((state) => state.orderAdmin.selectSearchType) || "name";
+  const delivery_om = useAppSelector((state) => state.orderAdmin.filteredValue.delivery_om);
+  const delivery_ghtk = useAppSelector((state) => state.orderAdmin.filteredValue.delivery_ghtk);
+  const dateFilter = useAppSelector((state) => state.orderAdmin.filteredValue.dateFilter);
+
   const displayedOrders = useMemo(() => {
     const queryParams = new URLSearchParams(location.search);
     const tabParam = queryParams.get("tab");
 
-    let filteredOrders =
-      tabParam === "all" ? OrderDataAdmin : OrderDataAdmin.filter((order: any) => order.status_slug === tabParam);
+    let filteredOrders: IOrder[] = orderData || [];
 
-    if (searchValue) {
-      filteredOrders = filteredOrders.filter((order: any) => {
-        const fieldValue = order[searchType];
-        const searchValueString = searchValue.toString();
+    filteredOrders =
+      tabParam === "all" ? orderData || [] : (orderData || []).filter((record) => record.status === tabParam);
 
-        return removeDiacritics(fieldValue.toString())
+    if (debouncedValue) {
+      filteredOrders = filteredOrders?.filter((record: any) => {
+        const fieldrecord = record[searchType];
+        const searchrecordString = debouncedValue.toString();
+
+        return removeDiacritics(fieldrecord.toString())
           .toLowerCase()
-          .includes(removeDiacritics(searchValueString).toLowerCase());
+          .includes(removeDiacritics(searchrecordString).toLowerCase());
+      });
+    }
+
+    if (delivery_ghtk) {
+      filteredOrders = filteredOrders?.filter((record: any) => {
+        return record?.shipping_unit === "GHTK";
+      });
+    }
+    if (delivery_om) {
+      filteredOrders = filteredOrders?.filter((record: any) => {
+        return record?.shipping_unit === "OM";
+      });
+    }
+    if (dateFilter) {
+      filteredOrders = filteredOrders?.filter((record: any) => {
+        const date = dayjs(record?.created_at).format("YYYY-MM-DD");
+        console.log(date);
+
+        return dayjs(date).isSame(dayjs(dateFilter), "day");
       });
     }
 
     return filteredOrders;
-  }, [location.search, searchType, searchValue]);
+  }, [location.search, orderData, debouncedValue, delivery_ghtk, delivery_om, dateFilter, searchType]);
 
-  const handleChange: TableProps<IOrderAdmin>["onChange"] = (_pagination, _filters, sorter) => {
-    setSortedInfo(sorter as SorterResult<IOrderAdmin>);
+  const handleChange: TableProps<IOrder>["onChange"] = (_pagination, _filters, sorter) => {
+    setSortedInfo(sorter as SorterResult<IOrder>);
   };
 
   return (
     <S.TableStyle>
       <Card bordered>
         <div className="card-inner">
-          <SortData />
+          {!isFilteredValueEmpty && <SortData />}
           <div className="header">
             <Space className="mb-4" direction="horizontal" align="center">
               <h3>
                 {hasSelected
-                  ? `${t("admin_shop.orders.list.table.selecting", { count: selectedRowKeys.length })}`
+                  ? `${t("admin_shop.orders.list.table.selecting", { count: selectedRowKeys?.length })}`
                   : t("admin_shop.orders.list.table.orders")}
               </h3>
               <Divider type="vertical" />
@@ -253,12 +260,12 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
                         <div className="header">
                           <Space className="mb-4" direction="horizontal" align="center">
                             <FontAwesomeIcon icon={faUser} />
-                            <h4>{`${record.shipping_address[0].name} (${record.shipping_address[0].telephone})`}</h4>
+                            <h4>{`${record?.user?.full_name} (${record?.user?.phone})`}</h4>
                             <span className="text-gray-400">/</span>
-                            <h4>{`${record.shipping_address[0].road}, ${record.shipping_address[0].ward},  ${record.shipping_address[0].district},  ${record.shipping_address[0].city}  `}</h4>
+                            <h4>{`${record?.street}, ${record.district},  ${record.city}  `}</h4>
                             <span className="text-gray-400">/</span>
                             <BankOutlined />
-                            <h4>{record.items[0].current_seller[0].name}</h4>
+                            <h4>{record?.order_item?.shop_name}</h4>
                             <Link to="#" className="flex ">
                               <MessageTwoTone />
                               <h4 className=" ml-2 text-blue-500">Chat</h4>
@@ -271,9 +278,9 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
                             pagination={{
                               pageSize: 2,
                             }}
-                            rowKey={uuidv4()}
+                            rowKey={(record) => record.id + record.full_name}
                             columns={columnsProduct}
-                            dataSource={record.items}
+                            dataSource={displayedOrders}
                             bordered
                             scroll={{ x: 500 }}
                             onChange={handleChange}
@@ -288,6 +295,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
               pagination={{
                 pageSize: 3,
               }}
+              loading={isFetching}
               scroll={{ x: 500 }}
               dataSource={displayedOrders}
               bordered

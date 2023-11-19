@@ -12,24 +12,10 @@ const UpdateData: React.FC<any> = ({ hasSelected }) => {
     console.log("Update quantity");
   };
 
-  const handleUpdateStatus = () => {
-    console.log("Update status");
-  };
-
-  const handleDelete = () => {
-    console.log("Delete");
-  };
-
   const handleMenuClick: MenuProps["onClick"] = (e) => {
     switch (e.key) {
       case "1":
         handleUpdateQuantity();
-        break;
-      case "2":
-        handleUpdateStatus();
-        break;
-      case "3":
-        handleDelete();
         break;
       default:
         break;

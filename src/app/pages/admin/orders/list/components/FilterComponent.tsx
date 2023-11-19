@@ -1,52 +1,53 @@
 import { FilterOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import { useResponsive } from "@app/hooks";
+import {
+  setDate,
+  setDeliveryGHTK,
+  setDeliveryOm,
+  setSearchValue,
+  setSelectSearchType,
+} from "@app/store/slices/redux/admin/orderAdminSlice";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
 import { Button, Checkbox, Col, DatePicker, Form, Input, Radio, Row, Select, Space } from "antd";
-import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import { searchType } from "../Order";
 import * as S from "../Order.styles";
-interface IFilterComponentProps {
-  setSearchValue: (value: string) => void;
-  setSelectSearchType: (key: any) => void;
-  searchTypeData: any[];
-}
-interface ISortDrawerProps {
-  onClose: () => void;
-  open: boolean;
-  t: any;
-}
-const { RangePicker } = DatePicker;
-const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searchTypeData }: IFilterComponentProps) => {
+
+const FilterComponent = React.memo(() => {
   const { isTablet } = useResponsive();
   const { t } = useTranslation();
-
   const [open, setOpen] = useState<boolean>(false);
-  const [selectedSearchTypeLabel, setSelectedSearchTypeLabel] = useState(searchTypeData[0].label);
-
+  const [selectedSearchTypeLabel, setSelectedSearchTypeLabel] = useState(t("admin_shop.orders.list.filter.type.id"));
+  const dispatch = useAppDispatch();
+  const searchValue = useAppSelector((state) => state.orderAdmin.searchValue);
   const showDrawer = () => {
     setOpen(true);
   };
-
   const onClose = () => {
     setOpen(false);
   };
 
-  const handleSearch = (value: any) => {
-    setSearchValue(value);
+  const handleSearch = (value: string) => {
+    dispatch(setSearchValue(value));
   };
-
   const handleSelectSearchType = (key: any) => {
-    const selectedSearchType = searchTypeData.find((item: any) => item.value === key);
+    const selectedSearchType = searchType(t).find((item: any) => item.value === key);
     if (selectedSearchType) {
       setSelectedSearchTypeLabel(selectedSearchType.label);
     }
-    setSelectSearchType(key);
+    dispatch(setSelectSearchType(key));
   };
 
+  const [defaultOrderId, setDefaultOrderId] = useState<any>([]);
+  const { OrderIdFilter } = useAppSelector((state) => state.orderAdmin.searchValue);
+
   useEffect(() => {
-    console.log("Filter Component rendered");
-  }, []);
+    setDefaultOrderId(OrderIdFilter);
+  }, [defaultOrderId, setDefaultOrderId, OrderIdFilter]);
 
   return (
     <S.Filter>
@@ -60,17 +61,18 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
                     <Space.Compact className="flex items-center" size="large">
                       <Select
                         className="w-36"
-                        defaultValue={searchTypeData[0].value}
-                        options={searchTypeData}
+                        defaultValue={searchType(t)[0].value}
+                        options={searchType(t)}
                         onChange={handleSelectSearchType}
                       />
                       <div className="flex-grow">
                         <Input
+                          value={searchValue}
                           placeholder={t("admin_shop.orders.list.filter.placeholder", {
                             placeholder: selectedSearchTypeLabel.toLowerCase(),
                           })}
                           prefix={<SearchOutlined />}
-                          onChange={(e) => handleSearch(e.target.value)}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) => handleSearch(e.target.value)}
                         />
                       </div>
                     </Space.Compact>
@@ -93,14 +95,6 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
             </Button>
           </Col>
         </Row>
-        <S.OmCol>
-          <div className="om-col">
-            <div className="om-col-col">{t("admin_shop.orders.list.filter.not_printed")}</div>
-          </div>
-          <div className="om-col">
-            <div className="om-col-col">{t("admin_shop.orders.list.filter.need_invoice")}</div>
-          </div>
-        </S.OmCol>
         <SortDrawer onClose={onClose} open={open} t={t} />
       </section>
     </S.Filter>
@@ -109,29 +103,28 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
 
 export default FilterComponent;
 
-const SortDrawer = ({ onClose, open, t }: ISortDrawerProps) => {
-  const handleChange = (value: any) => {
-    console.log(`selected ${value}`);
-  };
-  const [showRangePicker, setShowRangePicker] = useState(false);
+const SortDrawer = ({ onClose, open, t }: any) => {
+  const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
 
-  const onChange = (checkedValues: any) => {
-    console.log("checked = ", checkedValues);
-  };
-  const handleRadioChange = (e: any) => {
-    if (e.target.value === t("admin_shop.orders.list.filter.custom")) {
-      setShowRangePicker(true);
-    } else {
-      setShowRangePicker(false);
-    }
-  };
-  const [value, setValue] = useState(1);
+  const [defaultDelivery] = useState<boolean>(false);
+  const { delivery_om, delivery_ghtk, dateFilter } = useAppSelector((state) => state.orderAdmin.filteredValue);
 
-  const onChangeRadio = (e: any) => {
-    console.log("radio check: ", e.target.value);
-    setValue(e.target.value);
-  };
+  useEffect(() => {
+    form.setFieldsValue({
+      delivery_om: false,
+      delivery_ghtk: false,
+    });
+  }, [delivery_om, delivery_ghtk, form, dateFilter]);
 
+  const handleApplySort = (values: any) => {
+    const { delivery_om, delivery_ghtk, date } = values;
+
+    dispatch(setDeliveryOm(delivery_om));
+    dispatch(setDeliveryGHTK(delivery_ghtk));
+    dispatch(setDate(dayjs(date).format("YYYY-MM-DD")));
+    onClose();
+  };
   return (
     <S.DrawerStyle
       title={t("admin_shop.product.list.filter.other_filter")}
@@ -142,34 +135,13 @@ const SortDrawer = ({ onClose, open, t }: ISortDrawerProps) => {
       footer={
         <div className="grid grid-cols-2 gap-x-3">
           <Button onClick={onClose}>{t("admin_shop.product.list.filter.cancel")}</Button>
-          <Button onClick={onClose} type="primary">
+          <Button onClick={onClose} htmlType="submit" type="primary" form="ortherSortOrderForm">
             {t("admin_shop.product.list.filter.apply")}
           </Button>
         </div>
       }
     >
-      <S.FilterComponent>
-        <Row className="">
-          <Col span={23} className="mb-3  ">
-            <h4>{t("admin_shop.orders.list.filter.order_label")}</h4>
-          </Col>
-          <Col span={1} className="mb-3 flex ">
-            <Link to="#">
-              <span>{t("admin_shop.orders.list.filter.delete_filter")}</span>
-            </Link>
-          </Col>
-          <Col span={24}>
-            <Select
-              className="w-full"
-              defaultValue={t("admin_shop.orders.list.filter.order_label")}
-              onChange={handleChange}
-              options={[
-                { value: "jack", label: t("admin_shop.orders.list.filter.invoice_required") },
-                { value: "lucy", label: t("admin_shop.orders.list.filter.invoice_issued") },
-              ]}
-            />
-          </Col>
-        </Row>
+      <Form form={form} id="ortherSortOrderForm" onFinish={handleApplySort}>
         <Row className="mt-6  checkbox-group h-38 ">
           <Col span={23} className="mb-3 mt-6">
             <h4>{t("admin_shop.orders.list.filter.delivery")}</h4>
@@ -180,27 +152,23 @@ const SortDrawer = ({ onClose, open, t }: ISortDrawerProps) => {
             </Link>
           </Col>
           <Col span={24}>
-            <Checkbox.Group className="w-full" onChange={onChange}>
+            <Checkbox.Group defaultValue={[defaultDelivery]} className="w-full">
               <Row>
                 <Col span={12} className="mb-4">
-                  <Checkbox value={t("admin_shop.orders.list.filter.om_delivery")}>
-                    {t("admin_shop.orders.list.filter.om_delivery")}
-                  </Checkbox>
+                  <Form.Item name="delivery_om" valuePropName="checked">
+                    <Checkbox value="delivery_om">OM Delivery</Checkbox>
+                  </Form.Item>
                 </Col>
                 <Col span={12} className="mb-4">
-                  <Checkbox value={t("admin_shop.orders.list.filter.ghtk_delivery")}>
-                    {t("admin_shop.orders.list.filter.ghtk_delivery")}
-                  </Checkbox>
-                </Col>
-                <Col span={12}>
-                  <Checkbox value={t("admin_shop.orders.list.filter.shop_delivery")}>
-                    {t("admin_shop.orders.list.filter.shop_delivery")}
-                  </Checkbox>
+                  <Form.Item name="delivery_ghtk" valuePropName="checked">
+                    <Checkbox value="delivery_ghtk">GHTK Delivery</Checkbox>
+                  </Form.Item>
                 </Col>
               </Row>
             </Checkbox.Group>
           </Col>
         </Row>
+
         <Row className="mt-6 radio-group h-38 ">
           <Col span={23} className="mb-3 mt-6">
             <h4>{t("admin_shop.orders.list.filter.order_date")}</h4>
@@ -211,44 +179,18 @@ const SortDrawer = ({ onClose, open, t }: ISortDrawerProps) => {
             </Link>
           </Col>
           <Col span={24}>
-            <Radio.Group className="w-full" value={value} onChange={onChangeRadio}>
+            <Radio.Group className="w-full">
               <Row>
-                <Col span={12} className="mb-4">
-                  <Radio value={t("admin_shop.orders.list.filter.today")}>
-                    {t("admin_shop.orders.list.filter.today")}
-                  </Radio>
+                <Col span={24} className="mt-4 w-full">
+                  <Form.Item name="date">
+                    <DatePicker className="w-full date" format="YYYY-MM-DD" />
+                  </Form.Item>
                 </Col>
-                <Col span={12} className="mb-4">
-                  <Radio value={t("admin_shop.orders.list.filter.last_7")}>
-                    {t("admin_shop.orders.list.filter.last_7")}
-                  </Radio>
-                </Col>
-                <Col span={12} className="mb-4">
-                  <Radio value={t("admin_shop.orders.list.filter.last_30")}>
-                    {t("admin_shop.orders.list.filter.last_30")}
-                  </Radio>
-                </Col>
-                <Col span={12}>
-                  <Radio value={t("admin_shop.orders.list.filter.all_time")}>
-                    {t("admin_shop.orders.list.filter.all_time")}
-                  </Radio>
-                </Col>
-                <Col span={12}>
-                  <Radio onChange={handleRadioChange} value={t("admin_shop.orders.list.filter.custom")}>
-                    {t("admin_shop.orders.list.filter.custom")}
-                  </Radio>
-                </Col>
-
-                {showRangePicker && (
-                  <Col span={24} className="mt-4">
-                    <RangePicker showTime={{ format: "HH:mm" }} format="YYYY-MM-DD HH:mm" onChange={onChange} />
-                  </Col>
-                )}
               </Row>
             </Radio.Group>
           </Col>
         </Row>
-      </S.FilterComponent>
+      </Form>
     </S.DrawerStyle>
   );
 };

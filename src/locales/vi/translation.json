@@ -862,7 +862,7 @@
           "product": "Sản phẩm",
           "status": "Trạng thái ",
           "confirm": "Hạn xác nhận",
-          "quantity": "Số lượng/DT/GTĐH",
+          "quantity": "Giá trị đơn hàng",
           "infor_receiver": "Thông tin vận chuyển",
           "delivery_by": "Được giao bởi: ",
           "pick_delivery": "Được giao bởi: ",
@@ -891,7 +891,8 @@
           "type": {
             "id": "Mã đơn hàng",
             "sku": "SKU",
-            "infor_user": "Thông tin khách hàng"
+            "city": "Thành phố",
+            "name":" Tên khách hàng"
           },
           "print": "In phiếu các đơn hàng được chọn",
           "placeholder": "Nhập tối đa 20 {{placeholder}} cách nhau bằng dấu ',' ",

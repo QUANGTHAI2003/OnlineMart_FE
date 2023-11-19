@@ -1,6 +1,7 @@
 import activitySlice from "./activitySlice";
 import { activityApi } from "./api/activityApi";
 import { inventoryAdminApi } from "./api/admin/inventoryApi";
+import { orderApi } from "./api/admin/orderApi";
 import { productAdminApi } from "./api/admin/productApi";
 import { roleApi } from "./api/admin/roleApi";
 import { sellerApi } from "./api/admin/sellerApi";
@@ -18,6 +19,7 @@ import { wishlistApi } from "./api/user/wishlistApi";
 import { userApi } from "./api/userApi";
 import authSlice from "./authSlice";
 import inventoryAdminSlice from "./redux/admin/inventoryAdminSlice";
+import orderAdminSlice from "./redux/admin/orderAdminSlice";
 import productAdminSlice from "./redux/admin/productAdminSlice";
 import sellerAdminSlice from "./redux/admin/sellerAdminSlice";
 import productDetailSlice from "./redux/productDetailSlice";
@@ -43,10 +45,12 @@ export const rootReducer: any = {
   [inventoryAdminApi.reducerPath]: inventoryAdminApi.reducer,
   [shopApi.reducerPath]: shopApi.reducer,
   [activityApi.reducerPath]: activityApi.reducer,
+  [orderApi.reducerPath]: orderApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
   productDetail: productDetailSlice,
   productAdmin: productAdminSlice,
+  orderAdmin: orderAdminSlice,
   isNotify: showNotificationSlice,
   sellerAdmin: sellerAdminSlice,
   inventoryAdmin: inventoryAdminSlice,
@@ -69,6 +73,7 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     roleApi.middleware,
     notificationApi.middleware,
     voucherApi.middleware,
+    orderApi.middleware,
     sellerApi.middleware,
     voucherUserApi.middleware,
     inventoryAdminApi.middleware,

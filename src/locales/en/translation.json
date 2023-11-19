@@ -862,7 +862,7 @@
           "product": "Product",
           "status": "Status ",
           "confirm": "Confirm deadline",
-          "quantity": "Quantity/Rev./Order value",
+          "quantity": "Order value",
           "infor_receiver": "Info Receiver",
           "delivery_by": "Delivered by: ",
           "pick_delivery": "Delivered by: ",
@@ -891,7 +891,8 @@
           "type": {
             "id": "Order code",
             "sku": "SKU",
-            "infor_user": "Customer info"
+            "city": "City",
+            "name":" Name"
           },
           "print": "In phiếu các sản đơn hàng được chọn",
           "placeholder": "Enter max: 20 {{placeholder}} separated with ',' ",

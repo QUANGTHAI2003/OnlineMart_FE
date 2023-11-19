@@ -1,27 +1,23 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
-import { useDebounce } from "@app/hooks";
+import { useGetOrderQueryRootQuery } from "@app/store/slices/api/admin/orderApi";
 import { Button, Col, Row, Space, Typography } from "antd";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { FilterComponent, TabComponent, TableComponent } from "./components";
 
-const searchType = (t: any) => {
+export const searchType = (t: any) => {
   return [
     { value: "id", label: t("admin_shop.orders.list.filter.type.id") },
-    { value: "sku", label: t("admin_shop.orders.list.filter.type.sku") },
-    { value: "infor_user", label: t("admin_shop.orders.list.filter.type.infor_user") },
+    { value: "city", label: t("admin_shop.orders.list.filter.type.city") },
+    { value: "full_name", label: t("admin_shop.orders.list.filter.type.name") },
   ];
 };
 
 const Order = () => {
   const { t } = useTranslation();
-
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [selectSearchType, setSelectSearchType] = useState<string>(searchType(t)[0].value);
-  const debouncedSearchValue = useDebounce(searchValue, 300);
+  const { data: orderList } = useGetOrderQueryRootQuery();
 
   return (
     <main>
@@ -44,13 +40,9 @@ const Order = () => {
           </Col>
         </Row>
       </section>
-      <TabComponent />
-      <FilterComponent
-        setSearchValue={setSearchValue}
-        setSelectSearchType={setSelectSearchType}
-        searchTypeData={searchType(t)}
-      />
-      <TableComponent searchValue={debouncedSearchValue} searchType={selectSearchType} />
+      <TabComponent orderList={orderList} />
+      <FilterComponent />
+      <TableComponent />
     </main>
   );
 };
