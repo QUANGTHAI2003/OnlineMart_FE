@@ -751,10 +751,6 @@
           "clear_all": "Xóa tất cả",
           "apply": "Áp dụng",
           "seller_reply": "Nhà bán",
-          "status": "Trạng thái",
-          "approved": "Đã duyệt",
-          "reported": "Đã báo cáo",
-          "reject": "Đã ẩn",
           "review_date": "Ngày đánh giá"
         },
         "table_cpn": {
@@ -768,7 +764,7 @@
           "seller_replies": "Nhà bán trả lời",
           "status": "Trạng thái",
           "action": "Thao tác",
-          "title": "Tiêu đề",
+          "title": "Sản phẩm",
           "sku": "Mã SKU"
         },
         "rating_text": {

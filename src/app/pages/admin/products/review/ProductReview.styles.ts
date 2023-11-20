@@ -76,7 +76,7 @@ export const ProductReview = styled.main`
 export const SiteHeader = styled.section`
   .main_title {
     .title {
-      margin-bottom: 1rem;
+      margin-bottom: 12px;
     }
   }
   .main_content {
@@ -138,13 +138,22 @@ export const Filter = styled(Col)`
       gap: 1rem;
       border: none;
     }
+    :where(.css-dev-only-do-not-override-14mi6y0).om-radio-button-wrapper:hover {
+      background: #e6f7ff !important;
+      color: #0a68ff !important;
+    }
 
+    .radio_button_disabled {
+      background: #f5f5f5 !important;
+      color: #000 !important;
+    }
+    .radio_button_enabled {
+      background: #e6f7ff !important;
+      color: #0a68ff;
+    }
     :where(.css-dev-only-do-not-override-14mi6y0).om-radio-button-wrapper:first-child:last-child {
       background: #f5f5f5;
       border: none;
-    }
-    :where(.css-dev-only-do-not-override-14mi6y0).om-radio-button-wrapper:first-child:last-child:focus-within {
-      background: #e6f7ff;
     }
 
     .om-radio {

@@ -1,11 +1,23 @@
 import { FilterOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import { Select } from "@app/app/components/common/Select/Select";
 import { useResponsive } from "@app/hooks";
+import { useGetCategoryForSortQuery } from "@app/store/slices/api/categoryApi";
+import { useGetSupplierForSortQuery } from "@app/store/slices/api/supplierApi";
+import {
+  setBrandValue,
+  setCategoryValue,
+  setHasRepliedIncluded,
+  setMediaIncluded,
+  setStartDate,
+  setEndDate,
+  setSearchValue,
+  setSelectSearchType,
+} from "@app/store/slices/redux/admin/reviewAdminSlice";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
 import { Button, Checkbox, Col, DatePicker, Divider, Form, Input, Radio, Row, Space } from "antd";
-import React, { useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ProductListFilterBrand, ProductListFilterCategory } from "../data";
 import * as S from "../ProductReview.styles";
 
 import DropdownSelect from "./DropdownSelect";
@@ -16,12 +28,21 @@ const rangeConfig = {
   rules: [{ type: "array" as const, required: true, message: "Please select time!" }],
 };
 
-const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searchTypeData }: any) => {
+const FilterComponent = React.memo(({ searchTypeData }: any) => {
   const { isTablet, isDesktop } = useResponsive();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const shopId = useAppSelector((state) => state.userState.user)?.shop?.id;
+
+  const { data: supplierSortList } = useGetSupplierForSortQuery(shopId);
+  const { data: categortSortList } = useGetCategoryForSortQuery(shopId);
+  const searchValue = useAppSelector((state) => state.reviewAdmin.searchValue);
 
   const [open, setOpen] = useState<boolean>(false);
   const [selectedSearchTypeLabel, setSelectedSearchTypeLabel] = useState<string>(searchTypeData[0].label);
+  const [defaultCategory, setDefaultCategory] = useState<any>([]);
+  const [defaultSupplier, setDefaultSupplier] = useState<any>([]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -32,7 +53,7 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
   };
 
   const handleSearch = (value: any) => {
-    setSearchValue(value);
+    dispatch(setSearchValue(value));
   };
 
   const handleSelectSearchType = (key: any) => {
@@ -40,8 +61,25 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
     if (selectedSearchType) {
       setSelectedSearchTypeLabel(selectedSearchType.label);
     }
-    setSelectSearchType(key);
+    dispatch(setSelectSearchType(key));
   };
+
+  const handleOnChangeCategory = (value: any) => {
+    dispatch(setCategoryValue(value));
+  };
+
+  const handleOnChangeBrand = (value: any) => {
+    dispatch(setBrandValue(value));
+  };
+  const { brandFilter, categoryFilter } = useAppSelector((state) => state.reviewAdmin.filteredValue);
+
+  useEffect(() => {
+    setDefaultCategory(categoryFilter);
+  }, [defaultCategory, setDefaultCategory, categoryFilter]);
+
+  useEffect(() => {
+    setDefaultSupplier(brandFilter);
+  }, [defaultSupplier, setDefaultSupplier, brandFilter]);
 
   return (
     <section className="filter pt-4 pb-6">
@@ -60,12 +98,13 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
                     />
                     <div className="flex-grow">
                       <Input
+                        value={searchValue}
                         size="large"
                         placeholder={t("admin_shop.product.list.filter.placeholder", {
                           placeholder: selectedSearchTypeLabel.toLowerCase(),
                         })}
                         prefix={<SearchOutlined />}
-                        onChange={(e: any) => handleSearch(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleSearch(e.target.value)}
                       />
                     </div>
                   </Space.Compact>
@@ -76,13 +115,17 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
                   <Space size={16}>
                     <DropdownSelect
                       name={t("admin_shop.product.list.filter.category")}
-                      data={ProductListFilterCategory}
+                      data={categortSortList}
                       placement="bottomLeft"
+                      onChange={handleOnChangeCategory}
+                      currentValue={defaultCategory}
                     />
                     <DropdownSelect
                       name={t("admin_shop.product.list.filter.brand")}
-                      data={ProductListFilterBrand}
+                      data={supplierSortList}
                       placement="bottomRight"
+                      onChange={handleOnChangeBrand}
+                      currentValue={defaultSupplier}
                     />
                   </Space>
                 </Col>
@@ -103,14 +146,72 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
           </Button>
         </Col>
       </Row>
-      <SortDrawer onClose={onClose} open={open} t={t} />
+      <SortDrawer
+        onClose={onClose}
+        open={open}
+        t={t}
+        categortSortList={categortSortList}
+        supplierSortList={supplierSortList}
+      />
     </section>
   );
 });
 
 export default FilterComponent;
 
-export const SortDrawer = ({ onClose, open, t }: any) => {
+export const SortDrawer = ({ onClose, open, t, supplierSortList, categortSortList }: any) => {
+  const [form] = Form.useForm();
+
+  const dispatch = useAppDispatch();
+
+  const [defaultCategory, setDefaultCategory] = useState<any>([]);
+  const [defaultSupplier, setDefaultSupplier] = useState<any>([]);
+  const [dateRange, setDateRange] = useState<any>(null);
+
+  const [replyFilter, setReplyFilter] = useState<boolean | null>(null);
+
+  const { brandFilter, categoryFilter } = useAppSelector(
+    (state) => state.reviewAdmin.filteredValue
+  );
+  const { mediaFilter, hasRepliedFilter } = useAppSelector((state) => state.reviewAdmin);
+  useEffect(() => {
+    if (hasRepliedFilter === null ) {
+      setReplyFilter(null);
+    } else if (hasRepliedFilter) {
+      setReplyFilter(true);
+    } else {
+      setReplyFilter(false);
+    }
+  }, [hasRepliedFilter]);
+
+  useEffect(() => {
+    setDefaultCategory(categoryFilter);
+    setDefaultSupplier(brandFilter);
+  }, [categoryFilter, brandFilter]);
+
+  useEffect(() => {
+    form.setFieldsValue({
+      brand: brandFilter,
+      category: categoryFilter,
+      media: mediaFilter,
+      reply: replyFilter,
+    });
+  }, [brandFilter, categoryFilter, mediaFilter, form]);
+
+  const handleApplySort = (values: any) => {
+    const { category, brand, media, reply } = values;
+    const startDate = dateRange ? dateRange[0].format("YYYY-MM-DD") : null;
+    const endDate = dateRange ? dateRange[1].format("YYYY-MM-DD") : null;
+    dispatch(setCategoryValue(category));
+    dispatch(setBrandValue(brand));
+    dispatch(setMediaIncluded(media));
+    dispatch(setStartDate(startDate));
+    dispatch(setEndDate(endDate));
+    dispatch(setHasRepliedIncluded(reply));
+
+    onClose();
+  };
+
   return (
     <S.DrawerStyle
       title={t("admin_shop.product.list.filter.other_filter")}
@@ -121,40 +222,33 @@ export const SortDrawer = ({ onClose, open, t }: any) => {
       footer={
         <div className="grid grid-cols-2 gap-x-3">
           <Button onClick={onClose}>{t("admin_shop.product.review.filter.clear_all")}</Button>
-          <Button onClick={onClose} type="primary">
+          <Button key="submit" form="otherSortReviewForm" type="primary" htmlType="submit">
             {t("admin_shop.product.review.filter.apply")}
           </Button>
         </div>
       }
     >
-      <Form layout="vertical">
-        <Form.Item name="checkbox-group" label={t("admin_shop.product.review.filter.content_type")}>
-          <Checkbox.Group className="checkbox_group">
-            <Row>
-              <Col span={12}>
-                <Checkbox value="D" style={{ lineHeight: "32px" }}>
-                  {t("admin_shop.product.review.filter.include_content")}
-                </Checkbox>
-              </Col>
-              <Col span={12}>
-                <Checkbox value="E" style={{ lineHeight: "32px" }}>
+      <Form form={form} layout="vertical" id="otherSortReviewForm" onFinish={handleApplySort}>
+        <Checkbox.Group className="checkbox_group">
+            <Col span={12}>
+              <Form.Item name="media" valuePropName="checked">
+                <Checkbox style={{ lineHeight: "32px" }}>
                   {t("admin_shop.product.review.filter.include_media")}
                 </Checkbox>
-              </Col>
-            </Row>
-          </Checkbox.Group>
-        </Form.Item>
+              </Form.Item>
+            </Col>
+        </Checkbox.Group>
 
         <Divider />
 
-        <Form.Item name="radio-group" label={t("admin_shop.product.review.filter.seller_reply")}>
-          <Radio.Group className="radio_group">
+        <Form.Item name="reply" label={t("admin_shop.product.review.filter.seller_reply")}>
+          <Radio.Group className="radio_group" value={replyFilter} onChange={(e) => setReplyFilter(e.target.value)}>
             <Row>
               <Col span={12}>
-                <Radio value="a">{t("admin_shop.product.review.filter.already_replied")}</Radio>
+                <Radio value={true}>{t("admin_shop.product.review.filter.already_replied")}</Radio>
               </Col>
               <Col span={12}>
-                <Radio value="b">{t("admin_shop.product.review.filter.not_yet_replied")}</Radio>
+                <Radio value={false}>{t("admin_shop.product.review.filter.not_yet_replied")}</Radio>
               </Col>
             </Row>
           </Radio.Group>
@@ -162,49 +256,27 @@ export const SortDrawer = ({ onClose, open, t }: any) => {
 
         <Divider />
 
-        <Form.Item name="checkbox-group" label={t("admin_shop.product.review.filter.status")}>
-          <Checkbox.Group className="checkbox_group">
-            <Row>
-              <Col span={12}>
-                <Checkbox value="verified" style={{ lineHeight: "32px" }}>
-                  {t("admin_shop.product.review.filter.approved")}
-                </Checkbox>
-              </Col>
-              <Col span={12}>
-                <Checkbox value="reported" style={{ lineHeight: "32px" }}>
-                  {t("admin_shop.product.review.filter.reported")}
-                </Checkbox>
-              </Col>
-              <Col span={12}>
-                <Checkbox value="hidden" style={{ lineHeight: "32px" }}>
-                  {t("admin_shop.product.review.filter.reject")}
-                </Checkbox>
-              </Col>
-            </Row>
-          </Checkbox.Group>
-        </Form.Item>
-
-        <Divider />
-
-        <Form.Item label={t("admin_shop.product.list.filter.category")} htmlFor="category">
+        <Form.Item label={t("admin_shop.product.list.filter.category")} name="category" htmlFor="category">
           <Select
             mode="multiple"
             placeholder={t("admin_shop.product.list.filter.select_category")}
             id="category"
-            options={ProductListFilterCategory}
+            options={categortSortList}
             allowClear
+            defaultValue={form.getFieldValue("category")?.length > 0 ? form.getFieldValue("category") : defaultCategory}
           />
         </Form.Item>
 
         <Divider />
 
-        <Form.Item label={t("admin_shop.product.list.filter.brand")} htmlFor="brand">
+        <Form.Item label={t("admin_shop.product.list.filter.brand")} htmlFor="brand" name="brand">
           <Select
             mode="multiple"
             id="brand"
             placeholder={t("admin_shop.product.list.filter.select_brand")}
-            options={ProductListFilterCategory}
+            options={supplierSortList}
             allowClear
+            defaultValue={form.getFieldValue("brand")?.length > 0 ? form.getFieldValue("brand") : defaultSupplier}
           />
         </Form.Item>
 
@@ -213,7 +285,7 @@ export const SortDrawer = ({ onClose, open, t }: any) => {
         <Form.Item label={t("admin_shop.product.review.filter.review_date")} {...rangeConfig}>
           <Row>
             <Col span={24}>
-              <RangePicker className="range_picker" />
+              <RangePicker onChange={(dates: any) => setDateRange(dates)} className="range_picker" />
             </Col>
           </Row>
         </Form.Item>

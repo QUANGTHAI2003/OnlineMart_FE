@@ -823,10 +823,6 @@
           "clear_all": "Clear all",
           "apply": "Apply",
           "seller_reply": "Seller's reply",
-          "status": "Status",
-          "approved": "Approved",
-          "reported": "Reported",
-          "reject": "Reject",
           "review_date": "Review date"
         },
         "table_cpn": {
@@ -837,12 +833,12 @@
           "content": "Content",
           "reviewer": "Reviewer",
           "review_date": "Review date",
-          "seller_replies": "Seller's replies",
+          "seller_replies": "Seller's reply",
           "status": "Status",
           "action": "Action",
-          "title": "Title",
+          "title": "Product",
           "sku": "SKU"
-        },
+        },  
         "rating_text": {
           "abysmal": "Abysmal",
           "bad": "Bad",

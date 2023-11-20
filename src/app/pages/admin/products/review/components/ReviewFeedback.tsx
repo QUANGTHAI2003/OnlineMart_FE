@@ -3,7 +3,11 @@ import { Avatar, Button, Col, Form, Input, Modal, Rate, Row } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useReplyReviewMutation } from "@app/store/slices/api/admin/reviewApi";
+import { formatDateTime, notifyError, notifySuccess } from "@app/utils/helper";
+import { Link } from "react-router-dom";
 import { RatingText } from "../data";
+import { v4 as uuidv4 } from "uuid";
 
 interface IReviewFeedbackProps {
   data: any;
@@ -11,20 +15,27 @@ interface IReviewFeedbackProps {
 
 const ReviewFeedback: React.FC<IReviewFeedbackProps> = ({ data }) => {
   const { t } = useTranslation();
+  const [form] = Form.useForm();
 
-  const [loading, setLoading] = useState(false);
+  const [replyReview, { isLoading }] = useReplyReviewMutation();
+
   const [open, setOpen] = useState(false);
 
   const showModal = () => {
     setOpen(true);
   };
-
-  const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+  const handleSubmit = async (fieldValues: any) => {
+    try {
+      await replyReview({
+        reviewId: data.id,
+        data: { content: fieldValues.reply_review },
+      }).unwrap();
+      notifySuccess("Successfully", "Feedback successfully");
+      form.resetFields();
       setOpen(false);
-    }, 3000);
+    } catch (err) {
+      notifyError("Error", "Feedback failed");
+    }
   };
 
   const handleCancel = () => {
@@ -33,18 +44,22 @@ const ReviewFeedback: React.FC<IReviewFeedbackProps> = ({ data }) => {
 
   return (
     <div>
-      <Button onClick={showModal} className="border-0 hover:bg-slate-100">
-        {t("admin_shop.product.review.feedback.action")}
-      </Button>
+      {data?.reply_admin ? (
+        <div>Đã trả lời</div>
+      ) : (
+        <Button type="primary" onClick={showModal} className="border-0">
+          {t("admin_shop.product.review.feedback.action")}
+        </Button>
+      )}
+
       <Modal
         title={
           <div>
             {t("admin_shop.product.review.feedback.comment")}
-            <a href={data.id} className="ml-2">{`#${data.id}`}</a>
+            <Link to={data.id} className="ml-2">{`#${data.id}`}</Link>
           </div>
         }
         open={open}
-        onOk={handleOk}
         onCancel={handleCancel}
         width={700}
         centered
@@ -52,7 +67,7 @@ const ReviewFeedback: React.FC<IReviewFeedbackProps> = ({ data }) => {
           <Button key="back" onClick={handleCancel}>
             {t("admin_shop.product.review.feedback.close")}
           </Button>,
-          <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
+          <Button key="submit" loading={isLoading} type="primary" form="replyReivew" htmlType="submit">
             {t("admin_shop.product.review.feedback.send_a_response")}
           </Button>,
         ]}
@@ -63,11 +78,11 @@ const ReviewFeedback: React.FC<IReviewFeedbackProps> = ({ data }) => {
               <Avatar size={45} icon={<UserOutlined />} />
             </div>
             <div>
-              <div className="font-bold">{data.reviewer}</div>
+              <div className="font-bold">{data.full_name}</div>
               <div className="text-xs font-normal">
                 {`${t("admin_shop.product.review.feedback.joined")} 14 ${t(
                   "admin_shop.product.review.feedback.ago"
-                )} | ${t("admin_shop.product.review.feedback.comment_on")} ${data.review_date} | ${t(
+                )} | ${t("admin_shop.product.review.feedback.comment_on")} ${formatDateTime(data.review_date)} | ${t(
                   "admin_shop.product.review.feedback.used_for"
                 )} 5 ${t("admin_shop.product.review.feedback.days")} `}
               </div>
@@ -76,35 +91,41 @@ const ReviewFeedback: React.FC<IReviewFeedbackProps> = ({ data }) => {
 
           <div className="flex items-center">
             <Rate disabled allowHalf defaultValue={data.rating} className="text-base pr-3" />
-            <div className="font-semibold">{RatingText(t).status[data.status]}</div>
+            <div className="font-semibold">{RatingText(t).status[data.rating]}</div>
           </div>
-
-          <div>
-            <div className="comment text-sm">{data.comment}</div>
-            <img src={data.image} alt="" width={100} className="p-3 rounded-md" />
+          <div className="comment text-sm">{data.content}</div>
+          <div className="flex items-center justify-start">
+            {data?.image?.map((image: any) => {
+              return (
+                <div key={uuidv4()} className="mr-3">
+                  <img src={image.media} alt="media" width="80" className="rounded-lg" />
+                </div>
+              );
+            })}
           </div>
-
           <Row className="flex flex-col">
             <Row className="flex items-center">
               <Col span={2}>
-                <Avatar src={<img src={data.seller_avatar} alt="avatar" />} />
+                <Avatar src={<img src={data.shop_avatar} alt="avatar" />} />
               </Col>
               <Col span={20} className="font-bold">
-                {data.seller_name}
+                {data.shop_name}
               </Col>
             </Row>
             <Row>
               <Col span={2}></Col>
               <Col span={22} className="text-sm font-normal">
-                {data.seller_reply}
+                {data.reply_admin}
               </Col>
             </Row>
           </Row>
 
           <div>
-            <Form.Item rules={[{ required: true, message: "Please input Intro" }]}>
-              <Input.TextArea showCount maxLength={100} />
-            </Form.Item>
+            <Form form={form} id="replyReivew" autoComplete="off" onFinish={handleSubmit}>
+              <Form.Item name="reply_review" rules={[{ required: true, message: "Please input Intro" }]}>
+                <Input.TextArea showCount maxLength={100} />
+              </Form.Item>
+            </Form>
           </div>
         </div>
       </Modal>

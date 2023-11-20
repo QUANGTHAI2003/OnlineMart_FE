@@ -12,17 +12,18 @@ interface IFilterDropdownDataProps {
   data: { id: number; label: string; value: string }[];
   setLoading: (value: boolean) => void;
   setOpen: (value: boolean) => void;
+  onChange: (value: any) => void;
+  currentValue?: any;
 }
 
 const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilterDropdownDataProps> = (
-  { name, data, setLoading, setOpen },
+  { name, data, setLoading, setOpen, onChange, currentValue },
   ref
 ) => {
   const { t } = useTranslation();
 
   const [filteredData, setFilteredData] = useState<IFilterDropdownDataProps["data"]>(data);
   const [searchInput, setSearchInput] = useState<string>("");
-
   const [checkedList, setCheckedList] = useState<any[]>([]);
 
   const debouncedSearchInput = useDebounce(searchInput, 300);
@@ -44,11 +45,12 @@ const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilter
   const handleRemoveCheckBox = () => {
     const newCheckedList = checkedList.map((item) => ({ ...item, checked: false }));
     setCheckedList(newCheckedList);
+    setOpen(false);
   };
 
   const handleApplyCheckBox = () => {
     setOpen(false);
-    console.log("check list", checkedList);
+    onChange(checkedList);
   };
 
   const handleGetSearchCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +82,11 @@ const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilter
       <div className="content">
         {filteredData.map((item: any) => (
           <div className="mb-4" key={item.id}>
-            <Checkbox value={item.value} onChange={handleGetCheckBoxData}>
+            <Checkbox
+              value={item.value}
+              defaultChecked={currentValue?.includes(item?.value)}
+              onChange={handleGetCheckBoxData}
+            >
               {item.label}
             </Checkbox>
           </div>

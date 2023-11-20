@@ -20,6 +20,8 @@ export type Permission =
   | "View suppliers"
   | "Create categories"
   | "Update category"
+  | "View reviews"
+  | "Reply reviews"
   | "View vouchers"
   | "Create voucher"
   | "Update voucher"
