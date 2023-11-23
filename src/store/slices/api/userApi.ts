@@ -14,7 +14,6 @@ export const userApi = createApi({
       query() {
         return {
           url: "users/me",
-          credentials: "include",
         };
       },
       providesTags(result) {
@@ -30,11 +29,27 @@ export const userApi = createApi({
       },
     }),
     // Update user
-    updateUser: builder.mutation<IUser, Partial<IUser>>({
-      query(data: Partial<IUser>) {
+    updateUser: builder.mutation<IUser, any>({
+      query(data) {
         return {
           url: `user/${data.id}`,
           method: "PATCH",
+          body: data,
+        };
+      },
+      invalidatesTags: (result, _, body) => [
+        {
+          type: "User",
+          id: result ? result.id : body.id,
+        },
+      ],
+    }),
+    // Update avatar user
+    updateUserAvatar: builder.mutation<IUser, any>({
+      query({ data, id }) {
+        return {
+          url: `user/avatar/${id}`,
+          method: "POST",
           body: data,
           credentials: "include",
         };
@@ -51,7 +66,7 @@ export const userApi = createApi({
       query(id) {
         return {
           url: `user/delete-avatar/${id}`,
-          method: "POST",
+          method: "PUT",
           credentials: "include",
         };
       },
@@ -65,4 +80,5 @@ export const userApi = createApi({
   }),
 });
 
-export const { useGetMeQuery, useUpdateUserMutation, useDeleteUserAvatarMutation } = userApi;
+export const { useGetMeQuery, useUpdateUserMutation, useUpdateUserAvatarMutation, useDeleteUserAvatarMutation } =
+  userApi;

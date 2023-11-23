@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const ChatIconWrapperStyle = styled.section`
   position: fixed;
   display: flex;
-  bottom: 0px;
+  bottom: 60px;
   right: 16px;
   flex-direction: column;
   align-items: flex-end;

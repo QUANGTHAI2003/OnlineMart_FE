@@ -1,10 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'sans': ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
+    },
     extend: {
       colors: {
         transparent: 'transparent',
@@ -14,7 +19,7 @@ module.exports = {
         black: 'rgb(39, 39, 42)',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        'sans': ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         'xs': '0.75rem',

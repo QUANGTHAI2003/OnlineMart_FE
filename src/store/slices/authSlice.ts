@@ -5,10 +5,12 @@ import { RootState } from "../store";
 
 interface IAuthState {
   user: IUser | null;
+  loading: boolean;
 }
 
 const initialState: IAuthState = {
   user: null,
+  loading: true,
 };
 
 const authSlice = createSlice({
@@ -17,6 +19,7 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (state: RootState, action: PayloadAction<any>) => {
       state.user = action.payload.data;
+      state.loading = false;
     },
     logOut: (state: RootState) => {
       state.user = null;

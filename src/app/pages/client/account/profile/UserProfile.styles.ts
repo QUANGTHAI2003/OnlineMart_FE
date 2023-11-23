@@ -19,7 +19,7 @@ export const UserProfile = styled.div`
 
   @media only screen and (max-width: 480px) {
     .row_userProfile {
-      padding: 7px;
+      padding: 1rem;
 
       .myProfile_title {
         padding: 0.75rem;
@@ -35,170 +35,98 @@ export const UserProfile = styled.div`
     }
   }
 `;
-export const UserProfileLeft = styled(Col)`
-  width: 50%;
-
+export const UserProfileLeft = styled(Col).withConfig({
+  shouldForwardProp: () => true,
+})`
   .myProfile_title {
     margin-bottom: 1rem;
     font-size: 1rem;
     line-height: 1.5rem;
     color: #64646d;
   }
-  .row_profile {
-    width: 100%;
-    display: flex !important;
-    align-items: center !important;
-    flex-wrap: wrap;
-    padding: 20px;
 
-    .col_leftProfile {
-      .avatar {
-        position: relative;
-        cursor: pointer;
-        width: 100%;
+  .avatar {
+    position: relative;
+    cursor: pointer;
+    width: fit-content;
 
-        .img {
-          border-radius: 9999px;
-          border: 4px solid #c2e1ff;
-          width: 100%;
-          height: 100% !important;
-        }
-
-        .om-image-mask {
-          border-radius: 9999px;
-        }
-
-        .avatar_space {
-          position: absolute;
-          bottom: 0.25rem;
-          right: 6px;
-          z-index: 10;
-          cursor: pointer;
-
-          .editOutline {
-            width: 20px;
-            background: #64646d;
-            padding: 0.25rem;
-            border-radius: 100%;
-            color: #fff;
-          }
-        }
-      }
-    }
-    .col_rightProfile {
-      width: 70%;
-      display: grid;
-      row-gap: 2rem;
-
-      .input_name {
-        display: flex;
-        align-items: center;
-
-        .name_lable {
-          width: 40%;
-          color: #333;
-        }
-      }
-      .input_nickname {
-        display: flex;
-        align-items: center;
-
-        .nickname_lable {
-          width: 40%;
-          color: #333;
-        }
-      }
-    }
-    .col_bottomProfile {
+    .img {
+      border-radius: 9999px;
+      border: 4px solid #c2e1ff;
       width: 100%;
-      display: grid;
-      row-gap: 2rem;
-      margin-top: 0.75rem;
+      height: 100% !important;
+    }
 
-      .input_date {
-        display: flex;
-        align-items: center;
+    .om-image-mask {
+      border-radius: 9999px;
+    }
 
-        .date_lable {
-          width: 40%;
-          color: #333;
-        }
-      }
-      .input_gender {
-        display: flex;
-        align-items: center;
+    .om-space {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10;
+      cursor: pointer;
 
-        .gender_lable {
-          width: 29%;
-          color: #333;
-        }
-        .radio_group {
-          .radioGroup_item {
-            display: flex;
-          }
+      .editOutline {
+        background: #64646d;
+        padding: 0.25rem;
+        border-radius: 100%;
+        color: #fff;
+
+        > svg {
+          padding: 3px;
         }
       }
     }
   }
-  @media only screen and (max-width: 992px) {
-    width: 100%;
 
-    .col_leftProfile {
-      .avatar {
-        .om-image {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 20px;
-        }
+  .input_name {
+    display: flex;
+    align-items: center;
 
-        .avatar_space {
-          display: none;
-        }
-      }
+    .name_lable {
+      width: 40%;
+      color: #333;
     }
   }
-  @media only screen and (max-width: 1200px) {
-    .col_leftProfile {
-      width: 100% !important;
-      display: flex;
-      justify-content: center;
+  .input_nickname {
+    display: flex;
+    align-items: center;
 
-      .avatar_space {
-        bottom: 0rem !important;
-        right: 0.25rem !important;
-        z-index: 100 !important;
-      }
+    .nickname_lable {
+      width: 40%;
+      color: #333;
     }
-    .col_rightProfile {
-      width: 100% !important;
+  }
+
+  .input_date {
+    display: flex;
+    align-items: center;
+
+    .date_lable {
+      width: 40%;
+      color: #333;
     }
-    .col_bottomProfile {
-      .input {
+  }
+  .input_gender {
+    display: flex;
+    align-items: center;
+
+    .gender_lable {
+      width: 29%;
+      color: #333;
+    }
+    .radio_group {
+      .radioGroup_item {
         display: flex;
-        flex-direction: column;
-        align-items: start !important;
-      }
-    }
-  }
-  @media only screen and (max-width: 1400px) {
-    .row_profile {
-      .col_rightProfile {
-        .input {
-          display: flex;
-          flex-direction: column;
-          align-items: start;
-          row-gap: 0.5rem;
-        }
       }
     }
   }
 `;
-export const UserProfileRight = styled(Col)`
-  width: 50%;
-  padding: 20px;
-  display: grid;
-  row-gap: 2.5rem;
-
+export const UserProfileRight = styled(Col).withConfig({
+  shouldForwardProp: () => true,
+})`
   .phoneEmail {
     display: grid;
 
@@ -228,10 +156,6 @@ export const UserProfileRight = styled(Col)`
     display: grid;
   }
 
-  .profileRight_item {
-    display: grid;
-    row-gap: 1rem;
-  }
   .title_item {
     font-size: 1rem;
     line-height: 1.5rem;
@@ -279,7 +203,8 @@ export const UserProfileRight = styled(Col)`
   }
   @media only screen and (max-width: 992px) {
     width: 100%;
-    border-top: 1.5px solid #f5f5fa;
+    border-top: 2px solid #f5f5fa;
+    padding-top: 8px;
   }
   @media only screen and (max-width: 1400px) {
     .phoneEmail {

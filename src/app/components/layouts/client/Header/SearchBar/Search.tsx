@@ -77,7 +77,7 @@ const Search: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="relative w-auto h-[40px]">
+    <div className="relative w-auto h-[40px] flex-1">
       <div className="w-full h-full flex items-center rounded-lg relative border-solid border border-[#DDDDE3] bg-white">
         <img className="w-[20px] h-[20px] max-w-full ml-[18px]" src={iconSearch} alt="icon-search" />
         <Input

@@ -33,36 +33,42 @@ const UserHeader = () => {
   const haveBtnCallback = location.pathname === "/category" || location.pathname === "search";
   const haveHeaderPageAccount = location.pathname.startsWith("/account/") || location.pathname.startsWith("/checkout");
   const haveHeaderPageDetail = location.pathname === "/product";
+  const homePage = location.pathname === "/";
+
+  const isHaveShop = useAppSelector((state) => state.userState.user)?.shop || null;
 
   return (
     <header
       className={`${
         !isDesktop &&
         `sticky top-0 left-0 right-0 z-[150] border-solid border-b border-t-0 border-l-0 border-r-0 border-gray-200 shadow-inner`
-      } h-auto xl:h-[120px] bg-white`}
+      } h-auto md:h-[120px] bg-white`}
     >
-      <div className="xl:w-[1200px] max-w-full mx-auto my-0">
-        <nav className="hidden xl:flex justify-between items-center h-[35px]">
+      <div className={`${homePage ? "max-w-[1440px]" : "max-w-screen-xl"} mx-auto`}>
+        <nav className="hidden md:flex justify-between items-center h-[35px]">
           <ul className="mt-[5px]">
-            <li className="inline-block mx-1 relative after:content-[''] after:block after:absolute after:w-[1px] after:h-[15px] after:bg-black after:right-[-5px] after:top-[50%] after:transform after:translate-y-[-50%]">
-              <Link to="/admin/shop" className="text-black">
-                {t("user.header.seller_home")}
-              </Link>
-            </li>
-            <li className="inline-block mx-2 relative after:content-[''] after:block after:absolute after:w-[1px] after:h-[15px] after:bg-black after:right-[-5px] after:top-[50%] after:transform after:translate-y-[-50%]">
-              <Link to="/admin/shop" className="text-black">
-                {t("user.header.seller")}
-              </Link>
-            </li>
+            {isHaveShop ? (
+              <li className="inline-block mx-1 relative after:content-[''] after:block after:absolute after:w-[1px] after:h-[15px] after:bg-black after:right-[-5px] after:top-[50%] after:transform after:translate-y-[-50%]">
+                <Link to="/admin/shopadmin/shop/auth/switch" className="text-black">
+                  {t("user.header.seller_home")}
+                </Link>
+              </li>
+            ) : (
+              <li className="inline-block mx-2 relative after:content-[''] after:block after:absolute after:w-[1px] after:h-[15px] after:bg-black after:right-[-5px] after:top-[50%] after:transform after:translate-y-[-50%]">
+                <Link to="/admin/shop" className="text-black">
+                  {t("user.header.seller")}
+                </Link>
+              </li>
+            )}
             <li className="inline-block mx-1">
               <div className="text-black inline-flex items-center">
                 <span className="cursor-text">{t("user.header.contact")}</span>
-                <a href="/#">
+                <Link to="/#">
                   <FontAwesomeIcon icon={faFacebook} className="text-base mx-1 text-black" />
-                </a>
-                <a href="/#">
+                </Link>
+                <Link to="/#">
                   <FontAwesomeIcon icon={faInstagram} className="text-base mx-1 text-black" />
-                </a>
+                </Link>
               </div>
             </li>
           </ul>
@@ -97,13 +103,13 @@ const UserHeader = () => {
         </nav>
 
         {isDesktop && (
-          <div className="px-3 flex xl:flex items-center justify-between h-[calc(120px_-_35px)]">
-            <Link to="/" className="hidden xl:w-[200px] xl:flex items-center flex-col gap-1 pr-12">
+          <div className="px-3 flex md:flex items-center justify-between h-[calc(120px_-_35px)]">
+            <Link to="/" className="hidden md:w-[200px] md:flex items-center flex-col gap-1 pr-12 md:pr-4">
               <img src={logo} alt="logo-svg" className="w-[90px] h-[53px]" />
               <p className="font-bold text-[#003ea1]">Tốt & Nhanh</p>
             </Link>
             {haveBtnCallback && (
-              <div className="xl:hidden h-10 min-w-10 w-10 flex items-center justify-center">
+              <div className="md:hidden h-10 min-w-10 w-10 flex items-center justify-center">
                 <FontAwesomeIcon
                   onClick={() => {
                     history(-1);
@@ -117,7 +123,7 @@ const UserHeader = () => {
             <div className="flex-1">
               <Search />
             </div>
-            <div className="w-10 h-10 ml-2 flex items-center justify-center xl:w-[150px] text-center">
+            <div className="w-10 h-10 ml-2 flex items-center justify-center md:w-[80px] text-center">
               <Cart
                 items={[
                   {
@@ -133,12 +139,12 @@ const UserHeader = () => {
           </div>
         )}
         {!isDesktop && haveMainHeader && (
-          <div className="px-3 flex xl:flex items-center justify-between h-[calc(120px_-_35px)]">
-            <div className="hidden xl:w-[200px] xl:flex items-center">
+          <div className="px-3 flex md:flex items-center justify-between h-[calc(120px_-_35px)]">
+            <div className="hidden md:w-[200px] md:flex items-center">
               <img src={logo} alt="logo-svg" className="w-[150px]" />
             </div>
             {haveBtnCallback && (
-              <div className="xl:hidden h-10 min-w-10 w-10 flex items-center justify-center">
+              <div className="md:hidden h-10 min-w-10 w-10 flex items-center justify-center">
                 <FontAwesomeIcon
                   onClick={() => {
                     history(-1);
@@ -149,10 +155,8 @@ const UserHeader = () => {
                 />
               </div>
             )}
-            <div className="flex-1">
-              <Search />
-            </div>
-            <div className="w-10 h-10 ml-2 flex items-center justify-center xl:w-[150px] text-center">
+            <Search />
+            <div className="w-[90px] h-10 ml-2 flex items-center justify-center md:w-10 text-center">
               <Cart
                 items={[
                   {

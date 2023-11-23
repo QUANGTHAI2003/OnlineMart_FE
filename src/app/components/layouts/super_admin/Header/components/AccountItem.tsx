@@ -3,7 +3,7 @@ import avatarAdmin from "@app/app/assets/images/avatar_admin.png";
 import { useLogoutMutation } from "@app/store/slices/api/authApi";
 import { logOut } from "@app/store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@app/store/store";
-import { notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, notifySuccess } from "@app/utils/helper";
 import { Avatar, Button, Divider, Dropdown } from "antd";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ const AccountItem = () => {
 
       isLoading || navigate("./auth/signin");
     } catch (err) {
-      notifyError("Logout failed", "Something went wrong");
+      handleApiError(err);
     }
   };
 

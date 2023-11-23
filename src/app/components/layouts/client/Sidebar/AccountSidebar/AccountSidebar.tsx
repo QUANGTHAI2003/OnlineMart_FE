@@ -9,7 +9,10 @@ import {
 } from "@app/app/assets/icons/index";
 import { AvatarImage } from "@app/app/components/Images";
 import { useResponsive } from "@app/hooks";
-import { useAppSelector } from "@app/store/store";
+import { useLogoutMutation } from "@app/store/slices/api/authApi";
+import { logOut } from "@app/store/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
+import { handleApiError, notifySuccess } from "@app/utils/helper";
 import { useTranslation } from "react-i18next";
 
 import AccountItem from "./AccountItem";
@@ -20,6 +23,8 @@ const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
 const AccountSidebar = ({ onSidebar }: any) => {
   const { t } = useTranslation();
   const { isTablet } = useResponsive();
+  const dispatch = useAppDispatch();
+
   const user = useAppSelector((state) => state.userState.user);
 
   const data = [
@@ -68,15 +73,33 @@ const AccountSidebar = ({ onSidebar }: any) => {
     },
   ];
 
+  const [logout] = useLogoutMutation();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      dispatch(logOut());
+
+      notifySuccess("Successfully", "Logout successfully");
+    } catch (err) {
+      handleApiError(err);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center w-full md:block md:w-auto">
       <S.AccountSidebarStyle width={250} className="md:bg-white rounded-md shadow-gray-200 py-5">
         <div className="flex items-center px-6 py-2">
-          <AvatarImage className="block" src={`${baseImage}/${user?.avatar}`} size="large" alt={user?.full_name} />
+          <AvatarImage
+            className="block md:w-12 md:h-12 w-16 h-16"
+            src={`${baseImage}/${user?.avatar}`}
+            size="large"
+            alt={user?.full_name}
+          />
 
           <div className="ml-2">
             <p className="text-xs py-px pl-1.5">{t("user.account_user.account_of")}</p>
-            <p className="text-lg font-medium pl-1.5">{user?.full_name}</p>
+            <p className="text-lg font-medium pl-1.5 line-clamp-1">{user?.full_name}</p>
           </div>
         </div>
 
@@ -97,7 +120,9 @@ const AccountSidebar = ({ onSidebar }: any) => {
       </S.AccountSidebarStyle>
       {isTablet || (
         <S.ButtonStyle className="wrap-btn">
-          <button className="wrap-btn__button">Đăng Xuất</button>
+          <button className="wrap-btn__button" onClick={handleLogout}>
+            Đăng Xuất
+          </button>
         </S.ButtonStyle>
       )}
     </div>

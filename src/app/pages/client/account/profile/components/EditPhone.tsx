@@ -1,7 +1,7 @@
 import ImgPhone from "@app/app/assets/images/phone.png";
 import { useUpdateUserMutation } from "@app/store/slices/api/userApi";
 import { useAppSelector } from "@app/store/store";
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
 import { Button, Form, Input, Modal } from "antd";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,11 +12,12 @@ type FieldType = {
 
 const EditPhone = () => {
   const { t } = useTranslation();
+  const [form] = Form.useForm();
   const [open, setOpen] = useState<boolean>(false);
 
   const user = useAppSelector((state) => state.userState.user);
 
-  const [updateUser, { isLoading, error }] = useUpdateUserMutation(user);
+  const [updateUser, { isLoading, error }] = useUpdateUserMutation();
 
   const handleSubmit = async (fieldValues: FieldType) => {
     const values = {
@@ -31,7 +32,7 @@ const EditPhone = () => {
       }, 200);
       notifySuccess("Successfully", "Update email successfully");
     } catch (err) {
-      notifyError("Error", "Update email failed");
+      handleApiError(err);
     }
   };
 
@@ -51,6 +52,7 @@ const EditPhone = () => {
 
   const handleCancel = () => {
     setOpen(false);
+    form.resetFields();
   };
 
   return (
@@ -68,8 +70,9 @@ const EditPhone = () => {
       >
         <div className="p-5">
           <Form
+            form={form}
             name="phone"
-            initialValues={{ phone: user.phone }}
+            initialValues={{ phone: user?.phone }}
             onFinish={handleSubmit}
             autoComplete="off"
             className="w-full p-4 border border-[#ebebf0] border-solid rounded-md"
@@ -86,8 +89,8 @@ const EditPhone = () => {
                 },
               ]}
               hasFeedback
-              validateStatus={errorForm?.phone ? "error" : ""}
-              help={errorForm?.phone ? errorForm?.phone[0] : ""}
+              validateStatus={errorForm?.phone && "error"}
+              help={errorForm?.phone && errorForm?.phone[0]}
             >
               <Input
                 prefix={

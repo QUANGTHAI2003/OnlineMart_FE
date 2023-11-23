@@ -1,3 +1,5 @@
+import { setShowSidebar } from "@app/store/slices/redux/user/responsiveSidebar";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
@@ -8,35 +10,24 @@ import Cart from "../Popups/Cart/PopupCart";
 
 const PageAccount = () => {
   const location = useLocation();
-  const history = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
   const [title, setTitle] = useState<string>("");
-  const [clickTimeout, setClickTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   const haveCart = location.pathname.startsWith("/account/");
-  const backHome = location.pathname === "/account/edit_profile";
+
+  const isShowSidebar = useAppSelector((state) => state.showSidebar.showSidebar);
 
   const handleClick = () => {
-    if (clickTimeout) {
-      clearTimeout(clickTimeout);
-      setClickTimeout(null);
-      handleDoubleClick();
+    if (isShowSidebar) {
+      console.log("showSidebar");
+
+      navigate("/");
     } else {
-      setClickTimeout(
-        setTimeout(() => {
-          handleSingleClick();
-        }, 300)
-      );
-    }
-  };
-
-  const handleSingleClick = () => {
-    haveCart ? history("/account") : history(-1);
-  };
-
-  const handleDoubleClick = () => {
-    if (backHome) {
-      history("/");
+      dispatch(setShowSidebar(true));
+      navigate("/account/edit_profile");
     }
   };
 

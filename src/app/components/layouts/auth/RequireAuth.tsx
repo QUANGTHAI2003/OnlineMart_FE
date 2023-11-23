@@ -33,7 +33,7 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ children, type }) => {
   }
 
   const checkType = {
-    client: "/auth",
+    client: "/",
     adminShop: "/admin/shop/auth/switch",
     superAdmin: "/admin/super",
   }[type];

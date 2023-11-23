@@ -26,6 +26,7 @@ import reviewAdminSlice from "./redux/admin/reviewAdminSlice";
 import sellerAdminSlice from "./redux/admin/sellerAdminSlice";
 import productDetailSlice from "./redux/productDetailSlice";
 import showNotificationSlice from "./redux/showNotificationSlice";
+import responsiveSidebar from "./redux/user/responsiveSidebar";
 import shopSlice from "./shopSlice";
 import sortSidebarSlice from "./sortSidebarSlice";
 
@@ -60,6 +61,7 @@ export const rootReducer: any = {
   inventoryAdmin: inventoryAdminSlice,
   shopInformation: shopSlice,
   activitiesLogs: activitySlice,
+  showSidebar: responsiveSidebar,
 };
 
 export const apiMiddleware = (getDefaultMiddleware: any) =>

@@ -1,7 +1,7 @@
 import ImgEmail from "@app/app/assets/images/email.png";
 import { useUpdateUserMutation } from "@app/store/slices/api/userApi";
 import { useAppSelector } from "@app/store/store";
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
 import { Button, Form, Input, Modal } from "antd";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,7 @@ type FieldType = {
 
 const EditEmail = () => {
   const { t } = useTranslation();
+  const [form] = Form.useForm();
   const [open, setOpen] = useState<boolean>(false);
 
   const user = useAppSelector((state) => state.userState.user);
@@ -30,7 +31,7 @@ const EditEmail = () => {
       }, 200);
       notifySuccess("Successfully", "Update email successfully");
     } catch (err) {
-      notifyError("Error", "Update email failed");
+      handleApiError(err);
     }
   };
 
@@ -50,6 +51,7 @@ const EditEmail = () => {
 
   const handleCancel = () => {
     setOpen(false);
+    form.resetFields();
   };
 
   return (
@@ -66,6 +68,7 @@ const EditEmail = () => {
       >
         <div className="p-4">
           <Form
+            form={form}
             initialValues={{ email: user?.email }}
             onFinish={handleSubmit}
             autoComplete="off"
@@ -81,8 +84,8 @@ const EditEmail = () => {
                 { type: "email" },
               ]}
               hasFeedback
-              validateStatus={errorForm?.email ? "error" : ""}
-              help={errorForm?.email ? errorForm?.email[0] : ""}
+              validateStatus={errorForm?.email && "error"}
+              help={errorForm?.email && errorForm?.email[0]}
             >
               <Input
                 prefix={

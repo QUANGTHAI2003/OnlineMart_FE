@@ -36,7 +36,7 @@ export const getCookie = (cookieName: string) => {
   return null; // Cookie not found
 };
 
-export const formatDate = (dateString: string) => {
+export const formatDate = (dateString: string | null) => {
   const locale = getLang();
 
   const formatString = locale === "vi" ? "DD-MM-YYYY" : "YYYY-MM-DD";

@@ -2,9 +2,9 @@ import { AvatarImage } from "@app/app/components/Images";
 import { useLogoutMutation } from "@app/store/slices/api/authApi";
 import { logOut } from "@app/store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@app/store/store";
-import { notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, notifySuccess } from "@app/utils/helper";
 import { Popover } from "antd";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -15,9 +15,7 @@ const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
 const AccountMenu: React.FC = () => {
   const { t } = useTranslation();
 
-  const [loading, setLoading] = useState(true);
-
-  const user = useAppSelector((state) => state.userState.user);
+  const { user, loading } = useAppSelector((state) => state.userState);
   const dispatch = useAppDispatch();
 
   const [logout] = useLogoutMutation();
@@ -29,13 +27,9 @@ const AccountMenu: React.FC = () => {
 
       notifySuccess("Successfully", "Logout successfully");
     } catch (err) {
-      notifyError("Logout failed", "Something went wrong");
+      handleApiError(err);
     }
   };
-
-  useEffect(() => {
-    user && setLoading(false);
-  }, [user]);
 
   const content = (
     <div className="flex flex-col w-48 items-start gap-1.5 mx-[-12px]">
@@ -70,7 +64,12 @@ const AccountMenu: React.FC = () => {
       {loading && <AccountMenuSkeleton />}
       {!loading && (
         <div className="flex items-center">
-          <AvatarImage src={`${baseImage}/${user?.avatar}`} alt={user?.full_name} size="small" className="mr-3" />
+          <AvatarImage
+            src={`${baseImage}/${user?.avatar}?timestamp=${Date.now()}`}
+            alt={user?.full_name}
+            size="small"
+            className="mr-3"
+          />
           <span className="text-base whitespace-nowrap">{user?.user_name || user?.full_name}</span>
         </div>
       )}
