@@ -3,6 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface IDataCart {
   productName: string;
+  productVariantValue?: string;
   productImage: string;
   regularPrice: number;
   salePrice: number;
@@ -19,6 +20,7 @@ const initialState: IProductDetailState = {
   price: null,
   dataCart: {
     productName: "",
+    productVariantValue: "",
     productImage: "",
     regularPrice: 0,
     salePrice: 0,

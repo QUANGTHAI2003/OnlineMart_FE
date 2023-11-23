@@ -172,19 +172,22 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
               rules={[
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    console.log({ value });
+                    const currentSalePrice = getFieldValue("sale_price");
+                    if (currentSalePrice !== 0) {
+                      if (currentSalePrice > 1000) {
+                        return Promise.resolve();
+                      } else if (value === null) {
+                        return Promise.resolve();
+                      }
 
-                    if (getFieldValue("sale_price") > 1000) {
-                      return Promise.resolve();
-                    } else if (value === null) {
-                      return Promise.resolve();
+                      return Promise.reject(new Error("Price must be greater than 1000"));
                     }
-                    return Promise.reject(new Error("Price must be greater than 1000"));
+                    return Promise.resolve();
                   },
                 }),
               ]}
             >
-              <InputNumber className="w-full" min={1} />
+              <InputNumber className="w-full" min={0} />
             </Form.Item>
           );
         }

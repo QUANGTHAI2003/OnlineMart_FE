@@ -49,17 +49,18 @@ const AddToCartComponent = () => {
   };
 
   const handleAddToCart = (cartData: any) => {
-    const { productName, productImage, regularPrice, salePrice, cartQuantity } = cartData;
+    const { productName, productVariantValue, productImage, regularPrice, salePrice, cartQuantity } = cartData;
     const currentPrice = salePrice > 0 ? salePrice : regularPrice;
 
     const cartItem = {
       productName,
+      productVariantValue,
       productImage,
       currentPrice,
       cartQuantity,
     };
 
-    console.log({ cartItem });
+    console.table({ cartItem });
   };
 
   return (

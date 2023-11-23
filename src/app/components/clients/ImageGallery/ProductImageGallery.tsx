@@ -71,7 +71,7 @@ const ProductImageGallery = ({ galleryData, thumbnail, isLoading }: any) => {
                     tabIndex={0}
                   >
                     <Image
-                      src={item.image}
+                      src={`${baseImageUrl}/${item.image}`}
                       preview={{
                         visible: false,
                         onVisibleChange: () => setVisible(false),

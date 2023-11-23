@@ -62,10 +62,12 @@ const ProductDetail = () => {
       const variantValue = variants
         .map((item: any) => item?.values.find((value: any) => value?.id === parseInt(spid)))
         .filter(Boolean)[0];
+      console.log(variantValue);
 
       dispatch(
         setDataCart({
-          productName: productDetail?.name + " - " + variantValue?.label,
+          productName: productDetail?.name,
+          productVariantValue: variantValue?.label,
           productImage: variantValue?.image || productDetail.thumbnail_url,
           regularPrice: variantValue?.regular_price,
           salePrice: variantValue?.sale_price,
