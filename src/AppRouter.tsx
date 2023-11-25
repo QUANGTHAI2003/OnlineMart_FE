@@ -52,10 +52,10 @@ const AdminCategory = React.lazy(() => import("@app/app/pages/admin/products/cat
 const Evouncher = React.lazy(() => import("@app/app/pages/admin/products/evouncher/Evouncher"));
 const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/products/review/ProductReview"));
 const AdminSupplier = React.lazy(() => import("@app/app/pages/admin/products/suppliers/Supplier"));
+const AdminProductBin = React.lazy(() => import("@app/app/pages/admin/products/bin/Bin"));
 const AdminProductInventory = React.lazy(() => import("@app/app/pages/admin/products/inventory/ProductInventory"));
 const AdminProductPrintQRCode = React.lazy(() => import("@app/app/pages/admin/products/print_qr_code/PrintQRCode"));
 const AdminShipOverview = React.lazy(() => import("@app/app/pages/admin/ships/ShipOverview"));
-// const AdminReportProfit = React.lazy(() => import("@app/app/pages/admin/reports/profit"));
 const AdminReportSales = React.lazy(() => import("@app/app/pages/admin/reports/sales/SalesReport"));
 const AdminBusinessEfficiency = React.lazy(
   () => import("@app/app/pages/admin/dev_center/biz_efficiency/BusinessEfficiency")
@@ -151,6 +151,7 @@ const AppRouter: React.FC = () => {
         <Route path="settings">
           <Route index element={<SettingMain />} />
           <Route path="logs" element={<Logs />} />
+          <Route path="bin" element={<AdminProductBin />} />
         </Route>
       </Route>
 

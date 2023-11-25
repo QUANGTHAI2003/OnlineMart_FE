@@ -28,4 +28,7 @@ export type Permission =
   | "Delete voucher"
   | "View inventory"
   | "Print QR"
+  | "View bin"
+  | "Update bin"
+  | "Delete bin"
   | "Authorizations";

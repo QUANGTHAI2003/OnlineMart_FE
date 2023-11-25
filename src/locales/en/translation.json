@@ -534,7 +534,8 @@
       "dev_center": "Developer center",
       "biz_efficiency": "Business efficiency",
       "traffic_website": "Traffic website",
-      "operational_efficiency": "Operational Efficiency"
+      "operational_efficiency": "Operational Efficiency",
+      "recycle_bin": "Recycle bin"
     },
     "authentication": {
       "signin": {
@@ -591,6 +592,7 @@
           "price": "Price",
           "stock": "Stock quantity",
           "updated_at": "Last update",
+          "deleted_at": "Last deleted",
           "action": "Action",
           "edit": "Edit product",
           "delete": "Delete product",
@@ -1170,7 +1172,8 @@
         "selling": "Selling",
         "allowing_sales": "Allowing sales",
         "not_allowing_sales": "Not allowing sales",
-        "creation_date": "Creation date"
+        "creation_date": "Creation date",
+        "sku": "SKU"
       },
       "table": {
         "image": "Image",
@@ -1445,7 +1448,25 @@
           "description": "Description",
           "detail": "Detail"
         }
+      },
+      "bin": {
+        "title": "Recycle bin",
+        "description_bin": "Manage soft-deleted products" 
       }
+    },
+    "bin": {
+      "recycle_bin": "Recycle bin",
+      "seq": "Seq.",
+      "deleted": "Deleted",
+      "permanently_delete_after": "Automatically permanently deleted",
+      "restore": "Restore products",
+      "delete": "Delete products",
+      "restore_modal_alert": "Do you want to restore this product?",
+      "delete_modal_alert": "Do you want to permanently delete this product?",
+      "restore_success": "Restore product successfully!",
+      "delete_success": "Delete product successfully",
+      "permanently_delete_alert": "This products will be automatically deleted after 30 days !",
+      "yes": "Yes"
     }
   },
   "admin_super": {

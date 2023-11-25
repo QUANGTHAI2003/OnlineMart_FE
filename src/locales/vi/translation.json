@@ -533,7 +533,8 @@
       "dev_center": "Trung tâm phát triển",
       "biz_efficiency": "Hiệu quả kinh doanh",
       "traffic_website": "Chỉ số lượt truy cập",
-      "operational_efficiency": "Hiệu quả vận hành"
+      "operational_efficiency": "Hiệu quả vận hành",
+      "recycle_bin": "Thùng rác"
     },
     "authentication": {
       "signin": {
@@ -590,6 +591,7 @@
           "price": "Giá",
           "stock": "Tồn kho",
           "updated_at": "Cập nhật lần cuối",
+          "deleted_at": "Ngày xóa",
           "action": "Thao tác",
           "edit": "Sửa sản phẩm",
           "delete": "Xóa sản phẩm",
@@ -1169,7 +1171,8 @@
         "selling": "Bán hàng",
         "allowing_sales": "Cho phép bán",
         "not_allowing_sales": "Không cho phép bán",
-        "creation_date": "Ngày tạo sản phẩm"
+        "creation_date": "Ngày tạo sản phẩm",
+        "sku": "SKU"
       },
       "table": {
         "image": "Ảnh",
@@ -1444,7 +1447,25 @@
           "description": "Nội dung",
           "detail": " Chi tiết"
         }
+      },
+      "bin": {
+        "title": "Thùng rác",
+        "description_bin": "Quản lý các sản phẩm đã được xóa mềm" 
       }
+    },
+    "bin": {
+      "recycle_bin": "Thùng rác",
+      "seq": "STT",
+      "deleted": "Đã được xóa",
+      "permanently_delete_after": "Tự động xóa vĩnh viễn vào",
+      "restore": "Khôi phục sản phẩm",
+      "delete": "Xóa sản phẩm",
+      "restore_modal_alert": "Bạn muốn khôi phục sản phẩm này?",
+      "delete_modal_alert": "Bạn muốn xóa vĩnh viễn sản phẩm này?",
+      "restore_success": "Khôi phục sản phẩm thành công !",
+      "delete_success": "Xóa sản phẩm thành công !",
+      "permanently_delete_alert": "Những sản phẩm này sẽ tự động xóa vĩnh viên sau 30 ngày !",
+      "yes": "Đồng ý"
     }
   },
   "admin_super": {

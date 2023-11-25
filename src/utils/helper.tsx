@@ -143,6 +143,95 @@ export const formatTimeAgo = (timestamp: number) => {
   return `${years} ${t.years} ${t.ago}`;
 };
 
+export const formatDuration = (duration: number, isFuture = false) => {
+  const language: string = getLang();
+
+  const seconds = Math.floor(duration % 60);
+  const minutes = Math.floor((duration / 60) % 60);
+  const hours = Math.floor((duration / (60 * 60)) % 24);
+  const days = Math.floor((duration / (60 * 60 * 24)) % 30);
+  const months = Math.floor((duration / (60 * 60 * 24 * 30)) % 12);
+  const years = Math.floor(duration / (60 * 60 * 24 * 365));
+
+  type Translations = {
+    [key: string]: {
+      second: string;
+      seconds: string;
+      minute: string;
+      minutes: string;
+      hour: string;
+      hours: string;
+      day: string;
+      days: string;
+      month: string;
+      months: string;
+      year: string;
+      years: string;
+      ago: string;
+      in: string;
+    };
+  };
+
+  const translations: Translations = {
+    en: {
+      second: "second",
+      seconds: "seconds",
+      minute: "minute",
+      minutes: "minutes",
+      hour: "hour",
+      hours: "hours",
+      day: "day",
+      days: "days",
+      month: "month",
+      months: "months",
+      year: "year",
+      years: "years",
+      ago: "ago",
+      in: "from now",
+    },
+    vi: {
+      second: "giây",
+      seconds: "giây",
+      minute: "phút",
+      minutes: "phút",
+      hour: "giờ",
+      hours: "giờ",
+      day: "ngày",
+      days: "ngày",
+      month: "tháng",
+      months: "tháng",
+      year: "năm",
+      years: "năm",
+      ago: "trước",
+      in: "sau",
+    },
+  };
+
+  const t = translations[language] || translations.en;
+  const timeAgo = isFuture ? t.in : t.ago;
+
+  if (years > 0) return `${years} ${years > 1 ? t.years : t.year} ${timeAgo}`;
+  if (months > 0) return `${months} ${months > 1 ? t.months : t.month} ${timeAgo}`;
+  if (days > 0) return `${days} ${days > 1 ? t.days : t.day} ${timeAgo}`;
+  if (hours > 0) return `${hours} ${hours > 1 ? t.hours : t.hour} ${timeAgo}`;
+  if (minutes > 0) return `${minutes} ${minutes > 1 ? t.minutes : t.minute} ${timeAgo}`;
+  return `${seconds} ${seconds > 1 ? t.seconds : t.second} ${timeAgo}`;
+};
+
+export const calculateTimes = (deleted_at: string) => {
+  const deletedDate = dayjs(deleted_at);
+  const now = dayjs();
+
+  const elapsedSeconds = now.diff(deletedDate, "second");
+  const remainingSeconds = 30 * 24 * 60 * 60 - elapsedSeconds;
+
+  return {
+    deleted_at: deletedDate.format("YYYY-MM-DD\nHH:mm:ss"),
+    time_elapsed: formatDuration(elapsedSeconds),
+    time_remaining: formatDuration(remainingSeconds, true),
+  };
+};
+
 export const formatNumber = (number: number): string => {
   return number.toLocaleString("en-US");
 };

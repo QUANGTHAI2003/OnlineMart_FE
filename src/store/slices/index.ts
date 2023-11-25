@@ -1,5 +1,6 @@
 import activitySlice from "./activitySlice";
 import { activityApi } from "./api/activityApi";
+import { binAdminApi } from "./api/admin/binApi";
 import { inventoryAdminApi } from "./api/admin/inventoryApi";
 import { orderApi } from "./api/admin/orderApi";
 import { productAdminApi } from "./api/admin/productApi";
@@ -19,6 +20,7 @@ import { voucherUserApi } from "./api/user/voucherApi";
 import { wishlistApi } from "./api/user/wishlistApi";
 import { userApi } from "./api/userApi";
 import authSlice from "./authSlice";
+import binAdminSlice from "./redux/admin/binAdminSlice";
 import inventoryAdminSlice from "./redux/admin/inventoryAdminSlice";
 import orderAdminSlice from "./redux/admin/orderAdminSlice";
 import productAdminSlice from "./redux/admin/productAdminSlice";
@@ -47,6 +49,7 @@ export const rootReducer: any = {
   [voucherUserApi.reducerPath]: voucherUserApi.reducer,
   [sellerApi.reducerPath]: sellerApi.reducer,
   [inventoryAdminApi.reducerPath]: inventoryAdminApi.reducer,
+  [binAdminApi.reducerPath]: binAdminApi.reducer,
   [shopApi.reducerPath]: shopApi.reducer,
   [activityApi.reducerPath]: activityApi.reducer,
   [orderApi.reducerPath]: orderApi.reducer,
@@ -59,6 +62,7 @@ export const rootReducer: any = {
   isNotify: showNotificationSlice,
   sellerAdmin: sellerAdminSlice,
   inventoryAdmin: inventoryAdminSlice,
+  binAdmin: binAdminSlice,
   shopInformation: shopSlice,
   activitiesLogs: activitySlice,
   showSidebar: responsiveSidebar,
@@ -84,6 +88,7 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     sellerApi.middleware,
     voucherUserApi.middleware,
     inventoryAdminApi.middleware,
+    binAdminApi.middleware,
     shopApi.middleware,
     activityApi.middleware
   );

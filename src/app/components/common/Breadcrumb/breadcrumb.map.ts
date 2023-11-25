@@ -13,6 +13,7 @@ const breadcrumbNameMap: Record<string, string> = {
   "/manage-seller/role": "admin_shop.sidebar.manage_role",
   "/settings": "admin_shop.sidebar.settings",
   "/settings/logs": "admin_shop.settings.logs.title",
+  "/settings/bin": "admin_shop.sidebar.recycle_bin",
   "/orders": "admin_shop.sidebar.orders",
   "/ships": "admin_shop.sidebar.ships",
   "/reports": "admin_shop.sidebar.report",

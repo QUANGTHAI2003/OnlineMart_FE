@@ -1,6 +1,13 @@
 import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
 import { useResponsive } from "@app/hooks";
-import { faClockRotateLeft, faFolderOpen, faGears, faStore, faUserGear } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClockRotateLeft,
+  faFolderOpen,
+  faGears,
+  faStore,
+  faTrashCan,
+  faUserGear,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
@@ -156,6 +163,21 @@ const SettingMain = () => {
                     <h6 className="text-sm text-[#182537] ">{t("admin_shop.settings.diary.item.activity_log")}</h6>
                     <p className="md:line-clamp-1 xs:line-clamp-1 xl:line-clamp-none text-sm text-[#747C87] leading-5">
                       {t("admin_shop.settings.diary.item.description_log")}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div className="relative flex-grow-0 p-3 max-w-[70%] basis-1/4 ">
+              <a href="/admin/shop/settings/bin" className="text-[#0088FF] no-underline">
+                <div className="h-28 flex flex-row rounded-[3px] xl:h-24 p-4 bg-[#F2F9FF] border border-solid border-[#F2F9FF]">
+                  <div className="w-8 h-8 mr-3">
+                    <FontAwesomeIcon icon={faTrashCan} className="text-xl text-[#08F]" />
+                  </div>
+                  <div className="flex flex-col">
+                    <h6 className="text-sm text-[#182537] mb-2">{t("admin_shop.settings.bin.title")}</h6>
+                    <p className="md:line-clamp-1 xs:line-clamp-1 xl:line-clamp-none text-sm text-[#747C87] leading-5">
+                      {t("admin_shop.settings.bin.description_bin")}
                     </p>
                   </div>
                 </div>
