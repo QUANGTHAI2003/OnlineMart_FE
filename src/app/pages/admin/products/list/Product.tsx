@@ -22,6 +22,17 @@ const Product = () => {
   const { t } = useTranslation();
   const { data: productList, isFetching } = useGetProductQuery();
 
+  // productList?.forEach(async (product: any) => {
+  //   const embedding = await getEmbeddingsForProduct(product.name);
+
+  //   await dataIndex.upsert([
+  //     {
+  //       id: product.id,
+  //       values: embedding,
+  //     },
+  //   ]);
+  // });
+
   return (
     <main>
       <AdminBreadcrumb className="bg-white px-6" />
