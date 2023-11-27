@@ -1,14 +1,15 @@
 import { OfficialIcon } from "@app/app/assets/images";
-import { baseImageUrl, formatCurrency, formatPercent, formatVNCurrency } from "@app/utils/helper";
+import { baseImageKitUrl, formatCurrency, formatPercent, formatVNCurrency } from "@app/utils/helper";
 import { Rate } from "antd";
 import { useLayoutEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 
 import * as S from "./ProductCard.styles";
 
 interface IProductCardItem {
-  id: number;
+  id: number | string;
   name: string;
   slug?: string;
   price: number;
@@ -35,6 +36,7 @@ const ProductCard: React.FC<IProductCardItem> = ({
   const { t } = useTranslation();
   const productItemRef = useRef<HTMLDivElement>(null);
   const smallProductItem = 170;
+
   useLayoutEffect(() => {
     const handleResize = () => {
       if (productItemRef.current) {
@@ -56,7 +58,12 @@ const ProductCard: React.FC<IProductCardItem> = ({
           <S.Thumbnail>
             <div className="w-full h-full absolute top-0 left-0">
               <div className="thumbnail">
-                <img src={`${baseImageUrl}/${thumbnailUrl}`} className="w-full h-full object-contain block" alt="Img" />
+                <LazyLoadImage
+                  alt={name}
+                  src={`${baseImageKitUrl}/${thumbnailUrl}`}
+                  placeholderSrc={`${baseImageKitUrl}/${thumbnailUrl}?tr=bl-50`}
+                  className="w-full h-full object-contain block"
+                />
               </div>
             </div>
           </S.Thumbnail>
@@ -103,11 +110,6 @@ const ProductCard: React.FC<IProductCardItem> = ({
                 </div>
               )}
             </div>
-            <S.DeliveryInfo className="delivery-info">
-              <div className="delivery-date">
-                <span>Giao thứ 2, ngày 31/07</span>
-              </div>
-            </S.DeliveryInfo>
           </S.Info>
         </span>
       </Link>

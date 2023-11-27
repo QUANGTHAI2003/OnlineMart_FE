@@ -540,7 +540,7 @@ export const AddToCartStyle = styled.div`
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background: white;
     margin-left: -20px;
-    z-index: 9999;
+    z-index: 1000;
     padding: 16px 30px;
     min-height: ${mobileGroupBtn};
 

@@ -6,7 +6,7 @@ import { formatCurrency } from "@app/utils/helper";
 import { faCircleXmark, faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Pagination, Radio, Space } from "antd";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -85,7 +85,7 @@ const SortPaginateItem = ({ onPageChange, pageSize, total, current }: any) => {
   const otherSort: any = [
     {
       id: 1,
-      title: "Shopp",
+      title: "Shop",
       slug: "shop",
       values: [...sortShop],
     },
@@ -97,7 +97,8 @@ const SortPaginateItem = ({ onPageChange, pageSize, total, current }: any) => {
     },
   ];
 
-  const searchParams = new URLSearchParams(location.search);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const queryParams: Record<string, string> = {};
 
   for (const [key, value] of searchParams.entries()) {
@@ -123,11 +124,44 @@ const SortPaginateItem = ({ onPageChange, pageSize, total, current }: any) => {
     navigate(".", { replace: true });
   };
 
-  const handleDeleteSort = (key: string) => {
+  const handleDeleteSort = (key: string, value?: string) => {
     const newQueryParams = { ...queryParams };
-    delete newQueryParams[key];
+
+    if (value !== undefined) {
+      const arrayQueryParam = (newQueryParams[key] || "").split(",");
+
+      const index = arrayQueryParam.indexOf(value.toString()); // 1
+
+      if (index !== -1) {
+        arrayQueryParam.splice(index, 1);
+      }
+
+      newQueryParams[key] = arrayQueryParam.join(",");
+
+      if (newQueryParams[key].trim() === "") {
+        delete newQueryParams[key];
+      }
+    } else {
+      console.log({ key });
+
+      delete newQueryParams[key];
+    }
+
     navigate(`?${new URLSearchParams(newQueryParams).toString()}`, { replace: true });
   };
+
+  useEffect(() => {
+    const shopParam = searchParams.get("shop");
+    const supplierParam = searchParams.get("supplier");
+
+    if (shopParam === "" || shopParam === null) {
+      searchParams.delete("shop");
+      navigate(`?${searchParams.toString()}`, { replace: true });
+    } else if (supplierParam === "" || supplierParam === null) {
+      searchParams.delete("supplier");
+      navigate(`?${searchParams.toString()}`, { replace: true });
+    }
+  }, [navigate, searchParams]);
 
   return (
     <S.SortPaginateItemMain>
@@ -218,7 +252,7 @@ const SortPaginateItem = ({ onPageChange, pageSize, total, current }: any) => {
               </div>
 
               <div className="checkbox_sort_div">
-                <Space direction="vertical">
+                <Space direction="vertical" className="w-full">
                   {otherSort.map((item: any): any => {
                     return <CheckboxSortItem key={item.id} sortData={item} />;
                   })}
@@ -234,6 +268,7 @@ const SortPaginateItem = ({ onPageChange, pageSize, total, current }: any) => {
               .filter(([key]) => key !== "page" && key !== "sort")
               .map(([key, value], index) => {
                 let buttonText = "";
+                let buttons: any = [];
 
                 switch (key) {
                   case "price": {
@@ -253,34 +288,57 @@ const SortPaginateItem = ({ onPageChange, pageSize, total, current }: any) => {
                     buttonText = `Từ ${value} sao`;
                     break;
                   case "shop":
-                  case "supplier":
-                    {
-                      const sortId = value.split(",");
-                      const sortData = otherSort.find((item: any) => item.slug === key);
-                      const sortValues = sortData?.values || [];
-                      const sortName = sortValues
-                        .filter((item: any) => sortId.includes(item.id.toString()))
-                        .map((item: any) => item.name);
-                      buttonText = sortName.join(", ");
-                    }
+                  case "supplier": {
+                    const sortId = value.split(",");
+                    console.log({ sortId });
+
+                    // const sortData = otherSort.find((item: any) => item.slug === key);
+                    // const sortValues = sortData?.values || [];
+                    // const sortNames = sortValues
+                    //   .filter((item: any) => sortId.includes(item.id.toString()))
+                    //   .map((item: any) => item.name);
+
+                    // Create a button for each name
+                    buttons = sortId.map((id: string, buttonIndex: number) => {
+                      const buttonName = otherSort
+                        .find((item: any) => item.slug === key)
+                        ?.values.find((item: any) => item.id === parseInt(id))?.name;
+
+                      return (
+                        <Button key={id + buttonIndex} type="primary" ghost className="btn_click">
+                          <p className="btn_click_price cursor-default">{buttonName}</p>
+                          <FontAwesomeIcon
+                            icon={faCircleXmark}
+                            className="icon"
+                            onClick={() => handleDeleteSort(key, id)}
+                          />
+                        </Button>
+                      );
+                    });
+
                     break;
+                  }
                   case "sort":
                     break;
                   default:
                     buttonText = `${key}: ${value}`;
                 }
 
-                return (
-                  <Button key={index} type="primary" ghost className="btn_click">
-                    <p className="btn_click_price cursor-default">{buttonText}</p>
-                    <FontAwesomeIcon icon={faCircleXmark} className="icon" onClick={() => handleDeleteSort(key)} />
-                  </Button>
-                );
+                if (buttons.length === 0) {
+                  buttons.push(
+                    <Button key={index} type="primary" ghost className="btn_click">
+                      <p className="btn_click_price cursor-default">{buttonText}</p>
+                      <FontAwesomeIcon icon={faCircleXmark} className="icon" onClick={() => handleDeleteSort(key)} />
+                    </Button>
+                  );
+                }
+
+                return buttons;
               })}
           </Space>
         </Space>
 
-        {Object.entries(queryParams).length > 1 && (
+        {Object.entries(queryParams).length > 0 && (
           <Space className="delete_all_space">
             <Button type="text" className="delete_all" onClick={handleDeleteAllSort}>
               {t("user.product_category_page.delete_all")}

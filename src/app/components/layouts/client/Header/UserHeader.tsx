@@ -32,7 +32,7 @@ const UserHeader = () => {
   const haveMainHeader = location.pathname === "/category" || location.pathname === "/";
   const haveBtnCallback = location.pathname === "/category" || location.pathname === "search";
   const haveHeaderPageAccount = location.pathname.startsWith("/account/") || location.pathname.startsWith("/checkout");
-  const haveHeaderPageDetail = location.pathname === "/product";
+  const haveHeaderPageDetail = location.pathname.startsWith("/product/");
   const homePage = location.pathname === "/";
 
   const isHaveShop = useAppSelector((state) => state.userState.user)?.shop || null;

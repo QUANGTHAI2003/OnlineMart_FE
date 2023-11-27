@@ -41,7 +41,7 @@ const PageDetail = () => {
       </div>
       <div
         onClick={() => {
-          navigate("/category");
+          navigate("/ ");
         }}
         aria-hidden="true"
         className="flex items-center py-3 cursor-pointer"

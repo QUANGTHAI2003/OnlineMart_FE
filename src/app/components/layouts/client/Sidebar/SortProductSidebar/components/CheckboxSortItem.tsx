@@ -62,7 +62,7 @@ const CheckboxSortItem: React.FC<ICheckboxSortItem> = ({ sortData }) => {
     }
 
     // Update the URL with the new values
-    if (existingValuesArray.length > 0) {
+    if (existingValuesArray.length >= 0) {
       searchParams.set(slug, existingValuesArray.join(","));
     } else {
       // If no values are selected, remove the parameter from the URL and reset the state
@@ -76,6 +76,7 @@ const CheckboxSortItem: React.FC<ICheckboxSortItem> = ({ sortData }) => {
     // Update the state of the checkboxes
     setCheckboxState(updatedCheckboxState);
   };
+
   const show_hide = showLess ? numberOfCheckboxes : values.length;
 
   return (
@@ -96,19 +97,25 @@ const CheckboxSortItem: React.FC<ICheckboxSortItem> = ({ sortData }) => {
         );
       })}
 
-      <button onClick={() => setShowLess(!showLess)} aria-label={showLess ? "See more" : "Collapse"} className="button">
-        {showLess ? (
-          <>
-            {t("user.product_category_sidebar.see_more")}
-            <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronDown} />
-          </>
-        ) : (
-          <>
-            {t("user.product_category_sidebar.collapse")}
-            <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronUp} />
-          </>
-        )}
-      </button>
+      {values?.length > numberOfCheckboxes && (
+        <button
+          onClick={() => setShowLess(!showLess)}
+          aria-label={showLess ? "See more" : "Collapse"}
+          className="button"
+        >
+          {showLess ? (
+            <>
+              {t("user.product_category_sidebar.see_more")}
+              <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronDown} />
+            </>
+          ) : (
+            <>
+              {t("user.product_category_sidebar.collapse")}
+              <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronUp} />
+            </>
+          )}
+        </button>
+      )}
     </div>
   );
 };

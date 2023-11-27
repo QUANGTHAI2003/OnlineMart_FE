@@ -163,6 +163,7 @@ export const Info = styled.div`
     justify-content: space-between;
     flex-direction: column;
     padding: 4px 8px;
+    margin-bottom: 4px;
     gap: 4px;
     flex: 1 1 0%;
 

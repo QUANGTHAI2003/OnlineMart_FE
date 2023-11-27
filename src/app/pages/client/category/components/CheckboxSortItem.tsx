@@ -33,23 +33,25 @@ const CheckboxSortItem: React.FC<ICheckboxSortItem> = ({ sortData }) => {
           );
         })}
 
-        <Button
-          onClick={() => setShowLess(!showLess)}
-          aria-label={showLess ? "See more" : "Collapse"}
-          className="button"
-        >
-          {showLess ? (
-            <>
-              {t("user.product_category_sidebar.see_more")}
-              <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronDown} />
-            </>
-          ) : (
-            <>
-              {t("user.product_category_sidebar.collapse")}
-              <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronUp} />
-            </>
-          )}
-        </Button>
+        {values?.length > numberOfCheckboxes && (
+          <Button
+            onClick={() => setShowLess(!showLess)}
+            aria-label={showLess ? "See more" : "Collapse"}
+            className="button"
+          >
+            {showLess ? (
+              <>
+                {t("user.product_category_sidebar.see_more")}
+                <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronDown} />
+              </>
+            ) : (
+              <>
+                {t("user.product_category_sidebar.collapse")}
+                <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronUp} />
+              </>
+            )}
+          </Button>
+        )}
       </div>
     </div>
   );

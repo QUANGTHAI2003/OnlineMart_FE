@@ -7,7 +7,8 @@ import { useAppDispatch } from "@app/store/store";
 import { IProductCategoryData } from "@app/types/products_category.types";
 import { Alert, Col, Pagination as ProductPagination, Row } from "antd";
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { trackWindowScroll } from "react-lazy-load-image-component";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { BrandComponent, SortPaginateItem } from "./components";
 import * as S from "./ProductCategory.styles";
@@ -15,12 +16,13 @@ import * as S from "./ProductCategory.styles";
 const pageSize = 30;
 
 const ProductCategory = () => {
-  const { id } = useParams();
+  const { id, slug } = useParams();
   const location = useLocation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const syncToURL = useSyncToURL();
-  const [page, setPage] = useState<number>(1);
   const dispatch = useAppDispatch();
+
+  const [page, setPage] = useState<number>(1);
   const param = new URLSearchParams(location.search);
 
   const { data, isFetching } = useGetProductCategoryQuery(
@@ -31,19 +33,19 @@ const ProductCategory = () => {
     {
       skip: !id,
       refetchOnMountOrArgChange: true,
+      refetchOnFocus: true,
       refetchOnReconnect: true,
     }
   );
 
-  // useEffect(() => {
-  //   if (data?.category_slug !== slug && !isFetching) {
-  //     navigate(`/category/${data?.category_slug}/${id}`);
-  //   }
-  // }, [data?.category_slug, id, isFetching, navigate, slug]);
+  useEffect(() => {
+    if (data?.category_slug !== slug && !isFetching) {
+      navigate(`/category/${data?.category_slug}/${id}`);
+    }
+  }, [data?.category_slug, id, isFetching, navigate, slug]);
 
   useEffect(() => {
     if (data) {
-      // Set sort sidebar category
       const { category, sort_price, shop, supplier } = data.filters;
       dispatch(setCategory(category));
       dispatch(setPrice(sort_price));
@@ -141,7 +143,7 @@ const ProductCategory = () => {
       />
 
       {isFetching ? (
-        <ProductCardSkeleton count={18} />
+        <ProductCardSkeleton count={30} />
       ) : (
         <Row gutter={[8, 8]}>
           {filterdProductCategory().length > 0 ? (
@@ -188,4 +190,4 @@ const ProductCategory = () => {
   );
 };
 
-export default ProductCategory;
+export default trackWindowScroll(ProductCategory);

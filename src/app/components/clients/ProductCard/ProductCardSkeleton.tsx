@@ -1,35 +1,32 @@
+import { Col, Row } from "antd";
+
 type ProductCardSkeletonProps = {
   count: number;
 };
 
 const ProductCardSkeleton = ({ count }: ProductCardSkeletonProps) => {
   return (
-    <div
-      style={{
-        display: "grid",
-        alignItems: "stretch",
-        gap: "8px",
-        gridTemplateColumns: "repeat(6, 1fr)",
-        backgroundColor: "#f5f5f5",
-        padding: "8px",
-      }}
-    >
+    <Row gutter={[8, 8]}>
       {[...Array(count)].map((_, index) => (
-        <div key={index} className="w-full h-full animate-pulse">
-          <div className="rounded-xl bg-slate-200 h-40 w-full"></div>
+        <Col key={index} xs={{ span: 12 }} sm={{ span: 6 }} xl={{ span: 4 }} className="animate-pulse">
+          <div className="rounded-md bg-slate-300 h-44 w-full"></div>
           <div className="info py-3 w-full">
             <div className="name">
-              <div className="bg-slate-200 h-4 w-full rounded-md"></div>
-              <div className="flex mt-2 gap-x-4">
-                <div className="bg-slate-200 h-4 w-1/2 rounded-md"></div>
-                <div className="bg-slate-200 h-4 w-1/2 rounded-md"></div>
+              <div className="bg-slate-300 h-4 w-full rounded-sm"></div>
+              <div className="flex mt-2 gap-x-1">
+                <div className="bg-slate-300 h-4 w-1/2 rounded-sm"></div>
+                <div className="bg-slate-300 h-4 w-1/2 rounded-sm"></div>
               </div>
-              <div className="bg-slate-200 h-4 w-full rounded-md mt-2"></div>
+              <div className="bg-slate-300 h-4 w-full rounded-sm mt-2"></div>
+              <div className="flex mt-2 gap-x-1">
+                <div className="bg-slate-300 h-4 w-1/2 rounded-sm"></div>
+                <div className="bg-slate-300 h-4 w-1/2 rounded-sm"></div>
+              </div>
             </div>
           </div>
-        </div>
+        </Col>
       ))}
-    </div>
+    </Row>
   );
 };
 
