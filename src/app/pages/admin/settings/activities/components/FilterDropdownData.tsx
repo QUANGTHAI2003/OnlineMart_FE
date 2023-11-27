@@ -1,6 +1,7 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { useDebounce } from "@app/hooks";
 import { Button, Checkbox, Input } from "antd";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { forwardRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,33 +12,45 @@ interface IFilterDropdownDataProps {
   data: { id: number; label: string; value: string }[];
   setLoading: (value: boolean) => void;
   setOpen: (value: boolean) => void;
+  onChange: (value: any) => void;
+  currentValue?: any;
 }
 
 const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilterDropdownDataProps> = (
-  { name, data, setLoading, setOpen },
+  { name, data, setLoading, setOpen, onChange, currentValue },
   ref
 ) => {
   const { t } = useTranslation();
 
   const [filteredData, setFilteredData] = useState<IFilterDropdownDataProps["data"]>(data);
   const [searchInput, setSearchInput] = useState<string>("");
-  const [checkedList, setCheckedList] = useState<string[]>([]);
+
+  const [checkedList, setCheckedList] = useState<any[]>([]);
 
   const debouncedSearchInput = useDebounce(searchInput, 300);
 
-  const handleGetCheckBoxData = (value: string) => {
-    const newCheckedList = checkedList.includes(value)
-      ? checkedList.filter((item) => item !== value)
-      : [...checkedList, value];
+  const handleGetCheckBoxData = (e: CheckboxChangeEvent) => {
+    const { value } = e.target;
+    const currentIndex = checkedList.indexOf(value);
+    const newCheckedList = [...checkedList];
+
+    if (currentIndex === -1) {
+      newCheckedList.push(value);
+    } else {
+      newCheckedList.splice(currentIndex, 1);
+    }
+
     setCheckedList(newCheckedList);
   };
 
   const handleRemoveCheckBox = () => {
-    setCheckedList([]);
+    const newCheckedList = checkedList.map((item) => ({ ...item, checked: false }));
+    setCheckedList(newCheckedList);
   };
 
   const handleApplyCheckBox = () => {
     setOpen(false);
+    onChange(checkedList);
   };
 
   const handleGetSearchCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,8 +59,9 @@ const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilter
   };
 
   useEffect(() => {
-    const searchText = debouncedSearchInput.toLowerCase();
-    const filtered = data.filter((item) => item.label.toLowerCase().includes(searchText));
+    const searchText = debouncedSearchInput?.toLowerCase();
+
+    const filtered = data?.filter((item) => item?.label?.toLowerCase()?.includes(searchText));
     setTimeout(() => {
       setLoading(false);
     }, 300);
@@ -68,7 +82,11 @@ const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilter
       <div className="content">
         {filteredData.map((item: any) => (
           <div className="mb-4" key={item.id}>
-            <Checkbox checked={checkedList.includes(item.value)} onChange={() => handleGetCheckBoxData(item.value)}>
+            <Checkbox
+              value={item.value}
+              defaultChecked={currentValue?.includes(item?.value)}
+              onChange={handleGetCheckBoxData}
+            >
               {item.label}
             </Checkbox>
           </div>

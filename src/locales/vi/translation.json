@@ -1438,7 +1438,8 @@
           "placeholder": "Tìm kiếm theo người thao tác hoặc thao tác...",
           "time": "Thời gian",
           "select_author": "Vui lòng chọn người thao tác",
-          "select_action": "Vui lòng chọn thao tác"
+          "select_action": "Vui lòng chọn thao tác",
+          "date": "Ngày diễn ra hoạt động"
         },
         "table": {
           "author": "Người thao tác",

@@ -288,40 +288,27 @@ export const LogFilterModule = [
   },
   {
     id: 5,
-    label: "Thông tin cửa hàng",
-    value: "Thông tin cửa hàng",
-  },
-];
-
-export const LogFilterAuthor = [
-  {
-    id: 1,
-    label: "Trường Xuân",
-    value: "Trường Xuân",
-  },
-  {
-    id: 2,
-    label: "Quang Thái",
-    value: "Quang Thái",
-  },
-  {
-    id: 3,
-    label: "Hoàng Lịch",
-    value: "Hoàng Lịch",
-  },
-  {
-    id: 4,
-    label: "Chí Nguyện",
-    value: "Chí Nguyện",
-  },
-  {
-    id: 5,
-    label: "Khánh An",
-    value: "Khánh An",
+    label: "Vai Trò - Phân quyền",
+    value: "Vai Trò - Phân quyền",
   },
   {
     id: 6,
-    label: "Minh Tý",
-    value: "Minh Tý",
+    label: "Thông tin cửa hàng",
+    value: "Thông tin cửa hàng",
+  },
+  {
+    id: 7,
+    label: "Nhà cung cấp",
+    value: "Nhà cung cấp",
+  },
+  {
+    id: 8,
+    label: "Mã giảm giá",
+    value: "Mã giảm giá",
+  },
+  {
+    id: 9,
+    label: "Đánh giá",
+    value: "Đánh giá",
   },
 ];

@@ -20,6 +20,7 @@ import { voucherUserApi } from "./api/user/voucherApi";
 import { wishlistApi } from "./api/user/wishlistApi";
 import { userApi } from "./api/userApi";
 import authSlice from "./authSlice";
+import activityAdminSlice from "./redux/admin/activityAdminSlice";
 import binAdminSlice from "./redux/admin/binAdminSlice";
 import inventoryAdminSlice from "./redux/admin/inventoryAdminSlice";
 import orderAdminSlice from "./redux/admin/orderAdminSlice";
@@ -65,6 +66,7 @@ export const rootReducer: any = {
   binAdmin: binAdminSlice,
   shopInformation: shopSlice,
   activitiesLogs: activitySlice,
+  activityAdmin: activityAdminSlice,
   showSidebar: responsiveSidebar,
 };
 

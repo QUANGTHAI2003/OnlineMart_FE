@@ -1439,7 +1439,8 @@
           "placeholder": "Enter name author or action...",
           "time": "Time",
           "select_author": "Select author",
-          "select_action": "Select action"
+          "select_action": "Select action",
+          "date": "Date of activity"
         },
         "table": {
           "author": "Author",

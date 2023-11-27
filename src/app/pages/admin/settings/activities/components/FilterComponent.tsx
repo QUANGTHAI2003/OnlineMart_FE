@@ -1,18 +1,30 @@
 import { FilterOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import { useResponsive } from "@app/hooks";
+import { useGetMembersShopQuery } from "@app/store/slices/api/activityApi";
+import {
+  setActionValue,
+  setAuthorValue,
+  setEndDate,
+  setSearchValue,
+  setSelectSearchType,
+  setStartDate,
+} from "@app/store/slices/redux/admin/activityAdminSlice";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
 import { Button, Col, DatePicker, Divider, Form, Input, Row, Select, Space } from "antd";
-import React, { useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { LogFilterAuthor, LogFilterModule } from "../data";
+import { LogFilterModule } from "../data";
 import * as S from "../Log.styles";
 
 import { DropdownSelect } from ".";
 const { RangePicker } = DatePicker;
 
-const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searchTypeData }: any) => {
+const FilterComponent = React.memo(({ searchTypeData }: any) => {
   const { isTablet, isDesktop } = useResponsive();
   const { t } = useTranslation();
+  const { data: members = [] } = useGetMembersShopQuery();
+  const dispatch = useAppDispatch();
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -26,8 +38,8 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
     setOpen(false);
   };
 
-  const handleSearch = (value: any) => {
-    setSearchValue(value);
+  const handleSearch = (value: string) => {
+    dispatch(setSearchValue(value));
   };
 
   const handleSelectSearchType = (key: any) => {
@@ -35,8 +47,32 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
     if (selectedSearchType) {
       setSelectedSearchTypeLabel(selectedSearchType.label);
     }
-    setSelectSearchType(key);
+    dispatch(setSelectSearchType(key));
   };
+
+  const handleOnChangeAuthor = (value: any) => {
+    dispatch(setAuthorValue(value));
+    setDefaultAuthor(value);
+  };
+
+  const handleOnChangeAction = (value: any) => {
+    dispatch(setActionValue(value));
+    setDefaultAction(value);
+  };
+
+  const [defaultAuthor, setDefaultAuthor] = useState<any>([]);
+  const [defaultAction, setDefaultAction] = useState<any>([]);
+
+  const { authorFilter } = useAppSelector((state) => state.activityAdmin.filteredValue);
+  const { actionFilter } = useAppSelector((state) => state.activityAdmin.filteredValue);
+
+  useEffect(() => {
+    setDefaultAuthor(authorFilter);
+  }, [defaultAuthor, setDefaultAuthor, authorFilter]);
+
+  useEffect(() => {
+    setDefaultAction(actionFilter);
+  }, [defaultAction, setDefaultAction, actionFilter]);
 
   return (
     <section className="filter py-4 px-6 bg-white rounded-t-md">
@@ -55,12 +91,13 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
                     />
                     <div className="flex-grow">
                       <Input
+                        // value={searchValue}
                         size="large"
                         placeholder={t("admin_shop.product.list.filter.placeholder", {
                           placeholder: selectedSearchTypeLabel.toLowerCase(),
                         })}
                         prefix={<SearchOutlined />}
-                        onChange={(e: any) => handleSearch(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleSearch(e.target.value)}
                       />
                     </div>
                   </Space.Compact>
@@ -71,13 +108,17 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
                   <Space size={16}>
                     <DropdownSelect
                       name={t("admin_shop.settings.logs.table.author")}
-                      data={LogFilterAuthor}
+                      data={members}
                       placement="bottomLeft"
+                      onChange={handleOnChangeAuthor}
+                      currentValue={defaultAuthor}
                     />
                     <DropdownSelect
                       name={t("admin_shop.settings.logs.table.action")}
                       data={LogFilterModule}
                       placement="bottomRight"
+                      onChange={handleOnChangeAction}
+                      currentValue={defaultAction}
                     />
                   </Space>
                 </Col>
@@ -106,6 +147,32 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
 export default FilterComponent;
 
 export const SortDrawer = ({ onClose, open, t }: any) => {
+  const { data: members = [] } = useGetMembersShopQuery();
+
+  const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
+  const [dateRange, setDateRange] = useState<any>(null);
+
+  const authorData = useAppSelector((state) => state.activityAdmin.filteredValue.authorFilter);
+  const actionData = useAppSelector((state) => state.activityAdmin.filteredValue.actionFilter);
+
+  useEffect(() => {
+    form.setFieldsValue({
+      author: authorData,
+      action: actionData,
+    });
+  }, [form, authorData, actionData]);
+
+  const handleApplySort = (values: any) => {
+    const { author, action } = values;
+    const startDate = dateRange ? dateRange[0].format("DD-MM-YYYY") : null;
+    const endDate = dateRange ? dateRange[1].format("DD-MM-YYYY") : null;
+    dispatch(setAuthorValue(author));
+    dispatch(setActionValue(action));
+    dispatch(setStartDate(startDate));
+    dispatch(setEndDate(endDate));
+  };
+
   return (
     <S.DrawerStyle
       title={t("admin_shop.product.list.filter.other_filter")}
@@ -116,30 +183,32 @@ export const SortDrawer = ({ onClose, open, t }: any) => {
       footer={
         <div className="grid grid-cols-2 gap-x-3">
           <Button onClick={onClose}>{t("admin_shop.product.list.filter.cancel")}</Button>
-          <Button onClick={onClose} type="primary">
+          <Button form="activityDrawerSort" onClick={onClose} type="primary" htmlType="submit">
             {t("admin_shop.product.list.filter.apply")}
           </Button>
         </div>
       }
     >
-      <Form layout="vertical">
-        <Form.Item label={t("admin_shop.settings.logs.table.author")} htmlFor="author">
+      <Form form={form} id="activityDrawerSort" layout="vertical" onFinish={handleApplySort} autoComplete="off">
+        <Form.Item name="author" label={t("admin_shop.settings.logs.table.author")} htmlFor="author">
           <Select
             mode="multiple"
             id="author"
             placeholder={t("admin_shop.settings.logs.filter.select_author")}
-            options={LogFilterAuthor}
+            popupMatchSelectWidth={false}
+            options={members}
             allowClear
           />
         </Form.Item>
 
         <Divider />
 
-        <Form.Item label={t("admin_shop.settings.logs.table.action")} htmlFor="action">
+        <Form.Item name="action" label={t("admin_shop.settings.logs.table.action")} htmlFor="action">
           <Select
             mode="multiple"
             id="action"
             placeholder={t("admin_shop.settings.logs.filter.select_action")}
+            popupMatchSelectWidth={false}
             options={LogFilterModule}
             allowClear
           />
@@ -148,7 +217,7 @@ export const SortDrawer = ({ onClose, open, t }: any) => {
         <Divider />
 
         <Form.Item name="date-picker" label={t("admin_shop.settings.logs.filter.time")}>
-          <RangePicker className="checkbox_group" />
+          <RangePicker onChange={(dates: any) => setDateRange(dates)} className="checkbox_group" />
         </Form.Item>
       </Form>
     </S.DrawerStyle>
