@@ -1,14 +1,21 @@
-import react from '@vitejs/plugin-react-swc'
-import path from 'path'
-import { defineConfig } from 'vite'
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
 
-// https://vitejs.dev/config/
+import react from '@vitejs/plugin-react-swc';
+import path from 'path';
+import { defineConfig } from 'vite';
+
 export default defineConfig({
-  mode: process.env.NODE_ENV || 'development',
+  mode: process.env.NODE_ENV || "development",
   plugins: [react()],
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/tests/setupTest.ts",
+  },
   build: {
     sourcemap: true,
-    outDir: 'dist',
+    outDir: "dist",
     emptyOutDir: true,
   },
   server: {
@@ -19,7 +26,7 @@ export default defineConfig({
   },
   css: {
     modules: {
-      localsConvention: 'camelCaseOnly',
+      localsConvention: "camelCaseOnly",
     },
     preprocessorOptions: {
       scss: {
@@ -28,6 +35,6 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias: [{ find: '@app', replacement: path.resolve(__dirname, 'src') }],
+    alias: [{ find: "@app", replacement: path.resolve(__dirname, "src") }],
   },
-})
+});

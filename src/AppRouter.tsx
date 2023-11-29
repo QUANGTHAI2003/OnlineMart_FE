@@ -9,7 +9,6 @@ import AdminSuperMainLayout from "./app/components/layouts/super_admin/AdminSupe
 import SellerInfo from "./app/pages/admin/seller/SellerInfo";
 import Logs from "./app/pages/admin/settings/activities/Logs";
 import SettingMain from "./app/pages/admin/settings/main/SettingMain";
-import AI from "./app/pages/AI";
 import AccountLayout from "./app/pages/client/account/AccountLayout";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
@@ -93,11 +92,9 @@ const AppRouter: React.FC = () => {
     <Routes>
       <Route path="/" element={<UserMainLayout />}>
         <Route index element={<Home />} />
-        <Route path="cua-hang" element={<StoreIndex />}></Route>
         <Route path="category/:slug/:id" element={<ProductCategory />} />
         <Route path="store/:id" element={<StoreIndex />} />
         <Route path="category" element={<ProductCategory />} />
-        <Route path="ai" element={<AI />} />
         <Route path="checkout" element={<Cart />} />
         <Route path="checkout/payment" element={<Payment />} />
         <Route path="product/:slug/:id" element={<ProductDetail />} />
