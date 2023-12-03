@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import AdminMainLayout from "./app/components/layouts/admin/AdminMainLayout";
 import AuthLayout from "./app/components/layouts/auth/AuthLayout";
@@ -166,8 +166,7 @@ const AppRouter: React.FC = () => {
         <Route path="admin/shop/auth/signin" element={<SigninAdmin />} />
         <Route path="admin/shop/auth/signup" element={<SignupAdmin />} />
       </Route>
-      <Route path="/404" element={<NotFound />} />
-      <Route path="*" element={<Navigate to="/404" />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

@@ -1,7 +1,8 @@
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { CaretDownOutlined, CaretUpOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { useSyncToURL } from "@app/hooks";
 import { formatNumber, formatPercentage } from "@app/utils/helper";
 import { Radio, RadioChangeEvent, Tooltip, Typography } from "antd";
+import { TFunction } from "i18next";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FreeMode, Navigation, Pagination } from "swiper/modules";
@@ -13,15 +14,64 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { TrafficWebsiteData } from "../data";
+import { green_percent, jade_green_box, orange_box, primary_box, purple_box, red_percent } from "../data";
 import * as S from "../TrafficWebsite.styles";
+
+const getTitleAndToolTip = (title: string, t: TFunction<"translation", undefined>) => {
+  switch (title) {
+    case "totalView":
+      return [
+        t("admin_shop.dev_center.traffic_website.common.total_views"),
+        t("admin_shop.dev_center.traffic_website.common.tooltip.total_views"),
+      ];
+    case "conversionRate":
+      return [
+        t("admin_shop.dev_center.traffic_website.common.conversion_rate"),
+        t("admin_shop.dev_center.traffic_website.common.tooltip.conversion_rate"),
+      ];
+    case "buyer":
+      return [
+        t("admin_shop.dev_center.traffic_website.common.total_buyers"),
+        t("admin_shop.dev_center.traffic_website.common.tooltip.total_buyers"),
+      ];
+    case "userId":
+      return [
+        t("admin_shop.dev_center.traffic_website.common.total_viewers"),
+        t("admin_shop.dev_center.traffic_website.common.tooltip.total_viewers"),
+      ];
+    default:
+      return title;
+  }
+};
+
+const getFillColor = (fill: string) => {
+  switch (fill) {
+    case "primary_box":
+      return primary_box;
+    case "orange_box":
+      return orange_box;
+    case "jade_green_box":
+      return jade_green_box;
+    case "purple_box":
+      return purple_box;
+
+    default:
+      return fill;
+  }
+};
 
 const { Title } = Typography;
 
-const SlickList = () => {
+const SlickList: React.FC<any> = ({ trafficData }) => {
   const { t } = useTranslation();
   const syncToURL = useSyncToURL();
-  const [value, setValue] = useState<number>(TrafficWebsiteData(t)[0].id);
+  const [value, setValue] = useState<number>(1);
+
+  useEffect(() => {
+    if (trafficData && trafficData[0]) {
+      setValue(trafficData[0].id || 0);
+    }
+  }, [trafficData]);
 
   const handleClick = (id: number) => {
     setValue(id);
@@ -36,12 +86,12 @@ const SlickList = () => {
   useEffect(() => {
     const carouselItem = document.querySelector(".carousel_item");
     if (carouselItem && carouselItem instanceof HTMLElement && value !== null) {
-      const selectedItem = TrafficWebsiteData(t).find((item) => item.id === value);
+      const selectedItem = trafficData?.find((item: any) => item.id === value);
       if (selectedItem) {
-        carouselItem.style.setProperty("--fill-color", selectedItem.fill_color);
+        carouselItem.style.setProperty("--fill-color", getFillColor(selectedItem.fill_color));
       }
     }
-  }, [t, value]);
+  }, [t, trafficData, value]);
 
   useEffect(() => {
     const observer = new MutationObserver((mutationsList) => {
@@ -50,9 +100,9 @@ const SlickList = () => {
           const carouselItems = document.querySelectorAll(".carousel_item");
           carouselItems.forEach((carouselItem) => {
             if (carouselItem && carouselItem instanceof HTMLElement && value !== null) {
-              const selectedItem = TrafficWebsiteData(t).find((item) => item.id === value);
+              const selectedItem = trafficData?.find((item: any) => item.id === value);
               if (selectedItem) {
-                carouselItem.style.setProperty("--fill-color", selectedItem.fill_color);
+                carouselItem.style.setProperty("--fill-color", getFillColor(selectedItem.fill_color));
               }
             }
           });
@@ -66,7 +116,7 @@ const SlickList = () => {
     }
 
     return () => observer.disconnect();
-  }, [t, value]);
+  }, [t, trafficData, value]);
 
   return (
     <S.SlickList>
@@ -98,8 +148,8 @@ const SlickList = () => {
         }}
       >
         <Radio.Group onChange={(e: RadioChangeEvent) => setValue(e.target.value)}>
-          {TrafficWebsiteData(t).map((item) => {
-            const IconComponent = item.arrow_icon;
+          {trafficData?.map((item: any) => {
+            const [title, tooltip] = getTitleAndToolTip(item.title, t);
 
             return (
               <SwiperSlide
@@ -107,8 +157,8 @@ const SlickList = () => {
                 className={`carousel_item ${value === item.id ? "selected" : ""}`}
                 style={
                   {
-                    "--fill-color": value === item.id ? item.fill_color : "initial",
-                    borderColor: value === item.id ? item.fill_color : "rgb(217, 217, 217)",
+                    "--fill-color": value === item.id ? getFillColor(item.fill_color) : "initial",
+                    borderColor: value === item.id ? getFillColor(item.fill_color) : "rgb(217, 217, 217)",
                   } as any
                 }
               >
@@ -118,25 +168,28 @@ const SlickList = () => {
                   onKeyDown={() => handleClick(item.id)}
                   className="radio_button"
                 >
-                  <div className="site_header" style={{ color: value === item.id ? item.fill_color : "initial" }}>
-                    <p>{item.title}</p>
-                    <Tooltip title={item.tooltip}>
+                  <div
+                    className="site_header"
+                    style={{ color: value === item.id ? getFillColor(item.fill_color) : "initial" }}
+                  >
+                    <p>{title}</p>
+                    <Tooltip title={tooltip}>
                       <ExclamationCircleOutlined
                         className="icon_tooltip"
-                        style={{ color: value === item.id ? item.fill_color : "initial" }}
+                        style={{ color: value === item.id ? getFillColor(item.fill_color) : "initial" }}
                       />
                     </Tooltip>
                   </div>
 
                   <div className="content">
                     <Title level={3} className="m-0">
-                      {formatNumber(item.value)}
+                      {item.title !== "conversionRate" ? formatNumber(item.value) : formatPercentage(item.value)}
                     </Title>
                   </div>
 
-                  <div className="percent" style={{ color: item.percent_color }}>
-                    <IconComponent />
-                    <span className="value">{formatPercentage(item.percent)}</span>
+                  <div className="percent" style={{ color: item.gap >= 0 ? green_percent : red_percent }}>
+                    {item.gap >= 0 ? <CaretUpOutlined /> : <CaretDownOutlined />}
+                    <span className="value">{formatPercentage(item.gap)}</span>
                   </div>
                 </Radio.Button>
               </SwiperSlide>

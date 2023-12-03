@@ -1,12 +1,18 @@
 import { G2, Line } from "@ant-design/plots";
 import { each, findIndex } from "@antv/util";
-import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
-import { TrafficWebsiteData } from "../data";
+const LineChart: React.FC<any> = ({ trafficData }) => {
+  const [searchParams] = useSearchParams();
+  const [currentSlickId, setCurrentSlickId] = useState<number>(Number(searchParams.get("slick_id")) || 1);
 
-const LineChart = () => {
-  const { t } = useTranslation();
+  useEffect(() => {
+    setCurrentSlickId(Number(searchParams.get("slick_id")) || 1);
+  }, [searchParams]);
+
   const { InteractionAction, registerInteraction, registerAction } = G2;
+
   G2.registerShape("point", "custom-point", {
     draw(cfg, container) {
       const point = {
@@ -130,10 +136,10 @@ const LineChart = () => {
     ],
   });
   const config = {
-    data: TrafficWebsiteData(t)[0].data,
+    data: (trafficData && trafficData[currentSlickId - 1] && trafficData[currentSlickId - 1].data) || [],
     xField: "year",
     yField: "value",
-    label: {},
+    smooth: true,
     point: {
       size: 5,
       shape: "custom-point",
@@ -144,7 +150,15 @@ const LineChart = () => {
       },
     },
     tooltip: {
-      showMarkers: false,
+      showMarkers: true,
+      label: {
+        formatter: (datum: any) => {
+          return {
+            name: datum.year,
+            value: datum.value,
+          };
+        },
+      },
     },
     state: {
       active: {

@@ -265,8 +265,8 @@ export const formatShortenNumber = (number: number) => {
   return number + suffixes[suffixIndex];
 };
 
-export const formatPercentage = (value: number) => {
-  return `${value}%`;
+export const formatPercentage = (value: number, roundedNum?: number) => {
+  return `${value.toFixed(roundedNum || 2)}%`;
 };
 
 export const removeDiacritics = (str: string) => {

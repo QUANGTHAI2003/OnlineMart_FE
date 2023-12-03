@@ -1,10 +1,10 @@
 import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
-const red_percent = "#dc2626";
-const green_percent = "#84cc16";
-const primary_box = "rgb(24, 144, 255)";
-const orange_box = "#f97316";
-const jade_green_box = "#14b8a6";
-const pupple_box = "#7e22ce";
+export const red_percent = "#dc2626";
+export const green_percent = "#84cc16";
+export const primary_box = "rgb(24, 144, 255)";
+export const orange_box = "#f97316";
+export const jade_green_box = "#14b8a6";
+export const purple_box = "#7e22ce";
 
 export const ExportExcelData = [
   {
@@ -27,32 +27,16 @@ export const TrafficWebsiteData = (t: any) => [
     arrow_icon: CaretUpOutlined,
     data: [
       {
-        year: "2/1991",
-        value: 30,
+        year: "02/12/2023",
+        value: 6,
       },
       {
-        year: "9/1992",
-        value: 4,
+        year: "01/12/2023",
+        value: 1000,
       },
       {
-        year: "3/31993",
-        value: 27,
-      },
-      {
-        year: "7/1995",
-        value: 4,
-      },
-      {
-        year: "5/1997",
-        value: 1,
-      },
-      {
-        year: "1/1998",
-        value: 9,
-      },
-      {
-        year: "3/1999",
-        value: 1,
+        year: "30/11/2023",
+        value: 3453,
       },
     ],
   },
@@ -108,7 +92,7 @@ export const TrafficWebsiteData = (t: any) => [
     data: [
       {
         year: "2/1991",
-        value: 3,
+        value: 8,
       },
       {
         year: "1992",
@@ -116,7 +100,7 @@ export const TrafficWebsiteData = (t: any) => [
       },
       {
         year: "1993",
-        value: 7,
+        value: 2,
       },
       {
         year: "1995",
@@ -124,7 +108,7 @@ export const TrafficWebsiteData = (t: any) => [
       },
       {
         year: "1997",
-        value: 3,
+        value: 1,
       },
       {
         year: "1998",
@@ -132,7 +116,7 @@ export const TrafficWebsiteData = (t: any) => [
       },
       {
         year: "1999",
-        value: 1,
+        value: 4,
       },
     ],
   },
@@ -142,25 +126,25 @@ export const TrafficWebsiteData = (t: any) => [
     value: 288899,
     tooltip: t("admin_shop.dev_center.traffic_website.common.tooltip.total_buyers"),
     percent: 94.8,
-    fill_color: pupple_box,
+    fill_color: purple_box,
     percent_color: red_percent,
     arrow_icon: CaretDownOutlined,
     data: [
       {
         year: "2/1991",
-        value: 3,
+        value: 1,
       },
       {
         year: "1992",
-        value: 4,
+        value: 3,
       },
       {
         year: "1993",
-        value: 7,
+        value: 1,
       },
       {
         year: "1995",
-        value: 4,
+        value: 8,
       },
       {
         year: "1997",
@@ -172,7 +156,7 @@ export const TrafficWebsiteData = (t: any) => [
       },
       {
         year: "1999",
-        value: 1,
+        value: 2,
       },
     ],
   },

@@ -7,6 +7,7 @@ import { productAdminApi } from "./api/admin/productApi";
 import { reviewAdminApi } from "./api/admin/reviewApi";
 import { roleApi } from "./api/admin/roleApi";
 import { sellerApi } from "./api/admin/sellerApi";
+import { trafficAdminApi } from "./api/admin/trafficApi";
 import { voucherApi } from "./api/admin/voucherApi";
 import { authApi } from "./api/authApi";
 import { categoryApi } from "./api/categoryApi";
@@ -27,6 +28,7 @@ import orderAdminSlice from "./redux/admin/orderAdminSlice";
 import productAdminSlice from "./redux/admin/productAdminSlice";
 import reviewAdminSlice from "./redux/admin/reviewAdminSlice";
 import sellerAdminSlice from "./redux/admin/sellerAdminSlice";
+import trafficAdminSlice from "./redux/admin/trafficAdminSlice";
 import productDetailSlice from "./redux/productDetailSlice";
 import showNotificationSlice from "./redux/showNotificationSlice";
 import responsiveSidebar from "./redux/user/responsiveSidebar";
@@ -54,6 +56,7 @@ export const rootReducer: any = {
   [shopApi.reducerPath]: shopApi.reducer,
   [activityApi.reducerPath]: activityApi.reducer,
   [orderApi.reducerPath]: orderApi.reducer,
+  [trafficAdminApi.reducerPath]: trafficAdminApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
   productDetail: productDetailSlice,
@@ -68,6 +71,7 @@ export const rootReducer: any = {
   activitiesLogs: activitySlice,
   activityAdmin: activityAdminSlice,
   showSidebar: responsiveSidebar,
+  trafficAdmin: trafficAdminSlice,
 };
 
 export const apiMiddleware = (getDefaultMiddleware: any) =>
@@ -92,5 +96,6 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     inventoryAdminApi.middleware,
     binAdminApi.middleware,
     shopApi.middleware,
-    activityApi.middleware
+    activityApi.middleware,
+    trafficAdminApi.middleware
   );

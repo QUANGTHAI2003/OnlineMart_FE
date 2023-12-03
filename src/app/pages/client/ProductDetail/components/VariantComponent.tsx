@@ -34,9 +34,10 @@ const VariantComponent: React.FC<IVariantComponentProps> = ({ variant, variantTh
 
   useEffect(() => {
     const firstSpid = variant[0]?.values[0]?.id?.toString();
-    syncToURL({ spid: firstSpid });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [variant]);
+    if (firstSpid) {
+      syncToURL({ spid: firstSpid });
+    }
+  }, [syncToURL, variant]);
 
   useEffect(() => {
     const spids = new URLSearchParams(location.search).get("spid");

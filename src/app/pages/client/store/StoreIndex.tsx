@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Input } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { dataSeller } from "./data";
 import Products from "./product/Product";
@@ -23,16 +23,11 @@ import Store from "./widget/Store";
 
 const StoreIndex = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
 
-  const { data, error } = useGetShopQuery(id);
-
-  if (error && (error as { status?: number }).status === 404) {
-    navigate("/404");
-  }
+  const { data } = useGetShopQuery(id);
 
   useEffect(() => {
     if (data) {

@@ -1,3 +1,5 @@
+import { setEndDate, setStartDate } from "@app/store/slices/redux/admin/trafficAdminSlice";
+import { useAppDispatch } from "@app/store/store";
 import type { TimeRangePickerProps } from "antd";
 import { Button, Col, DatePicker, Row, Typography } from "antd";
 import type { Dayjs } from "dayjs";
@@ -9,10 +11,12 @@ import * as S from "../TrafficWebsite.styles";
 
 const { Text } = Typography;
 const { RangePicker } = DatePicker;
-const formatedDate = "DD/MM/YYYY";
+export const formatedDate = "DD/MM/YYYY";
 
 const ReportTime = ({ range, setRange, setSelectedLabel }: any) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
   const [lastUpdated, setLastUpdated] = useState<string | null>(localStorage.getItem("lastUpdated"));
   const [selectedButton, setSelectedButton] = useState<string | null>(
     t("admin_shop.dev_center.biz_efficiency.common.today")
@@ -20,10 +24,10 @@ const ReportTime = ({ range, setRange, setSelectedLabel }: any) => {
 
   const rangePresets: TimeRangePickerProps["presets"] = [
     { label: t("admin_shop.dev_center.biz_efficiency.common.today"), value: [dayjs(), dayjs()] },
-    {
-      label: t("admin_shop.dev_center.biz_efficiency.common.yesterday"),
-      value: [dayjs().subtract(1, "day"), dayjs().subtract(1, "day")],
-    },
+    // {
+    //   label: t("admin_shop.dev_center.biz_efficiency.common.yesterday"),
+    //   value: [dayjs().subtract(1, "day"), dayjs().subtract(1, "day")],
+    // },
     { label: t("admin_shop.dev_center.biz_efficiency.common.past_7days"), value: [dayjs().add(-7, "day"), dayjs()] },
     { label: t("admin_shop.dev_center.biz_efficiency.common.past_30days"), value: [dayjs().add(-30, "day"), dayjs()] },
   ];
@@ -31,8 +35,10 @@ const ReportTime = ({ range, setRange, setSelectedLabel }: any) => {
   const handleButtonClick = (value: Dayjs[], label: string) => {
     if (value[0] !== null && value[1] !== null) {
       setRange([value[0], value[1]]);
+      dispatch(setStartDate(value[0].format(formatedDate)));
+      dispatch(setEndDate(value[1].format(formatedDate)));
     }
-    const currentTime = dayjs().format("DD/MM/YYYY, HH:mm");
+    const currentTime = dayjs().format(`${formatedDate}, HH:mm`);
     setLastUpdated(currentTime);
     localStorage.setItem("lastUpdated", currentTime);
     setSelectedLabel(String(label));
@@ -44,8 +50,11 @@ const ReportTime = ({ range, setRange, setSelectedLabel }: any) => {
     const endDate = dayjs(dateStrings[1], formatedDate);
 
     if (dates) {
+      dispatch(setStartDate(startDate.format(formatedDate)));
+      dispatch(setEndDate(endDate.format(formatedDate)));
+
       setRange([startDate, endDate]);
-      setLastUpdated(dayjs().format("DD/MM/YYYY, HH:mm"));
+      setLastUpdated(dayjs().format(`${formatedDate}, HH:mm`));
       setSelectedLabel(null);
     }
   };

@@ -49,13 +49,13 @@ const UserHeader = () => {
           <ul className="mt-[5px]">
             {isHaveShop ? (
               <li className="inline-block mx-1 relative after:content-[''] after:block after:absolute after:w-[1px] after:h-[15px] after:bg-black after:right-[-5px] after:top-[50%] after:transform after:translate-y-[-50%]">
-                <Link to="/admin/shopadmin/shop/auth/switch" className="text-black">
+                <Link to="/admin/shop" className="text-black">
                   {t("user.header.seller_home")}
                 </Link>
               </li>
             ) : (
               <li className="inline-block mx-2 relative after:content-[''] after:block after:absolute after:w-[1px] after:h-[15px] after:bg-black after:right-[-5px] after:top-[50%] after:transform after:translate-y-[-50%]">
-                <Link to="/admin/shop" className="text-black">
+                <Link to="/admin/shop/auth/switch" className="text-black">
                   {t("user.header.seller")}
                 </Link>
               </li>
@@ -63,10 +63,10 @@ const UserHeader = () => {
             <li className="inline-block mx-1">
               <div className="text-black inline-flex items-center">
                 <span className="cursor-text">{t("user.header.contact")}</span>
-                <Link to="/#">
+                <Link to="https://www.facebook.com/OnlineMartVI">
                   <FontAwesomeIcon icon={faFacebook} className="text-base mx-1 text-black" />
                 </Link>
-                <Link to="/#">
+                <Link to="https://www.instagram.com/onlinemart_vn">
                   <FontAwesomeIcon icon={faInstagram} className="text-base mx-1 text-black" />
                 </Link>
               </div>

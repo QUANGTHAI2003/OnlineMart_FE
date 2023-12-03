@@ -8,7 +8,7 @@ import { formatCurrency } from "@app/utils/helper";
 import { Rate } from "antd";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -30,13 +30,12 @@ const ProductDetail = () => {
   const [variantThumbnail, setVariantThumbnail] = useState<string>("");
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const nagigate = useNavigate();
 
   const { t } = useTranslation();
   const { id } = useParams();
   const spid = new URLSearchParams(window.location.search).get("spid");
 
-  const { data: productDetail, isFetching, error } = useGetProductDetailQuery(parseInt(id as string));
+  const { data: productDetail, isFetching } = useGetProductDetailQuery(parseInt(id as string));
   const productGallery = productDetail?.gallery;
   const variants = productDetail?.variants;
 
@@ -111,14 +110,6 @@ const ProductDetail = () => {
       setVariantThumbnail(productDetail?.thumbnail_url as string);
     }
   };
-
-  const errorStatus = (error as any)?.status;
-
-  useEffect(() => {
-    if (errorStatus === 404) {
-      nagigate("/404");
-    }
-  }, [errorStatus, location.pathname, nagigate]);
 
   return (
     <S.DetailPageStyle>
