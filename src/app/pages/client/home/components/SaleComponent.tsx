@@ -1,12 +1,12 @@
 import ProductCardSale from "@app/app/components/clients/ProductCard/ProductCardSale";
 import ProductCardSkeleton from "@app/app/components/clients/ProductCard/ProductCardSkeleton";
+import { useGetProductFlashsaleQuery } from "@app/store/slices/api/user/productFlashsaleApi";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { v4 as uuidv4 } from "uuid";
 
-import data from "../data";
 import * as S from "../Home.styles";
 
 import { CountdownComponent } from ".";
@@ -15,9 +15,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const SaleComponent = React.memo(() => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(true);
+
+  const { data: productFlashsaleData } = useGetProductFlashsaleQuery();
+
   const number = 6;
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const SaleComponent = React.memo(() => {
           </div>
         </div>
         <div className="navigation">
-          <a title="Xem tất cả Deal Hot" href="#a">
+          <a title="Xem tất cả Deal Hot" href="flash_sale">
             {t("user.product.view_more")}
             <img
               className="icon-more"
@@ -79,19 +81,21 @@ const SaleComponent = React.memo(() => {
           {loading ? (
             <ProductCardSkeleton count={number} />
           ) : (
-            <>
-              {data.map((item: any) => (
+            <div>
+              {productFlashsaleData?.map((item: any) => (
                 <SwiperSlide key={uuidv4()}>
                   <ProductCardSale
                     id={item.id}
+                    slug={item.slug}
                     name={item.name}
-                    price={item.price}
+                    price={item.current_price}
                     discountRate={item.discount_rate}
                     thumbnailUrl={item.thumbnail_url}
                   />
                 </SwiperSlide>
               ))}
-            </>
+              ;
+            </div>
           )}
         </Swiper>
       </div>

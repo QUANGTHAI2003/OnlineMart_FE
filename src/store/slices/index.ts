@@ -17,6 +17,7 @@ import { supplierApi } from "./api/supplierApi";
 import { addressApi } from "./api/user/addressApi";
 import { notificationApi } from "./api/user/notificationApi";
 import { productApi } from "./api/user/productApi";
+import { productFlashsaleApi } from "./api/user/productFlashsaleApi";
 import { voucherUserApi } from "./api/user/voucherApi";
 import { wishlistApi } from "./api/user/wishlistApi";
 import { userApi } from "./api/userApi";
@@ -50,6 +51,7 @@ export const rootReducer: any = {
   [reviewAdminApi.reducerPath]: reviewAdminApi.reducer,
   [voucherApi.reducerPath]: voucherApi.reducer,
   [voucherUserApi.reducerPath]: voucherUserApi.reducer,
+  [productFlashsaleApi.reducerPath]: productFlashsaleApi.reducer,
   [sellerApi.reducerPath]: sellerApi.reducer,
   [inventoryAdminApi.reducerPath]: inventoryAdminApi.reducer,
   [binAdminApi.reducerPath]: binAdminApi.reducer,
@@ -81,6 +83,7 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     addressApi.middleware,
     categoryApi.middleware,
     productApi.middleware,
+    productFlashsaleApi.middleware,
     productCategoryApi.middleware,
     supplierApi.middleware,
     wishlistApi.middleware,

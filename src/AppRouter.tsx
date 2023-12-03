@@ -28,6 +28,7 @@ const NotFound = React.lazy(() => import("@app/app/pages/errors/NotFound"));
 const ProductCategory = React.lazy(() => import("@app/app/pages/client/category/ProductCategory"));
 const Home = React.lazy(() => import("@app/app/pages/client/home/Home"));
 const ProductDetail = React.lazy(() => import("@app/app/pages/client/ProductDetail/ProductDetail"));
+const FlashSalePage = React.lazy(() => import("@app/app/pages/client/flashsale/FlashSalePage"));
 
 const ListOrder = React.lazy(() => import("@app/app/pages/client/account/orders/ListOrder"));
 const OrderDetail = React.lazy(() => import("@app/app/pages/client/account/orders/OrderDetail"));
@@ -99,6 +100,7 @@ const AppRouter: React.FC = () => {
         <Route path="checkout/payment" element={<Payment />} />
         <Route path="product/:slug/:id" element={<ProductDetail />} />
         <Route path="search" element={<UserSearch />} />
+        <Route path="flash_sale" element={<FlashSalePage />} />
         <Route path="account" element={<AccountLayout />}>
           <Route path="edit_profile" element={<UserProfile />} />
           <Route path="notifications" element={<UserNotification />} />

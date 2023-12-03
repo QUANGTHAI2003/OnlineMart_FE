@@ -15,7 +15,6 @@ const ProductComponent: React.FC<IFixedHeader> = ({ isFixedHeader }) => {
   const { t } = useTranslation();
 
   const { data: productIndexData, isLoading: isLoadingProduct } = useGetAllProductQuery();
-  console.log(productIndexData);
 
   const initialProductCount = 18;
 

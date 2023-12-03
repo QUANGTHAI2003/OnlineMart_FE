@@ -890,7 +890,7 @@
             "id": "Mã đơn hàng",
             "sku": "SKU",
             "city": "Thành phố",
-            "name":" Tên khách hàng"
+            "name": " Tên khách hàng"
           },
           "print": "In phiếu các đơn hàng được chọn",
           "placeholder": "Nhập tối đa 20 {{placeholder}} cách nhau bằng dấu ',' ",

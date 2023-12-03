@@ -26,3 +26,11 @@ export interface IProductUser {
   type: string;
   variant_name: string[];
 }
+
+export interface IProductFlashSale {
+  id: number;
+  slug: string;
+  name: string;
+  thumbnail_url: string;
+  current_price: number;
+}
