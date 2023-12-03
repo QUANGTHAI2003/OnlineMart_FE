@@ -840,7 +840,7 @@
           "action": "Action",
           "title": "Product",
           "sku": "SKU"
-        },  
+        },
         "rating_text": {
           "abysmal": "Abysmal",
           "bad": "Bad",
@@ -890,7 +890,7 @@
             "id": "Order code",
             "sku": "SKU",
             "city": "City",
-            "name":" Name"
+            "name": " Name"
           },
           "print": "In phiếu các sản đơn hàng được chọn",
           "placeholder": "Enter max: 20 {{placeholder}} separated with ',' ",
