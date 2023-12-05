@@ -37,7 +37,8 @@ const VariantComponent: React.FC<IVariantComponentProps> = ({ variant, variantTh
     if (firstSpid) {
       syncToURL({ spid: firstSpid });
     }
-  }, [syncToURL, variant]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [variant]);
 
   useEffect(() => {
     const spids = new URLSearchParams(location.search).get("spid");

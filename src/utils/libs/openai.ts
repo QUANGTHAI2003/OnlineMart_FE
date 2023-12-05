@@ -4,8 +4,8 @@ const apiKey = import.meta.env.VITE_CHAT_GPT_API as string;
 
 const openai = new OpenAI({
   apiKey,
-  // timeout: 20 * 1000,
-  // dangerouslyAllowBrowser: true,
+  timeout: 20 * 1000,
+  dangerouslyAllowBrowser: true,
 });
 
 export default openai;

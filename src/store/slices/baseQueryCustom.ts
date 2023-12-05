@@ -32,12 +32,10 @@ const baseQueryCustom: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryEr
   let result = await baseQuery(args, api, extraOptions);
 
   if ((result?.error as any)?.message === "You are not admin") {
-    console.log("You are not admin");
     window.location.href = "/auth";
   }
 
   if ((result?.error as any)?.originalStatus === 403) {
-    console.log("You are not admin");
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
 
@@ -70,16 +68,16 @@ const baseQueryCustom: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryEr
     }
   }
 
-  if (result?.error?.status === 401) {
-    const isAdmin = window.location.pathname.includes("admin/shop");
+  // if (result?.error?.status === 401) {
+  //   const isAdmin = window.location.pathname.includes("admin/shop");
 
-    api.dispatch(logOut());
-    if (isAdmin) {
-      window.location.href = "/admin/shop/auth/switch";
-    } else {
-      window.location.href = "/auth";
-    }
-  }
+  //   api.dispatch(logOut());
+  //   if (isAdmin) {
+  //     window.location.href = "/admin/shop/auth/switch";
+  //   } else {
+  //     window.location.href = "/auth";
+  //   }
+  // }
 
   return result;
 };

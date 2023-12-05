@@ -331,41 +331,96 @@ type ErrorMessage = {
   [key: number]: string;
 };
 
-export const handleApiError = (err: any, titleMessage = "Error occurred"): void => {
+export const handleApiError = (err: any): void => {
   const errorStatus = err.status || 500;
+  const language: string = getLang();
 
-  const errorMessages: ErrorMessage = {
-    400: "Bad Request",
-    401: "Unauthorized",
-    403: "Forbidden",
-    404: "Not Found",
-    429: "Too Many Requests",
-    500: "Internal Server Error",
+  type Translations = {
+    [key: string]: {
+      error_400: string;
+      error_401: string;
+      error_403: string;
+      error_404: string;
+      error_429: string;
+      error_500: string;
+      message_400: string;
+      message_401: string;
+      message_403: string;
+      message_404: string;
+      message_429: string;
+      message_500: string;
+      unknown: string;
+    };
   };
 
-  const errorMessage = errorMessages[errorStatus] || "Unknown Error";
+  const translations: Translations = {
+    en: {
+      error_400: "Bad Request",
+      error_401: "Unauthorized",
+      error_403: "Forbidden",
+      error_404: "Not Found",
+      error_429: "Too Many Requests",
+      error_500: "Internal Server Error",
+      message_400: "The request is invalid. Please check your input.",
+      message_401: "Authentication failed. Please check your credentials.",
+      message_403: "Access to this resource is forbidden.",
+      message_404: "The requested resource was not found.",
+      message_429: "Too many requests. Please try again later.",
+      message_500: "Internal server error. Please try again later.",
+      unknown: "Unknown Error",
+    },
+    vi: {
+      error_400: "Lỗi yêu cầu",
+      error_401: "Lỗi xác thực",
+      error_403: "Lỗi truy cập",
+      error_404: "Không tìm thấy",
+      error_429: "Quá nhiều yêu cầu",
+      error_500: "Lỗi máy chủ",
+      message_400: "Yêu cầu không hợp lệ. Vui lòng kiểm tra lại thông tin.",
+      message_401: "Xác thực thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.",
+      message_403: "Truy cập bị từ chối.",
+      message_404: "Không tìm thấy tài nguyên.",
+      message_429: "Quá nhiều yêu cầu. Vui lòng thử lại sau.",
+      message_500: "Lỗi máy chủ. Vui lòng thử lại sau.",
+      unknown: "Lỗi không xác định",
+    },
+  };
+
+  const t = translations[language] || translations.en;
+
+  const errorMessages: ErrorMessage = {
+    400: t.error_400,
+    401: t.error_401,
+    403: t.error_403,
+    404: t.error_404,
+    429: t.error_429,
+    500: t.error_500,
+  };
+
+  const errorMessage = errorMessages[errorStatus] || t.unknown;
 
   switch (errorStatus) {
     case 400:
-      notifyError(errorMessage, "The request is invalid. Please check your input.");
+      notifyError(t.message_400);
       break;
     case 401:
-      notifyError(errorMessage, "Authentication failed. Please check your credentials.");
+      notifyError(t.message_401);
       break;
     case 403:
-      notifyError(errorMessage, "Access to this resource is forbidden.");
+      notifyError(t.message_403);
       break;
     case 404:
-      notifyError(errorMessage, "The requested resource was not found.");
+      notifyError(t.message_404);
       break;
     case 429:
-      notifyError(errorMessage, "Too many requests. Please try again later.");
+      notifyError(t.message_429);
       break;
     case 500:
-      notifyError(errorMessage, "Internal server error. Please try again later.");
+      notifyError(t.message_500);
       break;
     default:
-      notifyError(titleMessage, errorMessage);
+      notifyError(errorMessage);
+      break;
   }
 };
 

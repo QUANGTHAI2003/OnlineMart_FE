@@ -8,6 +8,7 @@ export function SingleOTPInputComponent(props: ISingleOTPInputProps) {
   const { focus, autoFocus, ...rest } = props;
   const inputRef = useRef<HTMLInputElement>(null);
   const prevFocus = usePrevious(!!focus);
+
   useLayoutEffect(() => {
     if (inputRef.current) {
       if (focus && autoFocus) {

@@ -101,8 +101,6 @@ const EditPassword = () => {
                 { required: true, message: t("user.account_user_page.valid.password_new_confirm_required") },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    console.log("🚀 ~ file: EditPassword.tsx:104 ~ validator ~ value:", value);
-                    console.log(getFieldValue("new_password"));
                     if (!value || getFieldValue("new_password") === value) {
                       return Promise.resolve();
                     }

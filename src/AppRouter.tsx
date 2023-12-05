@@ -78,9 +78,9 @@ const AppRouter: React.FC = () => {
   );
 
   const protectedSuperAdminLayout = (
-    <RequireAuth type="superAdmin">
-      <AdminSuperMainLayout />
-    </RequireAuth>
+    // <RequireAuth type="superAdmin">
+    <AdminSuperMainLayout />
+    // </RequireAuth>
   );
 
   // const protectedClientLayout = (
@@ -161,9 +161,9 @@ const AppRouter: React.FC = () => {
 
       <Route element={<AuthLayout />}>
         <Route path="auth" element={<AuthUser />} />
-        <Route path="auth/forgot" element={<CheckOtp />} />
+        <Route path="auth/verify-otp" element={<CheckOtp />} />
         <Route path="auth/changepass" element={<ChangePass />} />
-        <Route path="auth/email" element={<EmailForm />} />
+        <Route path="auth/send-otp" element={<EmailForm />} />
         <Route path="admin/shop/auth/switch" element={<SwitchPageAdmin />} />
         <Route path="admin/shop/auth/signin" element={<SigninAdmin />} />
         <Route path="admin/shop/auth/signup" element={<SignupAdmin />} />

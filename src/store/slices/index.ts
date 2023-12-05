@@ -9,6 +9,7 @@ import { roleApi } from "./api/admin/roleApi";
 import { sellerApi } from "./api/admin/sellerApi";
 import { trafficAdminApi } from "./api/admin/trafficApi";
 import { voucherApi } from "./api/admin/voucherApi";
+import { forgotPasswordApi } from "./api/auth/forgotPasswordApi";
 import { authApi } from "./api/authApi";
 import { categoryApi } from "./api/categoryApi";
 import { productCategoryApi } from "./api/producCategoryApi";
@@ -59,6 +60,7 @@ export const rootReducer: any = {
   [activityApi.reducerPath]: activityApi.reducer,
   [orderApi.reducerPath]: orderApi.reducer,
   [trafficAdminApi.reducerPath]: trafficAdminApi.reducer,
+  [forgotPasswordApi.reducerPath]: forgotPasswordApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
   productDetail: productDetailSlice,
@@ -100,5 +102,6 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     binAdminApi.middleware,
     shopApi.middleware,
     activityApi.middleware,
-    trafficAdminApi.middleware
+    trafficAdminApi.middleware,
+    forgotPasswordApi.middleware
   );

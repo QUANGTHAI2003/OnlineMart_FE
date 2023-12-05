@@ -114,6 +114,10 @@ export const ChatGptStyle = styled(Modal).withConfig({
     position: relative;
     word-break: break-word;
 
+    img {
+      width: 140px;
+    }
+
     p {
       padding: 0px;
       word-break: break-word;

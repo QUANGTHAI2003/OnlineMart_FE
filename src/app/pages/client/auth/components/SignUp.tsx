@@ -1,7 +1,7 @@
 import { useLoginMutation, useRegisterMutation } from "@app/store/slices/api/authApi";
 import { setCredentials } from "@app/store/slices/authSlice";
 import { useAppDispatch } from "@app/store/store";
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,10 +15,6 @@ type FormValues = {
   phone: number;
   password: string;
   confirm?: string;
-};
-
-type ErrorMessage = {
-  [key: number]: string;
 };
 
 export default function SignUp() {
@@ -45,16 +41,7 @@ export default function SignUp() {
 
       isLoading || navigate("/");
     } catch (err: any) {
-      const status = err.status || 500;
-      const errorMessages: ErrorMessage = {
-        400: "Bad Request",
-        401: "Unauthorized",
-        500: "Internal Server Error",
-      };
-
-      const errorMessage = errorMessages[status];
-
-      notifyError("Register failed", errorMessage);
+      handleApiError(err);
     }
   };
 
@@ -184,7 +171,7 @@ export default function SignUp() {
             {t("user.account.sign_up.Sign_up")}
           </Button>
         </Form.Item>
-        <div className="text-center text-gray-500">ONLINE MART &copy; 2018 - 2022. All Rights Reserved</div>
+        <div className="text-center text-gray-500">ONLINE MART &copy; 2023. All Rights Reserved</div>
       </Form>
     </S.SignUpForm>
   );

@@ -433,7 +433,7 @@
       },
       "forgot": {
         "forgot_pass": "Forgot Password",
-        "plz": "Please enter your email",
+        "plz": "Please enter your email or phone number",
         "box": "yours in the box below",
         "cf": "Confirm"
       },

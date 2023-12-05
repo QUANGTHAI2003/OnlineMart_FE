@@ -1,7 +1,7 @@
 import { useLoginMutation } from "@app/store/slices/api/authApi";
 import { setCredentials } from "@app/store/slices/authSlice";
 import { useAppDispatch } from "@app/store/store";
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,10 +13,6 @@ type FormValues = {
   email: string;
   password: string;
   rememberMe: boolean;
-};
-
-type ErrorMessage = {
-  [key: number]: string;
 };
 
 export default function Login() {
@@ -39,18 +35,7 @@ export default function Login() {
 
       isLoading || navigate("/");
     } catch (err: any) {
-      const errorStatus = err.status || 500;
-
-      const errorMessages: ErrorMessage = {
-        400: "Bad Request",
-        401: "Email or password is incorrect",
-        403: "Invalid",
-        500: "Internal Server Error",
-      };
-
-      const errorMessage = errorMessages[errorStatus] || "Unknown Error";
-
-      notifyError("Login failed", errorMessage);
+      handleApiError(err);
     }
   };
 
@@ -66,7 +51,7 @@ export default function Login() {
 
   return (
     <S.LoginForm className="mt-4">
-      <Form onFinish={handleSubmit}>
+      <Form onFinish={handleSubmit} autoComplete="off">
         <Form.Item
           name="email"
           rules={[
@@ -96,7 +81,7 @@ export default function Login() {
         </Form.Item>
         <div className="flex h-10 items-center justify-between">
           <Checkbox>{t("user.account.login.remember_me")}</Checkbox>
-          <Link to="/auth/email">
+          <Link to="/auth/send-otp">
             <span className="justify-end p-3 flex ">{t("user.account.login.forgot")}</span>
           </Link>
         </div>
@@ -106,7 +91,7 @@ export default function Login() {
           </Button>
         </Form.Item>
         <div className="text-center text-gray-500 text-sm">{t("user.account.login.or")}</div>
-        <div className="text-center text-gray-500">ONLINE MART &copy; 2018 - 2022. All Rights Reserved</div>
+        <div className="text-center text-gray-500">ONLINE MART &copy; 2023. All Rights Reserved</div>
       </Form>
     </S.LoginForm>
   );

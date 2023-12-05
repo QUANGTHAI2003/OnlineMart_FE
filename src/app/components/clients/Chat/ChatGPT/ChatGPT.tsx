@@ -80,7 +80,7 @@ const ChatGPT: React.FC = () => {
 
   const openai = new OpenAI({
     apiKey: API_KEY,
-    timeout: 20 * 1000,
+    // timeout: 20 * 1000,
     dangerouslyAllowBrowser: true,
   });
 
