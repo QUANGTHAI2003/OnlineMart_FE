@@ -2,6 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import logo from "@app/app/assets/images/OM_reverse.png";
 import { adminShopRoutes } from "@app/configs/routes/admin_shop";
 import { useDebounce, useResponsive } from "@app/hooks";
+import usePermissions from "@app/hooks/usePermissions";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
 import { useAppSelector } from "@app/store/store";
 import { Input, Layout, Menu } from "antd";
@@ -66,6 +67,8 @@ const AdminMainSidebar: React.FC<IAdminMainSidebarProps> = ({ isCollapsed }) => 
   const [searchSidebar, setSearchSidebar] = useState<string>("");
   const debouncedSearchSidebar = useDebounce(searchSidebar, 200);
   const [openKeys, setOpenKeys] = useState<string[] | undefined>([""]);
+
+  const { permissions } = usePermissions();
 
   const isCollapsible = useMemo(() => mobileOnly && tabletOnly, [mobileOnly, tabletOnly]);
 
@@ -146,22 +149,42 @@ const AdminMainSidebar: React.FC<IAdminMainSidebarProps> = ({ isCollapsed }) => 
         openKeys={openKeys}
         onClick={handleResetSearchSidebar}
         onOpenChange={handleOpenOnyCurrenSubMenu}
-        items={filteredRoutes.map((nav) => {
-          const isSubMenu = nav.children?.length;
+        items={filteredRoutes?.map((nav: any) => {
+          const isSubMenu = nav?.children?.length;
+          const checkPermissionMainNav =
+            nav?.permission &&
+            nav?.permission !== "all" &&
+            !permissions?.some((permission) => nav?.permission.includes(permission));
 
           return {
-            key: nav.key,
-            title: t(nav.title),
-            label: isSubMenu ? t(nav.title) : <Link to={nav.url || ""}>{t(nav.title)}</Link>,
-            icon: nav.icon,
+            key: nav?.key,
+            title: t(nav?.title),
+            label: isSubMenu ? (
+              t(nav?.title)
+            ) : checkPermissionMainNav ? (
+              <span style={{ color: "rgba(255, 255, 255, 0.5)" }}>{t(nav?.title)}</span>
+            ) : (
+              <Link to={nav?.url || ""}>{t(nav?.title)}</Link>
+            ),
+            icon: nav?.icon,
+            disabled: checkPermissionMainNav,
             children:
               isSubMenu &&
-              nav.children?.map((subNav: any) => ({
-                key: subNav.key,
-                title: t(subNav.title),
-                label: <Link to={subNav.url || ""}>{t(subNav.title)}</Link>,
-                icon: subNav.icon,
-              })),
+              nav?.children?.map((subNav: any) => {
+                const checkPermissionSubNav = subNav?.permission && !permissions?.includes(subNav?.permission);
+
+                return {
+                  key: subNav?.key,
+                  title: t(subNav?.title),
+                  label: checkPermissionSubNav ? (
+                    <span style={{ color: "rgba(255, 255, 255, 0.5)" }}>{t(subNav?.title)}</span>
+                  ) : (
+                    <Link to={subNav?.url || ""}>{t(subNav?.title)}</Link>
+                  ),
+                  icon: subNav?.icon,
+                  disabled: checkPermissionSubNav,
+                };
+              }),
           };
         })}
       />

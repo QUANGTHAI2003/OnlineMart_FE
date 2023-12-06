@@ -140,7 +140,7 @@ const UserSearch = () => {
                   },
                 }}
               >
-                {viewProduct.map((item) => (
+                {viewProduct.map((item: any) => (
                   <SwiperSlide className="brand_content" key={uuidv4()}>
                     <ProductCard
                       id={item.id}

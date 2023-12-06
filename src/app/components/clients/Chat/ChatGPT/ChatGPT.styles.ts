@@ -32,6 +32,11 @@ export const ChatGptStyle = styled(Modal).withConfig({
   margin: 0;
   margin-left: auto !important;
 
+  .om-modal {
+    min-width: 700px !important;
+    width: 100% !important;
+  }
+
   .chat-infinity {
     height: 100%;
   }
@@ -116,6 +121,27 @@ export const ChatGptStyle = styled(Modal).withConfig({
 
     img {
       width: 140px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
     }
 
     p {

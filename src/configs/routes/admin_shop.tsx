@@ -30,7 +30,7 @@ export const adminShopRoutes: ISidebarMenu[] = [
     children: [
       {
         title: "admin_shop.sidebar.order_list",
-        key: "order_list",
+        key: "View orders",
         permission: "View orders",
         url: "/admin/shop/orders",
       },
@@ -85,7 +85,7 @@ export const adminShopRoutes: ISidebarMenu[] = [
       {
         title: "admin_shop.sidebar.product_categories",
         key: "product_categories",
-        permission: "View products",
+        permission: "View categories",
         url: "/admin/shop/categories",
       },
       {
@@ -106,7 +106,7 @@ export const adminShopRoutes: ISidebarMenu[] = [
       {
         title: "admin_shop.sidebar.list_voucher",
         key: "list_voucher",
-        permission: "View voucher",
+        permission: "View vouchers",
         url: "/admin/shop/evoucher",
       },
     ],
@@ -136,8 +136,8 @@ export const adminShopRoutes: ISidebarMenu[] = [
       {
         title: "admin_shop.sidebar.info_seller",
         key: "info_seller",
+        permission: "Authorizations",
         url: "/admin/shop/manage-seller",
-        permission: "Info seller",
       },
       {
         title: "admin_shop.sidebar.manage_role",
@@ -172,7 +172,7 @@ export const adminShopRoutes: ISidebarMenu[] = [
     title: "admin_shop.sidebar.dev_center",
     key: "development_center",
     url: "/admin/shop/dev_center",
-    permission: "View reports",
+    permission: ["View operations", "View traffic"],
     icon: <AreaChartOutlined />,
     children: [
       {
@@ -184,13 +184,13 @@ export const adminShopRoutes: ISidebarMenu[] = [
       {
         title: "admin_shop.sidebar.traffic_website",
         key: "traffic_website",
-        permission: "View reports",
+        permission: "View traffic",
         url: "/admin/shop/dev_center/traffic_website",
       },
       {
         title: "admin_shop.sidebar.operational_efficiency",
         key: "operational_efficiency",
-        permission: "View reports",
+        permission: "View operations",
         url: "/admin/shop/dev_center/operational_efficiency",
       },
     ],
@@ -198,6 +198,7 @@ export const adminShopRoutes: ISidebarMenu[] = [
   {
     title: "admin_shop.sidebar.settings",
     key: "settings",
+    permission: ["View settings"],
     url: "/admin/shop/settings",
     icon: <FontAwesomeIcon icon={faGear} />,
   },

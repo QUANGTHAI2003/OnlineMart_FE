@@ -169,7 +169,7 @@ const ChatGPT: React.FC = () => {
         onOk={() => setModalOpen(false)}
         onCancel={() => setModalOpen(false)}
         maskStyle={{ zIndex: 99999 }}
-        width={700}
+        className="min-w-[700px] max-w-[1000px] w-full"
         zIndex={99999}
         keyboard={true}
         footer={<ChatGPTFooter onSend={handleSendRequest} />}
