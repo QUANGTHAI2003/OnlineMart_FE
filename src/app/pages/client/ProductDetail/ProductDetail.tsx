@@ -3,7 +3,7 @@ import ModalSelect from "@app/app/components/clients/SelectAddress/ModalSelect";
 import MetaHeader from "@app/app/components/Meta/MetaHeader";
 import { useGetProductDetailQuery } from "@app/store/slices/api/user/productApi";
 import { setDataCart, setPrice } from "@app/store/slices/redux/productDetailSlice";
-import { useAppDispatch } from "@app/store/store";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
 import { formatCurrency } from "@app/utils/helper";
 import { Rate } from "antd";
 import React, { useEffect, useState } from "react";
@@ -30,6 +30,7 @@ const ProductDetail = () => {
   const [variantThumbnail, setVariantThumbnail] = useState<string>("");
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const { rating, reviewCount } = useAppSelector((state) => state.productDetail);
 
   const { t } = useTranslation();
   const { id } = useParams();
@@ -41,7 +42,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     window.scrollTo(120, 120);
-  }, [location.pathname]);
+  }, [location.search]);
 
   useEffect(() => {
     if (productDetail) {
@@ -145,10 +146,10 @@ const ProductDetail = () => {
                   <div className="below-title">
                     <div className="flex flex-wrap">
                       <div className="review flex items-center">
-                        <Rate disabled allowHalf defaultValue={productDetail?.rating} className="text-sm" />
+                        <Rate disabled allowHalf value={rating} className="text-sm" />
                         <div className="flex items-center">
                           <button className="number" onClick={handleScrollToTReview}>
-                            {t("user.product_detail.view_review", { count: 3 })}
+                            {t("user.product_detail.view_review", { count: reviewCount })}
                           </button>
                           <div className="below-title-seperate"></div>
                         </div>

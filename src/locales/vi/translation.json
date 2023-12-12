@@ -390,7 +390,18 @@
       "write_review": "Đã viết: ",
       "receive_like": "Nhận được: ",
       "like": "Thích",
-      "comments": "Bình luận"
+      "star": "sao",
+      "stars": "sao",
+      "joined_for": "Đã tham gia",
+      "received_thanks": "lượt cảm ơn",
+      "reviewed": "Đánh giá vào",
+      "write_response": "Viết câu trả lời",
+      "view": "Xem thêm",
+      "collapse": "Thu gọn",
+      "more_response": "câu trả lời",
+      "more_responses": "câu trả lời",
+      "response": "câu trả lời",
+      "responses": "câu trả lời"
     },
     "chatgpt": {
       "assistant": "Trợ lý ảo Online Mart",
@@ -524,7 +535,6 @@
       "manage_seller": "Quản lý người bán",
       "manage_role": "Quản lý vai trò",
       "manage_permission": "Quản lý quyền",
-      "settings": "Cài đặt",
       "ships": "Vận chuyển",
       "overview": "Tổng quan",
       "report": "Báo cáo",
@@ -753,6 +763,10 @@
           "clear_all": "Xóa tất cả",
           "apply": "Áp dụng",
           "seller_reply": "Nhà bán",
+          "status": "Trạng thái",
+          "approved": "Đã duyệt",
+          "reported": "Đã báo cáo",
+          "reject": "Đã ẩn",
           "review_date": "Ngày đánh giá"
         },
         "table_cpn": {
@@ -1452,7 +1466,7 @@
       },
       "bin": {
         "title": "Thùng rác",
-        "description_bin": "Quản lý các sản phẩm đã được xóa mềm" 
+        "description_bin": "Quản lý các sản phẩm đã được xóa mềm"
       }
     },
     "bin": {

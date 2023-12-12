@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -24,17 +20,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "types": ["node", "vitest/globals"],
+    "types": ["node"],
     "paths": {
-      "@app/*": [
-        "./src/*"
-      ]
+      "@app/*": ["./src/*"]
     }
   },
   "include": ["src", "./setupTest.ts", "App.test"],
-  "exclude": [
-    "**/react-json-to-html-table"
-  ],
+  "exclude": ["**/react-json-to-html-table"],
   "references": [{ "path": "./tsconfig.node.json" }]
-
 }

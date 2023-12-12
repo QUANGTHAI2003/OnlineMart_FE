@@ -47,6 +47,7 @@
     "classnames": "^2.3.2",
     "country-list": "^2.3.0",
     "dayjs": "^1.11.9",
+    "emoji-picker-react": "^4.5.16",
     "flag-icon-css": "^4.1.7",
     "flag-icons": "^6.7.0",
     "highcharts": "^11.1.0",

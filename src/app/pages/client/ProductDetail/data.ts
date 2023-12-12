@@ -518,7 +518,7 @@ export const comment = {
       ],
       vote_attributes: {
         agree: ["Êm chân", "Kiểu dáng đẹp, năng động", "Thoáng khí", "Trọng lượng nhẹ"],
-        disagree: [],
+        disagree: ["Xấu", "Không đẹp"],
       },
       delivery_rating: [],
     },

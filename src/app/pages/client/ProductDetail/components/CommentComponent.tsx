@@ -1,33 +1,92 @@
-import { IconCheck, IconThank } from "@app/app/assets/icons";
+import { CloseOutlined } from "@ant-design/icons";
+import { IconCheck } from "@app/app/assets/icons";
+import defaultAvatar from "@app/app/assets/images/default_avatar_user.png";
+import likeIcon from "@app/app/assets/images/icon-like.png";
+import seeMoreIcon from "@app/app/assets/images/icon-see-more.png";
+import arrowSendIcon from "@app/app/assets/images/icon-send-arrow-comment.png";
+import { RatingText } from "@app/app/pages/admin/products/review/data";
 import { useResponsive } from "@app/hooks";
-import { formatTimeAgo } from "@app/utils/helper";
-import { Pagination, Rate } from "antd";
-import React, { useEffect, useState } from "react";
+import {
+  useAddCommentMutation,
+  useGetLikesQuery,
+  useGetReviewByProductQuery,
+  useUpdateLikeMutation,
+} from "@app/store/slices/api/user/reviewApi";
+import { useAppSelector } from "@app/store/store";
+import { baseImageKitUrl, calculateTimes, handleApiError } from "@app/utils/helper";
+import { faComment, faThumbsUp as faThumbsUpRegular } from "@fortawesome/free-regular-svg-icons";
+import { faThumbsUp as faThumbsUpSolid } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Divider, Image, Pagination, Rate, Spin } from "antd";
+import { debounce } from "lodash";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
-import { comment } from "../data";
 import * as S from "../ProductDetail.styles";
 
 import { CommentSkeleton } from ".";
 
-const CommentComponent = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+const CommentComponent: React.FC<any> = ({ activeItems }) => {
   const { isTablet } = useResponsive();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t } = useTranslation();
 
-  const [expanded, setExpanded] = useState<number[]>([]);
-  const [replyComment, setReplyComment] = useState<number[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const commentData: any = comment?.data || [];
-  const commentLength = (commentData as string[])?.length || 0;
+  const { id: productId } = useParams();
+  const userId = useAppSelector((state) => state.userState.user)?.id;
+  const timeLoadLike = 500;
 
-  const handleExpandCommentItem = (commentItemId: number) => {
-    if (expanded.includes(commentItemId)) {
-      setExpanded(expanded.filter((item) => item !== commentItemId));
-    } else {
-      setExpanded([...expanded, commentItemId]);
-    }
+  const reviewsPerPage = 2;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const { data: reviewData, isFetching } = useGetReviewByProductQuery(parseInt(productId as string));
+  const { data: likeData } = useGetLikesQuery(parseInt(productId as string));
+
+  const indexOfLastReview = currentPage * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const [updateLike] = useUpdateLikeMutation();
+  const [addComment, { isLoading }] = useAddCommentMutation();
+
+  const [likeCounts, setLikeCounts] = useState<{ [key: number]: number }>({});
+
+  const [content, setContent] = useState<string>("");
+  const [replyComment, setReplyComment] = useState<number[]>([]);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleExpandCommentItem = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const debouncedHandleLike = debounce(async (commentItemId: number, initialLikeCount: number) => {
+    const newLikeCount = (likeCounts[commentItemId] || initialLikeCount) + 1;
+    setLikeCounts((prev) => ({ ...prev, [commentItemId]: newLikeCount }));
+    await updateLike({
+      userId: userId,
+      productId: parseInt(productId as string),
+      reviewId: commentItemId,
+      like_count: 1,
+    });
+  }, timeLoadLike);
+
+  const debouncedHandleDislike = debounce(async (commentItemId: number, initialLikeCount: number) => {
+    const newLikeCount = (likeCounts[commentItemId] || initialLikeCount) - 1;
+    setLikeCounts((prev) => ({ ...prev, [commentItemId]: newLikeCount }));
+    await updateLike({
+      userId: userId,
+      productId: parseInt(productId as string),
+      reviewId: commentItemId,
+      like_count: -1,
+    });
+  }, timeLoadLike);
+
+  const handleLike = (commentItemId: number, initialLikeCount: number) => {
+    debouncedHandleLike(commentItemId, initialLikeCount);
+  };
+
+  const handleDislike = (commentItemId: number, initialLikeCount: number) => {
+    debouncedHandleDislike(commentItemId, initialLikeCount);
   };
 
   const handleToggleReplyComment = (commentItemId: number) => {
@@ -39,217 +98,302 @@ const CommentComponent = () => {
     });
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  });
+  const handleAddComment = async (reviewId: number) => {
+    try {
+      if (content.trim() !== "" && reviewId !== null) {
+        const values = {
+          content: content.trim(),
+          reviewId,
+          productId: parseInt(productId || "0"),
+        };
+
+        await addComment(values);
+        setContent("");
+        setIsExpanded(false);
+      }
+    } catch (err) {
+      handleApiError(err);
+    }
+  };
+
+  const displayReviewData = useMemo(() => {
+    return reviewData?.filter((item: any) => {
+      const reviewRating = item.rating as number;
+
+      if (activeItems.length > 0) {
+        return activeItems.some((item: number) => {
+          return Math.round(reviewRating) === item;
+        });
+      }
+      return reviewData;
+    });
+  }, [activeItems, reviewData]);
+
+  const currentReviews = displayReviewData.slice(indexOfFirstReview, indexOfLastReview);
 
   return (
     <S.CommentStyle>
-      {isLoading ? (
+      {isFetching ? (
         <CommentSkeleton />
       ) : (
-        // eslint-disable-next-line react/jsx-no-useless-fragment
-        <>
-          {commentData?.map((item: any) => {
-            const isExpanded = expanded.includes(item.id);
-            const subComment = item.comments?.sort((a: any, b: any) => a.create_at - b.create_at);
+        <div>
+          {currentReviews &&
+            currentReviews?.map((item: any) => {
+              const likeCount = likeCounts[item.id] || item.like_count;
+              const userTimes = calculateTimes(item?.user.created_at);
+              const reviewTimes = calculateTimes(item?.created_at);
+              const isReplyComment = replyComment.includes(item.id);
+              const commentsToShow = isExpanded ? item?.replies : item?.replies.slice(0, 2);
 
-            const commentLessItem = isExpanded ? subComment : subComment.slice(0, 1);
+              return (
+                <div className="review-comment" key={uuidv4()}>
+                  {isTablet && (
+                    <div className="review-comment__user">
+                      <div className="review-comment__user-inner">
+                        <div className="review-comment__user-avatar">
+                          <div className="user-avatar">
+                            <img
+                              src={`${item.user.avatar ? `${baseImageKitUrl}/${item.user.avatar}` : defaultAvatar}`}
+                              alt={item.user.avatar}
+                            />
+                          </div>
+                        </div>
 
-            const isReplyComment = replyComment.includes(item.id);
-
-            return (
-              <div className="review-comment" key={item.id}>
-                {isTablet && (
-                  <div className="review-comment__user">
-                    <div className="review-comment__user-inner">
-                      <div className="review-comment__user-avatar">
-                        <div className="user-avatar has-character">
-                          <img
-                            src="https://salt.tikicdn.com/cache/512x512/ts/avatar/52/b6/1f/40c46b223bccbba9df24126aa157c2f4.png"
-                            alt="Nhật Đăng"
-                          />
-                          <span>NĐ</span>
+                        <div>
+                          <div className="review-comment__user-name">{item.user.user_name}</div>
+                          <div className="review-comment__user-date">
+                            {`${t("user.product_detail.joined_for")} ${userTimes.time_elapsed}`}
+                          </div>
                         </div>
                       </div>
-                      <div>
-                        <div className="review-comment__user-name">{item.created_by.name}</div>
-                        <div className="review-comment__user-date">
-                          {item.created_by.contribute_info.summary.joined_time}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review-comment__user-info">
-                      <img
-                        src="https://salt.tikicdn.com/ts/upload/c6/67/f1/444fc9e1869b5d4398cdec3682af7f14.png"
-                        alt="review-count"
-                      />
-                      {t("user.product_detail.write_review")}
-                      <span>{`${item.created_by.contribute_info.summary.total_review} đánh giá`}</span>
-                    </div>
-                    <div className="review-comment__user-info">
-                      <img
-                        src="https://salt.tikicdn.com/ts/upload/cc/86/cd/1d5ac6d4e00abbf6aa4e4636489c9d80.png"
-                        alt="liked-count"
-                      />
-                      {t("user.product_detail.receive_like")}
-                      <span>{`${item.created_by.contribute_info.summary.total_thank} Lượt cảm ơn`}</span>
-                    </div>
-                  </div>
-                )}
-                <div className="flex-grow">
-                  <div className="review-comment__rating-title">
-                    <div className="review-comment__rating">
-                      <Rate disabled defaultValue={item.rating} />
-                    </div>
-                    <div className="review-comment__title">{item.title}</div>
-                  </div>
-                  <div className="review-comment__seller-name-attributes">
-                    <div className="review-comment__seller-name">
-                      <span className="review-comment__check-icon"></span>
-                      {t("user.product_detail.purchased")}
-                    </div>
-                  </div>
-                  <div className="review-comment__content">{item.content}</div>
-                  <div className="review-comment__images">
-                    {item?.images?.map((itemImage: any) => {
-                      return (
-                        <div
-                          key={itemImage.id}
-                          className="review-comment__image"
-                          style={{
-                            backgroundImage: `url(${itemImage.full_path})`,
-                          }}
-                        ></div>
-                      );
-                    })}
-                  </div>
-                  {item.vote_attributes.agree.length > 0 && (
-                    <div className="wrapper-rating-attribute">
-                      <div className="rating-attribute">
-                        <IconCheck />
-                        <span className="rating-attribute__attributes">
-                          {item.vote_attributes?.agree.map((itemAgree: any, index: number) => (
-                            <React.Fragment key={index}>
-                              {index > 0 && ", "}
-                              {itemAgree}
-                            </React.Fragment>
-                          ))}
-                        </span>
+
+                      <div className="review-comment__user-info">
+                        <img src={likeIcon} alt="liked-count" />
+                        {t("user.product_detail.receive_like")}
+                        <span>{`${likeCount} ${t("user.product_detail.received_thanks")}`}</span>
                       </div>
                     </div>
                   )}
-                  <div className="review-comment__created-date">
-                    <div className="review-comment__attributes">
-                      {item.product_attributes.map((itemProAttr: any, index: number) => (
+
+                  <div className="flex-grow">
+                    <div className="review-comment__rating-title">
+                      <div className="review-comment__rating">
+                        <Rate disabled allowHalf defaultValue={item.rating} />
+                      </div>
+                      <div className="review-comment__title">{RatingText(t).status[Math.floor(item.rating)]}</div>
+                    </div>
+
+                    <div className="review-comment__seller-name-attributes">
+                      <div className="review-comment__seller-name">
+                        <span className="review-comment__check-icon"></span>
+                        {t("user.product_detail.purchased")}
+                      </div>
+                    </div>
+
+                    {item.content && item.content.trim() !== "" && (
+                      <div className="review-comment__content">{item.content}</div>
+                    )}
+
+                    <div className="review-comment__images">
+                      <Image.PreviewGroup>
+                        {item?.review_media?.map((itemImage: any) => {
+                          return (
+                            <div key={uuidv4()} className="review-comment__image">
+                              <Image
+                                className="w-full h-full rounded-md object-cover"
+                                src={`${baseImageKitUrl}/${itemImage.media}`}
+                                alt={itemImage.media}
+                              />
+                            </div>
+                          );
+                        })}
+                      </Image.PreviewGroup>
+                    </div>
+
+                    {(item.agree?.length > 0 || item.disagree?.length > 0) && (
+                      <div className="wrapper-rating-attribute">
+                        {item.agree?.length > 0 && (
+                          <div className="rating-attribute">
+                            <IconCheck />
+                            <span className="rating-attribute__attributes">{item.agree}</span>
+                          </div>
+                        )}
+
+                        {item.disagree?.length > 0 && (
+                          <div className="rating-attribute">
+                            <CloseOutlined className="text-red-400" />
+                            <span className="rating-attribute__attributes">{item.disagree}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="review-comment__created-date">
+                      <div className="review-comment__attributes">
+                        {/* {item.product_attributes.map((itemProAttr: any, index: number) => (
                         <div className="review-comment__attributes--item" key={index}>
                           <span>{itemProAttr}</span>
                         </div>
-                      ))}
-                    </div>
-                    <span>{`Đánh giá vào ${formatTimeAgo(item.created_at)}`}</span>
-                    <span className="review-comment__time-line">{item.timeline?.content}</span>
-                  </div>
-                  <div className="inline-flex items-center">
-                    <span className="review-comment__thank">
-                      <IconThank />
-                      <span>{t("user.product_detail.like")}</span>
-                    </span>
-                    <span
-                      className="review-comment__reply"
-                      onClick={() => handleToggleReplyComment(item.id)}
-                      onKeyDown={() => handleToggleReplyComment(item.id)}
-                      role="button"
-                      tabIndex={0}
-                    >
-                      {t("user.product_detail.comments")}
-                    </span>
-                  </div>
-
-                  <div className={`reply-comment ${isReplyComment ? "expanded" : ""}`}>
-                    <div className="reply-comment__outer">
-                      <div
-                        className="reply-comment__avatar"
-                        style={{ backgroundImage: `url(&quot;//tiki.vn/assets/img/avatar-s.png&quot;)` }}
-                      >
-                        <img
-                          src="https://salt.tikicdn.com/ts/upload/07/d5/94/d7b6a3bd7d57d37ef6e437aa0de4821b.png"
-                          alt=""
-                        />
+                      ))} */}
+                        <span className="text-red-500">*** BIẾN THỂ ***</span>
                       </div>
-                      <div className="reply-comment__wrapper">
-                        <div>
-                          <textarea
-                            placeholder="Viết câu trả lời"
-                            className="reply-comment__input"
-                            spellCheck="false"
-                          ></textarea>
-                        </div>
-                        <img
-                          src="https://salt.tikicdn.com/ts/upload/1e/49/2d/92f01c5a743f7c8c1c7433a0a7090191.png"
-                          className="reply-comment__submit"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="review-comment__sub-comments">
-                    {commentLessItem.map((itemCmt: any) => {
-                      return (
-                        <div className="review-sub-comment" key={itemCmt.id}>
-                          <div className="review-sub-comment__avatar-thumb">
-                            <div
-                              className="user-avatar"
-                              style={{
-                                backgroundImage: `background-image: url(${itemCmt.avatar_url})`,
-                              }}
-                            >
-                              <img src={itemCmt.avatar_url} alt={itemCmt.fullname} />
-                            </div>
-                          </div>
-                          <div className="review-sub-comment__inner">
-                            <div className="review-sub-comment__avatar">
-                              <div className="review-sub-comment__avatar-name">{itemCmt.fullname}</div>
-                              {itemCmt.commentator === "seller" && (
-                                <span className="review-sub-comment__check-icon"></span>
-                              )}
-                              <div className="review-sub-comment__avatar-date">{formatTimeAgo(itemCmt.create_at)}</div>
-                            </div>
-                            <div className="review-sub-comment__content">{itemCmt.content}</div>
-                          </div>
-                        </div>
-                      );
-                    })}
 
-                    {item.comments.length > 1 && (
-                      <div
-                        className="review-comment__count"
-                        onClick={() => handleExpandCommentItem(item.id)}
-                        onKeyDown={() => handleExpandCommentItem(item.id)}
-                        role="button"
-                        tabIndex={0}
-                      >
-                        <img
-                          src="https://salt.tikicdn.com/ts/upload/d4/d0/90/6356a7cae463100ee88538511318c5fb.png"
-                          className={`review-comment__icon-more ${isExpanded ? "expanded" : ""}`}
-                          alt="icon-more"
-                        />
-                        {isExpanded
-                          ? `Thu gọn ${item.comments.length - 1} câu trả lời`
-                          : `Xem thêm ${item.comments.length - 1} câu trả lời`}
+                      <span>{`${t("user.product_detail.reviewed")} ${reviewTimes.time_elapsed}`}</span>
+
+                      <Divider type="vertical" />
+
+                      {/* <span className="review-comment__time-line">{item.timeline?.content}</span> */}
+                      <span className="review-comment__time-line text-red-500">*** THỜI GIAN ĐÃ DÙNG ***</span>
+                    </div>
+
+                    {userId && (
+                      <div className="inline-flex items-center">
+                        {likeData?.filter(
+                          (itemFilter: any) =>
+                            itemFilter?.review_id === item?.id &&
+                            itemFilter?.status === 1 &&
+                            userId === itemFilter?.user_id
+                        ).length > 0 ? (
+                          <Button
+                            type="link"
+                            className="review-comment__thank"
+                            onClick={() => handleDislike(item.id, item.like_count)}
+                          >
+                            <FontAwesomeIcon icon={faThumbsUpSolid} className="text-xl" />
+                            <p className="leading-[0px]">{likeCounts[item.id] || item?.like_count}</p>
+                          </Button>
+                        ) : (
+                          <Button
+                            type="link"
+                            className="review-comment__thank"
+                            onClick={() => handleLike(item.id, item.like_count)}
+                          >
+                            <FontAwesomeIcon icon={faThumbsUpRegular} className="text-xl" />
+                            <p className="leading-[0px]">{likeCounts[item.id] || item?.like_count}</p>
+                          </Button>
+                        )}
+                        <span
+                          className="review-comment__reply"
+                          onClick={() => handleToggleReplyComment(item.id)}
+                          onKeyDown={() => handleToggleReplyComment(item.id)}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <FontAwesomeIcon icon={faComment} className="text-xl" />
+                          <p className="leading-[0px]">{item.replies.length}</p>
+                        </span>
                       </div>
                     )}
+
+                    <div className={`reply-comment ${isReplyComment ? "expanded" : ""}`}>
+                      <div className="reply-comment__outer">
+                        <div className="reply-comment__avatar">
+                          <img
+                            src={`${item.user.avatar ? `${baseImageKitUrl}/${item.user.avatar}` : defaultAvatar}`}
+                            alt={item.user.user_name}
+                          />
+                        </div>
+
+                        <div className="reply-comment__wrapper">
+                          <div>
+                            <textarea
+                              placeholder={t("user.product_detail.write_response")}
+                              className="reply-comment__input"
+                              value={content}
+                              onChange={(e) => {
+                                setContent(e.target.value);
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter" && !e.shiftKey) {
+                                  e.preventDefault();
+                                  handleAddComment(item.id);
+                                }
+                              }}
+                              spellCheck="false"
+                            />
+                          </div>
+
+                          <button onClick={() => handleAddComment(item.id)} disabled={isLoading} className="contents">
+                            {isLoading ? (
+                              <Spin size="small" className="reply-comment__submit" />
+                            ) : (
+                              <img className="reply-comment__submit" src={arrowSendIcon} alt="send icon" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="review-comment__sub-comments">
+                      {commentsToShow?.map((itemCmt: any) => {
+                        return (
+                          <div className="review-sub-comment" key={uuidv4()}>
+                            <div className="review-sub-comment__inner">
+                              <div className="review-sub-comment__avatar-thumb">
+                                <div className="user-avatar">
+                                  <img
+                                    src={`${
+                                      itemCmt.user.avatar ? `${baseImageKitUrl}/${itemCmt.user.avatar}` : defaultAvatar
+                                    }`}
+                                    alt={itemCmt.user.user_name}
+                                  />
+                                </div>
+                              </div>
+                              <div>
+                                <div className="review-sub-comment__avatar">
+                                  <div className="review-sub-comment__avatar-name">{itemCmt.user.user_name}</div>
+
+                                  <Divider type="vertical" />
+
+                                  <div className="review-sub-comment__avatar-date">
+                                    {calculateTimes(itemCmt?.created_at).time_elapsed}
+                                  </div>
+                                </div>
+                                <div className="review-sub-comment__content">{itemCmt.content}</div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+
+                      {item.replies?.length > 2 && (
+                        <div
+                          className="review-comment__count"
+                          onClick={handleExpandCommentItem}
+                          onKeyDown={handleExpandCommentItem}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <img
+                            src={seeMoreIcon}
+                            className={`review-comment__icon-more ${isExpanded ? "expanded" : ""}`}
+                            alt="icon-more"
+                          />
+                          {isExpanded
+                            ? `${t("user.product_detail.collapse")} ${item.replies.length - 2} 
+                             ${t(`user.product_detail.${item.replies.length - 2 > 1 ? "responses" : "response"}`)}`
+                            : `${t("user.product_detail.view")} ${item.replies.length - 2} 
+                             ${t(
+                               `user.product_detail.${item.replies.length - 2 > 1 ? "more_responses" : "more_response"}`
+                             )}`}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </>
+              );
+            })}
+        </div>
       )}
+
       <div className="customer-reviews__pagination">
-        <Pagination defaultCurrent={1} defaultPageSize={3} total={commentLength} />
+        {/* <Pagination defaultCurrent={1} defaultPageSize={pageSize} total={commentLength} hideOnSinglePage /> */}
+        <Pagination
+          current={currentPage}
+          pageSize={reviewsPerPage}
+          total={displayReviewData ? displayReviewData.length : 0}
+          onChange={paginate}
+        />
       </div>
     </S.CommentStyle>
   );

@@ -908,9 +908,9 @@ export const CustomerReview = styled.section`
     &__heading {
       font-size: 20px;
       line-height: 32px;
-      font-weight: 400;
+      font-weight: 500;
       text-transform: capitalize;
-      padding: 8px 16px;
+      padding: 25px 47px 30px 47px;
     }
 
     &__inner {
@@ -959,7 +959,7 @@ export const CustomerReview = styled.section`
           left: 0px;
           top: 0px;
           bottom: 0px;
-          background-color: rgb(128, 128, 137);
+          background-color: #0a68ff;
           border-radius: 99em;
         }
       }
@@ -1010,13 +1010,6 @@ export const CustomerReview = styled.section`
         width: 100px;
         height: 100px;
       }
-
-      > img {
-        width: 100%;
-        height: 100%;
-        border-radius: 4px;
-        object-fit: cover;
-      }
     }
 
     .overlay {
@@ -1034,7 +1027,7 @@ export const CustomerReview = styled.section`
 
   .filter-review {
     display: flex;
-    padding: 48px 0px 32px;
+    margin-bottom: 20px;
 
     @media screen and (max-width: 768px) {
       flex-direction: column !important;
@@ -1062,16 +1055,16 @@ export const CustomerReview = styled.section`
       font-weight: 500;
       font-size: 14px;
       line-height: 20px;
-      padding: 6px 12px;
+      padding: 6px 15px;
       border-radius: 100px;
       color: rgb(56, 56, 61);
-      background: rgb(245, 245, 250);
       margin: 0px 12px 12px 0px;
       cursor: pointer;
       display: flex;
       -webkit-box-align: center;
       align-items: center;
       user-select: none;
+      border: 1px solid #cbd5e1;
 
       &.active {
         background: rgb(240, 248, 255);
@@ -1087,7 +1080,7 @@ export const CustomerReview = styled.section`
       display: none;
       width: 18px;
       height: 18px;
-      margin-right: 11px;
+      margin-right: 5px;
     }
   }
 `;
@@ -1149,7 +1142,7 @@ export const CommentStyle = styled.section`
       &-name {
         font-size: 15px;
         line-height: 24px;
-        font-weight: 500;
+        font-weight: 600;
         text-transform: capitalize;
       }
 
@@ -1194,7 +1187,8 @@ export const CommentStyle = styled.section`
     &__seller-name-attributes {
       display: flex;
       align-items: center;
-      margin: 0px 0px 16px;
+      margin-top: 7px;
+      margin-bottom: 15px;
     }
 
     &__seller-name {
@@ -1246,8 +1240,8 @@ export const CommentStyle = styled.section`
     }
 
     &__image {
-      width: 152px;
-      height: 152px;
+      width: 100px;
+      height: 100px;
       border-radius: 4px;
       background-size: cover;
       background-position: center center;
@@ -1309,49 +1303,31 @@ export const CommentStyle = styled.section`
 
     &__time-line {
       position: relative;
-      padding-left: 10px;
-      margin-left: 8px;
-
-      &:before {
-        content: "";
-        height: 2px;
-        width: 2px;
-        background-color: rgb(128, 128, 137);
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 0px;
-        margin: -1px 0px 0px;
-      }
     }
 
     &__thank {
-      padding: 8px 16px;
       font-size: 14px;
-      line-height: 20px;
       color: rgb(11, 116, 229);
-      border: 1px solid rgb(11, 116, 229);
       font-weight: 500;
       border-radius: 4px;
-      margin: 0px 24px 0px 0px;
       cursor: pointer;
-      display: inline-flex;
       user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     &__reply {
+      display: flex;
+      align-items: center;
+      gap: 7px;
       padding: 8px 16px;
       font-size: 14px;
-      line-height: 20px;
+      border-radius: 4px;
       color: rgb(11, 116, 229);
       font-weight: 500;
       cursor: pointer;
-      display: inline-flex;
       user-select: none;
-    }
-
-    &__sub-comments {
-      margin: 16px 0px 0px;
     }
 
     &__count {
@@ -1451,14 +1427,12 @@ export const CommentStyle = styled.section`
       min-width: 32px;
     }
 
-    &:first-child {
-      margin: 20px 0px 0px;
-    }
-
     &__inner {
+      display: flex;
+      gap: 5px;
       padding: 10px 12px;
       border: 1px solid rgb(242, 242, 242);
-      background-color: rgb(250, 250, 250);
+      background-color: #f5f5fa;
       border-radius: 12px;
       -webkit-box-flex: 1;
       flex-grow: 1;
@@ -1470,7 +1444,7 @@ export const CommentStyle = styled.section`
       align-items: center;
 
       &-name {
-        font-size: 13px;
+        font-size: 14px;
         line-height: 20px;
         font-weight: 500;
         text-transform: capitalize;
@@ -1478,25 +1452,11 @@ export const CommentStyle = styled.section`
 
       &-date {
         color: rgb(128, 128, 137);
-        margin: 0px 0px 0px 6px;
-        padding: 0px 0px 0px 8px;
         position: relative;
         z-index: 1;
         font-size: 13px;
         line-height: 20px;
         font-weight: 400;
-
-        &::before {
-          content: "";
-          height: 2px;
-          width: 2px;
-          background-color: rgb(128, 128, 137);
-          border-radius: 50%;
-          position: absolute;
-          top: 50%;
-          left: 0px;
-          margin: -1px 0px 0px;
-        }
       }
     }
 
@@ -1528,6 +1488,7 @@ export const CommentStyle = styled.section`
       font-size: 13px;
       line-height: 20px;
       margin: 4px 0px 0px;
+      font-weight: 100;
     }
   }
 
@@ -1616,7 +1577,7 @@ export const CommentStyle = styled.section`
       z-index: 1;
       width: 17px;
       right: 12px;
-      bottom: 16px;
+      bottom: 16.5px;
       cursor: pointer;
     }
   }

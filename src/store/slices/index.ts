@@ -19,6 +19,7 @@ import { addressApi } from "./api/user/addressApi";
 import { notificationApi } from "./api/user/notificationApi";
 import { productApi } from "./api/user/productApi";
 import { productFlashsaleApi } from "./api/user/productFlashsaleApi";
+import { reviewApi } from "./api/user/reviewApi";
 import { voucherUserApi } from "./api/user/voucherApi";
 import { wishlistApi } from "./api/user/wishlistApi";
 import { userApi } from "./api/userApi";
@@ -61,6 +62,7 @@ export const rootReducer: any = {
   [orderApi.reducerPath]: orderApi.reducer,
   [trafficAdminApi.reducerPath]: trafficAdminApi.reducer,
   [forgotPasswordApi.reducerPath]: forgotPasswordApi.reducer,
+  [reviewApi.reducerPath]: reviewApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
   productDetail: productDetailSlice,
@@ -103,5 +105,6 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     shopApi.middleware,
     activityApi.middleware,
     trafficAdminApi.middleware,
-    forgotPasswordApi.middleware
+    forgotPasswordApi.middleware,
+    reviewApi.middleware
   );

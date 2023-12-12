@@ -390,7 +390,18 @@
       "write_review": "Wrote: ",
       "receive_like": "Received: ",
       "like": "Like",
-      "comments": "Comments"
+      "star": "star",
+      "stars": "stars",
+      "joined_for": "Joined for",
+      "received_thanks": "likes",
+      "reviewed": "Reviewed",
+      "write_response": "Write a response",
+      "view": "View",
+      "collapse": "Collapse",
+      "more_response": "more response",
+      "more_responses": "more responses",
+      "response": "response",
+      "responses": "responses"
     },
     "chatgpt": {
       "assistant": "Assistant Online Mart",
@@ -1453,7 +1464,7 @@
       },
       "bin": {
         "title": "Recycle bin",
-        "description_bin": "Manage soft-deleted products" 
+        "description_bin": "Manage soft-deleted products"
       }
     },
     "bin": {

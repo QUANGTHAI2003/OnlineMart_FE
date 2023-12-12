@@ -14,6 +14,8 @@ interface IDataCart {
 interface IProductDetailState {
   price: null | number;
   dataCart: IDataCart;
+  rating: number;
+  reviewCount: number;
 }
 
 const initialState: IProductDetailState = {
@@ -27,6 +29,8 @@ const initialState: IProductDetailState = {
     stock: 0,
     cartQuantity: 1,
   },
+  rating: 0,
+  reviewCount: 0,
 };
 
 const productDetailSlice = createSlice({
@@ -39,9 +43,15 @@ const productDetailSlice = createSlice({
     setDataCart: (state: RootState, action: PayloadAction<any>) => {
       state.dataCart = action.payload;
     },
+    setRating: (state: RootState, action: PayloadAction<any>) => {
+      state.rating = action.payload;
+    },
+    setReview: (state: RootState, action: PayloadAction<any>) => {
+      state.reviewCount = action.payload;
+    },
   },
 });
 
-export const { setPrice, setDataCart } = productDetailSlice.actions;
+export const { setPrice, setDataCart, setRating, setReview } = productDetailSlice.actions;
 
 export default productDetailSlice.reducer;
