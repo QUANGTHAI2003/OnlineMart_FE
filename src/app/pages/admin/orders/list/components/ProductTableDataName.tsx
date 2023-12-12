@@ -1,4 +1,4 @@
-import { formatCurrency } from "@app/utils/helper";
+import { baseImageUrl, formatCurrency } from "@app/utils/helper";
 import { Image, Tooltip } from "antd";
 import { TFunction } from "i18next";
 import React from "react";
@@ -16,9 +16,9 @@ const ProductTabledataName: React.FC<IProductTabledataNameProps> = ({ data }) =>
   return (
     <S.TableCellOrderStyle className="product-cell flex items-start flex-nowrap">
       <div className="thumbnail">
-        <Image width={64} preview={false} src={`${data?.product_image}`} />
+        <Image width={64} preview={false} src={`${baseImageUrl}/${data?.product_image}`} />
       </div>
-      <div className="content">
+      <div className="content pl-3">
         <Tooltip title={data?.product_name} className="name">
           <Link to="#">
             <h5 className="line-clamp-2">{data?.product_name}</h5>

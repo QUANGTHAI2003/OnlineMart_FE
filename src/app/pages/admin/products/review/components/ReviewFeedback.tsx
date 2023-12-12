@@ -1,13 +1,13 @@
 import { UserOutlined } from "@ant-design/icons";
+import { useReplyReviewMutation } from "@app/store/slices/api/admin/reviewApi";
+import { formatDateTime, notifyError, notifySuccess } from "@app/utils/helper";
 import { Avatar, Button, Col, Form, Input, Modal, Rate, Row } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import { useReplyReviewMutation } from "@app/store/slices/api/admin/reviewApi";
-import { formatDateTime, notifyError, notifySuccess } from "@app/utils/helper";
 import { Link } from "react-router-dom";
-import { RatingText } from "../data";
 import { v4 as uuidv4 } from "uuid";
+
+import { RatingText } from "../data";
 
 interface IReviewFeedbackProps {
   data: any;

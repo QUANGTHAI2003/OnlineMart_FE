@@ -1,4 +1,4 @@
-import { Tabs } from "antd";
+import { Modal, Tabs } from "antd";
 import styled from "styled-components";
 
 export const TextGray = styled.div`
@@ -50,9 +50,7 @@ export const OrderItem = styled.div`
       &::before {
         content: "";
         display: block;
-        background: url(https://frontend.tikicdn.com/_desktop-next/static/img/account/block.png) center center / 20px
-          20px no-repeat;
-        width: 20px;
+        width: 10;
         height: 20px;
         float: left;
         margin: 0px 6px 0px 0px;
@@ -179,7 +177,7 @@ export const OrderDetails = styled.div`
     display: none;
   }
 
-  @media (min-width: 320px) and (max-width: 480px) {
+  @media (min-width: 320px) and (max-width: 600px) {
     .infor-method {
       display: none !important;
     }
@@ -199,6 +197,27 @@ export const OrderDetails = styled.div`
       text-align: center;
       padding: 10px;
       background-color: #f0f0f0;
+    }
+  }
+
+  .om-table-footer {
+    .price-footer {
+      max-width: 100px;
+    }
+  }
+`;
+export const ModalReview = styled(Modal).withConfig({
+  shouldForwardProp: () => true,
+})`
+  .om-modal-footer {
+    button {
+      width: 100%;
+    }
+    .om-btn-default {
+      margin-bottom: 16px;
+    }
+    .om-btn-primary {
+      margin-inline-start: 0px !important;
     }
   }
 `;

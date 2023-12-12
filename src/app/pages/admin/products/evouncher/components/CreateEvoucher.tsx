@@ -40,8 +40,6 @@ const CreateEvoucher = ({ onCancel }: any) => {
   }, [form]);
 
   const handleSubmit = async (data: FormValues) => {
-    console.log({ data });
-
     const code = data.code;
     const usage_limit = data.usage_limit;
     const discount = data.discount;
@@ -63,7 +61,6 @@ const CreateEvoucher = ({ onCancel }: any) => {
       status,
       shop_id,
     };
-    console.log(values);
     try {
       const response = await createVoucher(values).unwrap();
       const createdVoucher = response.data;

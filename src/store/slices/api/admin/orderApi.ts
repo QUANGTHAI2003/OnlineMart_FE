@@ -16,7 +16,6 @@ export const orderApi = createApi({
         };
       },
       transformResponse: (response: { data: IOrder[] }) => {
-        console.log(response.data);
         return response.data;
       },
       providesTags: (result): any => {
@@ -27,6 +26,17 @@ export const orderApi = createApi({
         return [{ type: "Order" as const, id: "LIST" }];
       },
     }),
+    // lay chi tiet 1 don hang
+    getOrderOnly: builder.query<IOrder, number>({
+      query: (id) => {
+        return {
+          url: `order/${id}`,
+        };
+      },
+      transformResponse: (response: { data: IOrder }) => {
+        return response.data;
+      },
+    }),
   }),
 });
-export const { useGetOrderQueryRootQuery } = orderApi;
+export const { useGetOrderQueryRootQuery, useGetOrderOnlyQuery } = orderApi;

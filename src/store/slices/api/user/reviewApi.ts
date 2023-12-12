@@ -1,4 +1,5 @@
 import { IReview } from "@app/types/customer_review.types";
+import { IReviewProduct } from "@app/types/reviewProduct.types";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import baseQueryCustom from "../../baseQueryCustom";
@@ -6,7 +7,7 @@ import baseQueryCustom from "../../baseQueryCustom";
 export const reviewApi = createApi({
   reducerPath: "reviewApi",
   baseQuery: baseQueryCustom,
-  tagTypes: ["Review", "Like"],
+  tagTypes: ["Review", "Like", "ReviewProductApi"],
   endpoints: (builder) => ({
     // Lấy tất cả review theo product_id
     getReviewByProduct: builder.query<any, number>({
@@ -60,7 +61,6 @@ export const reviewApi = createApi({
     // Cập nhật lượt thích của một review (+1 like)
     updateLike: builder.mutation<IReview, any>({
       query: ({ userId, productId, reviewId, like_count }) => {
-        console.log({ userId }, { productId }, { reviewId }, { like_count });
 
         return {
           url: `customer_reviews/${userId}/${productId}/${reviewId}/like`,
@@ -73,6 +73,30 @@ export const reviewApi = createApi({
       },
       invalidatesTags: (): any => [{ type: "Like", id: "LIST" }],
     }),
+
+    getReviewProduct: builder.query<IReviewProduct, any>({
+      query: ({ user_id, product_id }) => {
+        return {
+          url: `get/review/${user_id}/${product_id}`,
+        };
+      },
+      transformResponse: (response: { data: IReviewProduct }) => {
+        return response?.data;
+      },
+      providesTags: (): any => {
+        return [{ type: "ReviewProductApi" as const, id: "LIST" }];
+      },
+    }),
+    reviewProduct: builder.mutation<IReviewProduct, any>({
+      query: (data) => {
+        return {
+          url: `review/product`,
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: (): any => [{ type: "ReviewProductApi" as const, id: "LIST" }],
+    }),
   }),
 });
 
@@ -83,4 +107,6 @@ export const {
   useAddCommentMutation,
   useGetLikesQuery,
   useUpdateLikeMutation,
+  useReviewProductMutation,
+  useGetReviewProductQuery
 } = reviewApi;

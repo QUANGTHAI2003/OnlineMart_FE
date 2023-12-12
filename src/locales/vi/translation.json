@@ -311,14 +311,34 @@
     },
     "orders": {
       "order": {
+        "print": {
+        "id":"Mã đơn hàng: ",
+        "created_at":"Ngày đặt hàng: ",
+        "bill":  "HÓA ĐƠN",
+        "bill_to":"Hóa đơn đến: ",
+        "delivery_to":"Giao hàng đến: ",
+        "phone":"Số diện thoại: ",
+        "id_product":"Mã sản phẩm",
+        "name_product":"Tên sản phẩm",
+        "price":"Đơn giá",
+        "sale_price":"Giá giảm",
+        "total":"Thành tiền",
+        "quantity":"Số lượng",
+        "total_product":"Tổng số lượng",
+        "grand_total":"Tổng tiền",
+        "shipping_fee":"Phí vận chuyển",
+        "custom_pay":"Khách phải trả"
+      },
         "my_order": "Đơn hàng của tôi",
         "all_menus": "Tất cả đơn",
         "wait_pay": "Chờ thanh toán",
         "processing": "Đang xử lý",
         "being_transported": "Đang vận chuyển",
         "delivered": "Đã giao",
+        "reason_cancel": "Lý do hủy",
+        "choose_reason": "Chọn lý do hủy",
         "canceled": "Đã hủy",
-        "find_order": "Tìm đơn hàng theo Mã đơn hàng, Nhà bán hoặc Tên sản phẩm",
+        "find_order": "Tìm đơn hàng theo Tên sản phẩm",
         "find_orders": "Tìm đơn hàng",
         "repurchase": "Mua lại",
         "see_detail": "Xem chi tiết",
@@ -327,19 +347,28 @@
         "product": "sản phẩm"
       },
       "order_details": {
-        "order_detail": "Chi tiết đơn hàng ",
+        "order_detail": "Chi tiết đơn hàng: ",
         "order_date": "Ngày đặt hàng ",
+        "review_success":"Đánh giá sản phẩm thành công",
+        "agree":"Hài lòng",
+        "disagree":"Không hài lòng",
         "receive_address": "ĐỊA CHỈ NGƯỜI NHẬN",
-        "delivery_method": "HÌNH THỨC GIAO HÀNG",
+        "delivery_method": "HÌNH THỨC GIAO HÀNG: ",
         "payments": "HÌNH THỨC THANH TOÁN",
         "address": "Địa chỉ: ",
         "phone": "Số điện thoại: ",
         "delivery_on": "Giao hàng vào ",
         "product": "Sản phẩm",
         "price": "Giá",
+        "cancel":"Huỷ",
+        "reason_cancel":"Lý do hủy đơn",
+        "your_review":"Nhập đánh giá của bạn",
+        "add_review":"Thêm đánh giá",
         "quantity": "Số lượng",
+        "write_review":"Viết đánh giá",
+        "send_review":"Gửi đánh giá",
         "discount": "Giảm giá",
-        "provided": "Cung cấp bởi",
+        "provided": "Cung cấp bởi:",
         "provisional": "Tạm tính:",
         "chat_seller": "Chat với nhà bán",
         "repurchase": "Mua lại",
@@ -691,7 +720,7 @@
         "option": {
           "label": {
             "selling_price": "Giá bán",
-            "sale_price": "Giảm giá",
+            "sale_price": "Giá giảm",
             "quantity": "Số lượng",
             "product_code": "Mã sản phẩm",
             "add_variant": "Thêm lựa chọn hàng để giúp khách hàng tìm kiếm sản phẩm và dễ dàng thêm mới lựa chọn",
@@ -965,9 +994,9 @@
           "products_name": "Tên sản phẩm",
           "qty": "Số lượng",
           "unit_price": "Đơn giá",
-          "discount": "Chiết khấu",
+          "discount": "Giảm giá",
           "into_money": "Thành tiền",
-          "total_amount": "Tổng tiền ({{number_product}} sản phẩm)",
+          "total_amount": "Tổng tiền ",
           "delivery_charges": "Phí giao hàng",
           "discount_code": "Mã giảm giá"
         }
@@ -1000,7 +1029,6 @@
         "thisMonth": "Tháng này"
       }
     },
-
     "categories": {
       "name": "Danh mục sản phẩm",
       "title": "Thêm danh mục sản phẩm",

@@ -1,4 +1,4 @@
-import { IUserVoucher } from "@app/types/voucher.types";
+import { IVoucher } from "@app/types/voucher.types";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import baseQueryCustom from "../../baseQueryCustom";
@@ -7,13 +7,13 @@ export const voucherUserApi = createApi({
   reducerPath: "voucherUserApi",
   baseQuery: baseQueryCustom,
   endpoints: (builder) => ({
-    getVoucherRoot: builder.query<IUserVoucher[], void>({
+    getVoucherRoot: builder.query<IVoucher[], void>({
       query: () => {
         return {
           url: `voucher/user`,
         };
       },
-      transformResponse: (response: { data: IUserVoucher[] }) => {
+      transformResponse: (response: { data: IVoucher[] }) => {
         return response.data;
       },
       providesTags: (result): any => {

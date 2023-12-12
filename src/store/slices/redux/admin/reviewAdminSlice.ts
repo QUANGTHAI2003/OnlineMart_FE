@@ -77,7 +77,7 @@ const reviewAdminSlice = createSlice({
       } else if (action.payload === "endDateFilter") {
         state.filteredValue.startDateFilter = null;
         state.filteredValue.endDateFilter = null;
-      } else { 
+      } else {
         state.filteredValue[action.payload] = [];
       }
     },

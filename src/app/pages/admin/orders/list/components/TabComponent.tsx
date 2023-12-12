@@ -14,7 +14,7 @@ const TabComponent: React.FC<any> = ({ orderList }) => {
     let orderCount;
 
     if (tabKey === "all") {
-      orderCount = orderList?.length;
+      orderCount = orderList?.length || 0;
     } else {
       orderCount = orderList?.filter((order: IOrder) => order?.status === tabKey)?.length || 0;
     }

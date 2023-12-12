@@ -1,5 +1,4 @@
 import {
-  AreaChartOutlined,
   ControlOutlined,
   DashboardOutlined,
   GroupOutlined,
@@ -8,6 +7,7 @@ import {
   ShoppingCartOutlined,
   StockOutlined,
   UsergroupAddOutlined,
+  AreaChartOutlined,
 } from "@ant-design/icons";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
 import { faGear } from "@fortawesome/free-solid-svg-icons";

@@ -5,7 +5,7 @@ import { useAppSelector } from "@app/store/store";
 // import type { TabsProps } from "antd";
 // import { Tabs } from "antd";
 // import { useMemo } from "react";
-import { IUserVoucher } from "@app/types/voucher.types";
+import { IVoucher } from "@app/types/voucher.types";
 import { useTranslation } from "react-i18next";
 // import { useLocation } from "react-router-dom";
 
@@ -50,7 +50,7 @@ const Discount = () => {
       {/* <Tabs defaultActiveKey="1" items={items} /> */}
       <S.DiscountTab>
         {/* {voucherUserData?.map((item: {voucher: IUserVoucher}:any) => { */}
-        {voucherUserData?.map((item: IUserVoucher) => {
+        {voucherUserData?.map((item: IVoucher) => {
           return (
             <DiscountItem
               key={item.id}

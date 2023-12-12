@@ -1,169 +1,116 @@
-import { formatCurrency } from "@app/utils/helper";
-import { Button, Table } from "antd";
+import { useGetOrderOnlyQuery } from "@app/store/slices/api/user/orderApi";
+import { baseImageUrl, formatCurrency } from "@app/utils/helper";
+import { Table } from "antd";
+import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
+import ModalCancelOrder from "./components/ModalCancelOrder";
+import ModalReviewProduct from "./components/ModalReviewProduct";
 import * as S from "./ListOrder.style";
 
-const OrderData = [
-  {
-    id: 1,
-    status: "Đang vận chuyển",
-    status_slug: "delivered",
-    grand_total: 138000,
-    items: [
-      {
-        id: 1,
-        category_name: "Đồng hồ",
-        product_id: 1,
-        product_sku: 7180770726869,
-        product_name:
-          "Dụng cụ cạo lưỡi bằng inox 304 sáng bóng làm sạch bề mặt lưỡi giúp hơi thở thơm mát tặng kèm khăn đa năng 2 mặt BaoAn hàng chính hãng - inox",
-        sale_price: 0,
-        qty: 2,
-        price: 69000,
-        subtotal: 138000,
-        discount: 0,
-        grand_total: 138000,
-        thumbnail_url:
-          "https://salt.tikicdn.com/cache/200x200/ts/product/4d/07/69/fee34463b2c954eb24ef46604cbe6b8e.png",
-        current_seller: [
-          {
-            id: 1,
-            name: "Shop mạnh tiến",
-            link: null,
-            store_id: 1,
-          },
-        ],
-      },
-    ],
-    shipping_address: [
-      {
-        id: 1,
-        name: "Nguyễn Minh Tý",
-        road: "Số 1 đường số 15",
-        ward: "Phường An Khánh",
-        district: "Quận Ninh Kiều",
-        city: "Cần Thơ",
-        country: "Việt Nam",
-        telephone: "0915661392",
-      },
-    ],
-
-    shipping: [
-      {
-        method_fee_text: 22000,
-        method_text: "24h Thứ Năm, 24/08",
-        method_name: "Giao tiết kiệm",
-        delivery_name: "Tikinow Smart Logistics",
-      },
-    ],
-    payment_method: [
-      {
-        id: 1,
-        name: "COD",
-        description: "THANH TOÁN KHI NHẬN HÀNG",
-      },
-    ],
-    created_at: "20:00 16/11/2003",
-  },
-];
-
 const OrderDetailPage = () => {
-  // const { id } = useParams();
-  const totalSubtotal = OrderData.reduce((total, item) => total + item.items[0].subtotal, 0);
+  const { id } = useParams();
+  const { data: dataOrder, isLoading } = useGetOrderOnlyQuery(parseInt(id as string));
   const { t } = useTranslation();
-  const totalAmount = totalSubtotal + OrderData[0].shipping[0].method_fee_text;
   const columns: any = [
     {
       title: t("user.orders.order_details.product"),
-      dataIndex: "product",
+      dataIndex: "order_item",
       key: "product",
-      render: () => {
+      render: (_: any, record: any) => {
         return (
-          <div key={OrderData[0].items[0].product_id} className="flex flex-row">
-            <div className="col-span-1 w-20">
+          <div key={uuidv4()} className="flex flex-row items-center">
+            <div className="col-span-1 w-full max-w-[100px]">
               <img
-                src={OrderData[0].items[0].thumbnail_url}
-                alt={OrderData[0].items[0].product_name}
-                className="mr-2 w-12 h-12"
+                src={`${baseImageUrl}/${record?.product?.product_image}`}
+                alt={record?.product?.product_name}
+                className="mr-2"
               />
             </div>
-            <div className="ml-5  grid gap-3">
+            <div className="ml-5 grid gap-3">
               <div className="row-span-1">
-                <span className="font-bold line-clamp-2">{OrderData[0].items[0].product_name}</span>
+                <span className="font-bold line-clamp-1">{record?.product?.product_name}</span>
               </div>
               <div className="row-span-1">
                 {t("user.orders.order_details.provided")}
-                <span className="text-blue-500 p-2">{OrderData[0].items[0].current_seller[0].name}</span>
+                <span className="text-blue-500 p-2">{record?.shop_name}</span>
               </div>
               <div className="row-span-1">
                 <span>
-                  SKU:
-                  {OrderData[0].items[0].product_sku}
+                  SKU: &nbsp;
+                  {record?.product?.product_sku}
                 </span>
               </div>
               <div className="row-span-1 flex items-center">
-                <Button type="default" className="border-blue-400 text-blue-400">
-                  {t("user.orders.order_details.chat_seller")}
-                </Button>
-                <Button type="default" className=" ml-3 border-blue-400 text-blue-400">
-                  {t("user.orders.order_details.repurchase")}
-                </Button>
+                {dataOrder?.status === "delivered" ? (
+                  <ModalReviewProduct
+                    product_id={record.product?.product_id}
+                    product_name={record.product?.product_name}
+                    product_image={record.product?.product_image}
+                    order_id={dataOrder?.id}
+                  />
+                ) : null}
               </div>
             </div>
           </div>
         );
       },
     },
-
     {
       title: t("user.orders.order_details.price"),
       dataIndex: "price",
       key: "price",
-      render: () => <span>{formatCurrency(OrderData[0].items[0].price)}</span>,
+      render: (_: any, record: any) => {
+        return <span key={uuidv4()}>{formatCurrency(record?.product?.product_price)}</span>;
+      },
     },
     {
       title: t("user.orders.order_details.quantity"),
       dataIndex: "quantity",
       key: "quantity",
-      render: () => <span>{OrderData[0].items[0].qty}</span>,
-    },
-    {
-      title: t("user.orders.order_details.discount"),
-      dataIndex: "discount",
-      key: "discount",
-      render: () => <span>{`${OrderData[0].items[0].discount} %`}</span>,
-    },
-    {
-      title: t("user.orders.order_details.provisional"),
-      dataIndex: "subtotal",
-      key: "subtotal",
-      render: () => <span>{`${formatCurrency(OrderData[0].items[0].subtotal)}`}</span>,
+      className: "text-center",
+      render: (_: any, record: any) => {
+        return (
+          <span key={uuidv4()}>
+            {`
+            x${record?.product?.product_quantity}
+            `}
+          </span>
+        );
+      },
     },
   ];
   const footer = () => (
-    <>
-      <div className="text-right sub-total   px-12">
-        <div className="mb-2   items-center">
-          <span className="pr-4">{t("user.orders.order_details.provisional")}</span>
-          <span>{`${formatCurrency(totalSubtotal)}`}</span>
-        </div>
-        <div className="mb-2">
-          <span className="pr-4">{t("user.orders.order_details.transport_fee")}</span>
-          <span>{`${formatCurrency(OrderData[0].shipping[0].method_fee_text)}`}</span>
-        </div>
-        <div>
-          <span className="pr-4">{t("user.orders.order_details.total")}</span>
-          <span className="text-red-600">{`${formatCurrency(totalAmount)}`}</span>
+    <div className="text-right sub-total px-12">
+      <div className="flex justify-end">
+        <span className="pr-4">{t("user.orders.order_details.transport_fee")}</span>
+        <span className="price-footer">{`${formatCurrency(22000)}`}</span>
+      </div>
+      <div className="flex justify-end">
+        <div className="pr-4">Giá giảm:</div>
+        <div className="price-footer">
+          {dataOrder?.voucher?.unit === "1"
+            ? `${formatCurrency(dataOrder?.voucher?.discount)} ${dataOrder?.voucher.unit === "1" ? "" : "%"}`
+            : `${dataOrder?.voucher?.discount} ${dataOrder?.voucher.unit === "0" ? "%" : "VNĐ"}`}
         </div>
       </div>
-      <div className="flex justify-end mt-6 p">
-        <Button type="primary" className="bg-yellow-300 font-bold text-black">
-          {t("user.orders.order_details.cancel_order")}
-        </Button>
+      <div className="flex justify-end">
+        <div className="pr-4">{t("user.orders.order_details.total")}</div>
+        <span className="text-red-600 price-footer">{`${formatCurrency(dataOrder?.grand_total)}`}</span>
       </div>
-    </>
+      <div className="grid grid-cols-5 w-full flex mt-5">
+        <div className=" items-center pt-2  text-left col-start-1 col-end-3 space-x-10 mt-3">
+          <Link to={"/account/orders"} className="link-agin text-blue-400">
+            {t("user.orders.order_details.back_order")}
+          </Link>
+        </div>
+        <div className="mt-3 flex-1 col-end-6 col-span-2 p">
+          {dataOrder?.status === "awaiting" && <ModalCancelOrder order_id={id} />}
+        </div>
+      </div>
+    </div>
   );
 
   return (
@@ -171,14 +118,27 @@ const OrderDetailPage = () => {
       <div className="sm:flex sm:justify-between">
         <div>
           <h1 className="text-lg pb-3">
-            {t("user.orders.order_details.order_detail")}
-            {/* nữa truyền id vô đây */}
-            {OrderData[0].status}
+            {` ${t("user.orders.order_details.order_detail")}
+            #${dataOrder?.id} - 
+            ${
+              dataOrder?.status === "awaiting"
+                ? t("admin_shop.orders.list.status.awaiting")
+                : dataOrder?.status === "processing"
+                ? t("admin_shop.orders.list.status.processing")
+                : dataOrder?.status === "shipping"
+                ? t("admin_shop.orders.list.status.shipping")
+                : dataOrder?.status === "canceled"
+                ? t("admin_shop.orders.list.status.canceled")
+                : dataOrder?.status === "delivered"
+                ? t("admin_shop.orders.list.status.delivered")
+                : null
+            }
+              `}
           </h1>
         </div>
         <span className="flex justify-end">
           {t("user.orders.order_details.order_date")}
-          {OrderData[0].created_at}
+          {dayjs(dataOrder?.created_at).format("DD-MM-YYYY: HH:mm:ss")}
         </span>
       </div>
       <S.OrderDetails>
@@ -190,43 +150,40 @@ const OrderDetailPage = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5">
           <div className="bg-white rounded-xl p-4">
-            <div className="font-bold">{OrderData[0].shipping_address[0].name}</div>
-
+            <div className="font-bold">{dataOrder?.user?.full_name}</div>
             <p className="py-3">
               {t("user.orders.order_details.address")}
-              {OrderData[0].shipping_address[0].road}
+              {dataOrder?.street}
             </p>
             <p className="">
               {t("user.orders.order_details.phone")}
-              {OrderData[0].shipping_address[0].telephone}
+              {dataOrder?.user?.phone}
             </p>
           </div>
           <div className="bg-white rounded-xl p-4">
             <div>
-              <span className="py-2">
-                {t("user.orders.order_details.delivery_on")}
-                {OrderData[0].shipping[0].method_text}
-              </span>
-              <p className="py-2">{OrderData[0].shipping[0].method_name}</p>
-              <p className="py-2">{OrderData[0].shipping[0].delivery_name}</p>
+              <p className="py-2 ">{`${t("user.orders.order_details.delivery_method")}${dataOrder?.shipping_unit}`}</p>
               <p className="py-2">
                 {t("user.orders.order_details.transport_fee")}
-                {formatCurrency(OrderData[0].shipping[0].method_fee_text)}
+                {formatCurrency(22000)}
               </p>
             </div>
           </div>
           <div className="bg-white rounded-xl p-4">
-            <span>{OrderData[0].payment_method[0].description}</span>
+            <span>{dataOrder?.payment_method?.method_name}</span>
           </div>
         </div>
         <div className="mt-4 table-responsive">
           <div className="table-scroll-instructions">{t("user.orders.order_details.table_scrool")}</div>
-          <Table scroll={{ x: 320 }} dataSource={OrderData} columns={columns} footer={footer} pagination={false} />
-        </div>
-        <div className="flex items-center space-x-10 mt-3">
-          <Link to={"/account/orders"} className="pl-12 link-agin text-blue-400">
-            {t("user.orders.order_details.back_order")}
-          </Link>
+          <Table
+            rowKey={uuidv4()}
+            loading={isLoading}
+            scroll={{ x: 320 }}
+            dataSource={dataOrder?.order_item}
+            columns={columns}
+            footer={footer}
+            pagination={false}
+          />
         </div>
       </S.OrderDetails>
     </>

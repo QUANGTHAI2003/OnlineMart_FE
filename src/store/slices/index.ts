@@ -4,6 +4,7 @@ import { binAdminApi } from "./api/admin/binApi";
 import { inventoryAdminApi } from "./api/admin/inventoryApi";
 import { orderApi } from "./api/admin/orderApi";
 import { productAdminApi } from "./api/admin/productApi";
+import { reasonCancelApi } from "./api/admin/reasoncancelApi";
 import { reviewAdminApi } from "./api/admin/reviewApi";
 import { roleApi } from "./api/admin/roleApi";
 import { sellerApi } from "./api/admin/sellerApi";
@@ -17,6 +18,7 @@ import { shopApi } from "./api/shopApi";
 import { supplierApi } from "./api/supplierApi";
 import { addressApi } from "./api/user/addressApi";
 import { notificationApi } from "./api/user/notificationApi";
+import { orderUserApi } from "./api/user/orderApi";
 import { productApi } from "./api/user/productApi";
 import { productFlashsaleApi } from "./api/user/productFlashsaleApi";
 import { reviewApi } from "./api/user/reviewApi";
@@ -63,6 +65,8 @@ export const rootReducer: any = {
   [trafficAdminApi.reducerPath]: trafficAdminApi.reducer,
   [forgotPasswordApi.reducerPath]: forgotPasswordApi.reducer,
   [reviewApi.reducerPath]: reviewApi.reducer,
+  [orderUserApi.reducerPath]: orderUserApi.reducer,
+  [reasonCancelApi.reducerPath]: reasonCancelApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
   productDetail: productDetailSlice,
@@ -104,6 +108,8 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     binAdminApi.middleware,
     shopApi.middleware,
     activityApi.middleware,
+    orderUserApi.middleware,
+    reasonCancelApi.middleware,
     trafficAdminApi.middleware,
     forgotPasswordApi.middleware,
     reviewApi.middleware

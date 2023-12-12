@@ -1,4 +1,5 @@
 export interface IReview {
+  data: any;
   id: number;
   product_id: number;
   product_name: string;

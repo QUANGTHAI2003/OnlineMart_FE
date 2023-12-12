@@ -1,4 +1,4 @@
-import { BankOutlined, MessageTwoTone } from "@ant-design/icons";
+import { BankOutlined } from "@ant-design/icons";
 import { AdminTable } from "@app/app/components/common/Table/AdminTable";
 import { useDebounce } from "@app/hooks";
 import { useGetOrderQueryRootQuery } from "@app/store/slices/api/admin/orderApi";
@@ -139,7 +139,6 @@ const TableComponent = React.memo(() => {
       dataIndex: "product",
       key: "product",
       render: (_, record: any) => {
-        console.log(record?.order_item[0]?.product);
         return <ProductTableDataName data={record?.order_item[0]?.product} trans={t} />;
       },
     },
@@ -260,16 +259,14 @@ const TableComponent = React.memo(() => {
                         <div className="header">
                           <Space className="mb-4" direction="horizontal" align="center">
                             <FontAwesomeIcon icon={faUser} />
-                            <h4>{`${record?.user?.full_name} (${record?.user?.phone})`}</h4>
+                            <h4>
+                              {`${record?.user?.full_name} ${record?.user?.phone ? `(${record?.user?.phone})` : ""}`}
+                            </h4>
                             <span className="text-gray-400">/</span>
                             <h4>{`${record?.street}, ${record.district},  ${record.city}  `}</h4>
                             <span className="text-gray-400">/</span>
                             <BankOutlined />
-                            <h4>{record?.order_item?.shop_name}</h4>
-                            <Link to="#" className="flex ">
-                              <MessageTwoTone />
-                              <h4 className=" ml-2 text-blue-500">Chat</h4>
-                            </Link>
+                            <h4>{record?.order_item[0]?.shop_name}</h4>
                             <Divider type="vertical" />
                           </Space>
                         </div>
