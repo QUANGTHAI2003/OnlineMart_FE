@@ -1,4 +1,5 @@
 import { SearchOutlined } from "@ant-design/icons";
+import { adminSuperRoutes } from "@app/configs/routes/super_admin";
 import { useDebounce, useResponsive } from "@app/hooks";
 import { ISidebarMenu } from "@app/interfaces/routes.interface";
 import { Input, Layout, Menu } from "antd";
@@ -6,7 +7,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 
-import { adminSuperRoutes } from "@app/configs/routes/super_admin";
 import * as S from "./AdminSuperMainSidebar.styles";
 
 const { Sider } = Layout;
@@ -74,11 +74,11 @@ const AdminSuperMainSidebar: React.FC<IAdminMainSidebarProps> = ({ isCollapsed }
   };
 
   // Set default selected keys
-  const currentMenuItem = sidebarNavFlat.find(({ url }) => url === location.pathname);
+  const currentMenuItem = sidebarNavFlat.find(({ url }: any) => url === location.pathname);
   const defaultSelectedKeys = currentMenuItem ? [currentMenuItem.key] : [];
 
   const openedSubmenu = adminSuperRoutes.find(
-    ({ children }) => children?.some(({ url }: any) => url === location.pathname)
+    ({ children }: any) => children?.some(({ url }: any) => url === location.pathname)
   );
   const defaultOpenKeys = openedSubmenu ? [openedSubmenu.key] : [];
 
@@ -94,7 +94,7 @@ const AdminSuperMainSidebar: React.FC<IAdminMainSidebarProps> = ({ isCollapsed }
   }, [checkSearch, filteredRoutes]);
 
   // Handle open only current submenu
-  const rootSubmenuKeys = adminSuperRoutes.map(({ key }) => key);
+  const rootSubmenuKeys = adminSuperRoutes.map(({ key }: any) => key);
 
   const handleOpenOnyCurrenSubMenu = (keys: any) => {
     if (!checkSearch) {

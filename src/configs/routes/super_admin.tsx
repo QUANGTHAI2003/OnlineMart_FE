@@ -1,7 +1,6 @@
 import { DashboardOutlined, ShopOutlined } from "@ant-design/icons";
-import { ISidebarMenu } from "@app/interfaces/routes.interface";
 
-export const adminSuperRoutes: ISidebarMenu[] = [
+export const adminSuperRoutes: any = [
   {
     title: "admin_super.sidebar.dashboard",
     key: "dashboard",

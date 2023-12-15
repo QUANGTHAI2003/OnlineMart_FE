@@ -1,13 +1,12 @@
 import { CopyIcon, IconCheck } from "@app/app/assets/icons";
 import useCopyToClipboard from "@app/hooks/useCopyToClipboard";
-import { IUserVoucher } from "@app/types/voucher.types";
 import { formatVNCurrency } from "@app/utils/helper";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 import * as S from "./Discount.styles";
 
-const DiscountItem = ({ discount, min_discount_amount, max_discount_amount, code, expired_date }: IUserVoucher) => {
+const DiscountItem = ({ discount, min_discount_amount, max_discount_amount, code, expired_date }: any) => {
   const { t } = useTranslation();
   const [copiedText, copyToClipboard] = useCopyToClipboard();
   const hasCopiedText = Boolean(copiedText);
