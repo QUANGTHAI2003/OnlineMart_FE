@@ -60,15 +60,11 @@ export const SortDataItem = ({ value }: any) => {
 
   const handleRemoveSort = (value: any) => {
     const keyValue = value[0];
-    console.log("Removing sort for key:", keyValue);
     if (keyValue === "searchValueFilter") {
-      console.log("Removing searchValueFilter");
       dispatch(setSearchValue(""));
     } else if (keyValue === "categoryFilter") {
-      console.log("Removing categoryFilter");
       dispatch(deleteOneFilteredValue("categoryFilter"));
     } else if (keyValue === "brandFilter") {
-      console.log("Removing brandFilter");
       dispatch(deleteOneFilteredValue("brandFilter"));
     }
   };

@@ -7,7 +7,7 @@ import { notifyError, notifySuccess, removeDiacritics } from "@app/utils/helper"
 import { Button, Card, Divider, Modal, Space } from "antd";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { SorterResult } from "antd/lib/table/interface";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -56,9 +56,6 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       maskClosable: true,
       onOk() {
         handleDeleteSupplier(id);
-      },
-      onCancel() {
-        console.log("Cancel");
       },
     });
   };
@@ -146,12 +143,8 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
   };
   const hasSelected = selectedRowKeys.length > 0;
 
-  useEffect(() => {
-    console.log("Table component rendered");
-  });
   const suppliersList: any = useMemo(() => {
     let filterInventory = data;
-    console.log("filterInventory", filterInventory);
 
     if (searchValue) {
       filterInventory = filterInventory?.filter((supplier: any) => {
@@ -167,8 +160,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
     return filterInventory;
   }, [searchType, searchValue, data]);
 
-  const handleChange: TableProps<ISupplier>["onChange"] = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
+  const handleChange: TableProps<ISupplier>["onChange"] = (_, __, sorter) => {
     setSortedInfo(sorter as SorterResult<ISupplier>);
   };
 

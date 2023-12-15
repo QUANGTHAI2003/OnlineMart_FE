@@ -82,8 +82,7 @@ export const ProductSectionWrapper = styled.section`
   border-radius: 8px;
   padding: 42px 12px 12px 12px;
   position: relative;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin: 32px 0;
 
   .title {
     color: #8c8c8c;

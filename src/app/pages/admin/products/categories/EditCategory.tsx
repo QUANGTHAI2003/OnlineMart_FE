@@ -111,14 +111,7 @@ const EditCategory = ({ id, dataCategory }: any) => {
   }, [data, form]);
 
   return (
-    <Form
-      form={form}
-      autoComplete="off"
-      onFinish={handleSubmit}
-      onFinishFailed={(error) => {
-        console.log({ error });
-      }}
-    >
+    <Form form={form} autoComplete="off" onFinish={handleSubmit}>
       <Row gutter={16} justify="space-between">
         <Col span={checked ? 12 : 24}>
           <S.FormField

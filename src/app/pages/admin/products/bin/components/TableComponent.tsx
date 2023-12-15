@@ -83,9 +83,6 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
           handleApiError(err);
         }
       },
-      onCancel() {
-        // console.log("Cancel");
-      },
     });
   };
 
@@ -106,9 +103,6 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
         } catch (err) {
           handleApiError(err);
         }
-      },
-      onCancel() {
-        // console.log("Cancel");
       },
     });
   };

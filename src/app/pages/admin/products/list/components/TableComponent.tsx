@@ -4,7 +4,7 @@ import { AdminTable } from "@app/app/components/common/Table/AdminTable";
 import { useDebounce, useResponsive } from "@app/hooks";
 import { useDeleteProductMutation } from "@app/store/slices/api/admin/productApi";
 import { useAppSelector } from "@app/store/store";
-import { formatCurrency, formatDateTime, notifyError, notifySuccess, removeDiacritics } from "@app/utils/helper";
+import { formatCurrency, formatDateTime, handleApiError, notifySuccess, removeDiacritics } from "@app/utils/helper";
 import { Button, Card, Modal, Space } from "antd";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { SorterResult } from "antd/lib/table/interface";
@@ -32,7 +32,7 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
   const { t } = useTranslation();
 
   const location = useLocation();
-  const { isDesktop } = useResponsive();
+  const { isMobile } = useResponsive();
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [sortedInfo, setSortedInfo] = useState<SorterResult<IDataType>>({});
@@ -54,7 +54,7 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
       title: t("admin_shop.product.list.table.product"),
       dataIndex: "name",
       key: "name",
-      width: "10%",
+      width: 300,
       sorter: (a, b) => a.name.localeCompare(b.name),
       sortOrder: sortedInfo.columnKey === "name" ? sortedInfo.order : null,
       render: (_, record: any) => {
@@ -88,6 +88,11 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
         const priceRange = record?.price.split("-");
         const minPrice = parseInt(priceRange[0]);
         const maxPrice = parseInt(priceRange[1]);
+
+        if (minPrice === maxPrice) {
+          return <span>{formatCurrency(minPrice)}</span>;
+        }
+
         return <span>{`${formatCurrency(minPrice)} - ${formatCurrency(maxPrice)}`}</span>;
       },
     },
@@ -112,6 +117,7 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
       title: t("admin_shop.product.list.table.action"),
       key: "action",
       align: "center",
+      fixed: "right",
       render: (_, record: any) => (
         <Space size="middle" direction="vertical">
           <PermissionsSwitch>
@@ -199,12 +205,8 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
           deleteProduct(productId);
           notifySuccess("Delete product successfully");
         } catch (err) {
-          console.log(err);
-          notifyError("Delete product failed");
+          handleApiError(err);
         }
-      },
-      onCancel() {
-        console.log("Cancel");
       },
     });
   };
@@ -232,7 +234,6 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
     if (debouncedValue) {
       filteredProducts = filteredProducts?.filter((product: any) => {
         const fieldValue = product[searchType];
-        console.log("fieldValue", fieldValue);
 
         const searchValueString = debouncedValue.toString();
 
@@ -270,8 +271,8 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
       <Card bordered>
         <div className="card-inner">
           {!isFilteredValueEmpty && <SortData />}
-          {isDesktop && <UpdateData hasSelected={hasSelected} selectedRowKeys={selectedRowKeys} />}
-          {isDesktop ? (
+          {isMobile && <UpdateData hasSelected={hasSelected} selectedRowKeys={selectedRowKeys} />}
+          {isMobile ? (
             <div className="body">
               <AdminTable
                 rowSelection={rowSelection}
@@ -280,7 +281,8 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
                 dataSource={displayedProducts}
                 bordered
                 onChange={handleChange}
-                loading={isLoading && isFetching}
+                loading={isLoading || isFetching}
+                scroll={{ x: 1000 }}
                 pagination={{
                   pageSize: 10,
                   hideOnSinglePage: true,
@@ -293,7 +295,7 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
                         rowKey={(record) => record?.id}
                         dataSource={record?.items}
                         columns={columnsVariant}
-                        loading={isLoading && isFetching}
+                        loading={isLoading || isFetching}
                         pagination={{
                           pageSize: 2,
                           hideOnSinglePage: true,

@@ -632,8 +632,8 @@
           "updated_at": "Cập nhật lần cuối",
           "deleted_at": "Ngày xóa",
           "action": "Thao tác",
-          "edit": "Sửa sản phẩm",
-          "delete": "Xóa sản phẩm",
+          "edit": "Sửa",
+          "delete": "Xóa",
           "selecting": "Đang chọn: {{count}}"
         },
         "status": {
@@ -753,6 +753,7 @@
           },
           "rules": {
             "selling_price": "Vui lòng nhập giá bán",
+            "product_code":"Vui lòng nhập mã sản phẩm",
             "variant_required": "Vui lòng nhập tên lựa chọn",
             "operation_model_required": "Vui lòng chọn mô hình vận hành",
             "weight_required": "Vui lòng nhập trọng lượng",

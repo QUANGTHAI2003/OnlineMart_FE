@@ -170,13 +170,11 @@ export const SortDrawer = ({ onClose, open, t, supplierSortList, categortSortLis
   }, [defaultSupplier, setDefaultSupplier, brandFilter]);
 
   useEffect(() => {
-    form.setFieldsValue({
-      brand: brandFilter,
-      category: categoryFilter,
+    form?.setFieldsValue({
+      brand: form.getFieldValue("brand")?.length > 0 ? form.getFieldValue("brand") : defaultSupplier,
+      category: form.getFieldValue("category")?.length > 0 ? form.getFieldValue("category") : defaultCategory,
     });
-    console.log("brandFilter", brandFilter);
-    console.log("categoryFilter", categoryFilter);
-  }, [brandFilter, categoryFilter, form]);
+  }, [brandFilter, categoryFilter, defaultCategory, defaultSupplier, form]);
 
   const handleApplySort = (values: any) => {
     const { category, brand } = values;
@@ -209,7 +207,6 @@ export const SortDrawer = ({ onClose, open, t, supplierSortList, categortSortLis
             id="category"
             options={categortSortList}
             allowClear
-            defaultValue={form.getFieldValue("category")?.length > 0 ? form.getFieldValue("category") : defaultCategory}
           />
         </Form.Item>
         <Divider />
@@ -220,7 +217,6 @@ export const SortDrawer = ({ onClose, open, t, supplierSortList, categortSortLis
             placeholder={t("admin_shop.product.list.filter.select_brand")}
             options={supplierSortList}
             allowClear
-            defaultValue={form.getFieldValue("brand")?.length > 0 ? form.getFieldValue("brand") : defaultSupplier}
           />
         </Form.Item>
       </Form>

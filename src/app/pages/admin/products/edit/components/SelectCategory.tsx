@@ -10,9 +10,11 @@ import * as S from "../ProductEdit.styles";
 const SelectCategory = ({ value = [], onChange, optionsSelect = [] }: any) => {
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<any[]>(value);
+
   useEffect(() => {
     setSelectedValue(value);
   }, [value]);
+
   const [searchCategory, setSearchCategory] = useState<string>("");
   const debouncedSearchCategory = useDebounce(searchCategory, 500);
   const filter = (inputValue: string, path: DefaultOptionType[]) =>

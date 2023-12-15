@@ -1,5 +1,6 @@
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import SelectOrCreate from "@app/app/components/common/Select/SelectOrCreate";
+import { useAppSelector } from "@app/store/store";
 import { Button, Col, Form, Input, InputNumber, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +14,8 @@ interface IOptionPrice {
 
 const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVariant, setCurrentVariantValues }) => {
   const { t } = useTranslation();
-  console.log({ isVariant });
+
+  const errorForm = useAppSelector((state) => state.productAdmin.errorForm);
 
   const [dynamicFormName, setDynamicFormName] = useState<string[]>([]);
   const [currentVariants, setCurrentVariants] = useState<{ [key: string]: string }>({});
@@ -164,12 +166,15 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
                 name="price"
                 colon={false}
                 rules={[{ required: true, message: t("admin_shop.product.create.option.rules.selling_price") }]}
+                validateStatus={errorForm?.regular_price && "error"}
+                help={errorForm?.regular_price && errorForm?.regular_price[0]}
               >
                 <InputNumber
                   className="block"
                   formatter={(value: any) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   parser={(value) => value?.replace(/\$\s?|(\.*)/g, "").replace(/\./g, "")}
-                  addonBefore="đ"
+                  addonAfter="đ"
+                  min={0}
                   placeholder={t("admin_shop.product.create.option.placeholder.selling_price")}
                 />
               </Form.Item>
@@ -180,12 +185,25 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
                 label={t("admin_shop.product.create.option.label.sale_price")}
                 name="sale_price"
                 colon={false}
+                rules={[
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("price") > value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error("Giá giảm phải nhỏ hơn giá bán"));
+                    },
+                  }),
+                ]}
+                validateStatus={errorForm?.sale_price && "error"}
+                help={errorForm?.sale_price && errorForm?.sale_price[0]}
               >
                 <InputNumber
                   className="block"
                   formatter={(value: any) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   parser={(value) => value?.replace(/\$\s?|(\.*)/g, "").replace(/\./g, "")}
-                  addonBefore="đ"
+                  addonAfter="đ"
+                  min={0}
                   placeholder={t("admin_shop.product.create.option.placeholder.sale_price")}
                 />
               </Form.Item>
@@ -196,8 +214,11 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
                 label={t("admin_shop.product.create.option.label.quantity")}
                 name="stock"
                 colon={false}
+                validateStatus={errorForm?.stock && "error"}
+                help={errorForm?.stock && errorForm?.stock[0]}
               >
                 <InputNumber
+                  min={0}
                   className="w-full"
                   placeholder={t("admin_shop.product.create.option.placeholder.quantity")}
                 />
@@ -209,6 +230,9 @@ const ProductOptionPrice: React.FC<IOptionPrice> = ({ form, isVariant, setIsVari
                 label={t("admin_shop.product.create.option.label.product_code")}
                 name="product_code"
                 colon={false}
+                rules={[{ required: true, message: t("admin_shop.product.create.option.rules.product_code") }]}
+                validateStatus={errorForm?.sku && "error"}
+                help={errorForm?.sku && errorForm?.sku[0]}
               >
                 <Input type="text" placeholder={t("admin_shop.product.create.option.placeholder.product_code")} />
               </Form.Item>

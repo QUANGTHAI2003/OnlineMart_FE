@@ -341,12 +341,14 @@ export const handleApiError = (err: any): void => {
       error_401: string;
       error_403: string;
       error_404: string;
+      error_422: string;
       error_429: string;
       error_500: string;
       message_400: string;
       message_401: string;
       message_403: string;
       message_404: string;
+      message_422: string;
       message_429: string;
       message_500: string;
       unknown: string;
@@ -359,12 +361,14 @@ export const handleApiError = (err: any): void => {
       error_401: "Unauthorized",
       error_403: "Forbidden",
       error_404: "Not Found",
+      error_422: "Validation Error",
       error_429: "Too Many Requests",
       error_500: "Internal Server Error",
       message_400: "The request is invalid. Please check your input.",
       message_401: "Authentication failed. Please check your credentials.",
       message_403: "Access to this resource is forbidden.",
       message_404: "The requested resource was not found.",
+      message_422: "Validation failed. Please check your input.",
       message_429: "Too many requests. Please try again later.",
       message_500: "Internal server error. Please try again later.",
       unknown: "Unknown Error",
@@ -374,12 +378,14 @@ export const handleApiError = (err: any): void => {
       error_401: "Lỗi xác thực",
       error_403: "Lỗi truy cập",
       error_404: "Không tìm thấy",
+      error_422: "Lỗi xác thực",
       error_429: "Quá nhiều yêu cầu",
       error_500: "Lỗi máy chủ",
       message_400: "Yêu cầu không hợp lệ. Vui lòng kiểm tra lại thông tin.",
       message_401: "Xác thực thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.",
       message_403: "Truy cập bị từ chối.",
       message_404: "Không tìm thấy tài nguyên.",
+      message_422: "Xác thực thất bại. Vui lòng kiểm tra lại thông tin.",
       message_429: "Quá nhiều yêu cầu. Vui lòng thử lại sau.",
       message_500: "Lỗi máy chủ. Vui lòng thử lại sau.",
       unknown: "Lỗi không xác định",
@@ -393,6 +399,7 @@ export const handleApiError = (err: any): void => {
     401: t.error_401,
     403: t.error_403,
     404: t.error_404,
+    422: t.error_422,
     429: t.error_429,
     500: t.error_500,
   };
@@ -411,6 +418,9 @@ export const handleApiError = (err: any): void => {
       break;
     case 404:
       notifyError(t.message_404);
+      break;
+    case 422:
+      notifyError(t.message_422);
       break;
     case 429:
       notifyError(t.message_429);

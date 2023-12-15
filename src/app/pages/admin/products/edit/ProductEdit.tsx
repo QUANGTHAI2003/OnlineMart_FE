@@ -216,6 +216,12 @@ const ProductEdit = () => {
       variants: createProductVariants(data, newtransformedData),
     };
 
+    const seo_meta: any = {
+      meta_title: data.meta_title,
+      meta_keywords: data.meta_keywords,
+      meta_description: data.meta_description,
+    };
+
     const product = {
       basis_info,
       product_desc,
@@ -223,6 +229,7 @@ const ProductEdit = () => {
       product_image: data.product_image,
       gallery_images: data.gallery_images,
       status: data.status,
+      seo_meta,
     };
 
     try {
@@ -237,16 +244,38 @@ const ProductEdit = () => {
       formData.append("origin", product.basis_info.origin);
       formData.append("description", product.product_desc.description);
       formData.append("status", product.status);
+      formData.append("_method", "PATCH");
+      formData.append("meta_title", product.seo_meta.meta_title || "");
+      formData.append("meta_description", product.seo_meta.meta_description || "");
 
-      // !FIX: can't upload thumbnail in edit
-      if (!(typeof data.product_image === "string" && /^https?:\/\//.test(data.product_image))) {
+      if (product?.seo_meta?.meta_keywords?.length > 0) {
+        formData.append("meta_keywords", product.seo_meta?.meta_keywords?.join(","));
+      }
+
+      if (typeof data.product_image !== "string") {
+        formData.append("thumbnail_url", data.product_image?.fileList[0]?.originFileObj);
+      } else {
         formData.append("thumbnail_url", data.product_image);
       }
 
-      if (galleryArray.length > 0) {
-        galleryArray.forEach((file: any, index: number) => {
-          formData.append(`gallery[${index}]`, file?.originFileObj);
-        });
+      if (galleryArray?.length > 0) {
+        if (typeof galleryArray[0] !== "string") {
+          galleryArray[1]?.forEach((file: any, index: number) => {
+            if (file?.originFileObj) {
+              formData.append(`gallery[${index}]`, file?.originFileObj);
+            } else {
+              formData.append(`gallery[${index}]`, file.url);
+            }
+          });
+        } else {
+          galleryArray?.forEach((file: any, index: number) => {
+            if (typeof file !== "string") {
+              formData.append(`gallery[${index}]`, file?.originFileObj);
+            } else {
+              formData.append(`gallery[${index}]`, file);
+            }
+          });
+        }
       }
 
       if (isNormal) {
@@ -257,20 +286,15 @@ const ProductEdit = () => {
       }
       formData.append("variants", JSON.stringify(product.option_operation.variants));
 
-      const values: any = {};
-      for (const pair of formData.entries()) {
-        values[pair[0]] = pair[1];
-        console.log(pair[0] + ", " + pair[1]);
-      }
-
       await updateProduct({
-        body: values,
+        body: formData,
         id: productId,
       }).unwrap();
       notifySuccess("Success", "Updated successfully");
 
       isLoading || navigate("/admin/shop/products");
     } catch (err: any) {
+      console.log(err);
       handleApiError(err);
     }
   };
@@ -295,7 +319,7 @@ const ProductEdit = () => {
       category_id: product_detail?.all_category_id,
       supplier_id: 1,
       origin: product_detail?.origin,
-      description: "Product Details",
+      description: product_detail?.description,
       price: product_detail?.price,
       sale_price: product_detail?.sale_price,
       stock: product_detail?.stock,
@@ -305,8 +329,12 @@ const ProductEdit = () => {
       isVariant: product_detail?.isVariant,
       variants: product_detail?.variants,
       variant_values: product_detail?.variant_values,
+      meta_title: product_detail?.meta_title || "",
+      meta_keywords: product_detail?.meta_keywords?.split(","),
+      meta_description: product_detail?.meta_description || "",
     });
   }, [product_detail, form]);
+
   const [statusColor, statusText] = getStatusTagColor(product_detail?.status, t);
 
   const handleValuesChange = (_: any, allValues: any) => {
@@ -314,7 +342,7 @@ const ProductEdit = () => {
   };
 
   return (
-    <Spin spinning={isFetching || isLoading}>
+    <Spin spinning={isFetching || isLoading} size="large">
       <S.ProductCreateStyle>
         <header className="bg-white p-6">
           <AdminBreadcrumb />

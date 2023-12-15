@@ -633,8 +633,8 @@
           "updated_at": "Last update",
           "deleted_at": "Last deleted",
           "action": "Action",
-          "edit": "Edit product",
-          "delete": "Delete product",
+          "edit": "Edit",
+          "delete": "Delete",
           "selecting": "Selecting: {{count}}"
         },
         "status": {
@@ -825,6 +825,7 @@
           },
           "rules": {
             "selling_price": "Please enter selling price",
+            "product_code": "Please enter product code",
             "variant_required": "Please enter variant name",
             "operation_model_required": "Please enter operation model",
             "weight_required": "Please enter weight",

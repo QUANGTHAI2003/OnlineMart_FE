@@ -1,6 +1,5 @@
 import { DownOutlined } from "@ant-design/icons";
 import { Can, PermissionsSwitch } from "@app/app/components/common/Permissions";
-import { useResponsive } from "@app/hooks";
 import usePermissions from "@app/hooks/usePermissions";
 import {
   useDeleteMultipleProductMutation,
@@ -20,7 +19,6 @@ interface IUpdateDataProps {
 const UpdateData: React.FC<IUpdateDataProps> = ({ hasSelected, selectedRowKeys }) => {
   const { t } = useTranslation();
   const location = useLocation();
-  const { isDesktop } = useResponsive();
 
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(false);
@@ -56,6 +54,7 @@ const UpdateData: React.FC<IUpdateDataProps> = ({ hasSelected, selectedRowKeys }
 
       notifySuccess("Delete product successfully");
       setCompleteAction(true);
+      setSelected(false);
     } catch (err) {
       handleApiError(err);
     }
@@ -106,6 +105,7 @@ const UpdateData: React.FC<IUpdateDataProps> = ({ hasSelected, selectedRowKeys }
 
       notifySuccess("Update status successfully");
       setCompleteAction(true);
+      setSelected(false);
     } catch (err) {
       handleApiError(err);
     }
@@ -137,47 +137,47 @@ const UpdateData: React.FC<IUpdateDataProps> = ({ hasSelected, selectedRowKeys }
             : t("admin_shop.product.list.table.product")}
         </h3>
         <Divider type="vertical" />
-        {isDesktop && (
-          <Space direction="horizontal" align="center">
-            <PermissionsSwitch>
-              <Can permissions={["Update product", "Delete product"]}>
-                <Dropdown
-                  menu={{
-                    items,
-                    onClick: handleMenuClick,
-                  }}
-                  trigger={["click"]}
-                  onOpenChange={handleOpenChange}
-                  open={open}
-                  disabled={!selected}
-                >
-                  {selected ? (
-                    <Button>
+        {/* {isDesktop && ( */}
+        <Space direction="horizontal" align="center">
+          <PermissionsSwitch>
+            <Can permissions={["Update product", "Delete product"]}>
+              <Dropdown
+                menu={{
+                  items,
+                  onClick: handleMenuClick,
+                }}
+                trigger={["click"]}
+                onOpenChange={handleOpenChange}
+                open={open}
+                disabled={!selected}
+              >
+                {selected ? (
+                  <Button>
+                    {t("admin_shop.product.list.filter.update_selected")}
+                    <DownOutlined />
+                  </Button>
+                ) : (
+                  <Tooltip title={t("admin_shop.product.list.filter.select_at_less")}>
+                    <Button disabled>
                       {t("admin_shop.product.list.filter.update_selected")}
                       <DownOutlined />
                     </Button>
-                  ) : (
-                    <Tooltip title={t("admin_shop.product.list.filter.select_at_less")}>
-                      <Button disabled>
-                        {t("admin_shop.product.list.filter.update_selected")}
-                        <DownOutlined />
-                      </Button>
-                    </Tooltip>
-                  )}
-                </Dropdown>
-              </Can>
-            </PermissionsSwitch>
-            <PermissionsSwitch>
-              <Can permissions={["Update product"]}>
-                {showUpdateStatus?.includes(currentTab) && (
-                  <Button disabled={!selected} onClick={() => handleUpdateMultipleStatus(status)}>
-                    {`Cập nhật trạng thái sang ${statusText}`}
-                  </Button>
+                  </Tooltip>
                 )}
-              </Can>
-            </PermissionsSwitch>
-          </Space>
-        )}
+              </Dropdown>
+            </Can>
+          </PermissionsSwitch>
+          <PermissionsSwitch>
+            <Can permissions={["Update product"]}>
+              {showUpdateStatus?.includes(currentTab) && (
+                <Button disabled={!selected} onClick={() => handleUpdateMultipleStatus(status)}>
+                  {`Cập nhật trạng thái sang ${statusText}`}
+                </Button>
+              )}
+            </Can>
+          </PermissionsSwitch>
+        </Space>
+        {/* )} */}
       </Space>
     </div>
   );

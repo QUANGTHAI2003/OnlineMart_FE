@@ -24,14 +24,6 @@ const ProductGeneral = ({ errorForm }: any) => {
     handleCountLength(value);
   };
 
-  const onChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
-
-  const onSearch = (value: string) => {
-    console.log("search:", value);
-  };
-
   const filterOption = (input: string, option?: { label: string; value: string }) => {
     if (option && option.label) {
       return option.label.toLowerCase().includes(input.toLowerCase());
@@ -100,8 +92,6 @@ const ProductGeneral = ({ errorForm }: any) => {
             <Select
               showSearch
               placeholder="Vui lòng chọn thương hiệu"
-              onChange={onChange}
-              onSearch={onSearch}
               filterOption={filterOption}
               options={supplier}
               loading={loadingSupplier}
@@ -122,8 +112,6 @@ const ProductGeneral = ({ errorForm }: any) => {
               showSearch
               placeholder={t("admin_shop.product.create.basic.placeholder.origin")}
               optionFilterProp="children"
-              onChange={onChange}
-              onSearch={onSearch}
               filterOption={filterOption}
               options={countryList.getData().map((country) => ({ label: country.name, value: country.code }))}
             />

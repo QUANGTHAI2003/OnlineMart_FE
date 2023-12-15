@@ -1,7 +1,7 @@
 import { InboxOutlined } from "@ant-design/icons";
 import SelectOrCreate from "@app/app/components/common/Select/SelectOrCreate";
 import { useAddCategoryMutation } from "@app/store/slices/api/categoryApi";
-import { isEntityError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
 import { Button, Col, Form, Input, Radio, RadioChangeEvent, Row, Upload, UploadFile } from "antd";
 import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import type { UploadProps } from "antd/es/upload/interface";
@@ -58,7 +58,7 @@ const CreateCategory = ({ data, setIsModalOpen }: any) => {
       setIsModalOpen(false);
       form.resetFields();
     } catch (err) {
-      console.log("Error = ", err);
+      handleApiError(err);
     }
   };
 
@@ -91,9 +91,6 @@ const CreateCategory = ({ data, setIsModalOpen }: any) => {
         status: "1",
       }}
       onFinish={handleSubmit}
-      onFinishFailed={(error) => {
-        console.log({ error });
-      }}
     >
       <Row gutter={16} justify="space-between">
         <Col span={checked ? 12 : 24}>

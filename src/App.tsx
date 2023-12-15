@@ -1,7 +1,6 @@
 import { ConfigProvider } from "antd";
 import enUS from "antd/locale/en_US";
 import viVN from "antd/locale/vi_VN";
-import React from "react";
 import { HelmetProvider } from "react-helmet-async";
 
 import { PermissionsProvider } from "./app/components/common/Permissions";
@@ -23,26 +22,24 @@ const App = () => {
   const userPermissions = useAppSelector((state) => state.userState?.user?.permissions);
 
   return (
-    <React.StrictMode>
-      <HelmetProvider context={helmetContext}>
-        <ConfigProvider
-          prefixCls="om"
-          iconPrefixCls="om"
-          theme={{
-            token: {
-              colorPrimary: defaultTheme.colorPrimary,
-              borderRadius: defaultTheme.borderRadius,
-              fontFamily: "Inter,Helvetica,Arial,sans-serif",
-            },
-          }}
-          locale={language === "en" ? enUS : viVN}
-        >
-          <PermissionsProvider permissions={userPermissions}>
-            <AppRouter />
-          </PermissionsProvider>
-        </ConfigProvider>
-      </HelmetProvider>
-    </React.StrictMode>
+    <HelmetProvider context={helmetContext}>
+      <ConfigProvider
+        prefixCls="om"
+        iconPrefixCls="om"
+        theme={{
+          token: {
+            colorPrimary: defaultTheme.colorPrimary,
+            borderRadius: defaultTheme.borderRadius,
+            fontFamily: "Inter,Helvetica,Arial,sans-serif",
+          },
+        }}
+        locale={language === "en" ? enUS : viVN}
+      >
+        <PermissionsProvider permissions={userPermissions}>
+          <AppRouter />
+        </PermissionsProvider>
+      </ConfigProvider>
+    </HelmetProvider>
   );
 };
 

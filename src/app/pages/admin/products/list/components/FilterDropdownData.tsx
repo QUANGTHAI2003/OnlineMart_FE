@@ -2,7 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { useDebounce } from "@app/hooks";
 import { Button, Checkbox, Input } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { forwardRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as S from "../Product.styles";
@@ -16,10 +16,14 @@ interface IFilterDropdownDataProps {
   currentValue?: any;
 }
 
-const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilterDropdownDataProps> = (
-  { name, data, setLoading, setOpen, onChange, currentValue },
-  ref
-) => {
+const FilterDropdownData: React.FC<IFilterDropdownDataProps> = ({
+  name,
+  data,
+  setLoading,
+  setOpen,
+  onChange,
+  currentValue,
+}) => {
   const { t } = useTranslation();
 
   const [filteredData, setFilteredData] = useState<IFilterDropdownDataProps["data"]>(data);
@@ -69,7 +73,7 @@ const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilter
   }, [debouncedSearchInput, data, setLoading]);
 
   return (
-    <S.FilterDropdownStyle ref={ref} className="filter-data">
+    <S.FilterDropdownStyle className="filter-data">
       <div className="header">
         <Input
           placeholder={t("admin_shop.product.list.filter.search_by", {
@@ -104,4 +108,4 @@ const FilterDropdownData: React.ForwardRefRenderFunction<HTMLDivElement, IFilter
   );
 };
 
-export default forwardRef(FilterDropdownData);
+export default FilterDropdownData;

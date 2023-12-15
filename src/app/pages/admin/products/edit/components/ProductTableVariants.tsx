@@ -38,8 +38,6 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
       const newVariantValue = [...new Set(allVariationValueName)];
       setFlattenCurrentVariantValues(newVariantValue);
 
-      console.log({ newVariantValue });
-
       const tableData = newVariantValue.map((variant: any, index: number) => ({
         key: index + 1,
         variants: variant,
@@ -159,7 +157,15 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
     {
       title: (
         <Form.Item label="Selling price" name="selling_price" required={true}>
-          <InputNumber className="w-full" placeholder="Enter for all" onChange={handleOnChangeSellingPrice} />
+          <InputNumber
+            formatter={(value: any) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            parser={(value: any) => value?.replace(/\$\s?|(\.*)/g, "").replace(/\./g, "")}
+            addonAfter="đ"
+            min={0}
+            className="w-full"
+            placeholder="Enter for all"
+            onChange={handleOnChangeSellingPrice}
+          />
         </Form.Item>
       ),
       dataIndex: "selling_price",
@@ -184,7 +190,13 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
                 }),
               ]}
             >
-              <InputNumber className="w-full" min={1} />
+              <InputNumber
+                formatter={(value: any) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                parser={(value: any) => value?.replace(/\$\s?|(\.*)/g, "").replace(/\./g, "")}
+                addonAfter="đ"
+                className="w-full"
+                min={1}
+              />
             </Form.Item>
           );
         }
@@ -194,7 +206,15 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
     {
       title: (
         <Form.Item label="Sale price" name="sale_price">
-          <InputNumber className="w-full" placeholder="Enter for all" onChange={handleOnChangeSalePrice} />
+          <InputNumber
+            formatter={(value: any) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            parser={(value: any) => value?.replace(/\$\s?|(\.*)/g, "").replace(/\./g, "")}
+            addonAfter="đ"
+            min={0}
+            className="w-full"
+            placeholder="Enter for all"
+            onChange={handleOnChangeSalePrice}
+          />
         </Form.Item>
       ),
       dataIndex: "sale_price",
@@ -205,26 +225,45 @@ const ProductTableVariants: React.FC<IProductTableVariants> = ({ form, currentVa
           return (
             <Form.Item
               name={`offer[${record.key - 1}].sale_price`}
-              dependencies={["sale_price"]}
+              dependencies={[
+                "sale_price",
+                `
+                offer[${record.key - 1}].selling_price
+              `,
+              ]}
               rules={[
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    const currentSalePrice = getFieldValue("sale_price");
-                    if (currentSalePrice !== 0) {
-                      if (currentSalePrice > 1000) {
-                        return Promise.resolve();
-                      } else if (value === null) {
-                        return Promise.resolve();
+                    if (record && record.key !== undefined) {
+                      const currentSellingPrice = getFieldValue(`offer[${record?.key - 1}].selling_price`);
+
+                      if (value > 0) {
+                        if (value > 1000) {
+                          if (currentSellingPrice < value) {
+                            return Promise.reject(new Error("Giá bán phải lớn hơn giá giảm"));
+                          }
+
+                          return Promise.resolve();
+                        } else if (value === null) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(new Error("Giá giảm phải lớn hơn 1000"));
                       }
 
-                      return Promise.reject(new Error("Price must be greater than 1000"));
+                      return Promise.resolve();
                     }
                     return Promise.resolve();
                   },
                 }),
               ]}
             >
-              <InputNumber className="w-full" min={0} />
+              <InputNumber
+                formatter={(value: any) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                parser={(value: any) => value?.replace(/\$\s?|(\.*)/g, "").replace(/\./g, "")}
+                addonAfter="đ"
+                className="w-full"
+                min={0}
+              />
             </Form.Item>
           );
         }

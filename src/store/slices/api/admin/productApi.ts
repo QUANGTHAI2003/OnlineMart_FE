@@ -55,7 +55,7 @@ export const productAdminApi = createApi({
       query: (data) => {
         return {
           url: `product/${data.id}`,
-          method: "PATCH",
+          method: "POST",
           body: data.body,
           credentials: "include",
         };

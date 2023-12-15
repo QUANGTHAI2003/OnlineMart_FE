@@ -205,10 +205,12 @@ const ProductCreate = () => {
     const option_operation_variants: any = {
       variants: createProductVariants(data, newtransformedData),
     };
-    console.log(
-      "🚀 ~ file: ProductCreate.tsx:208 ~ handleSubmit ~ option_operation_variants: any.variants:",
-      option_operation_variants.variants
-    );
+
+    const seo_meta: any = {
+      meta_title: data.meta_title,
+      meta_keywords: data.meta_keywords,
+      meta_description: data.meta_description,
+    };
 
     const product = {
       basis_info,
@@ -217,11 +219,13 @@ const ProductCreate = () => {
       product_image: data.product_image,
       gallery_images: data.gallery_images,
       status: data.status,
+      seo_meta,
     };
 
     try {
       const galleryArray = Object.values(product.gallery_images || []) as any[];
 
+      console.log(product.product_image);
       const formData = new FormData();
       formData.append("type", isNormal ? "normal" : "variant");
       formData.append("shop_id", shopId);
@@ -229,20 +233,32 @@ const ProductCreate = () => {
       formData.append("category_id", product.basis_info.category_id.at(-1));
       formData.append("supplier_id", product.basis_info.supplier_id);
       formData.append("origin", product.basis_info.origin);
-      formData.append("description", product.product_desc.description);
+      formData.append("description", product.product_desc.description || "");
       formData.append("status", product.status);
       formData.append("thumbnail_url", product.product_image);
+      formData.append("meta_title", product.seo_meta.meta_title || "");
+      formData.append("meta_description", product.seo_meta.meta_description || "");
+
+      if (product?.seo_meta?.meta_keywords?.length > 0) {
+        formData.append("meta_keywords", product.seo_meta.meta_keywords.join(","));
+      }
 
       if (galleryArray.length > 0) {
-        galleryArray.forEach((file: any, index: number) => {
-          formData.append(`gallery[${index}]`, file?.originFileObj);
-        });
+        if (!galleryArray[0]?.originFileObj) {
+          galleryArray[1].forEach((file: any, index: number) => {
+            formData.append(`gallery[${index}]`, file?.originFileObj);
+          });
+        } else {
+          galleryArray.forEach((file: any, index: number) => {
+            formData.append(`gallery[${index}]`, file?.originFileObj);
+          });
+        }
       }
 
       if (isNormal) {
         formData.append("regular_price", product.option_operation.price);
         formData.append("sale_price", product.option_operation.sale_price);
-        formData.append("stock", product.option_operation.stock);
+        formData.append("stock_qty", product.option_operation.stock);
         formData.append("sku", product.option_operation.product_code);
       } else {
         formData.append("variants", JSON.stringify(product.option_operation.variants));
@@ -282,7 +298,7 @@ const ProductCreate = () => {
   };
 
   return (
-    <Spin spinning={isLoading}>
+    <Spin spinning={isLoading} size="large">
       <S.ProductCreateStyle>
         <header className="bg-white p-6">
           <AdminBreadcrumb />

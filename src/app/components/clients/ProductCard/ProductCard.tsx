@@ -57,14 +57,13 @@ const ProductCard: React.FC<IProductCardItem> = ({
         <span className="flex flex-col w-full">
           <S.Thumbnail>
             <div className="w-full h-full absolute top-0 left-0">
-              <div className="thumbnail">
-                <LazyLoadImage
-                  alt={name}
-                  src={`${baseImageKitUrl}/${thumbnailUrl}`}
-                  placeholderSrc={`${baseImageKitUrl}/${thumbnailUrl}?tr=bl-50`}
-                  className="w-full h-full object-contain block"
-                />
-              </div>
+              <LazyLoadImage
+                alt={name}
+                src={`${baseImageKitUrl}/${thumbnailUrl}`}
+                placeholderSrc={`${baseImageKitUrl}/${thumbnailUrl}?tr=bl-50,ar-1-1,h-200,cm-pad_resize,bg-F3F3F3,q-100`}
+                className="w-full h-full object-contain block"
+                wrapperClassName="h-full"
+              />
             </div>
           </S.Thumbnail>
           <S.Info>

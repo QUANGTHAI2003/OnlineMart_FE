@@ -3,6 +3,7 @@ import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrum
 import { Can, PermissionsSwitch } from "@app/app/components/common/Permissions";
 import { useGetProductQuery } from "@app/store/slices/api/admin/productApi";
 import { Button, Col, Row, Space, Typography } from "antd";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -32,6 +33,10 @@ const Product = () => {
   //     },
   //   ]);
   // });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <main>

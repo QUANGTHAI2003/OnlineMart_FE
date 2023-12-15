@@ -28,15 +28,15 @@ export const ProductListTab = (t: any) => {
       alert:
         "Mục này chứa các sản phẩm có thể bán. Bao gồm sản phẩm đang hiển thị và bị hạn chế hiển thị trong kết quả tìm kiếm.",
     },
+    // {
+    //   id: 5,
+    //   name: t("admin_shop.product.list.status.waiting_for_approve"),
+    //   tab: "waiting-for-approve",
+    //   alert:
+    //     "Mục này chứa các sản phẩm đang chờ duyệt bởi Tiki. Duyệt thành công sẽ tự động chuyển qua mục Đang bán, bị từ chối chuyển qua mục Vi phạm.",
+    // },
     {
       id: 5,
-      name: t("admin_shop.product.list.status.waiting_for_approve"),
-      tab: "waiting-for-approve",
-      alert:
-        "Mục này chứa các sản phẩm đang chờ duyệt bởi Tiki. Duyệt thành công sẽ tự động chuyển qua mục Đang bán, bị từ chối chuyển qua mục Vi phạm.",
-    },
-    {
-      id: 6,
       name: t("admin_shop.product.list.status.off"),
       tab: "off",
       alert: "Mục này chứa các sản phẩm mà Nhà bán đã tắt toàn bộ lựa chọn Khách hàng không thể xem và đặt hàng.",

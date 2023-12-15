@@ -1,5 +1,6 @@
-import { UploadOutlined } from "@ant-design/icons";
-import { Form, Upload, UploadFile, UploadProps } from "antd";
+import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { Form, Image, Modal, Upload, UploadFile, UploadProps } from "antd";
+import { RcFile } from "antd/es/upload";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +10,20 @@ import { ProductOptionPrice, ProductTableVariants } from ".";
 
 const { Dragger } = Upload;
 
+const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result as string));
+  reader.readAsDataURL(img);
+};
+
+const getBase64Multiple = (file: RcFile): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
+
 const ProductOptions = ({ form }: any) => {
   const { t } = useTranslation();
 
@@ -16,45 +31,58 @@ const ProductOptions = ({ form }: any) => {
   const [currentVariantValues, setCurrentVariantValues] = useState<any>({});
   const [, setFile] = useState<UploadFile>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [imageUrl, setImageUrl] = useState<string>();
+
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
 
   const props: UploadProps = {
     onRemove: () => {
       setFile(undefined);
     },
-    beforeUpload: (file) => {
-      setFile(file);
-
+    beforeUpload: () => {
       return false;
     },
-    listType: "picture-card",
+    onChange: (info) => {
+      getBase64(info.file as RcFile, (url) => {
+        setImageUrl(url);
+      });
+    },
+    accept: ".jpg,.jpeg,.png,.webp",
+    showUploadList: false,
   };
 
   const propsMultiple: UploadProps = {
     multiple: true,
-    accept: ".jpg,.jpeg,.png,.webp,.mp4",
-    onRemove: (file: any) => {
+    accept: ".jpg,.jpeg,.png,.webp",
+    beforeUpload: () => {
+      return false;
+    },
+    onRemove: (file: UploadFile) => {
       const index = fileList.indexOf(file);
       const newFileList: any = fileList.slice();
       newFileList.splice(index, 1);
 
       return setFileList(newFileList);
     },
-    beforeUpload: () => {
-      return false;
-    },
-    onChange: (info) => {
-      const listFiles = info.fileList;
-      console.log(listFiles);
+    onPreview: async (file: UploadFile) => {
+      if (!file.url && !file.preview) {
+        file.preview = await getBase64Multiple(file.originFileObj as RcFile);
+      }
 
-      setFileList(listFiles);
+      setPreviewImage(file.url || (file.preview as string));
+      setPreviewOpen(true);
     },
-    fileList: fileList,
+    onChange: ({ fileList: newFileList }) => {
+      setFileList(newFileList);
+    },
     listType: "picture-card",
+    fileList,
   };
 
-  const normFile = (e: any) => {
-    console.log("Upload event:", e);
+  const handleCancel = () => setPreviewOpen(false);
 
+  const normFile = (e: any) => {
     if (Array.isArray(e)) {
       return e;
     }
@@ -91,30 +119,40 @@ const ProductOptions = ({ form }: any) => {
           valuePropName="file"
           getValueFromEvent={normFile}
         >
-          <Dragger {...props} accept=".jpg,.jpeg,.png,.webp">
-            <p className="om-upload-drag-icon">
-              <UploadOutlined />
-            </p>
-            <p className="om-upload-text">{t("admin_shop.product.create.option.label.click_drag_upload")}</p>
-            <p className="om-upload-hint">{t("admin_shop.product.create.option.label.image_limit")}</p>
+          <Dragger {...props}>
+            {imageUrl ? (
+              <Image height={300} src={imageUrl} preview={false} />
+            ) : (
+              <>
+                <p className="om-upload-drag-icon">
+                  <UploadOutlined />
+                </p>
+                <p className="om-upload-text">{t("admin_shop.product.create.option.label.click_drag_upload")}</p>
+                <p className="om-upload-hint">{t("admin_shop.product.create.option.label.image_limit")}</p>
+              </>
+            )}
           </Dragger>
         </Form.Item>
-        <Form.Item
-          label={t("admin_shop.product.create.option.label.gallery_images")}
-          name="gallery_images"
-          valuePropName="fileList"
-          getValueFromEvent={(e) => {
-            return e?.fileList;
-          }}
+        <Form.Item label={t("admin_shop.product.create.option.label.gallery_images")} name="gallery_images">
+          <Upload {...propsMultiple}>
+            {fileList?.length >= 8 ? null : (
+              <div>
+                <PlusOutlined />
+                <div style={{ marginTop: 8 }}>Upload</div>
+              </div>
+            )}
+          </Upload>
+        </Form.Item>
+        <Modal
+          className="min-w-[700px] max-w-[900px] w-min"
+          open={previewOpen}
+          title={"Image"}
+          centered
+          footer={null}
+          onCancel={handleCancel}
         >
-          <Dragger {...propsMultiple}>
-            <p className="om-upload-drag-icon">
-              <UploadOutlined />
-            </p>
-            <p className="om-upload-text">{t("admin_shop.product.create.option.label.click_drag_upload")}</p>
-            <p className="om-upload-hint">{t("admin_shop.product.create.option.label.image_limit")}</p>
-          </Dragger>
-        </Form.Item>
+          <img className="w-full" src={previewImage} alt={previewImage} />
+        </Modal>
       </S.ProductSectionWrapper>
     </S.ProductOptionsStyle>
   );

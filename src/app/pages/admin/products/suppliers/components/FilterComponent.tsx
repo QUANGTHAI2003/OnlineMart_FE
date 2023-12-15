@@ -1,7 +1,7 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Select } from "@app/app/components/common/Select/Select";
 import { Col, Form, Input, Row, Space } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searchTypeData }: any) => {
@@ -20,10 +20,6 @@ const FilterComponent = React.memo(({ setSearchValue, setSelectSearchType, searc
     }
     setSelectSearchType(key);
   };
-
-  useEffect(() => {
-    console.log("Filter Component rendered");
-  });
 
   return (
     <section className="filter pt-4 bg-white">

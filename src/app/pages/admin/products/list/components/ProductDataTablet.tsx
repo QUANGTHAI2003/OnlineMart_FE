@@ -1,4 +1,4 @@
-import { formatDateTime } from "@app/utils/helper";
+import { formatCurrency, formatDateTime } from "@app/utils/helper";
 import { Button, Card, Col, Divider, Pagination, Row, Space } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -38,6 +38,35 @@ const ProductDataTablet: React.FC<IProductDataTabletProps> = ({ data, showConfir
               >
                 <>
                   <ProductTableDataName data={item} trans={t} />
+                  <Divider />
+                  <Row className="flex-1">
+                    <Col span={12}>
+                      <Space direction="vertical">
+                        <div className="secondary-description">Giá</div>
+                        {typeof item?.price === "number" ? (
+                          <span>{formatCurrency(item?.price)}</span>
+                        ) : (
+                          (() => {
+                            const priceRange = item?.price.split("-");
+                            const minPrice = parseInt(priceRange[0]);
+                            const maxPrice = parseInt(priceRange[1]);
+
+                            if (minPrice === maxPrice) {
+                              return <span>{formatCurrency(minPrice)}</span>;
+                            }
+
+                            return <span>{`${formatCurrency(minPrice)} - ${formatCurrency(maxPrice)}`}</span>;
+                          })()
+                        )}
+                      </Space>
+                    </Col>
+                    <Col span={12}>
+                      <Space direction="vertical">
+                        <div className="secondary-description">Tồn kho</div>
+                        {item?.stock}
+                      </Space>
+                    </Col>
+                  </Row>
                   <Divider />
                   <Row className="flex-1">
                     <Col span={8}>
