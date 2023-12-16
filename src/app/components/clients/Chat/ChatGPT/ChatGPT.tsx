@@ -40,6 +40,8 @@ const ChatGPT: React.FC = () => {
 
   const [messages, setMessages] = useState<IChatGPTMessage[]>(initMessage);
   const [isTyping, setIsTyping] = useState<boolean>(false);
+  const [stream, setStream] = useState<any>(null);
+
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const scrollDownRef = useRef<HTMLButtonElement>(null);
@@ -60,15 +62,35 @@ const ChatGPT: React.FC = () => {
 
     try {
       const response = await processMessageToChatGPT([...messages, newMessage]);
-      const content = response.choices[0]?.message?.content;
-      if (content) {
-        const chatGPTResponse: IChatGPTMessage = {
-          message: content,
-          sender: CHATGPT,
-        };
-        setMessages((prevMessages: IChatGPTMessage[]) => [...prevMessages, chatGPTResponse]);
+      setStream(response);
+
+      let completeMessage = "";
+      for await (const chunk of response) {
+        const chunkMessage = chunk.choices[0]?.delta?.content;
+
+        if (chunkMessage !== undefined) {
+          completeMessage += chunkMessage;
+        }
+
+        setMessages((prevMessages: IChatGPTMessage[]) => {
+          const updatedMessages = [...prevMessages];
+          if (updatedMessages.length > 0) {
+            const lastMessageIndex = updatedMessages.length - 1;
+            const lastMessage = updatedMessages[lastMessageIndex];
+
+            const updatedMessage: IChatGPTMessage = {
+              ...lastMessage,
+              message: completeMessage,
+              sender: "system",
+            };
+
+            updatedMessages[lastMessageIndex] = updatedMessage;
+          }
+          return updatedMessages;
+        });
       }
     } catch (error: any) {
+      console.log("Error sending message:", error);
       setMessages((prevMessages: IChatGPTMessage[]) => [
         ...prevMessages,
         { message: t("user.chatgpt.system_error"), sender: "system" },
@@ -87,7 +109,7 @@ const ChatGPT: React.FC = () => {
   async function processMessageToChatGPT(chatMessages: IChatGPTMessage[]): Promise<any> {
     const apiMessages = chatMessages.map((messageObject: IChatGPTMessage) => {
       const role = messageObject.sender === CHATGPT ? "assistant" : "user";
-      return { role, content: messageObject.message };
+      return { role, content: messageObject.message || "" };
     });
 
     const apiRequestBody: any = {
@@ -99,6 +121,7 @@ const ChatGPT: React.FC = () => {
         },
         ...apiMessages,
       ],
+      stream: true,
     };
 
     try {
@@ -124,6 +147,7 @@ const ChatGPT: React.FC = () => {
           }
         }
       });
+
       return response;
     } catch (error) {
       console.log("Error processing message:", error);
@@ -134,6 +158,11 @@ const ChatGPT: React.FC = () => {
   const handleScrollDownClick = () => {
     const chatGpt = document.querySelector(".om-modal-body") as HTMLElement;
     chatGpt?.scrollTo(0, chatGpt?.scrollHeight);
+  };
+
+  const handleStopResponse = () => {
+    console.log("stop response");
+    stream.controller.abort();
   };
 
   useEffect(() => {
@@ -172,7 +201,7 @@ const ChatGPT: React.FC = () => {
         className="min-w-[700px] max-w-[1000px] w-full"
         zIndex={99999}
         keyboard={true}
-        footer={<ChatGPTFooter onSend={handleSendRequest} />}
+        footer={<ChatGPTFooter onSend={handleSendRequest} isTyping={isTyping} onStop={handleStopResponse} />}
       >
         <div className="chat-infinity" ref={currentChatRef}>
           {messages.map((chat: any, index: number) => {
@@ -183,14 +212,6 @@ const ChatGPT: React.FC = () => {
             <ScrollDownIcon />
           </button>
         </div>
-        {isTyping && (
-          <div className="is-typing">
-            <p className="flex items-end gap-x-1">
-              {t("user.chatgpt.is_typing")}
-              <div className="dots mb-1"></div>
-            </p>
-          </div>
-        )}
       </S.ChatGptStyle>
       <ChatIcon onClickGPT={handleShowChatGPT} />
     </>
