@@ -1,7 +1,7 @@
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { useDeleteWishlistMutation } from "@app/store/slices/api/user/wishlistApi";
 import { IWishlist } from "@app/types/wishlist.types";
-import { formatCurrency, notifyError, notifySuccess } from "@app/utils/helper";
+import { baseImageUrl, formatCurrency, notifyError, notifySuccess } from "@app/utils/helper";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Modal } from "antd";
@@ -51,7 +51,7 @@ const WishlistItem = ({
       <div className="flex w-full justify-between">
         <div className="flex left">
           <div className="flex justify-center relative">
-            <img src={thumbnail_url} alt={name} width={150} className="object-cover" />
+            <img src={`${baseImageUrl}/${thumbnail_url}`} alt={name} width={150} className="object-cover" />
             <S.BoxShadow></S.BoxShadow>
           </div>
           <div className="ml-4">

@@ -8,7 +8,6 @@ const { Title } = Typography;
 const SiteHeaderItem = () => {
   const { t } = useTranslation();
 
-
   return (
     <S.SiteHeader>
       <Row className="main_title">

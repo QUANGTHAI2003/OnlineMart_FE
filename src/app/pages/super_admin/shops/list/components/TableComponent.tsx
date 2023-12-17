@@ -1,6 +1,14 @@
 import { DownOutlined } from "@ant-design/icons";
 import { SuperAdminTable } from "@app/app/components/common/Table/SuperAdminTable";
-import { removeDiacritics } from "@app/utils/helper";
+import {
+  useAccpectShopMutation,
+  useGetListManagerShopQuery,
+  useReasonAccpectShopMutation,
+} from "@app/store/slices/api/superadmin/managerShopApi";
+import { setShopId } from "@app/store/slices/redux/superadmin/managerShopSlice";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
+import { IManagerShop } from "@app/types/shop.types";
+import { handleApiError, notifySuccess, removeDiacritics } from "@app/utils/helper";
 import { Button, Card, Dropdown, Form, Input, MenuProps, Modal, Space, Tag } from "antd";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { SorterResult } from "antd/es/table/interface";
@@ -8,63 +16,70 @@ import { TFunction } from "i18next";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { data } from "../data";
 
-interface IDataType {
-  id: number;
-  name: string;
-  phone: number;
-  email: string;
-  status: string;
-  code: string;
-}
-
-interface ITableComponentProps {
-  searchValue: string;
-  searchType: string;
-  selectType: string;
-  selectValue: string;
-}
-
-const TableComponent = React.memo(({ searchValue, searchType, selectType, selectValue }: ITableComponentProps) => {
+const TableComponent = React.memo(({ searchValue, searchType, selectType, selectValue }: any) => {
   const { t } = useTranslation();
+  const [form] = Form.useForm();
+  const [selectedShopId, setSelectedShopId] = useState<number | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [sortedInfo, setSortedInfo] = useState<SorterResult<IDataType>>({});
+  const [sortedInfo, setSortedInfo] = useState<SorterResult<IManagerShop>>({});
 
-  const handleMenuClick = () => {
+  const { data: getListManagerShop, isFetching } = useGetListManagerShopQuery();
+  const [updateStatus, { isLoading }] = useAccpectShopMutation();
+  const [reasonAccpect, { isLoading: loadReason }] = useReasonAccpectShopMutation();
+  const dispatch = useAppDispatch();
+
+  const shopIdSlice = useAppSelector((state) => state.managerShopSupperAdmin.shopId);
+  const handleAccpect = async (shopId: number) => {
+    try {
+      setSelectedShopId(shopId);
+      await updateStatus(shopId).unwrap();
+      notifySuccess("Successfully", "Change accpect shop successfully");
+    } catch (err: any) {
+      handleApiError(err);
+    }
+  };
+
+  const handleSubmit = async (fieldValues: any) => {
+    try {
+      await reasonAccpect({ shopId: shopIdSlice, data: { reason_accpect: fieldValues.reason_accpect } }).unwrap();
+      notifySuccess("Successfully", "Reason accpect shop successfully");
+      setIsModalVisible(false);
+    } catch (err: any) {
+      handleApiError(err);
+    }
+  };
+
+  const handleMenuClick = (value: number) => {
+    dispatch(setShopId(value));
     setIsModalVisible(true);
   };
-  const getStatusTagColor = (status: string, t: TFunction<"translation", undefined>) => {
-    switch (status) {
-      case "disabled":
+
+  const getStatusTagColor = (type: string, t: TFunction<"translation", undefined>) => {
+    switch (type) {
+      case "0":
         return ["volcano", t("admin_super.shop_list.filter.disabled")];
-      case "enabled":
+      case "1":
         return ["green", t("admin_super.shop_list.filter.enabled")];
+      case "2":
+        return ["", "Duyệt không thành công"];
       default:
         return [];
     }
   };
 
-  const items: MenuProps["items"] = [
+  const getItems = (record: any): MenuProps["items"] => [
     {
       key: "1",
       label: (
-        <Button className="p-0 bg-transparent" type="text">
-          {t("admin_super.shop_list.table.approve")}
-        </Button>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <Button className="p-0 bg-transparent" onClick={handleMenuClick} type="text">
+        <Button className="p-0 bg-transparent" onClick={() => handleMenuClick(record?.id)} type="text">
           {t("admin_super.shop_list.table.cancel")}
         </Button>
       ),
     },
   ];
 
-  const columns: ColumnsType<IDataType> = [
+  const columns: ColumnsType<IManagerShop> = [
     {
       title: t("admin_super.shop_list.table.shop_code"),
       dataIndex: "code",
@@ -91,16 +106,18 @@ const TableComponent = React.memo(({ searchValue, searchType, selectType, select
     },
     {
       title: t("admin_super.shop_list.table.shop_status"),
-      dataIndex: "status",
-      key: "status",
+      dataIndex: "type",
+      key: "type",
       render: (_id, record) => {
-        const [statusColor, statusText] = getStatusTagColor(record.status, t);
+        const [statusColor, statusText] = getStatusTagColor(record.type, t);
         return <Tag color={statusColor}>{statusText}</Tag>;
       },
     },
     {
       title: t("admin_super.shop_list.table.action"),
       key: "action",
+      fixed: "right",
+      width: 180,
       align: "center",
       render: (_, record: any) => (
         <Space size="middle" direction="vertical">
@@ -112,9 +129,9 @@ const TableComponent = React.memo(({ searchValue, searchType, selectType, select
           <Dropdown.Button
             icon={<DownOutlined />}
             placement="bottomCenter"
-            menu={{
-              items,
-            }}
+            onClick={() => handleAccpect(record?.id)}
+            loading={selectedShopId === record?.id && isLoading}
+            menu={{ items: getItems(record) }}
           >
             {t("admin_super.shop_list.table.approve")}
           </Dropdown.Button>
@@ -122,31 +139,30 @@ const TableComponent = React.memo(({ searchValue, searchType, selectType, select
       ),
     },
   ];
-
   const displayedShop = useMemo(() => {
-    let filteredShop = data;
+    let filteredShop = getListManagerShop;
     if (searchValue) {
-      filteredShop = filteredShop.filter((shop: any) => {
+      filteredShop = filteredShop?.filter((shop: any) => {
         const fieldValue = shop[searchType];
         const searchValueString = searchValue.toString();
 
-        return removeDiacritics(fieldValue.toString())
+        return removeDiacritics(fieldValue?.toString())
           .toLowerCase()
           .includes(removeDiacritics(searchValueString).toLowerCase());
       });
     }
     if (selectValue) {
-      filteredShop = filteredShop.filter((shop: any) => {
-        const fieldSelectValue = shop.status;
+      filteredShop = filteredShop?.filter((shop: any) => {
+        const fieldSelectValue = shop?.type;
         return fieldSelectValue === selectType;
       });
     }
 
     return filteredShop;
-  }, [searchType, searchValue, selectType, selectValue]);
+  }, [getListManagerShop, searchType, searchValue, selectType, selectValue]);
 
-  const handleChange: TableProps<IDataType>["onChange"] = (_pagination, _filters, sorter) => {
-    setSortedInfo(sorter as SorterResult<IDataType>);
+  const handleChange: TableProps<IManagerShop>["onChange"] = (_pagination, _filters, sorter) => {
+    setSortedInfo(sorter as SorterResult<IManagerShop>);
   };
   return (
     <>
@@ -155,6 +171,7 @@ const TableComponent = React.memo(({ searchValue, searchType, selectType, select
           <div className="card-inner">
             <div className="body">
               <SuperAdminTable
+                loading={isFetching}
                 columns={columns}
                 dataSource={displayedShop}
                 bordered
@@ -171,14 +188,16 @@ const TableComponent = React.memo(({ searchValue, searchType, selectType, select
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={[
-          <Button key="confirm" type="primary" block onClick={() => setIsModalVisible(false)}>
+          <Button key="confirm" type="primary" htmlType="submit" form="formReasonAccpect" block loading={loadReason}>
             {t("admin_super.shop_list.table.confirm")}
           </Button>,
         ]}
       >
-        <Form.Item>
-          <Input.TextArea autoSize={{ minRows: 5 }} placeholder={t("admin_super.shop_list.table.text_area")} />
-        </Form.Item>
+        <Form form={form} autoComplete="off" id="formReasonAccpect" onFinish={handleSubmit}>
+          <Form.Item name="reason_accpect">
+            <Input.TextArea autoSize={{ minRows: 5 }} placeholder={t("admin_super.shop_list.table.text_area")} />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );

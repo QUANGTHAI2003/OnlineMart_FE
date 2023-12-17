@@ -4,23 +4,27 @@ import ImageInfo from "@app/app/assets/images/store/info.png";
 import ImageProductNew from "@app/app/assets/images/store/product-new.png";
 import ImageStartIcon from "@app/app/assets/images/store/start.png";
 import TimeNew from "@app/app/assets/images/store/time-new.png";
-import data from "@app/app/pages/client/home/data";
 import { useAppSelector } from "@app/store/store";
 import { formatShortenNumber } from "@app/utils/helper";
-import { faComment, faStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Popover, Row } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { dataSeller } from "../data";
-
 import * as S from "./Profile.styles";
 
-const Profile = () => {
+const Profile: React.FC<any> = (shopData) => {
+  console.log(shopData?.shopData?.product);
   const { t } = useTranslation();
 
   const information = useAppSelector((state) => state.shopInformation.information) || {};
   const founded_year = new Date(information.created_at).getFullYear().toString();
+
+  const totalRating = shopData?.shopData?.review.reduce((acc: any, review: any) => acc + review.rating, 0);
+  const reviewCount = shopData?.shopData?.review.length;
+
+  let averageRating = totalRating / reviewCount;
+  averageRating = averageRating > 5 ? 5 : averageRating;
 
   return (
     <div className="rounded-lg">
@@ -75,7 +79,7 @@ const Profile = () => {
               <span className="store-info w-full ml-1 ">{t("user.seller.info.product")}</span>
             </Col>
             <Col lg={{ span: 16 }} xs={{ span: 12 }} className="store-des">
-              {formatShortenNumber(data.length)}
+              {formatShortenNumber(shopData?.shopData?.product?.length)}
             </Col>
           </Row>
           <Row className="bg-res w-full p-4">
@@ -93,9 +97,9 @@ const Profile = () => {
               <span className="store-info w-full ml-1 ">{t("user.seller.info.assess")}</span>
             </Col>
             <Col lg={{ span: 16 }} xs={{ span: 12 }} className="store-des flex items-center">
-              <span>{`${information.rating} / 5`}</span>
+              <span>{`${averageRating} / 5`}</span>
               <img src={ImageStartIcon} alt="start" width="20" />
-              <span className="ml-1">{`(${formatShortenNumber(dataSeller.total_rating)})`}</span>
+              <span className="ml-1">{`(${formatShortenNumber(shopData?.shopData?.review.length)})`}</span>
             </Col>
           </Row>
           <Row className="bg-res w-full p-4">
@@ -104,16 +108,7 @@ const Profile = () => {
               <span className="store-info w-full ml-1 ">{t("user.seller.info.follow")}</span>
             </Col>
             <Col lg={{ span: 16 }} xs={{ span: 12 }} className="store-des">
-              {formatShortenNumber(dataSeller.total_follower)}
-            </Col>
-          </Row>
-          <Row className="w-full p-4">
-            <Col lg={{ span: 8 }} xs={{ span: 12 }} className="store-info">
-              <FontAwesomeIcon icon={faComment} />
-              <span className="store-info w-full ml-1">{t("user.seller.info.feedback")}</span>
-            </Col>
-            <Col lg={{ span: 16 }} xs={{ span: 12 }} className="store-des">
-              {dataSeller.feedback ? dataSeller.feedback + "%" : "Chưa có"}
+              {formatShortenNumber(shopData?.shopData?.followed)}
             </Col>
           </Row>
         </S.Info>

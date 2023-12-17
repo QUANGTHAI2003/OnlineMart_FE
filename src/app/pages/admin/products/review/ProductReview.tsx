@@ -1,10 +1,11 @@
 import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
+import { useGetReviewQuery } from "@app/store/slices/api/admin/reviewApi";
 import { Card } from "antd";
 import { useTranslation } from "react-i18next";
-import { useGetReviewQuery } from "@app/store/slices/api/admin/reviewApi";
+
 import { Filter, FilterComponent, SiteHeaderItem, TableComponent, TabRating } from "./components";
-import * as S from "./ProductReview.styles";
 import { searchType } from "./data";
+import * as S from "./ProductReview.styles";
 
 const ProductPreview = () => {
   const { t } = useTranslation();

@@ -9,12 +9,10 @@ export const supplierApi = createApi({
   tagTypes: ["Supplier"],
   endpoints: (builder) => ({
     // Lấy danh sách suppliers theo shop
-    getSupplierList: builder.query<ISupplier[], any>({
-      query: ({ shop_id }) => {
-        return {
-          url: `suppliers/shop/${shop_id}`,
-        };
-      },
+    getSupplierList: builder.query<ISupplier[], void>({
+      query: () => ({
+        url: `suppliers`,
+      }),
       transformResponse: (response: { data: ISupplier[] }) => {
         return response.data;
       },
@@ -28,7 +26,7 @@ export const supplierApi = createApi({
     }),
     // Lấy chi tiết một supplier
     getSupplierOnly: builder.query<ISupplier, number>({
-      query: (id) => `suppliers/${id}`,
+      query: (supplierId) => `suppliers/${supplierId}`,
       transformResponse: (response: { data: ISupplier }) => {
         return response.data;
       },
@@ -62,14 +60,14 @@ export const supplierApi = createApi({
           body: data,
         };
       },
-      invalidatesTags: (): any => [{ type: "Supplier", id: "LIST" }],
+      invalidatesTags: [{ type: "Supplier", id: "LIST" }],
     }),
     // Cập nhật supplier.
-    updateSupplier: builder.mutation<ISupplier, Partial<ISupplier>>({
-      query(data: Partial<ISupplier>) {
+    updateSupplier: builder.mutation<ISupplier, any>({
+      query: ({ supplierId, data }) => {
         return {
-          url: `suppliers/${data.id}`,
-          method: "PATCH",
+          url: `suppliers/${supplierId}`,
+          method: "POST",
           body: data,
         };
       },

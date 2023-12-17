@@ -61,7 +61,6 @@ export const reviewApi = createApi({
     // Cập nhật lượt thích của một review (+1 like)
     updateLike: builder.mutation<IReview, any>({
       query: ({ userId, productId, reviewId, like_count }) => {
-
         return {
           url: `customer_reviews/${userId}/${productId}/${reviewId}/like`,
           method: "PATCH",
@@ -108,5 +107,5 @@ export const {
   useGetLikesQuery,
   useUpdateLikeMutation,
   useReviewProductMutation,
-  useGetReviewProductQuery
+  useGetReviewProductQuery,
 } = reviewApi;

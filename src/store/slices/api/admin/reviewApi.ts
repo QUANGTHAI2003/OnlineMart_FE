@@ -26,10 +26,9 @@ export const reviewAdminApi = createApi({
     }),
     replyReview: builder.mutation<IReview, any>({
       query: ({ reviewId, data }) => {
-        console.log(data);
         return {
           url: `reviews/${reviewId}/reply`,
-          method: "POST",
+          method: "PUT",
           body: data,
         };
       },

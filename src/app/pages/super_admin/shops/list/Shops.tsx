@@ -4,6 +4,7 @@ import { Typography } from "antd";
 import { TFunction } from "i18next";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import FilterComponent from "./components/FilterComponent";
 import TableComponent from "./components/TableComponent";
 
@@ -18,8 +19,9 @@ const searchType = (t: TFunction<"translation", undefined>) => {
 
 const statusType = (t: TFunction<"translation", undefined>) => {
   return [
-    { value: "enabled", label: t("admin_super.shop_list.filter.enabled") },
-    { value: "disabled", label: t("admin_super.shop_list.filter.disabled") },
+    { value: "1", label: t("admin_super.shop_list.filter.enabled") },
+    { value: "0", label: t("admin_super.shop_list.filter.disabled") },
+    { value: "2", label: "Duyệt không thành công" },
   ];
 };
 

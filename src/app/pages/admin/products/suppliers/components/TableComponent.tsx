@@ -11,32 +11,15 @@ import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import EditSupplier from "../EditSupplier";
-
+import SupplierTableDataName from "./SupplierTableDataName";
 import UpdateData from "./UpdateData";
 
 const { confirm } = Modal;
 
-const shop_id = 1;
 const TableComponent = React.memo(({ searchValue, searchType }: any) => {
   const { t } = useTranslation();
-  const { data = [], isFetching } = useGetSupplierListQuery({ shop_id });
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [editingSupplierId, setEdtingSupplierId] = useState<number | null>(null);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleEditSupplier = (id: number) => {
-    setEdtingSupplierId(id);
-    showModal();
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  const { data: supplierList, isFetching } = useGetSupplierListQuery();
   const [deleteSupplier] = useDeleteSupplierMutation();
   const handleDeleteSupplier = async (id: number) => {
     try {
@@ -48,9 +31,8 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
   };
   const showConfirm = (id: number) => {
     confirm({
-      title: "Do you Want to delete these items?",
+      title: "Bạn có muốn xóa nhà cung cấp này?",
       icon: <ExclamationCircleFilled />,
-      content: "Some descriptions",
       centered: true,
       keyboard: true,
       maskClosable: true,
@@ -69,15 +51,19 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       title: t("admin_shop.suppliers.col_supplier_code"),
       dataIndex: "code",
       key: "code",
-      sorter: (a, b) => a.code.length - b.code.length,
+      sorter: (a, b) => a.code.localeCompare(b.code),
       sortOrder: sortedInfo.columnKey === "code" ? sortedInfo.order : null,
     },
     {
       title: t("admin_shop.suppliers.col_name"),
       dataIndex: "name",
       key: "name",
-      sorter: (a, b) => a.name.length - b.name.length,
+      width: "20%",
+      sorter: (a, b) => a.name.localeCompare(b.name),
       sortOrder: sortedInfo.columnKey === "name" ? sortedInfo.order : null,
+      render: (_, record: ISupplier) => {
+        return <SupplierTableDataName {...record} />;
+      },
     },
     {
       title: t("admin_shop.suppliers.col_phone"),
@@ -89,7 +75,6 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       dataIndex: "email",
       key: "email",
     },
-
     {
       title: t("admin_shop.suppliers.col_address"),
       dataIndex: "address",
@@ -101,7 +86,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       key: "website",
       render: (_, { website }) => (
         <Link target="_blank" to={website} style={{ textDecoration: "none" }}>
-          {website}
+          {website ? website : null}
         </Link>
       ),
     },
@@ -112,20 +97,11 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       fixed: "right",
       render: (_: any, record: any) => (
         <Space size="middle" direction="vertical">
-          <Button type="primary" onClick={() => handleEditSupplier(record.id)} ghost className="w-full">
-            {t("admin_shop.suppliers.btn_edit")}
-          </Button>
-          <Modal
-            centered
-            className="w-[768px]"
-            title={t("admin_shop.suppliers.title_update")}
-            open={isModalOpen && editingSupplierId === record.id}
-            onOk={handleOk}
-            onCancel={handleCancel}
-            footer={[]}
-          >
-            <EditSupplier id={record.id} onCancel={handleCancel} />
-          </Modal>
+          <Link to={`edit/${record?.id}`}>
+            <Button type="primary" ghost className="w-full">
+              {t("admin_shop.suppliers.btn_edit")}
+            </Button>
+          </Link>
           <Button className="w-full" onClick={() => showConfirm(record.id)}>
             {t("admin_shop.suppliers.btn_delete")}
           </Button>
@@ -144,7 +120,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
   const hasSelected = selectedRowKeys.length > 0;
 
   const suppliersList: any = useMemo(() => {
-    let filterInventory = data;
+    let filterInventory = supplierList;
 
     if (searchValue) {
       filterInventory = filterInventory?.filter((supplier: any) => {
@@ -158,7 +134,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
     }
 
     return filterInventory;
-  }, [searchType, searchValue, data]);
+  }, [searchType, searchValue, supplierList]);
 
   const handleChange: TableProps<ISupplier>["onChange"] = (_, __, sorter) => {
     setSortedInfo(sorter as SorterResult<ISupplier>);

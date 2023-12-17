@@ -21,7 +21,7 @@ const UserMainLayout = (): JSX.Element => {
       <UserHeader />
       <Layout className="container mx-auto gap-6 mt-6" style={{ maxWidth }}>
         {isTablet && (homePage ? <CategorySidebar /> : categoryPage ? <SortProductSidebar /> : null)}
-        <div className="flex flex-col overflow-hidden">
+        <div className="flex flex-col overflow-hidden w-full">
           <Layout.Content>
             <Outlet />
           </Layout.Content>

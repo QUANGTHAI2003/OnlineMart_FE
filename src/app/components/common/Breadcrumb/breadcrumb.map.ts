@@ -1,5 +1,9 @@
 const breadcrumbNameMap: Record<string, string> = {
   "": "admin_shop.sidebar.dashboard",
+  "/profile": "admin_shop.dashboard.profile",
+  "/profile/store_setting": "admin_shop.dashboard.store_setting",
+  "/profile/store_depot": "admin_shop.dashboard.store_depot",
+  "/profile/business_license": "admin_shop.dashboard.business_license",
   "/products": "admin_shop.sidebar.product_list",
   "/products/create": "admin_shop.sidebar.product_create",
   "/products/edit": "admin_shop.sidebar.product_edit",
@@ -9,6 +13,8 @@ const breadcrumbNameMap: Record<string, string> = {
   "/info-seller": "admin_shop.sidebar.info_seller",
   "/categories": "admin_shop.sidebar.product_categories",
   "/suppliers": "admin_shop.sidebar.suppliers",
+  "/suppliers/create": "admin_shop.sidebar.supplier_create",
+  "/suppliers/edit": "admin_shop.sidebar.supplier_edit",
   "/manage-seller": "admin_shop.sidebar.manage_seller",
   "/manage-seller/role": "admin_shop.sidebar.manage_role",
   "/settings": "admin_shop.sidebar.settings",

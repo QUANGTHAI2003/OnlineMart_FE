@@ -1,8 +1,3 @@
-import { useAppDispatch, useAppSelector } from "@app/store/store";
-import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Col, Form, Radio, Row } from "antd";
-import { useTranslation } from "react-i18next";
 import {
   deleteFilteredValue,
   deleteOneFilteredValue,
@@ -10,8 +5,14 @@ import {
   setMediaIncluded,
   setSearchValue,
 } from "@app/store/slices/redux/admin/reviewAdminSlice";
-import { searchType } from "../data";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
+import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Col, Form, Radio, Row } from "antd";
 import React from "react";
+import { useTranslation } from "react-i18next";
+
+import { searchType } from "../data";
 
 const Filter = () => {
   const { t } = useTranslation();
@@ -53,17 +54,33 @@ const Filter = () => {
         <Radio.Group onChange={handleChange} optionType="button" buttonStyle="solid">
           <Row className="row_radio">
             <Col>
-              <Radio.Button onClick={() => toggleDisable("media")} className={mediaFilter ? "radio_button_enabled" : "radio_button_disabled"} value="media">
+              <Radio.Button
+                onClick={() => toggleDisable("media")}
+                className={mediaFilter ? "radio_button_enabled" : "radio_button_disabled"}
+                value="media"
+              >
                 {t("admin_shop.product.review.filter.include_media")}
               </Radio.Button>
             </Col>
-            <Col> 
-              <Radio.Button onClick={() => toggleDisable("unanswered")} className={hasRepliedFilter === null ? "radio_button_disabled" : hasRepliedFilter ? "" : "radio_button_enabled"} value="unanswered">
+            <Col>
+              <Radio.Button
+                onClick={() => toggleDisable("unanswered")}
+                className={
+                  hasRepliedFilter === null ? "radio_button_disabled" : hasRepliedFilter ? "" : "radio_button_enabled"
+                }
+                value="unanswered"
+              >
                 {t("admin_shop.product.review.filter.not_yet_replied")}
               </Radio.Button>
             </Col>
             <Col>
-              <Radio.Button onClick={() => toggleDisable("reply")} className={hasRepliedFilter === null ? "radio_button_disabled" : hasRepliedFilter ? "radio_button_enabled" : ""} value="reply">
+              <Radio.Button
+                onClick={() => toggleDisable("reply")}
+                className={
+                  hasRepliedFilter === null ? "radio_button_disabled" : hasRepliedFilter ? "radio_button_enabled" : ""
+                }
+                value="reply"
+              >
                 {t("admin_shop.product.review.filter.already_replied")}
               </Radio.Button>
             </Col>

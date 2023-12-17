@@ -1,63 +1,57 @@
 import { StarFilled } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
+import { baseImageUrl } from "@app/utils/helper";
+import { Image } from "antd";
+import React from "react";
 import { useTranslation } from "react-i18next";
-
 import "swiper/css";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
+
 import BrandSkeleton from "../skeletons/BrandSkeleton";
 
 interface IBrandItem {
-  image: string;
-  title: string;
-  brand: string;
+  avatar: string;
+  name: string;
+  supplier: string;
   rate: number;
-  detail: any;
+  isFetching: boolean;
+  slug: string;
 }
 
-const BrandItem: React.FC<IBrandItem> = ({ image, title, brand, rate, detail }) => {
+const BrandItem: React.FC<IBrandItem> = ({ avatar, name, supplier, rate, isFetching, slug }) => {
   const { t } = useTranslation();
-
-  const [loadingSkeletonCount, setLoadingSkeletonCount] = useState(false);
-
-  useEffect(() => {
-    setLoadingSkeletonCount(true);
-    setTimeout(() => {
-      setLoadingSkeletonCount(false);
-    }, 3000);
-  }, []);
 
   return (
     <div>
-      {loadingSkeletonCount ? (
+      {isFetching ? (
         <BrandSkeleton count={1} />
       ) : (
-        <div className="product_category">
-          <div className="img">
-            <img src={image} alt={image} width={110} />
-          </div>
-
-          <div className="content">
-            <p className="brand_title">{title}</p>
-            <span className="content_col2">
-              <p className="financed">{t("user.product_category_page.sponsored")}</p>
-              <p className="brand">{brand}</p>
-              <p className="rate">
-                {rate}
-                /5
-                <StarFilled className="star" />
-              </p>
-            </span>
-
-            <div className="thumbnail_div">
-              {detail.map((item: any) => (
-                <div className="thumbnail" key={item.id}>
-                  <img src={item.thumbnail} alt="Thumbnail" />
-                  <span className="sale">{item.sale}</span>
-                </div>
-              ))}
+        <Link to={`/store/${slug}`} target="_blank">
+          <div className="product_category items-center">
+            <div className="img">
+              <Image
+                src={`${baseImageUrl}/${avatar}`}
+                preview={false}
+                width={110}
+                height={110}
+                alt="svsv"
+                className="object-cover"
+              />
+            </div>
+            <div className="content">
+              <p className="brand_title">{name}</p>
+              <span className="content_col2">
+                <p className="financed">{t("user.product_category_page.sponsored")}</p>
+                <p className="brand">{supplier}</p>
+                <p className="rate">
+                  {rate}
+                  /5
+                  <StarFilled className="star" />
+                </p>
+              </span>
             </div>
           </div>
-        </div>
+        </Link>
       )}
     </div>
   );

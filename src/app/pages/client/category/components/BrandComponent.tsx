@@ -1,16 +1,17 @@
+import { useGetShopListQuery } from "@app/store/slices/api/shopApi";
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { v4 as uuidv4 } from "uuid";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-import { brand } from "../data";
 import * as S from "../ProductCategory.styles";
 
 import { BrandItem } from ".";
 
 const BrandComponent = () => {
+  const { data: getShopData, isFetching } = useGetShopListQuery();
   return (
     <S.ProductCategory>
       <Swiper
@@ -44,9 +45,16 @@ const BrandComponent = () => {
           },
         }}
       >
-        {brand.map((item: any): any => (
-          <SwiperSlide className="brand_content" key={item.id}>
-            <BrandItem image={item.image} title={item.title} brand={item.brand} rate={item.rate} detail={item.detail} />
+        {getShopData?.map((item: any): any => (
+          <SwiperSlide className="brand_content" key={uuidv4()}>
+            <BrandItem
+              avatar={item.avatar}
+              isFetching={isFetching}
+              slug={item.url}
+              name={item.name}
+              supplier={item?.supplier[0]?.name}
+              rate={item.rating}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

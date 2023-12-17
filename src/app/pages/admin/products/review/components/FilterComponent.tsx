@@ -170,12 +170,10 @@ export const SortDrawer = ({ onClose, open, t, supplierSortList, categortSortLis
 
   const [replyFilter, setReplyFilter] = useState<boolean | null>(null);
 
-  const { brandFilter, categoryFilter } = useAppSelector(
-    (state) => state.reviewAdmin.filteredValue
-  );
+  const { brandFilter, categoryFilter } = useAppSelector((state) => state.reviewAdmin.filteredValue);
   const { mediaFilter, hasRepliedFilter } = useAppSelector((state) => state.reviewAdmin);
   useEffect(() => {
-    if (hasRepliedFilter === null ) {
+    if (hasRepliedFilter === null) {
       setReplyFilter(null);
     } else if (hasRepliedFilter) {
       setReplyFilter(true);
@@ -196,7 +194,7 @@ export const SortDrawer = ({ onClose, open, t, supplierSortList, categortSortLis
       media: mediaFilter,
       reply: replyFilter,
     });
-  }, [brandFilter, categoryFilter, mediaFilter, form]);
+  }, [brandFilter, categoryFilter, mediaFilter, form, replyFilter]);
 
   const handleApplySort = (values: any) => {
     const { category, brand, media, reply } = values;
@@ -230,13 +228,11 @@ export const SortDrawer = ({ onClose, open, t, supplierSortList, categortSortLis
     >
       <Form form={form} layout="vertical" id="otherSortReviewForm" onFinish={handleApplySort}>
         <Checkbox.Group className="checkbox_group">
-            <Col span={12}>
-              <Form.Item name="media" valuePropName="checked">
-                <Checkbox style={{ lineHeight: "32px" }}>
-                  {t("admin_shop.product.review.filter.include_media")}
-                </Checkbox>
-              </Form.Item>
-            </Col>
+          <Col span={12}>
+            <Form.Item name="media" valuePropName="checked">
+              <Checkbox style={{ lineHeight: "32px" }}>{t("admin_shop.product.review.filter.include_media")}</Checkbox>
+            </Form.Item>
+          </Col>
         </Checkbox.Group>
 
         <Divider />

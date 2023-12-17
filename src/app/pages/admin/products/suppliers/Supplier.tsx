@@ -1,12 +1,12 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
 import { useDebounce } from "@app/hooks";
-import { Button, Col, Modal, Row, Space, Typography } from "antd";
+import { Button, Col, Row, Space, Typography } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import { FilterComponent, TableComponent } from "./components";
-import CreateSupplier from "./CreateSupplier";
 
 const searchType = (t: any) => {
   return [
@@ -17,22 +17,12 @@ const searchType = (t: any) => {
 };
 const Supplier = () => {
   const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectSearchType, setSelectSearchType] = useState<string>(searchType(t)[0].value);
+
   const debouncedSearchValue = useDebounce(searchValue, 300);
+
   return (
     <div>
       <main className="p-5 bg-white">
@@ -45,20 +35,11 @@ const Supplier = () => {
             <Col md={8}>
               <Row justify="end">
                 <Space>
-                  <Button type="primary" onClick={showModal} icon={<PlusOutlined />}>
-                    {t("admin_shop.suppliers.btn_add")}
-                  </Button>
-                  <Modal
-                    centered
-                    className="w-[768px]"
-                    title={t("admin_shop.suppliers.title")}
-                    open={isModalOpen}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                    footer={[]}
-                  >
-                    <CreateSupplier onCancel={handleCancel} />
-                  </Modal>
+                  <Link to="/admin/shop/suppliers/create">
+                    <Button type="primary" icon={<PlusOutlined />}>
+                      {t("admin_shop.suppliers.btn_add")}
+                    </Button>
+                  </Link>
                 </Space>
               </Row>
             </Col>

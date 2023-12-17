@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 export const SellerProfile = styled.div`
   display: flex;
-  flex-direction: column;
   gap: 1.25rem;
+  align-items: center;
   padding: 1.5rem 1.5rem 0 1.5rem;
 
   .seller_title {
@@ -95,6 +95,7 @@ export const SellerProfile = styled.div`
 
 export const BusinessResults = styled.div`
   padding: 2rem 1.5rem;
+  margin-top: 15px;
   background-color: #fff;
   display: flex;
   justify-content: center;

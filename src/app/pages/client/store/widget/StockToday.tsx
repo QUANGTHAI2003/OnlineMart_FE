@@ -6,7 +6,6 @@ import ImageToday from "@app/app/assets/images/store/today.svg";
 import ProductCardSale from "@app/app/components/clients/ProductCard/ProductCardSale";
 import ProductCardSkeleton from "@app/app/components/clients/ProductCard/ProductCardSkeleton";
 import CountdownComponent from "@app/app/pages/client/home/components/CountdownComponent";
-import data from "@app/app/pages/client/home/data";
 import * as S from "@app/app/pages/client/home/Home.styles";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,8 +19,9 @@ import * as SC from "./Store.styles";
 import "swiper/css";
 import "swiper/css/navigation";
 
-const StockToday = React.memo(() => {
+const StockToday: React.FC<any> = (shopData) => {
   const { t } = useTranslation();
+  const productSale = shopData?.shopData?.shopData?.product_sale;
   const [loading, setLoading] = useState<boolean>(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   useEffect(() => {
@@ -104,15 +104,15 @@ const StockToday = React.memo(() => {
               <ProductCardSkeleton count={number} />
             ) : (
               <div>
-                {data?.map((item: any) => (
+                {productSale?.map((item: any) => (
                   <SwiperSlide key={uuidv4()}>
                     <SC.ProductCardSale>
                       <ProductCardSale
                         id={item.id}
                         name={item.name}
-                        price={item.price}
-                        discountRate={item.discount_rate}
-                        thumbnailUrl={item.thumbnail_url}
+                        price={item.regular_price}
+                        discountRate={item.sale_price}
+                        thumbnailUrl={item.thumbnail}
                       />
                     </SC.ProductCardSale>
                   </SwiperSlide>
@@ -124,6 +124,6 @@ const StockToday = React.memo(() => {
       </S.SalesStyle>
     </SC.SalesStyle>
   );
-});
+};
 
 export default StockToday;

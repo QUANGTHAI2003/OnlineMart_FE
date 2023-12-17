@@ -1,11 +1,11 @@
 import { StarIcon } from "@app/app/assets/icons";
 import { AdminTabs } from "@app/app/components/common/Tabs/Tabs.styles";
 import { useSyncUrlWithTab } from "@app/hooks";
+import { IReview } from "@app/types/review.types";
 import { TabsProps } from "antd";
 import { useTranslation } from "react-i18next";
 
 import { RatingListTab } from "../data";
-import { IReview } from "@app/types/review.types";
 
 const TabRating: React.FC<any> = ({ reviewList }) => {
   const { t } = useTranslation();

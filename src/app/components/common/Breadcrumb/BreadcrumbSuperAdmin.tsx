@@ -2,8 +2,8 @@ import { BreadcrumbProps } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 
-import breadcrumbNameMapSuperAdmin from "./breadcrumbSuperAdmin.map";
 import * as S from "./Breadcrumb.styles";
+import breadcrumbNameMapSuperAdmin from "./breadcrumbSuperAdmin.map";
 
 export const BreadcrumbItem = S.BreadcrumbItem;
 

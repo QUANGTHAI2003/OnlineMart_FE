@@ -1,5 +1,6 @@
 import activitySlice from "./activitySlice";
 import { activityApi } from "./api/activityApi";
+import { adminShopApi } from "./api/admin/adminShopApi";
 import { binAdminApi } from "./api/admin/binApi";
 import { inventoryAdminApi } from "./api/admin/inventoryApi";
 import { orderApi } from "./api/admin/orderApi";
@@ -15,6 +16,7 @@ import { authApi } from "./api/authApi";
 import { categoryApi } from "./api/categoryApi";
 import { productCategoryApi } from "./api/producCategoryApi";
 import { shopApi } from "./api/shopApi";
+import { managerShopApi } from "./api/superadmin/managerShopApi";
 import { supplierApi } from "./api/supplierApi";
 import { addressApi } from "./api/user/addressApi";
 import { notificationApi } from "./api/user/notificationApi";
@@ -36,6 +38,7 @@ import sellerAdminSlice from "./redux/admin/sellerAdminSlice";
 import trafficAdminSlice from "./redux/admin/trafficAdminSlice";
 import productDetailSlice from "./redux/productDetailSlice";
 import showNotificationSlice from "./redux/showNotificationSlice";
+import managerShopSlice from "./redux/superadmin/managerShopSlice";
 import responsiveSidebar from "./redux/user/responsiveSidebar";
 import shopSlice from "./shopSlice";
 import sortSidebarSlice from "./sortSidebarSlice";
@@ -54,6 +57,8 @@ export const rootReducer: any = {
   [notificationApi.reducerPath]: notificationApi.reducer,
   [reviewAdminApi.reducerPath]: reviewAdminApi.reducer,
   [voucherApi.reducerPath]: voucherApi.reducer,
+  [adminShopApi.reducerPath]: adminShopApi.reducer,
+  [managerShopApi.reducerPath]: managerShopApi.reducer,
   [voucherUserApi.reducerPath]: voucherUserApi.reducer,
   [productFlashsaleApi.reducerPath]: productFlashsaleApi.reducer,
   [sellerApi.reducerPath]: sellerApi.reducer,
@@ -82,6 +87,7 @@ export const rootReducer: any = {
   activityAdmin: activityAdminSlice,
   showSidebar: responsiveSidebar,
   trafficAdmin: trafficAdminSlice,
+  managerShopSupperAdmin: managerShopSlice,
 };
 
 export const apiMiddleware = (getDefaultMiddleware: any) =>
@@ -101,6 +107,7 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     notificationApi.middleware,
     reviewAdminApi.middleware,
     voucherApi.middleware,
+    adminShopApi.middleware,
     orderApi.middleware,
     sellerApi.middleware,
     voucherUserApi.middleware,
@@ -112,5 +119,6 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     reasonCancelApi.middleware,
     trafficAdminApi.middleware,
     forgotPasswordApi.middleware,
-    reviewApi.middleware
+    reviewApi.middleware,
+    managerShopApi.middleware
   );

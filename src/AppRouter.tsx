@@ -53,9 +53,22 @@ const Evouncher = React.lazy(() => import("@app/app/pages/admin/products/evounch
 const AdminProductReview = React.lazy(() => import("@app/app/pages/admin/products/review/ProductReview"));
 const AdminSupplier = React.lazy(() => import("@app/app/pages/admin/products/suppliers/Supplier"));
 const AdminProductBin = React.lazy(() => import("@app/app/pages/admin/products/bin/Bin"));
+const AdminSupplierCreate = React.lazy(() => import("@app/app/pages/admin/products/suppliers/CreateSupplier"));
+const AdminSupplierEdit = React.lazy(() => import("@app/app/pages/admin/products/suppliers/EditSupplier"));
 const AdminProductInventory = React.lazy(() => import("@app/app/pages/admin/products/inventory/ProductInventory"));
 const AdminProductPrintQRCode = React.lazy(() => import("@app/app/pages/admin/products/print_qr_code/PrintQRCode"));
 const AdminShipOverview = React.lazy(() => import("@app/app/pages/admin/ships/ShipOverview"));
+// const AdminReportProfit = React.lazy(() => import("@app/app/pages/admin/reports/profit"));
+const AdminAccountStoreInfo = React.lazy(() => import("@app/app/pages/admin/dashboard/profile/info/AccountStoreInfo"));
+const AdminAccountStoreSetting = React.lazy(
+  () => import("@app/app/pages/admin/dashboard/profile/info/setting/StoreSetting")
+);
+const AdminAccountStoreDepots = React.lazy(
+  () => import("@app/app/pages/admin/dashboard/profile/info/depots/StoreDepots")
+);
+const AdminAccountStoreBusinessLicense = React.lazy(
+  () => import("@app/app/pages/admin/dashboard/profile/info/business_license/BusinessLicense")
+);
 const AdminReportSales = React.lazy(() => import("@app/app/pages/admin/reports/sales/SalesReport"));
 const AdminBusinessEfficiency = React.lazy(
   () => import("@app/app/pages/admin/dev_center/biz_efficiency/BusinessEfficiency")
@@ -94,7 +107,7 @@ const AppRouter: React.FC = () => {
       <Route path="/" element={<UserMainLayout />}>
         <Route index element={<Home />} />
         <Route path="category/:slug/:id" element={<ProductCategory />} />
-        <Route path="store/:id" element={<StoreIndex />} />
+        <Route path="store/:slug" element={<StoreIndex />} />
         <Route path="category" element={<ProductCategory />} />
         <Route path="checkout" element={<Cart />} />
         <Route path="checkout/payment" element={<Payment />} />
@@ -114,6 +127,12 @@ const AppRouter: React.FC = () => {
       </Route>
       <Route path="/admin/shop" element={protectedAdminLayout}>
         <Route index element={<Dashboard />} />
+        <Route path="profile">
+          <Route index element={<AdminAccountStoreInfo />} />
+          <Route path="store_setting" element={<AdminAccountStoreSetting />} />
+          <Route path="store_depot" element={<AdminAccountStoreDepots />} />
+          <Route path="business_license" element={<AdminAccountStoreBusinessLicense />} />
+        </Route>
         <Route path="products">
           <Route index element={<AdminProductList />} />
           <Route path="create" element={<AdminProductCreate />} />
@@ -124,7 +143,11 @@ const AppRouter: React.FC = () => {
         </Route>
         <Route path="evoucher" element={<Evouncher />} />
         <Route path="categories" element={<AdminCategory />} />
-        <Route path="suppliers" element={<AdminSupplier />} />
+        <Route path="suppliers">
+          <Route index element={<AdminSupplier />} />
+          <Route path="create" element={<AdminSupplierCreate />} />
+          <Route path="edit/:id" element={<AdminSupplierEdit />} />
+        </Route>
         <Route path="orders">
           <Route index element={<AdminOrderList />} />
           <Route path=":id" element={<AdminOrderDetail />} />

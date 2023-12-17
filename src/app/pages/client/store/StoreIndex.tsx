@@ -8,9 +8,10 @@ import { useAppDispatch } from "@app/store/store";
 import { formatShortenNumber } from "@app/utils/helper";
 import { getAccessToken } from "@app/utils/localstorage";
 import { notificationController } from "@app/utils/notification";
-import { faCheck, faComment, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Input } from "antd";
+import { TFunction } from "i18next";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -27,19 +28,19 @@ const StoreIndex = () => {
   const dispatch = useAppDispatch();
   const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
 
-  const { data } = useGetShopQuery(id);
+  const { data: shopData } = useGetShopQuery(id);
 
   useEffect(() => {
-    if (data) {
-      dispatch(setInformation(data));
+    if (shopData) {
+      dispatch(setInformation(shopData));
     }
-  }, [data, dispatch]);
+  }, [shopData, dispatch]);
 
-  const items = [
+  const items = (shopData: any, t: TFunction<"translation", undefined>) => [
     {
       label: t("user.seller.store"),
       key: "store",
-      children: <Store />,
+      children: <Store shopData={shopData} />,
     },
     {
       label: t("user.seller.all_product"),
@@ -47,30 +48,18 @@ const StoreIndex = () => {
       children: <Products />,
     },
     {
-      label: t("user.seller.Gallery"),
-      key: "gallery",
-      children: "Content of Tab Pane 3",
-    },
-    {
       label: t("user.seller.store_profile"),
       key: "storeInfo",
-      children: <Profile />,
+      children: <Profile shopData={shopData} />,
     },
   ];
 
-  const initialTab = items[0].key;
+  const initialTab = items(shopData, t)[0].key;
   const { tabFiltered, handleChangeTab } = useSyncUrlWithTab(initialTab, "t");
 
   const [isSave, setIsSave] = useState(false);
-  const [isChat, setIsChat] = useState(true);
   const token = getAccessToken();
-  const handleChat = () => {
-    if (token) {
-      if (!isChat) {
-        setIsChat(false);
-      }
-    }
-  };
+
   const handleSave = () => {
     if (token) {
       if (!isSave) {
@@ -87,16 +76,7 @@ const StoreIndex = () => {
       });
     }
   };
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+
   return (
     <S.StoreContainer className="relative">
       <S.StoreHeader $background={dataSeller.background_url} className="relative">
@@ -104,10 +84,10 @@ const StoreIndex = () => {
         <div className="header-wrapper flex items-center">
           <div className="flex items-center">
             <div className="seller-logo">
-              <img src={`${baseImage}/${data?.avatar}`} alt={data?.name} className="object-cover" />
+              <img src={`${baseImage}/${shopData?.avatar}`} alt={shopData?.name} className="object-cover" />
             </div>
             <S.StoreInfo className="store-info flex flex-col justify-center">
-              <h1 className="store-name mb-1">{data?.name}</h1>
+              <h1 className="store-name mb-1">{shopData?.name}</h1>
               <div className="store-badge mb-1 flex flex-row items-center">
                 <img src={dataSeller.certification} alt="certification" />
               </div>
@@ -116,7 +96,7 @@ const StoreIndex = () => {
                   <div className="mr-1 mt-1">
                     <RatingStar />
                   </div>
-                  <S.TextInfo>{`${data?.rating || 0} / 5`}</S.TextInfo>
+                  <S.TextInfo>{`${shopData?.rating || 0} / 5`}</S.TextInfo>
                 </div>
                 <div className="line"></div>
                 <div className="flex items-center flex-row mr-1">
@@ -128,32 +108,10 @@ const StoreIndex = () => {
                     {formatShortenNumber(dataSeller.total_follower)}
                   </S.TextInfo>
                 </div>
-                {dataSeller.feedback > 0 && (
-                  <>
-                    <div className="line"></div>
-                    <div className="flex items-center flex-row mr-1">
-                      <div className="mr-1">
-                        <FontAwesomeIcon icon={faComment} style={{ color: "#ffffffb3" }} />
-                      </div>
-                      <S.TextInfo>
-                        <span className="text-res">{`${t("user.seller.chat")}:`}</span>
-                        {`${dataSeller.feedback}%`}
-                      </S.TextInfo>
-                    </div>
-                  </>
-                )}
               </div>
             </S.StoreInfo>
           </div>
           <S.StoreAction className="flex items-center">
-            {windowWidth > 1024 && isChat && (
-              <Button type="dashed" onClick={handleChat} className="mr-4 flex items-center">
-                <div className="mr-3">
-                  <FontAwesomeIcon icon={faComment} />
-                </div>
-                <span>Chat</span>
-              </Button>
-            )}
             <Button type={isSave ? "dashed" : "primary"} onClick={handleSave} className="flex items-center">
               <div className="mr-1 w-4">
                 <FontAwesomeIcon icon={isSave ? faCheck : faPlus} />
@@ -168,7 +126,7 @@ const StoreIndex = () => {
           activeKey={tabFiltered}
           onChange={handleChangeTab}
           tabBarGutter={60}
-          items={items}
+          items={items(shopData, t)}
           defaultActiveKey={initialTab}
           animated={false}
           tabBarExtraContent={

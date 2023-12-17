@@ -1,11 +1,13 @@
 import { CouponStoreBackground, CouponStoreSaved } from "@app/app/assets/icons";
 import ImageNext from "@app/app/assets/images/store/next.png";
 import ImagePrev from "@app/app/assets/images/store/prev.png";
-import { dataCoupon, dataSeller } from "@app/app/pages/client/store/data";
+import { dataSeller } from "@app/app/pages/client/store/data";
+import { useAppSelector } from "@app/store/store";
 import { formatVNCurrency } from "@app/utils/helper";
 import { notificationController } from "@app/utils/notification";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "antd";
 import { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { useTranslation } from "react-i18next";
@@ -15,19 +17,29 @@ import StockToday from "./StockToday";
 import * as S from "./Store.styles";
 import Widget from "./Widget";
 
-const Store = () => {
+const Store: React.FC<any> = (shopData) => {
   const { t } = useTranslation();
+
   const [copiedCoupons, setCopiedCoupons] = useState(new Set());
+
+  const user = useAppSelector((state) => state.userState?.user?.id);
+
   const handleCopy = (couponCode: string) => {
-    setCopiedCoupons((prevCopiedCoupons) => {
-      const updatedCopiedCoupons = new Set(prevCopiedCoupons);
-      updatedCopiedCoupons.add(couponCode);
-      return updatedCopiedCoupons;
-    });
-    notificationController.success({
-      message: t("user.seller.save_coupon"),
-      description: t("user.seller.coupon_desc"),
-    });
+    if (user) {
+      setCopiedCoupons((prevCopiedCoupons) => {
+        const updatedCopiedCoupons = new Set(prevCopiedCoupons);
+        updatedCopiedCoupons.add(couponCode);
+        return updatedCopiedCoupons;
+      });
+      notificationController.success({
+        message: t("user.seller.save_coupon"),
+        description: t("user.seller.coupon_desc"),
+      });
+    } else {
+      notificationController.info({
+        message: "Đăng nhập để dùng voucher",
+      });
+    }
   };
 
   const dividedBanners = [];
@@ -37,7 +49,7 @@ const Store = () => {
   }
   return (
     <>
-      <StockToday />
+      <StockToday shopData={shopData} />
       <S.CarouselCustomBanner
         className="mt-4"
         dots={false}
@@ -59,7 +71,7 @@ const Store = () => {
           </div>
         ))}
       </S.CarouselCustomBanner>
-      {dataCoupon && dataCoupon.length > 0 && (
+      {shopData?.shopData?.voucher && shopData?.shopData?.voucher.length > 0 && (
         <S.CarouselCustomCoupon
           className="bg-white py-4 px-5 mt-4"
           arrows
@@ -70,7 +82,7 @@ const Store = () => {
           dots={false}
           slidesToShow={6}
         >
-          {dataCoupon?.map((item: any) => (
+          {shopData?.shopData?.voucher?.map((item: any) => (
             <S.CouponItem key={uuidv4()}>
               <div className="coupon">
                 <div className="absolute top-0 left-0 w-full h-full">
@@ -80,20 +92,26 @@ const Store = () => {
                       <div className="title">
                         <h4>
                           {`${t("user.seller.discount")}
-                          ${formatVNCurrency(item.discount_amount)}${item.type === "by_percent" ? "%" : ""}`}
+                          ${formatVNCurrency(item.discount)}${item.unit === "0" ? "%" : " K"}`}
                         </h4>
                       </div>
                       <p>
                         {t("user.seller.for_order")}
-                        {formatVNCurrency(item.min_amount)}
+                        {`${formatVNCurrency(item.min_discount_amount)}K`}
                       </p>
-                      {copiedCoupons.has(item.coupon_code) ? (
+                      {copiedCoupons.has(item.code) && user ? (
                         <CouponStoreSaved />
                       ) : (
                         <div className="btn-copy">
-                          <CopyToClipboard text={item.coupon_code} onCopy={() => handleCopy(item.coupon_code)}>
-                            <button className="border-0 bg-transparent">{t("user.seller.save")}</button>
-                          </CopyToClipboard>
+                          {user ? (
+                            <CopyToClipboard text={item.code} onCopy={() => handleCopy(item.code)}>
+                              <Button className="border-0 bg-transparent">{t("user.seller.save")}</Button>
+                            </CopyToClipboard>
+                          ) : (
+                            <Button className="border-0 bg-transparent" onClick={() => handleCopy(item.code)}>
+                              {t("user.seller.save")}
+                            </Button>
+                          )}
                         </div>
                       )}
                     </div>

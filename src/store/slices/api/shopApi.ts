@@ -10,16 +10,26 @@ export const shopApi = createApi({
   endpoints: (builder) => ({
     //  Get information shop
     getShop: builder.query<IShop, string | undefined>({
-      query: (id) => {
+      query: (slug) => {
         return {
-          url: `shops/${id}`,
+          url: `shops/${slug}`,
         };
       },
       transformResponse: (response: { data: IShop }) => {
         return response.data;
       },
     }),
+    getShopList: builder.query<any, void>({
+      query: () => ({
+        url: `shops`,
+        method: "GET",
+        credentials: "include",
+      }),
+      transformResponse: (response: { data: any }) => {
+        return response.data;
+      },
+    }),
   }),
 });
 
-export const { useGetShopQuery } = shopApi;
+export const { useGetShopQuery, useGetShopListQuery } = shopApi;

@@ -17,8 +17,8 @@ import {
   UploadFile,
   UploadProps,
 } from "antd";
-import ImgCrop from "antd-img-crop";
 import { RcFile } from "antd/es/upload";
+import ImgCrop from "antd-img-crop";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
