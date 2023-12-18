@@ -2,6 +2,8 @@
 /* eslint-disable no-unused-vars */
 import { store } from "@app/store/store";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import React from "react";
 import { CookiesProvider } from "react-cookie";
 import ReactDOM from "react-dom/client";
@@ -22,7 +24,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <CookiesProvider>
           <AuthMiddleware>
-            <App />
+            <>
+              <App />
+              <SpeedInsights />
+              <Analytics />
+            </>
           </AuthMiddleware>
         </CookiesProvider>
       </BrowserRouter>

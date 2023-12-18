@@ -2,6 +2,8 @@ import CategorySidebar from "@app/app/components/layouts/client/Sidebar/Category
 import SortProductSidebar from "@app/app/components/layouts/client/Sidebar/SortProductSidebar/SortProductSidebar";
 import { useResponsive } from "@app/hooks";
 import { Layout } from "antd";
+import { useEffect } from "react";
+import ReactGA from "react-ga";
 import { Outlet, useLocation } from "react-router-dom";
 
 import UserFooter from "./Footer/UserFooter";
@@ -15,6 +17,12 @@ const UserMainLayout = (): JSX.Element => {
   const maxWidth = homePage ? "1440px" : "1280px";
 
   const { isTablet, isDesktop } = useResponsive();
+
+  ReactGA.initialize("G-EQQ0LD4QKD");
+
+  useEffect(() => {
+    ReactGA.pageview(location.pathname + location.search);
+  }, [location]);
 
   return (
     <Layout className="layout">
