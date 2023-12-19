@@ -1,7 +1,7 @@
 import { Can, PermissionsSwitch } from "@app/app/components/common/Permissions";
 import { useDebounce } from "@app/hooks";
 import { useAppSelector } from "@app/store/store";
-import { formatCurrency, formatNumber, removeDiacritics } from "@app/utils/helper";
+import { baseImageKitUrl, formatCurrency, formatNumber, removeDiacritics } from "@app/utils/helper";
 import { Button, Card, Divider, QRCode, Table, Tooltip, Typography } from "antd";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { SorterResult } from "antd/lib/table/interface";
@@ -15,6 +15,7 @@ import { SortData, StatusProductData, UpdateData } from ".";
 const { Text } = Typography;
 interface IDataType {
   id: number;
+  product_id: number;
   thumbnail_url: string;
   name: string;
   variant: number;
@@ -66,7 +67,7 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
       render: (_, record: any) => {
         return (
           <div>
-            <img src={record?.thumbnail_url} alt="Media" />
+            <img src={`${baseImageKitUrl}/${record?.thumbnail_url}`} alt="Media" />
           </div>
         );
       },
@@ -181,7 +182,10 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
         return (
           <PermissionsSwitch>
             <Can permissions={["Print QR"]}>
-              <Link to={`/admin/shop/products/print_qrcode?product_id=${record?.id}`} target="_blank">
+              <Link
+                to={`/admin/shop/products/print_qrcode?product_id=${record?.product_id}&variant_value_id=${record?.id}`}
+                target="_blank"
+              >
                 <Button type="primary" ghost>
                   {t("admin_shop.inventory.table.print_code")}
                 </Button>
@@ -259,8 +263,14 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
   };
 
   const handleSelectProducts = () => {
-    const selectedIds = selectedRowKeys.map((key: any) => key.split("_")[0]);
-    navigate(`/admin/shop/products/print_qrcode?product_id=${selectedIds}`);
+    const productIds = selectedRowKeys.map((key: any) => key.split("_")[0]);
+    const variantValueIds = selectedRowKeys.map((key: any) => key.split("_")[1]);
+
+    navigate(
+      `/admin/shop/products/print_qrcode?product_id=${productIds.join(",")}&variant_value_id=${variantValueIds.join(
+        ","
+      )}`
+    );
   };
 
   return (
@@ -288,7 +298,7 @@ const TableComponent: React.FC<any> = React.memo(({ productList, isFetching }) =
       <div>
         <Table
           rowSelection={rowSelection}
-          rowKey={(record) => `${record?.id}_${record?.name}`}
+          rowKey={(record) => `${record?.product_id}_${record?.id}_${record?.name}`}
           columns={columns}
           dataSource={displayedInventory}
           bordered

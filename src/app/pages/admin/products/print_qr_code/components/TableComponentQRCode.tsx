@@ -1,43 +1,50 @@
 import { useSyncToURL } from "@app/hooks";
-import { formatCurrency, formatNumber } from "@app/utils/helper";
+import { useGetProductPrintQRQuery } from "@app/store/slices/api/admin/printQRApi";
+import { baseImageKitUrl, formatCurrency } from "@app/utils/helper";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, InputNumber, Table, Typography } from "antd";
+import { Button, Table } from "antd";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { InventoryListData } from "../../inventory/data";
 import * as S from "../PrintQRCode.styles";
-const { Link } = Typography;
-
-// interface IProductInfo {
-//   id: number;
-//   product_media: string;
-//   name: string;
-//   product_code: string;
-//   sellable: number;
-//   qty_inventory: number;
-//   created_at: string;
-//   retail_price: number;
-//   import_price: number;
-//   wholesale_price: number;
-//   barcode: string;
-//   supplier: string;
-//   status: string;
-// }
 
 const TableComponentQRCode = () => {
   const { t } = useTranslation();
 
   const location = useLocation();
   const syncToURL = useSyncToURL();
+  const params = new URLSearchParams(location.search);
 
+  const { data: productPrintQR, isFetching } = useGetProductPrintQRQuery({
+    productId: params.get("product_id"),
+    variantValueId: params.get("variant_value_id"),
+  });
+
+  const currentValueId = new URLSearchParams(location.search).get("variant_value_id");
+  const currentValueIdArray = currentValueId?.split(",") || [];
   const currentProductId = new URLSearchParams(location.search).get("product_id");
   const currentProductIdArray = currentProductId?.split(",") || [];
 
-  const handleDeleteClick = (productId: number) => {
-    const updatedProductIds = currentProductIdArray.filter((id) => id !== String(productId));
-    syncToURL({ product_id: updatedProductIds.join(",") });
+  const handleDeleteClick = (productId: number, valueId: number, isVariant: boolean) => {
+    if (isVariant) {
+      const updatedVariantIds = currentValueIdArray.filter((id) => id !== String(valueId));
+      syncToURL({ variant_value_id: updatedVariantIds.join(",") });
+
+      // Get all variant_value_id of a product
+      const allVariantIdsOfProduct = productPrintQR
+        ?.filter((item: any) => item.product_id === productId)
+        .map((item: any) => String(item.id));
+
+      // If the deleted variant_value_id is the last one of the product, delete the product_id
+      if (allVariantIdsOfProduct?.length === 1 && allVariantIdsOfProduct[0] === String(valueId)) {
+        const updatedProductIds = currentProductIdArray.filter((id) => id !== String(productId));
+        syncToURL({ product_id: updatedProductIds.join(",") });
+      }
+    } else {
+      const updatedProductIds = currentProductIdArray.filter((id) => id !== String(productId));
+      syncToURL({ product_id: updatedProductIds.join(",") });
+    }
   };
 
   const columns: any = [
@@ -46,7 +53,7 @@ const TableComponentQRCode = () => {
       dataIndex: "index",
       align: "center",
       key: "index",
-      width: 80,
+      width: 50,
       render: (_: any, __: any, index: number) => <span>{index + 1}</span>,
     },
     {
@@ -54,60 +61,30 @@ const TableComponentQRCode = () => {
       dataIndex: "product_media",
       key: "product_media",
       align: "center",
-      width: 130,
+      width: 70,
       render: (_: any, record: any) => {
-        return <img src={record.product_media} alt="Media" className="w-16 rounded" />;
+        return <img src={`${baseImageKitUrl}/${record.thumbnail_url}`} alt="Media" className="w-16 rounded" />;
       },
     },
-    {
-      title: t("admin_shop.inventory.table.qrcode"),
-      dataIndex: "barcode",
-      key: "barcode",
-      width: 180,
-      render: (_: any, record: any) => {
-        return (
-          <Link href={record.barcode} target="_blank" className="line-clamp-1">
-            {record.product_code}
-          </Link>
-        );
-      },
-    },
+
     {
       title: t("admin_shop.inventory.table.product"),
       dataIndex: "name",
       key: "name",
-      width: 220,
+      width: 150,
       render: (_: any, record: any) => {
         return <p className="line-clamp-2">{record.name}</p>;
       },
     },
-    {
-      title: t("admin_shop.print_qrcode.table.quantity"),
-      dataIndex: "sellable",
-      key: "sellable",
-      align: "center",
-      width: 200,
-      render: (_: any, record: any) => {
-        return (
-          <div>
-            <InputNumber
-              defaultValue={formatNumber(record.sellable)}
-              bordered={false}
-              controls={false}
-              className="w-32 border-b border-0 border-solid border-slate-300 rounded-none hover:border-slate-500"
-            />
-          </div>
-        );
-      },
-    },
+
     {
       title: t("admin_shop.inventory.table.retail_price"),
-      dataIndex: "retail_price",
-      key: "retail_price",
+      dataIndex: "regular_price",
+      key: "regular_price",
       align: "center",
-      width: 150,
+      width: 100,
       render: (_: any, record: any) => {
-        return <div>{formatCurrency(record.retail_price)}</div>;
+        return <div>{formatCurrency(record.regular_price)}</div>;
       },
     },
     {
@@ -116,10 +93,16 @@ const TableComponentQRCode = () => {
       key: "delete",
       align: "center",
       fixed: "right",
-      width: 100,
+      width: 50,
       render: (_: any, record: any) => {
         return (
-          <Button type="primary" danger ghost className="border-0 text-lg" onClick={() => handleDeleteClick(record.id)}>
+          <Button
+            type="primary"
+            danger
+            ghost
+            className="border-0 text-lg"
+            onClick={() => handleDeleteClick(record.product_id, record.value_id, record.isVariant)}
+          >
             <FontAwesomeIcon icon={faXmark} />
           </Button>
         );
@@ -131,11 +114,11 @@ const TableComponentQRCode = () => {
     <S.TableComponent>
       <div className="mt-3">
         <Table
-          dataSource={InventoryListData}
+          dataSource={productPrintQR}
           columns={columns}
-          rowKey={(record) => record.id}
+          rowKey={(record) => `${record.product_id}_${record.id}`}
           bordered
-          scroll={{ x: 1300 }}
+          loading={isFetching}
         />
       </div>
     </S.TableComponent>

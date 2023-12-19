@@ -1,62 +1,78 @@
 import { CaretDownOutlined } from "@ant-design/icons";
 import logo from "@app/app/assets/images/OM_reverse.png";
+import { useGetProductPrintQRQuery } from "@app/store/slices/api/admin/printQRApi";
+import { baseImageKitUrl, formatCurrency } from "@app/utils/helper";
 import {
-  Button,
-  Col,
   Divider,
   Dropdown,
   MenuProps,
   QRCode,
   Radio,
   RadioChangeEvent,
+  Button,
+  Col,
   Row,
   Space,
   Typography,
+  theme,
 } from "antd";
 import Paragraph from "antd/es/typography/Paragraph";
-import { useRef, useState } from "react";
+import dayjs from "dayjs";
+import { useEffect, useRef, useState } from "react";
 import { CSVLink } from "react-csv";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 
-import { InventoryListData } from "../../inventory/data";
 import * as S from "../PrintQRCode.styles";
 
 const { Title, Text } = Typography;
+const { useToken } = theme;
 
-interface IProduct {
-  id: number;
-  barcode: string;
-  [key: string]: any;
-}
+const baseUrl = import.meta.env.VITE_BASE_URL as string;
 
-const SettingUpQRPrint: React.FC = () => {
+const SettingUpQRPrint = () => {
   const { t } = useTranslation();
-  const [value, setValue] = useState<string>("72x22");
+  const { token } = useToken();
+
+  const [value, setValue] = useState<string>();
   const componentRef = useRef<any>();
   const [dataExport, setDataExport] = useState<string[][]>([]);
+  const [isPrinting, setIsPrinting] = useState<boolean>(false);
+
+  const params = new URLSearchParams(location.search);
+  const { data: productPrintQR } = useGetProductPrintQRQuery({
+    productId: params.get("product_id"),
+    variantValueId: params.get("variant_value_id"),
+  });
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    onBeforeGetContent: () => setIsPrinting(true),
+    onAfterPrint: () => setIsPrinting(false),
+  });
+
+  useEffect(() => {
+    if (isPrinting) {
+      handlePrint();
+    }
+  }, [handlePrint, isPrinting]);
 
   const onChangeRadio = (e: RadioChangeEvent) => {
     setValue(e.target.value);
   };
 
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
-
   const getQRsExport = (done: any) => {
     const result = [];
-    if (InventoryListData && InventoryListData.length > 0) {
+    if (productPrintQR && productPrintQR?.length > 0) {
       result.push(["ID", "Image", "QR Code", "Name", "Quantity", "Price"]);
-      InventoryListData.map((item: any) => {
+      productPrintQR?.map((item: any, index: any) => {
         const arr = [];
-        arr[0] = item.id;
-        arr[1] = item.thumbnail_url;
-        arr[2] = item.qr_link;
+        arr[0] = index + 1;
+        arr[1] = `${baseImageKitUrl}/${item.thumbnail_url}`;
+        arr[2] = `${baseUrl}/${item.qr_link}`;
         arr[3] = item.name;
-        arr[4] = item.stock_qty;
-        arr[5] = item.regular_price;
+        arr[4] = formatCurrency(item.regular_price);
         result.push(arr);
       });
 
@@ -69,11 +85,11 @@ const SettingUpQRPrint: React.FC = () => {
     {
       label: t("admin_shop.print_qrcode.setting.export_pdf"),
       key: "0",
-      onClick: handlePrint,
+      onClick: () => setIsPrinting(true),
     },
     {
       label: (
-        <CSVLink data={dataExport} filename={"QR-List.csv"} asyncOnClick={true}>
+        <CSVLink data={dataExport} filename={`QR-List_${dayjs().format("DD-MM-YYYY_h-mm-ss-A")}`} asyncOnClick={true}>
           {t("admin_shop.print_qrcode.setting.export_excel")}
         </CSVLink>
       ),
@@ -81,8 +97,6 @@ const SettingUpQRPrint: React.FC = () => {
       onClick: getQRsExport,
     },
   ];
-
-  const selectedProduct: IProduct | undefined = InventoryListData[0];
 
   return (
     <S.SettingUpQRPrint>
@@ -93,11 +107,18 @@ const SettingUpQRPrint: React.FC = () => {
           </div>
 
           <div className="qrcode_item" ref={componentRef}>
-            <div className="qrcode overflow-x-scroll">
-              {InventoryListData.map((item: any) => {
+            <div className="qrcode flex flex-gap flex-wrap justify-center">
+              {(isPrinting ? productPrintQR : productPrintQR?.slice(0, 1))?.map((item: any) => {
                 return (
-                  <div key={item.id} className="">
-                    <QRCode key={item.id} errorLevel="H" value={selectedProduct?.qr_link || ""} icon={logo} />
+                  <div key={item.id}>
+                    <QRCode
+                      errorLevel="H"
+                      value={item?.qr_link || ""}
+                      icon={logo}
+                      iconSize={80}
+                      size={250}
+                      bgColor={token.colorBgLayout}
+                    />
                   </div>
                 );
               })}

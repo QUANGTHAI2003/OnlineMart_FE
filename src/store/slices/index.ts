@@ -4,6 +4,7 @@ import { adminShopApi } from "./api/admin/adminShopApi";
 import { binAdminApi } from "./api/admin/binApi";
 import { inventoryAdminApi } from "./api/admin/inventoryApi";
 import { orderApi } from "./api/admin/orderApi";
+import { printQRAdminApi } from "./api/admin/printQRApi";
 import { productAdminApi } from "./api/admin/productApi";
 import { reasonCancelApi } from "./api/admin/reasoncancelApi";
 import { reviewAdminApi } from "./api/admin/reviewApi";
@@ -71,6 +72,7 @@ export const rootReducer: any = {
   [forgotPasswordApi.reducerPath]: forgotPasswordApi.reducer,
   [reviewApi.reducerPath]: reviewApi.reducer,
   [orderUserApi.reducerPath]: orderUserApi.reducer,
+  [printQRAdminApi.reducerPath]: printQRAdminApi.reducer,
   [reasonCancelApi.reducerPath]: reasonCancelApi.reducer,
   userState: authSlice,
   sortSidebar: sortSidebarSlice,
@@ -114,6 +116,7 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     inventoryAdminApi.middleware,
     binAdminApi.middleware,
     shopApi.middleware,
+    printQRAdminApi.middleware,
     activityApi.middleware,
     orderUserApi.middleware,
     reasonCancelApi.middleware,

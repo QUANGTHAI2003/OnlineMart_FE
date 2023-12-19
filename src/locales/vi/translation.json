@@ -576,7 +576,8 @@
       "biz_efficiency": "Hiệu quả kinh doanh",
       "traffic_website": "Chỉ số lượt truy cập",
       "operational_efficiency": "Hiệu quả vận hành",
-      "recycle_bin": "Thùng rác"
+      "recycle_bin": "Thùng rác",
+      "settings": "Cài đặt"
     },
     "authentication": {
       "signin": {
@@ -1237,7 +1238,7 @@
         "retail_price": "Giá bán lẻ",
         "import_price": "Giá nhập",
         "wholesale_price": "Giá bán buôn",
-        "qrcode": "Mã vạch",
+        "qrcode": "Mã QR",
         "supplier": "Nhãn hiệu",
         "status": "Trạng thái",
         "number_of_stock": "Số sản phẩm trong kho",

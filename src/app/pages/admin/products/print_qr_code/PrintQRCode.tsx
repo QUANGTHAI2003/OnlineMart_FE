@@ -3,8 +3,6 @@ import { Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { InventoryListData } from "../inventory/data";
-
 import { FilterComponent, SettingUpQRPrint, TableComponentQRCode } from "./components";
 import * as S from "./PrintQRCode.styles";
 import { BreadcrumbSkeleton, FilterSkeleton, SettingUpSkeleton, TableSkeleton } from "./skeletons";
@@ -19,7 +17,7 @@ const PrintQRCode = () => {
     setLoadingSkeleton(true);
     setTimeout(() => {
       setLoadingSkeleton(false);
-    }, 1000);
+    }, 300);
   }, []);
 
   return (
@@ -34,7 +32,7 @@ const PrintQRCode = () => {
         </S.SiteHeader>
       )}
 
-      {loadingSkeleton ? <FilterSkeleton count={1} /> : <FilterComponent inventoryData={InventoryListData} />}
+      {loadingSkeleton ? <FilterSkeleton count={1} /> : <FilterComponent />}
 
       {loadingSkeleton ? <TableSkeleton count={1} /> : <TableComponentQRCode />}
 
