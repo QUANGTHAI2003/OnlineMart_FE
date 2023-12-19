@@ -77,25 +77,3 @@ body::-webkit-scrollbar-track{
 body::-webkit-scrollbar-thumb{
   display: none;
 }
-
-// Font emmbeded
-@font-face {
-  font-family: "ProximaNova";
-  src: url("../fonts/Proxima-Nova-Regular.woff2") format("woff2");
-  font-weight: 400;
-}
-@font-face {
-  font-family: "ProximaNova";
-  src: url("../fonts/ProximaNova-Semibold.woff2") format("woff2");
-  font-weight: 600;
-}
-@font-face {
-  font-family: "ProximaNova";
-  src: url("../fonts/Proxima-Nova-Bold.woff") format("woff");
-  font-weight: 700;
-}
-@font-face {
-  font-family: "ProximaNova";
-  src: url("../fonts/sofiapro-bold.woff") format("woff");
-  font-weight: 700;
-}

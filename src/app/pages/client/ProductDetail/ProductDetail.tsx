@@ -4,7 +4,6 @@ import MetaHeader from "@app/app/components/Meta/MetaHeader";
 import { useGetProductDetailQuery } from "@app/store/slices/api/user/productApi";
 import { setDataCart, setPrice } from "@app/store/slices/redux/productDetailSlice";
 import { useAppDispatch, useAppSelector } from "@app/store/store";
-import { formatCurrency } from "@app/utils/helper";
 import { Rate } from "antd";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +14,6 @@ import "swiper/css/navigation";
 import {
   AddToCartComponent,
   CustomerReview,
-  DeliverySkeleton,
   PriceComponent,
   ProductDetailInfo,
   ProductNameSkeleton,
@@ -172,7 +170,7 @@ const ProductDetail = () => {
                 />
                 <S.DeliveryStyle>
                   <ModalSelect />
-                  {isFetching ? (
+                  {/* {isFetching ? (
                     <DeliverySkeleton />
                   ) : (
                     <>
@@ -218,7 +216,7 @@ const ProductDetail = () => {
                         </span>
                       </span>
                     </>
-                  )}
+                  )} */}
                 </S.DeliveryStyle>
                 <AddToCartComponent />
               </S.ProductInfoStyle>

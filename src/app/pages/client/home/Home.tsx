@@ -1,6 +1,5 @@
 import ChatGPT from "@app/app/components/clients/Chat/ChatGPT/ChatGPT";
 import ModalSelect from "@app/app/components/clients/SelectAddress/ModalSelect";
-import SpecialCategory from "@app/app/components/clients/SpecialCategory/SpecialCategory";
 import { useResponsive } from "@app/hooks";
 import { useLayoutEffect, useState } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -84,7 +83,7 @@ const Home = () => {
         </S.SelectAddressStyle>
       )}
       <SaleComponent />
-      <SpecialCategory />
+      {/* <SpecialCategory /> */}
       <ProductComponent isFixedHeader={isHeaderFixed.toString()} />
       <ChatGPT />
       {/* <ModalSelect /> */}

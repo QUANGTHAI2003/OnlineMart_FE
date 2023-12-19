@@ -11,11 +11,11 @@ type IAuthMiddleware = {
 const AuthMiddleware: React.FC<IAuthMiddleware> = ({ children }) => {
   const [cookies] = useCookies(["logged_in"]);
 
-  const { isLoading } = userApi.endpoints.getMe.useQuery(null, {
+  const { isLoading, isFetching } = userApi.endpoints.getMe.useQuery(null, {
     skip: !cookies.logged_in,
   });
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <CustomLoading />;
   }
 
