@@ -1,7 +1,7 @@
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { useDeleteWishlistMutation } from "@app/store/slices/api/user/wishlistApi";
 import { IWishlist } from "@app/types/wishlist.types";
-import { baseImageUrl, formatCurrency, notifyError, notifySuccess } from "@app/utils/helper";
+import { baseImageUrl, formatCurrency, handleApiError, notifySuccess } from "@app/utils/helper";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Modal } from "antd";
@@ -30,7 +30,7 @@ const WishlistItem = ({
       await deleteWishlist(id).unwrap();
       notifySuccess("Successfully", "Delete Wishlist successfully");
     } catch (err) {
-      notifyError("Error", "Delete Wishlist failed");
+      handleApiError(err);
     }
   };
   const showConfirm = (id: number) => {
@@ -44,7 +44,6 @@ const WishlistItem = ({
         console.log("Cancel");
       },
     });
-    console.log(Object.values({ id }).toString());
   };
   return (
     <S.UserWishListProduct>

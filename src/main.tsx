@@ -27,7 +27,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <>
               <App />
               <SpeedInsights />
-              <Analytics />
+              <Analytics
+                beforeSend={(event) => {
+                  if (event.url.includes("/admin/")) {
+                    return null;
+                  }
+                  return event;
+                }}
+                mode={"production"}
+              />
             </>
           </AuthMiddleware>
         </CookiesProvider>

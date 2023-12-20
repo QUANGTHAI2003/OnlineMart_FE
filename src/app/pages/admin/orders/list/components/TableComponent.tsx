@@ -217,7 +217,6 @@ const TableComponent = React.memo(() => {
     if (dateFilter) {
       filteredOrders = filteredOrders?.filter((record: any) => {
         const date = dayjs(record?.created_at).format("YYYY-MM-DD");
-        console.log(date);
 
         return dayjs(date).isSame(dayjs(dateFilter), "day");
       });

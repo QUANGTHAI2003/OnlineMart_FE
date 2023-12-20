@@ -1,7 +1,7 @@
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { CheckIcon } from "@app/app/assets/icons";
 import { useDeleteAddressMutation } from "@app/store/slices/api/user/addressApi";
-import { notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, notifySuccess } from "@app/utils/helper";
 import { Button, Modal } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +14,6 @@ const AddressItem = ({ id, name, phone, city, district, ward, is_default }: any)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingAddressId, setEdtingAddressId] = useState<number | null>(null);
   const showModal = () => {
-    console.log(Object.values({ id }).toString());
     setIsModalOpen(true);
   };
 
@@ -39,7 +38,7 @@ const AddressItem = ({ id, name, phone, city, district, ward, is_default }: any)
       await deleteAddress(id).unwrap();
       notifySuccess("Successfully", "Delete address successfully");
     } catch (err) {
-      notifyError("Error", "Delete address failed");
+      handleApiError(err);
     }
   };
   const showConfirm = (id: any) => {

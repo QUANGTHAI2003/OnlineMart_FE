@@ -7,7 +7,7 @@ import { useAppSelector } from "@app/store/store";
 import { ISeller } from "@app/types/seller.type";
 import { handleApiError, notifySuccess, removeDiacritics } from "@app/utils/helper";
 import { Button, Card, Modal, Space, Tag } from "antd";
-import type { ColumnsType, TableProps } from "antd/es/table";
+import type { ColumnsType } from "antd/es/table";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -68,9 +68,6 @@ const TableComponent = React.memo(({ permissionList }: any) => {
       cancelText: "No",
       maskClosable: true,
       onOk: () => handleDeleteAdmin(id),
-      onCancel() {
-        console.log("Cancel");
-      },
     });
   };
 
@@ -200,10 +197,6 @@ const TableComponent = React.memo(({ permissionList }: any) => {
     return filteredSellers;
   }, [debouncedValue, permissionFilter, searchType, sellers, statusType]);
 
-  const handleChange: TableProps<IDataType>["onChange"] = (pagination, filters) => {
-    console.log("Various parameters", pagination, filters);
-  };
-
   const isFilteredValueEmpty = Object.values(filteredValue).every(
     (value) => !value || (Array.isArray(value) && value.length === 0)
   );
@@ -222,7 +215,6 @@ const TableComponent = React.memo(({ permissionList }: any) => {
               columns={columns}
               dataSource={displayedSellers}
               bordered
-              onChange={handleChange}
               loading={isFetching}
             />
           </div>

@@ -39,7 +39,6 @@ export const forgotPasswordApi = createApi({
     }),
     otpSendAt: builder.query<any, any>({
       query(data: any) {
-        console.log(data);
         return {
           url: `otp/${data}/send-at`,
           method: "GET",

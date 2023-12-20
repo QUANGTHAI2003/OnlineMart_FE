@@ -50,7 +50,6 @@ const baseQueryCustom: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryEr
     const exp = decoded.exp;
 
     const isExpired = exp && exp - currentUnixTime < 100;
-    console.log("🚀 ~ exp && exp - currentUnixTime: ", exp && exp - currentUnixTime);
 
     if (isExpired) {
       if (!mutex.isLocked()) {

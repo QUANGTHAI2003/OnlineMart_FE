@@ -44,7 +44,6 @@ const Otp: React.FC = () => {
         }, 500);
       }
     } catch (err) {
-      console.log({ error });
       handleApiError(err);
     }
   };

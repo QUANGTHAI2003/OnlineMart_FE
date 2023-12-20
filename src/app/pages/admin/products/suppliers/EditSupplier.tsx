@@ -1,23 +1,14 @@
-import { ArrowLeftOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
 import { useGetSupplierOnlyQuery, useUpdateSupplierMutation } from "@app/store/slices/api/supplierApi";
-import { baseImageUrl, isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
-import { Button, Col, Form, Image, Input, Typography } from "antd";
-import Upload, { RcFile, UploadProps } from "antd/es/upload";
-import { useEffect, useMemo, useState } from "react";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
+import { Button, Col, Form, Input, Typography } from "antd";
+import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 
 import SelectAddress from "./components/SelectAddress";
 import * as S from "./Supplier.styles";
-
-const acceptedAvatar = ["image/png", "image/jpg", "image/jpeg", "image/gif", "image/svg", "image/webp"];
-
-const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result as string));
-  reader.readAsDataURL(img);
-};
 
 const EditSupplier = () => {
   const { t } = useTranslation();
@@ -27,32 +18,27 @@ const EditSupplier = () => {
   const supplierId: number = parseInt(id || "0");
   const { data: supplierDetail } = useGetSupplierOnlyQuery(supplierId);
   const [updateSupplier, { error, isLoading }] = useUpdateSupplierMutation();
-
-  const [imageUrl, setImageUrl] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const [form] = Form.useForm();
   const handleSubmit = async (fieldValues: any) => {
-    const { name, email, phone, address, code, website, avatar, city, district, ward } = fieldValues;
+    const { name, email, phone, address, code, website, city, district, ward } = fieldValues;
 
-    const formData = new FormData();
     const addressDetail = `${address}, ${ward}, ${district}, ${city}`;
-    if (typeof avatar !== "string") {
-      formData.append("avatar", avatar.fileList[0].originFileObj);
-    }
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("address", addressDetail);
-    formData.append("code", code);
-    formData.append("website", website ? website : "");
-    formData.append("_method", "PUT");
+
+    const values = {
+      name: name,
+      email: email,
+      phone: phone,
+      address: addressDetail,
+      code: code,
+      website: website ? website : "",
+      _method: "PUT",
+    };
 
     try {
-      await updateSupplier({ supplierId: supplierId, data: formData }).unwrap();
+      await updateSupplier({ supplierId: supplierId, data: values }).unwrap();
       notifySuccess("Successfully", "Update supplier successfully");
     } catch (err) {
-      notifyError("Error", "Update supplier failed");
+      handleApiError(err);
     }
   };
   const errorForm: any = useMemo(() => {
@@ -83,7 +69,6 @@ const EditSupplier = () => {
       phone: supplierDetail?.phone,
       address: supplierDetail?.address,
       website: supplierDetail?.website,
-      avatar: baseImageUrl + supplierDetail?.avatar,
     });
     if (supplierDetail?.address) {
       const parts = supplierDetail?.address.split(",").map((part) => part.trim());
@@ -96,22 +81,6 @@ const EditSupplier = () => {
       });
     }
   }, [supplierDetail, form]);
-
-  const props: UploadProps = {
-    className: "rounded-none",
-    listType: "picture-card",
-    accept: acceptedAvatar.join(","),
-    showUploadList: false,
-    beforeUpload: () => {
-      return false;
-    },
-    onChange: (info: any) => {
-      getBase64(info.file, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    },
-  };
 
   return (
     <div>
@@ -184,37 +153,6 @@ const EditSupplier = () => {
               </S.FormField>
             </Col>
             <SelectAddress onAddressChange={(value) => form.setFieldsValue({ full_address: value })} />
-            <Col span={12}>
-              <S.FormField
-                name="avatar"
-                colon={false}
-                valuePropName="file"
-                validateStatus={errorForm?.avatar && "error"}
-                help={errorForm?.avatar && errorForm?.avatar}
-                label="Ảnh nhà cung cấp"
-              >
-                <Upload {...props}>
-                  {imageUrl || supplierDetail?.avatar ? (
-                    <Image
-                      src={imageUrl || `${baseImageUrl}/${supplierDetail?.avatar}`}
-                      alt="avatar"
-                      width={100}
-                      height={100}
-                      preview={{
-                        visible: false,
-                        mask: "Tải ảnh mới",
-                      }}
-                      className="img object-cover"
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center">
-                      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                      <span className="mt-2">Upload</span>
-                    </div>
-                  )}
-                </Upload>
-              </S.FormField>
-            </Col>
             <Col span={12}>
               <S.Field>
                 <S.FormField

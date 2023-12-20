@@ -225,7 +225,6 @@ const ProductCreate = () => {
     try {
       const galleryArray = Object.values(product.gallery_images || []) as any[];
 
-      console.log(product.product_image);
       const formData = new FormData();
       formData.append("type", isNormal ? "normal" : "variant");
       formData.append("shop_id", shopId);

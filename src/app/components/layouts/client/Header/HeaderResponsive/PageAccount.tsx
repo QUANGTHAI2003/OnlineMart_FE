@@ -22,8 +22,6 @@ const PageAccount = () => {
 
   const handleClick = () => {
     if (isShowSidebar) {
-      console.log("showSidebar");
-
       navigate("/");
     } else {
       dispatch(setShowSidebar(true));

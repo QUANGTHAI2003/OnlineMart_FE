@@ -1,7 +1,7 @@
 import SelectAddress from "@app/app/components/clients/SelectAddress/SelectAddress";
 import { useGetOneAddressQuery, useUpdateAddressMutation } from "@app/store/slices/api/user/addressApi";
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
-import { Input, Button, Form } from "antd";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
+import { Button, Form, Input } from "antd";
 import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -42,7 +42,7 @@ const EditAddress = ({ id, setIsModalOpen }: any) => {
       notifySuccess("Successfully", "Update address successfully");
       setIsModalOpen(false);
     } catch (err) {
-      notifyError("Error", "Update address failed");
+      handleApiError(err);
     }
   };
   const errorForm: any = useMemo(() => {
@@ -69,15 +69,7 @@ const EditAddress = ({ id, setIsModalOpen }: any) => {
   return (
     <S.AddressStyle>
       <div className="min-w-min bg-white">
-        <Form
-          className="md:text-sm sm:text-xs"
-          form={form}
-          autoComplete="off"
-          onFinish={handleSubmit}
-          onFinishFailed={(error) => {
-            console.log({ error });
-          }}
-        >
+        <Form className="md:text-sm sm:text-xs" form={form} autoComplete="off" onFinish={handleSubmit}>
           <S.FormItem
             name="name"
             label={t("user.address.fullname")}

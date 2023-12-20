@@ -1,9 +1,11 @@
 import ProductImageGallery from "@app/app/components/clients/ImageGallery/ProductImageGallery";
 import ModalSelect from "@app/app/components/clients/SelectAddress/ModalSelect";
 import MetaHeader from "@app/app/components/Meta/MetaHeader";
+import OpenGraph from "@app/app/components/Meta/OpenGraph";
 import { useGetProductDetailQuery } from "@app/store/slices/api/user/productApi";
 import { setDataCart, setPrice } from "@app/store/slices/redux/productDetailSlice";
 import { useAppDispatch, useAppSelector } from "@app/store/store";
+import { baseImageKitUrl } from "@app/utils/helper";
 import { Rate } from "antd";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -60,7 +62,6 @@ const ProductDetail = () => {
       const variantValue = variants
         .map((item: any) => item?.values.find((value: any) => value?.id === parseInt(spid)))
         .filter(Boolean)[0];
-      console.log(variantValue);
 
       dispatch(
         setDataCart({
@@ -113,6 +114,11 @@ const ProductDetail = () => {
   return (
     <S.DetailPageStyle>
       <MetaHeader title={`Mua ${productDetail?.name} tại ${productDetail?.shop?.name}`} />
+      <OpenGraph
+        title={`Mua ${productDetail?.name} tại ${productDetail?.shop?.name}`}
+        url={window.location.href}
+        image={`${baseImageKitUrl}/${productDetail?.thumbnail_url}`}
+      />
       <section className="flex flex-col gap-y-4 sm:max-w-[768px] md:max-w-full mx-auto">
         <S.ProductDetailStyle>
           <section className="main-thumbnail w-[450px]">

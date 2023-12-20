@@ -1,7 +1,7 @@
 import { InboxOutlined } from "@ant-design/icons";
 import SelectOrCreate from "@app/app/components/common/Select/SelectOrCreate";
 import { useGetCategoryByIdQuery, useUpdateCategoryMutation } from "@app/store/slices/api/categoryApi";
-import { notifyError } from "@app/utils/helper";
+import { handleApiError } from "@app/utils/helper";
 import { Button, Col, Form, Input, Radio, RadioChangeEvent, Row, Upload, UploadFile, UploadProps } from "antd";
 import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import TextArea from "antd/es/input/TextArea";
@@ -50,7 +50,7 @@ const EditCategory = ({ id, dataCategory }: any) => {
 
       await updateCategory({ formData, id }).unwrap();
     } catch (err) {
-      notifyError("Update category failed", "Failed");
+      handleApiError(err);
     }
   };
 

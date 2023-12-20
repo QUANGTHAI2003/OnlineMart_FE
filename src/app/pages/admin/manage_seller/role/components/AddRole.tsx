@@ -1,6 +1,6 @@
 import { useAddRoleMutation, useGetAllPermissionsQuery } from "@app/store/slices/api/admin/roleApi";
 import { IPermission } from "@app/types/roles.type";
-import { notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, notifySuccess } from "@app/utils/helper";
 import { Button, Form, Input, Modal, Select, message } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -23,8 +23,6 @@ const AddRole = () => {
   const [form] = Form.useForm();
 
   const handleSubmit = async (fieldValues: any) => {
-    console.log("🚀 ~ file: AddRole.tsx:27 ~ handleSubmit ~ fieldValues:", fieldValues);
-
     try {
       await addRole({
         name: fieldValues.name,
@@ -37,7 +35,7 @@ const AddRole = () => {
 
       notifySuccess("Thêm mới thành công", "Thành công");
     } catch (err) {
-      notifyError("Thêm mới thất bại", "Thất bại");
+      handleApiError(err);
     }
   };
 

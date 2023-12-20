@@ -1,6 +1,6 @@
 import { UserOutlined } from "@ant-design/icons";
 import { useReplyReviewMutation } from "@app/store/slices/api/admin/reviewApi";
-import { formatDateTime, notifyError, notifySuccess } from "@app/utils/helper";
+import { formatDateTime, handleApiError, notifySuccess } from "@app/utils/helper";
 import { Avatar, Button, Col, Form, Input, Modal, Rate, Row } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -34,7 +34,7 @@ const ReviewFeedback: React.FC<IReviewFeedbackProps> = ({ data }) => {
       form.resetFields();
       setOpen(false);
     } catch (err) {
-      notifyError("Error", "Feedback failed");
+      handleApiError(err);
     }
   };
 

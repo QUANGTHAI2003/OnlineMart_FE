@@ -32,11 +32,9 @@ const trafficAdminSlice = createSlice({
       state.pageType = action.payload;
     },
     setStartDate: (state: RootState, action: PayloadAction<any>) => {
-      console.log("setStartDate", action.payload);
       state.dateFilter.startDate = action.payload;
     },
     setEndDate: (state: RootState, action: PayloadAction<any>) => {
-      console.log("setEndDate", action.payload);
       state.dateFilter.endDate = action.payload;
     },
   },

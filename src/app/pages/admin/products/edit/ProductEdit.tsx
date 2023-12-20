@@ -294,7 +294,6 @@ const ProductEdit = () => {
 
       isLoading || navigate("/admin/shop/products");
     } catch (err: any) {
-      console.log(err);
       handleApiError(err);
     }
   };

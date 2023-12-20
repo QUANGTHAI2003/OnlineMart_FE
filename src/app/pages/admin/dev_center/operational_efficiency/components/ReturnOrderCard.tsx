@@ -24,7 +24,6 @@ const ReturnOrderCard = () => {
       });
 
       setDataExport(result);
-      console.log(result);
 
       done();
     }

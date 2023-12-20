@@ -3,7 +3,7 @@ import { AdminTable } from "@app/app/components/common/Table/AdminTable";
 import { useResponsive } from "@app/hooks";
 import { useDeleteSupplierMutation, useGetSupplierListQuery } from "@app/store/slices/api/supplierApi";
 import { ISupplier } from "@app/types/suppliers.types";
-import { notifyError, notifySuccess, removeDiacritics } from "@app/utils/helper";
+import { handleApiError, notifySuccess, removeDiacritics } from "@app/utils/helper";
 import { Button, Card, Divider, Modal, Space } from "antd";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { SorterResult } from "antd/lib/table/interface";
@@ -26,7 +26,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
       await deleteSupplier(id).unwrap();
       notifySuccess("Successfully", "Delete supplier successfully");
     } catch (err) {
-      notifyError("Error", "Delete supplier failed");
+      handleApiError(err);
     }
   };
   const showConfirm = (id: number) => {

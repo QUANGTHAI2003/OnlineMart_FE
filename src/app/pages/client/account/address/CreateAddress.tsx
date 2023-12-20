@@ -1,9 +1,8 @@
 import SelectAddress from "@app/app/components/clients/SelectAddress/SelectAddress";
 import { useCreateAddressMutation } from "@app/store/slices/api/user/addressApi";
 import { useAppSelector } from "@app/store/store";
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
-import { Input, Button, Form } from "antd";
-import type { CheckboxChangeEvent } from "antd/es/checkbox";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
+import { Button, Form, Input } from "antd";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -21,14 +20,6 @@ type FormValues = {
   is_default: boolean;
   user_id: number;
   full_address: string;
-};
-
-type ErrorMessage = {
-  [key: number]: string;
-};
-
-const onChange = (e: CheckboxChangeEvent) => {
-  console.log(`checked = ${e.target.checked}`);
 };
 
 const CreateAddress = ({ setIsModalOpen }: any) => {
@@ -61,15 +52,7 @@ const CreateAddress = ({ setIsModalOpen }: any) => {
       form.resetFields();
       setIsModalOpen(false);
     } catch (err: any) {
-      const status = err.status || 500;
-      const errorMessages: ErrorMessage = {
-        400: "Bad Request",
-        401: "Unauthorized",
-        500: "Internal Server Error",
-      };
-
-      const errorMessage = errorMessages[status];
-      notifyError("Create address failed", errorMessage);
+      handleApiError(err);
     }
   };
 
@@ -149,9 +132,7 @@ const CreateAddress = ({ setIsModalOpen }: any) => {
             <TextArea rows={3} placeholder={t("user.address.p_address")} />
           </S.FormItem>
           <S.FormItem name="is_default" valuePropName="checked">
-            <S.FormCheckBox onChange={onChange} value>
-              {t("user.address.set_default")}
-            </S.FormCheckBox>
+            <S.FormCheckBox value>{t("user.address.set_default")}</S.FormCheckBox>
           </S.FormItem>
           <S.FormItem>
             <Button

@@ -142,8 +142,6 @@ const SortPaginateItem = ({ onPageChange, pageSize, total, current }: any) => {
         delete newQueryParams[key];
       }
     } else {
-      console.log({ key });
-
       delete newQueryParams[key];
     }
 
@@ -290,7 +288,6 @@ const SortPaginateItem = ({ onPageChange, pageSize, total, current }: any) => {
                   case "shop":
                   case "supplier": {
                     const sortId = value.split(",");
-                    console.log({ sortId });
 
                     // const sortData = otherSort.find((item: any) => item.slug === key);
                     // const sortValues = sortData?.values || [];

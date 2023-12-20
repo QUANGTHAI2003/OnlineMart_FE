@@ -161,7 +161,6 @@ const ChatGPT: React.FC = () => {
   };
 
   const handleStopResponse = () => {
-    console.log("stop response");
     stream.controller.abort();
   };
 

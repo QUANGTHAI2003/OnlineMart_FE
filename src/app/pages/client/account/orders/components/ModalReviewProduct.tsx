@@ -52,7 +52,6 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
   const [disagreeValue, setDisagreeValue] = useState<string>("");
   const inputRef = useRef<InputRef>(null);
 
-  console.log(mappedMedia);
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
@@ -116,7 +115,6 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    console.log(newFileList);
     setFileList(newFileList);
   };
   const onPreview = async (file: UploadFile<any>) => {

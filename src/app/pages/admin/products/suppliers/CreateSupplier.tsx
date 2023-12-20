@@ -1,48 +1,37 @@
-import { ArrowLeftOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { AdminBreadcrumb } from "@app/app/components/common/Breadcrumb/Breadcrumb";
 import { useCreateSupplierMutation } from "@app/store/slices/api/supplierApi";
 import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
-import { Button, Col, Form, Input, Image, Typography } from "antd";
-import Upload, { RcFile, UploadProps } from "antd/es/upload";
-import { useMemo, useState } from "react";
+import { Button, Col, Form, Input, Typography } from "antd";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import SelectAddress from "./components/SelectAddress";
 import * as S from "./Supplier.styles";
 
-const acceptedAvatar = ["image/png", "image/jpg", "image/jpeg", "image/gif", "image/svg", "image/webp"];
-
-const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result as string));
-  reader.readAsDataURL(img);
-};
-
 const CreateSupplier = () => {
   const { t } = useTranslation();
 
   const [createSupplier, { error, isLoading }] = useCreateSupplierMutation();
-  const [imageUrl, setImageUrl] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const [form] = Form.useForm();
   const handleSubmit = async (FormValues: any) => {
-    const { name, email, phone, address, code, website, avatar, city, district, ward } = FormValues;
-    const formData = new FormData();
+    const { name, email, phone, address, code, website, city, district, ward } = FormValues;
     const addressDetail = `${address}, ${ward}, ${district}, ${city}`;
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("address", addressDetail);
-    formData.append("code", code);
-    formData.append("website", website ? website : "");
-    formData.append("avatar", avatar.fileList[0].originFileObj);
+
+    const values = {
+      name: name,
+      email: email,
+      phone: phone,
+      address: addressDetail,
+      code: code,
+      website: website ? website : "",
+    };
+
     try {
-      await createSupplier(formData).unwrap();
+      await createSupplier(values).unwrap();
       notifySuccess("Successfully", "Create supplier successfully");
       form.resetFields();
-      setImageUrl("");
     } catch (err: any) {
       handleApiError(err);
     }
@@ -68,22 +57,6 @@ const CreateSupplier = () => {
     },
     string: {
       min: "${label} " + t("admin_shop.suppliers.err_min", { min: "${min}" }),
-    },
-  };
-
-  const props: UploadProps = {
-    className: "rounded-none",
-    listType: "picture-card",
-    accept: acceptedAvatar.join(","),
-    showUploadList: false,
-    beforeUpload: () => {
-      return false;
-    },
-    onChange: (info: any) => {
-      getBase64(info.file, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
     },
   };
 
@@ -158,38 +131,6 @@ const CreateSupplier = () => {
               </S.FormField>
             </Col>
             <SelectAddress onAddressChange={(value) => form.setFieldsValue({ full_address: value })} />
-            <Col span={12}>
-              <S.FormField
-                name="avatar"
-                colon={false}
-                valuePropName="file"
-                rules={[{ required: true }]}
-                validateStatus={errorForm?.avatar && "error"}
-                help={errorForm?.avatar && errorForm?.avatar}
-                label={t("admin_shop.suppliers.label_avatar")}
-              >
-                <Upload {...props}>
-                  {imageUrl ? (
-                    <Image
-                      src={imageUrl}
-                      alt="avatar"
-                      width={100}
-                      height={100}
-                      preview={{
-                        visible: false,
-                        mask: t("admin_shop.suppliers.preview_avatar"),
-                      }}
-                      className="img object-cover"
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center">
-                      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                      <span className="mt-2">Upload</span>
-                    </div>
-                  )}
-                </Upload>
-              </S.FormField>
-            </Col>
             <Col span={12}>
               <S.Field>
                 <S.FormField

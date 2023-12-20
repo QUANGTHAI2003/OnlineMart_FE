@@ -1,6 +1,6 @@
 import { useGetAllPermissionsQuery, useUpdateRoleMutation } from "@app/store/slices/api/admin/roleApi";
 import { IPermission } from "@app/types/roles.type";
-import { isEntityError, notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Form, Input, Modal, Select, message } from "antd";
@@ -40,7 +40,7 @@ const EditRole: React.FC<IEditRoleProps> = ({ data }) => {
 
       notifySuccess("Cập nhật thành công", "Thành công");
     } catch (err) {
-      notifyError("Cập nhật thất bại", "Thất bại");
+      handleApiError(err);
     }
   };
 

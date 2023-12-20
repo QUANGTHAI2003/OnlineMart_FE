@@ -68,10 +68,6 @@ const EditPermission = ({ data, permissions, isFetching, disabled = false }: IEd
     setOpen(false);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
   const validateMessages = {
     required: "${label} " + t("admin_shop.seller.register.form.validate_required"),
     types: {
@@ -106,7 +102,6 @@ const EditPermission = ({ data, permissions, isFetching, disabled = false }: IEd
             form={form}
             name="register"
             onFinish={handleSubmit}
-            onFinishFailed={onFinishFailed}
             validateMessages={validateMessages}
             autoComplete="off"
             layout="vertical"

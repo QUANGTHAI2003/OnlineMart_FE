@@ -21,7 +21,6 @@ const Payment = () => {
   const { t } = useTranslation();
 
   const onChange = (e: RadioChangeEvent): any => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
 

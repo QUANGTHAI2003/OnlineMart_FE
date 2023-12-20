@@ -62,13 +62,10 @@ export const SortDataItem = ({ value }: any) => {
   const handleRemoveSort = (value: any) => {
     const keyValue = value[0];
     if (keyValue === "searchValueFilter") {
-      console.log("Removing searchValueFilter");
       dispatch(setSearchValue(""));
     } else if (keyValue === "dateFilter") {
-      console.log("Removing dateFilter");
       dispatch(deleteOneFilteredValue("dateFilter"));
     } else if (keyValue === "delivery_ghtk") {
-      console.log("Removing deliveryFilter");
       dispatch(deleteOneFilteredValue("delivery_ghtk"));
     }
   };
@@ -102,7 +99,6 @@ export const SortDataItem = ({ value }: any) => {
   };
 
   const shouldShowSortItem = (value: any) => {
-    console.log(value);
     switch (value[0]) {
       case "searchValueFilter":
         return value[1] !== "";

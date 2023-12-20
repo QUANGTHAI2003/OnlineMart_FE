@@ -63,7 +63,7 @@ const UserProfile = () => {
       await updateUser(values).unwrap();
       notifySuccess("Successfully", "Update user information successfully");
     } catch (err) {
-      notifyError("Error", "Update user information failed");
+      handleApiError(err);
     }
   };
 

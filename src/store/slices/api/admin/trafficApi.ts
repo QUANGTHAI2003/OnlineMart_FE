@@ -12,7 +12,6 @@ export const trafficAdminApi = createApi({
         const params = Object.fromEntries(
           Object.entries(data).filter(([, value]) => value !== null && value !== undefined)
         );
-        console.log("🚀 ~ file: trafficApi.ts:15 ~ params:", params);
 
         return {
           url: `dev/traffic`,

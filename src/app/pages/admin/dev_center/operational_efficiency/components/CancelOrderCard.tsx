@@ -26,7 +26,6 @@ const CancelOrderCard = () => {
       });
 
       setDataExport(result);
-      console.log(result);
 
       done();
     }

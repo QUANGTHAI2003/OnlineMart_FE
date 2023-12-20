@@ -19,7 +19,6 @@ const ModalCancelOrder: React.FC<any> = ({ order_id }) => {
     label: item.reason_name,
   }));
   const [reasonCancelId, setReasonCancelId] = useState<number>();
-  console.log(reasonCancelId);
   const handleOk = async () => {
     const reason_cancel_id = reasonCancelId;
     const values = {

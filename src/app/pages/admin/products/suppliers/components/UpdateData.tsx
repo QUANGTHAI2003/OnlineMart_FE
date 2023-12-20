@@ -1,6 +1,6 @@
 import { DownOutlined } from "@ant-design/icons";
 import { useDeleteMultiSupplierMutation } from "@app/store/slices/api/supplierApi";
-import { notifyError, notifySuccess } from "@app/utils/helper";
+import { handleApiError, notifySuccess } from "@app/utils/helper";
 import { Button, Dropdown, MenuProps, Space, Tooltip } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,7 +18,7 @@ const UpdateData: React.FC<any> = ({ hasSelected, selectedRowKeys }) => {
       }).unwrap();
       notifySuccess("Successfully", "Delete supplier successfully");
     } catch (err) {
-      notifyError("Error", "Delete supplier failed");
+      handleApiError(err);
     }
   };
 

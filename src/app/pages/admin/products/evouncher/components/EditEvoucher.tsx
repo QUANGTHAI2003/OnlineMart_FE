@@ -26,7 +26,6 @@ const { RangePicker } = DatePicker;
 const EditVoucher = ({ id, onCancel }: any) => {
   const { data, isFetching } = useGetVoucherOnlyQuery(id);
   const [updateVoucher, { isLoading, error }] = useUpdateVoucherMutation();
-  console.log(data);
   const [form] = Form.useForm();
 
   const handleUnitChange = () => {
@@ -46,7 +45,6 @@ const EditVoucher = ({ id, onCancel }: any) => {
     };
     try {
       await updateVoucher(values).unwrap();
-      console.log(values);
       notifySuccess(
         t("admin_shop.product.evouncher.successfully"),
         t("admin_shop.product.evouncher.update_successfully")

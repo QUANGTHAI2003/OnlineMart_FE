@@ -62,11 +62,9 @@ const CreateEvoucher = ({ onCancel }: any) => {
       shop_id,
     };
     try {
-      const response = await createVoucher(values).unwrap();
-      const createdVoucher = response.data;
+      await createVoucher(values).unwrap();
       notifySuccess(t("admin_shop.product.evouncher.create_successfully"));
       form.resetFields();
-      console.log("Created voucher:", createdVoucher);
       onCancel();
     } catch (err: any) {
       handleApiError(err);

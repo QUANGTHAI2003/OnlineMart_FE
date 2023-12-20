@@ -55,9 +55,6 @@ const TableComponent = React.memo(() => {
       centered: true,
       onOk: () => handleDeleteVoucher(id),
       cancelText: t("admin_shop.product.evouncher.table.no"),
-      onCancel: () => {
-        console.log("Cancel");
-      },
     });
   };
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
@@ -91,8 +88,7 @@ const TableComponent = React.memo(() => {
     selectedRowKeys,
     onChange: onSelectChange,
   };
-  const handleChange: TableProps<IVoucher>["onChange"] = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
+  const handleChange: TableProps<IVoucher>["onChange"] = (_, __, sorter) => {
     setSortedInfo(sorter as SorterResult<IVoucher>);
   };
   formatVNCurrency(100000);

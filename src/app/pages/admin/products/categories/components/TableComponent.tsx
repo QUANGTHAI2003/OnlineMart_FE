@@ -7,7 +7,7 @@ import {
   useUpdateStatusMutation,
 } from "@app/store/slices/api/categoryApi";
 import { ICategory } from "@app/types/categories.types";
-import { notifyError, notifySuccess, removeDiacritics } from "@app/utils/helper";
+import { handleApiError, notifySuccess, removeDiacritics } from "@app/utils/helper";
 import { Button, Card, Divider, Modal, Space, Switch } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { SorterResult } from "antd/es/table/interface";
@@ -47,9 +47,6 @@ const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
       onOk() {
         deleteCategory(categoryId);
       },
-      onCancel() {
-        console.log("Cancel");
-      },
     });
   };
 
@@ -61,7 +58,7 @@ const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
       }).unwrap();
       notifySuccess("Cập nhật trạng thái thành công", "Thành công");
     } catch (err) {
-      notifyError("Cập nhật trạng thái thất bại", "Thất bại");
+      handleApiError(err);
     }
   };
 

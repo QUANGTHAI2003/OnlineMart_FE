@@ -31,7 +31,6 @@ const FillerDrawer = React.memo(({ statusTypeData, permissionList }: any) => {
 
   const handleApplySort = (values: any) => {
     const { statusType, permissions } = values;
-    console.log("🚀 ~ file: FillerDrawer.tsx:34 ~ handleApplySort ~ permissions:", permissions);
     dispatch(setStatusType(statusType));
     dispatch(setPermission(permissions));
   };

@@ -26,7 +26,6 @@ const FullfillOrderCard = () => {
       });
 
       setDataExport(result);
-      console.log(result);
 
       done();
     }
