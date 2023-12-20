@@ -39,6 +39,7 @@ const CreateAddress = ({ setIsModalOpen }: any) => {
     const value = {
       name,
       phone,
+      address_home: address,
       city: full_address.split(",")[2],
       district: full_address.split(",")[1],
       ward: full_address.split(",")[0],
@@ -48,7 +49,7 @@ const CreateAddress = ({ setIsModalOpen }: any) => {
     };
     try {
       await createAddress(value).unwrap();
-      notifySuccess("Successfully", "Create address successfully");
+      notifySuccess(t("admin_shop.product.evouncher.successfully"), t("user.account_user.create_address_success"));
       form.resetFields();
       setIsModalOpen(false);
     } catch (err: any) {

@@ -31,6 +31,7 @@ const EditAddress = ({ id, setIsModalOpen }: any) => {
       id,
       name,
       phone,
+      address_home: address,
       city: full_address.split(",")[2],
       district: full_address.split(",")[1],
       ward: full_address.split(",")[0],
@@ -57,12 +58,12 @@ const EditAddress = ({ id, setIsModalOpen }: any) => {
 
   useEffect(() => {
     form.setFieldsValue({
-      fullname: data?.name,
+      name: data?.name,
       phone: data?.phone,
-      address: data?.ward + `, ` + data?.district + `, ` + data?.city,
-      city: data?.full_address?.split(",")[2],
-      district: data?.full_address?.split(",")[1],
-      ward: data?.full_address?.split(",")[0],
+      address: data?.address_home,
+      city: data?.city,
+      district: data?.district,
+      ward: data?.ward,
     });
   }, [data, form]);
 

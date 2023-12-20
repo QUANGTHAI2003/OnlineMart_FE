@@ -124,17 +124,7 @@ const UserHeader = () => {
               <Search />
             </div>
             <div className="w-10 h-10 ml-2 flex items-center justify-center md:w-[80px] text-center">
-              <Cart
-                items={[
-                  {
-                    id: 1,
-                    name: "Sách Đắc Nhân Tâm",
-                    price: 25000,
-                    urlImage: "https://source.unsplash.com/random",
-                  },
-                ]}
-                isBlue={false}
-              />
+              <Cart isBlue={false} />
             </div>
           </div>
         )}
@@ -157,17 +147,7 @@ const UserHeader = () => {
             )}
             <Search />
             <div className="w-[90px] h-10 ml-2 flex items-center justify-center md:w-10 text-center">
-              <Cart
-                items={[
-                  {
-                    id: 1,
-                    name: "Sách Đắc Nhân Tâm",
-                    price: 25000,
-                    urlImage: "https://source.unsplash.com/random",
-                  },
-                ]}
-                isBlue={false}
-              />
+              <Cart isBlue={false} />
             </div>
           </div>
         )}

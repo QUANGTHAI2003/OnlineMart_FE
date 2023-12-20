@@ -61,17 +61,7 @@ const PageAccount = () => {
           className="w-[44px] h-[40px] flex justify-center items-center text-white"
           style={{ color: "white !important" }}
         >
-          <Cart
-            items={[
-              {
-                id: 1,
-                name: "Sách Đắc Nhân Tâm",
-                price: 25000,
-                urlImage: "https://source.unsplash.com/random",
-              },
-            ]}
-            isBlue={false}
-          />
+          <Cart isBlue={false} />
         </div>
       )}
       {haveCart || <div className="w-[44px] h-[40px] bg-transparent"></div>}

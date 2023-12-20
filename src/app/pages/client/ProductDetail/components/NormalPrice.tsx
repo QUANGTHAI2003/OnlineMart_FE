@@ -4,6 +4,8 @@ import { round } from "lodash";
 
 const NormalPrice = () => {
   const dataCart = useAppSelector((state) => state.productDetail.dataCart);
+  console.log("🚀 ~ dataCart:", dataCart);
+
   const isSale = dataCart?.salePrice > 0;
   const currentPrice = isSale ? dataCart?.salePrice : dataCart.regularPrice;
 

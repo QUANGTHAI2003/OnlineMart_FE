@@ -49,9 +49,8 @@ export const SortDataItem = ({ value }: any) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const { selectSearchType, startDateFilter, endDateFilter } = useAppSelector(
-    (state) => state.activityAdmin.filteredValue
-  );
+  const { selectSearchType } = useAppSelector((state) => state.activityAdmin);
+  const { startDateFilter, endDateFilter } = useAppSelector((state) => state.activityAdmin.filteredValue);
 
   const currentSearchType = React.useMemo(() => {
     return searchType(t).find((item) => item.value === selectSearchType);

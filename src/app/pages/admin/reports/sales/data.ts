@@ -2,33 +2,32 @@ export const DualChartData = [
   {
     time: "2019-03",
     value: 2000,
-    count: 300,
   },
   {
     time: "2019-04",
     value: 900,
-    count: 800,
   },
   {
     time: "2019-05",
     value: 300,
-    count: 400,
   },
   {
     time: "2019-06",
     value: 450,
-    count: 380,
   },
   {
     time: "2019-07",
     value: 470,
-    count: 220,
+  },
+  {
+    time: "2019-07",
+    value: 470,
   },
 ];
 
 export const PieChartData = (t: any) => [
   {
-    type: t("admin_shop.reports.sales.piechart.to_pay"),
+    type: t("admin_shop.reports.sales.piechart.awaiting"),
     value: 14,
   },
   {
@@ -46,10 +45,6 @@ export const PieChartData = (t: any) => [
   {
     type: t("admin_shop.reports.sales.piechart.canceled"),
     value: 3,
-  },
-  {
-    type: t("admin_shop.reports.sales.piechart.return_refund"),
-    value: 5,
   },
 ];
 

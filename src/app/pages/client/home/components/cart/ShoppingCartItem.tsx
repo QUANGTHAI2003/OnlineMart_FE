@@ -1,28 +1,24 @@
+import { WarningOutlined } from "@ant-design/icons";
 import { useResponsive } from "@app/hooks";
-import { formatCurrency } from "@app/utils/helper";
+import { useDeleteSingleItemMutation, useUpdateQuantityMutation } from "@app/store/slices/api/user/cartApi";
+import { formatCurrency, handleApiError, notifySuccess } from "@app/utils/helper";
 import { faAngleDown, faAngleRight, faStore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Checkbox, InputNumber } from "antd";
+import { Checkbox, InputNumber, Modal } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as S from "../../Cart.styles";
 
-import { default as ModalCouponShop, default as PopupCoupon } from "./ModalCouponShop";
+import { default as ModalCouponShop } from "./ModalCouponShop";
 
-const ShoppingCartItem = ({
-  shop,
-  index,
-  selectedShops,
-  handleSelectShop,
-  selectedProducts,
-  handleSelectProduct,
-  showConfirm,
-  showCouponModal,
-}: any) => {
+const ShoppingCartItem = ({ shop, index, isAllProductsChecked, handleSelectShop, handleSelectProduct }: any) => {
   const { t } = useTranslation();
   const { isTablet, isDesktop } = useResponsive();
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [deleteSingleItem] = useDeleteSingleItemMutation();
+  const [updateQuantity] = useUpdateQuantityMutation();
+  const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
 
   const openModal = () => {
     setIsOpenModal(true);
@@ -32,46 +28,90 @@ const ShoppingCartItem = ({
     setIsOpenModal(false);
   };
 
+  // Delete item in carts
+  const handleDeleteSingleItem = async (id: number) => {
+    try {
+      await deleteSingleItem(id).unwrap();
+      notifySuccess(
+        t("admin_shop.product.evouncher.successfully"),
+        t("user.account_user.account_notification_page.delete_success")
+      );
+    } catch (err) {
+      handleApiError(err);
+    }
+  };
+
+  // Update quantity item in carts
+  const handleUpdateQuantity = async (value: number, id: number) => {
+    try {
+      if (value < 1) {
+        showConfirm(id);
+      }
+      await updateQuantity({ quantity: value, id }).unwrap();
+    } catch (err) {
+      handleApiError(err);
+    }
+  };
+
+  const showConfirm = (id: number) => {
+    Modal.confirm({
+      title: t("user.shopping_cart_page.btn_confirm_title"),
+      icon: <WarningOutlined />,
+      content: t("user.shopping_cart_page.btn_confirm_description"),
+      onOk: () => handleDeleteSingleItem(id),
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
+  const [shopChecked, setShopChecked] = useState(false);
+
+  const handleCheckboxChange = (shopId: number) => {
+    setShopChecked(!shopChecked);
+    handleSelectShop(shopId);
+  };
+
   return (
     <div key={index}>
       <div className="h-auto overflow-auto">
-        <div key={shop.shopId} className="bg-white mb-[10px] rounded">
+        <div key={shop.shop_id} className="bg-white mb-[10px] rounded">
           <div className="px-4 pt-[19px] pb-0">
             <div className="block mb-[10px]">
               <Checkbox
-                value={shop.shopId}
-                checked={selectedShops.includes(shop.shopId)}
-                onChange={() => handleSelectShop(shop.shopId)}
+                value={shop.shop_id}
+                checked={isAllProductsChecked(shop.shop_id)}
+                onChange={() => handleCheckboxChange(shop.shop_id)}
                 className="mr-3"
               ></Checkbox>
               <FontAwesomeIcon icon={faStore} className="text-gray-400 text-base inline-block mr-1" />
-              <a href="/#" className="inline-block text-[#242424] font-semibold text-[15px]">
-                {shop.shopName}
+              <a href={`/store/${shop.shop_id}`} className="inline-block text-[#242424] font-semibold text-[15px]">
+                {shop.shop_name}
                 <FontAwesomeIcon icon={faAngleRight} className="text-gray-400 text-sm inline-block ml-1" />
               </a>
             </div>
           </div>
           <div className="mt-8 mx-0 bg-white pt-0 px-[16px] pb-[3px]">
-            {shop.products.map((product: any, index: number) => (
+            {shop.items.map((product: any, index: number) => (
               <div className="mb-8 " key={index}>
                 <S.CartItem className="row">
                   <div className="col-1 flex">
                     <Checkbox
-                      value={product.productId}
+                      value={product.id}
                       className="mr-3"
-                      checked={selectedProducts.includes(product.productId)}
-                      onChange={() => handleSelectProduct(product.productId, shop.shopId)}
+                      checked={product.is_checked === "1"}
+                      onChange={() => handleSelectProduct(product.id, shop.shop_id)}
                     ></Checkbox>
                     <a href="/#">
                       <img
-                        src={product.thumbnail}
-                        alt={product.productName}
+                        src={`${baseImage}/${product.thumbnail_url}`}
+                        alt={product.name}
                         className="w-[75px] h-[75px] object-cover "
                       />
                     </a>
                     <div className="relative pl-[10px] w-[calc(100%_-_100px)]">
                       <a href="/#" className="leading-5 mb-1 text-[13px] text-[#242424] line-clamp-2 text-ellipsis">
-                        {product.productName}
+                        {product.name}
                       </a>
                     </div>
                   </div>
@@ -80,12 +120,20 @@ const ShoppingCartItem = ({
                       <span className="font-medium text-sm inline-block mr-[5px] text-[#242424]">
                         {formatCurrency(product.price)}
                       </span>
-                      <del className="inline-block text-xs">{formatCurrency(120000)}</del>
+                      {product.regular_price > 0 && product.regular_price > product.price && (
+                        <del className="inline-block text-xs">{formatCurrency(product.regular_price)}</del>
+                      )}
                     </div>
                   </div>
                   <div className="col-3 w-[130px] px-[15px]">
                     <div className="quantity text-center">
-                      <InputNumber min={1} defaultValue={product.quantity} className="text-center" />
+                      <InputNumber
+                        onChange={(value) => handleUpdateQuantity(value, product.id)}
+                        min={1}
+                        max={50}
+                        defaultValue={product.quantity}
+                        className="text-center"
+                      />
                     </div>
                   </div>
                   <div className="col-4 w-[120px] px-[15px]">
@@ -95,12 +143,17 @@ const ShoppingCartItem = ({
                   </div>
                   <div className="col-5 w-12 text-right">
                     {!isTablet || !isDesktop ? (
-                      <span className="text-blue-600" onClick={showConfirm} aria-hidden={true} key={product.productId}>
+                      <span
+                        className="text-blue-600"
+                        onClick={() => showConfirm(product.id)}
+                        aria-hidden={true}
+                        key={product.product_id}
+                      >
                         {t("user.shopping_cart_page.btn_delete")}
                       </span>
                     ) : (
                       <img
-                        onClick={showConfirm}
+                        onClick={() => showConfirm(product.id)}
                         aria-hidden={true}
                         key={product.productId}
                         src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/trash.svg"
@@ -118,8 +171,14 @@ const ShoppingCartItem = ({
               <div className="text-black text-[15px] font-medium leading-6 mr-3 whitespace-nowrap">
                 {t("user.shopping_cart_page.shop_promotion")}
               </div>
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                className="text-gray-500 cursor-pointer"
+                onClick={openModal}
+                aria-hidden={true}
+              />
               {/* <S.Ticket>
-                <div className="ticket">
+                <div className="ticket ml-2">
                   <img
                     className="w-[15px] h-[15px] absolute right-[-5px] top-[-5px] inline-block max-w-full"
                     src="https://salt.tikicdn.com/ts/upload/5c/50/ce/bab71210dd41a417824c5844420306e2.jpg"
@@ -132,17 +191,6 @@ const ShoppingCartItem = ({
                   </div>
                 </div>
               </S.Ticket> */}
-              {showCouponModal ? (
-                <FontAwesomeIcon
-                  icon={faAngleDown}
-                  className="text-gray-500 cursor-pointer"
-                  onClick={openModal}
-                  aria-hidden={true}
-                />
-              ) : (
-                <span className="text-sm text-gray-500">{t("user.shopping_cart_page.shop_promotion_condition")}</span>
-              )}
-              <PopupCoupon />
             </div>
           </div>
           <ModalCouponShop

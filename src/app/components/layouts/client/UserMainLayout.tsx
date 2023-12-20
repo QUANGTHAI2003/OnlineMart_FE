@@ -37,7 +37,7 @@ const UserMainLayout = (): JSX.Element => {
         </div>
       </Layout>
       {!isTablet && homePage && <Navigation />}
-      {isDesktop && <UserFooter />}
+      {!isDesktop && <UserFooter />}
     </Layout>
   );
 };

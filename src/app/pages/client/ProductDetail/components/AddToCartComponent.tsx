@@ -1,9 +1,12 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { useAddToCartMutation } from "@app/store/slices/api/user/cartApi";
 import { setDataCart } from "@app/store/slices/redux/productDetailSlice";
 import { useAppDispatch, useAppSelector } from "@app/store/store";
+import { handleApiError, notifySuccess } from "@app/utils/helper";
 import { Button, InputNumber } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
 import * as S from "../ProductDetail.styles";
 
@@ -15,6 +18,8 @@ const AddToCartComponent = () => {
   const dispatch = useAppDispatch();
 
   const dataCart = useAppSelector((state) => state.productDetail.dataCart);
+  const { id } = useParams();
+  const [addToCart] = useAddToCartMutation();
 
   const handleSetCartQuantity = useCallback(
     (value: quantityNumber) => {
@@ -48,19 +53,24 @@ const AddToCartComponent = () => {
     handleSetCartQuantity(value);
   };
 
-  const handleAddToCart = (cartData: any) => {
+  const handleAddToCart = async (cartData: any) => {
     const { productName, productVariantValue, productImage, regularPrice, salePrice, cartQuantity } = cartData;
     const currentPrice = salePrice > 0 ? salePrice : regularPrice;
 
     const cartItem = {
+      id,
       productName,
       productVariantValue,
       productImage,
       currentPrice,
       cartQuantity,
     };
-
-    console.table({ cartItem });
+    try {
+      await addToCart(cartItem).unwrap();
+      notifySuccess(t("admin_shop.product.evouncher.successfully"), t("user.shopping_cart_page.add_to_cart_success"));
+    } catch (err) {
+      handleApiError(err);
+    }
   };
 
   return (

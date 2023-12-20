@@ -1,22 +1,18 @@
 import {
-  faBoxOpen,
   faBuildingColumns,
-  faFileCircleCheck,
   faFileLines,
   faHandHoldingDollar,
   faPager,
   faPeopleCarryBox,
   faSackXmark,
-  faTruck,
-  faTruckRampBox,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 const bg_gradien_green = "linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )";
 const bg_gradien_blue =
   "radial-gradient( circle farthest-corner at 92.3% 71.5%,  rgba(83,138,214,1) 0%, rgba(134,231,214,1) 90% )";
-const bg_gradient_orange =
-  "radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,209,67,1) 0%, rgba(255,145,83,1) 90% )";
+// const bg_gradient_orange =
+//   "radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,209,67,1) 0%, rgba(255,145,83,1) 90% )";
 const bg_gradient_redpink =
   "linear-gradient( 112.5deg,  rgba(236,62,98,1) 1.5%, rgba(235,108,108,1) 17.9%, rgba(241,163,163,1) 57.8%, rgba(254,217,217,1) 89.9% )";
 
@@ -85,14 +81,6 @@ export const BusinessResultsData = (t: any) => [
     background: bg_gradien_blue,
   },
   {
-    id: 3,
-    icon: faTruckRampBox,
-    title: t("admin_shop.dashboard.title.refund_orders"),
-    value: 1000255,
-    today: "12/05/2023",
-    background: bg_gradient_orange,
-  },
-  {
     id: 4,
     icon: faSackXmark,
     title: t("admin_shop.dashboard.title.cancelled_orders"),
@@ -137,127 +125,9 @@ export const DualChartOptions = (t: any) => [
   { value: "1year", label: t("admin_shop.reports.sales.common.1year") },
 ];
 
-export const RecentActivitiesData = [
-  {
-    id: 1,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ Hoàng Chung Thanh",
-    action: "Thêm sản phẩm của nhà sản xuất chưa thanh toán",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 2,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 3,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 4,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 5,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 6,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 7,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 8,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 9,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 10,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-  {
-    id: 11,
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU",
-    name: "Cao Chương Vĩ",
-    action: "Thêm sản phẩm",
-    active_time: "10/10/2023",
-  },
-];
-
 export const OrderPendingOptions = (t: any) => [
   { value: "7days", label: t("admin_shop.reports.sales.common.7days") },
   { value: "1month", label: t("admin_shop.reports.sales.common.1month") },
   { value: "1quarter", label: t("admin_shop.reports.sales.common.1quarter") },
   { value: "1year", label: t("admin_shop.reports.sales.common.1year") },
-];
-
-export const OrdersPendingData = (t: any) => [
-  {
-    id: 1,
-    icon: faFileCircleCheck,
-    title: t("admin_shop.dashboard.title.awaiting_confirmation"),
-    value: 135465,
-    link: "awaiting_confirmation",
-  },
-  {
-    id: 2,
-    icon: faBoxOpen,
-    title: t("admin_shop.dashboard.title.in_progress"),
-    value: 135465,
-    link: "processing",
-  },
-  {
-    id: 3,
-    icon: faTruck,
-    title: t("admin_shop.dashboard.title.in_transit"),
-    value: 1355465,
-    link: "shipping",
-  },
-  {
-    id: 4,
-    icon: faHandHoldingDollar,
-    title: t("admin_shop.dashboard.title.delivered"),
-    value: 135465,
-    link: "delivered",
-  },
-  {
-    id: 5,
-    icon: faSackXmark,
-    title: t("admin_shop.dashboard.title.cancelled"),
-    value: 1358465,
-    link: "cancelled",
-  },
 ];

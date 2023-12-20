@@ -64,6 +64,18 @@ export const addressApi = createApi({
       },
       invalidatesTags: (): any => [{ type: "Address", id: "LIST" }],
     }),
+    selectShippingAddress: builder.mutation<IAddress, any>({
+      query(id) {
+        return {
+          url: `select-address/${id}`,
+          method: "PATCH",
+        };
+      },
+      transformResponse: (response: { data: IAddress }) => {
+        return response.data;
+      },
+      invalidatesTags: (): any => [{ type: "Address", id: "LIST" }],
+    }),
   }),
 });
 
@@ -73,4 +85,5 @@ export const {
   useCreateAddressMutation,
   useUpdateAddressMutation,
   useDeleteAddressMutation,
+  useSelectShippingAddressMutation,
 } = addressApi;

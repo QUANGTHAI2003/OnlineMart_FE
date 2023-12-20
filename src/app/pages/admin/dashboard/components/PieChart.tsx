@@ -1,5 +1,6 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Pie } from "@ant-design/plots";
+import { useGetTopProductsQuery } from "@app/store/slices/api/admin/dashboardApi";
 import { Select, Tooltip, Typography } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +9,6 @@ import * as S from "../Dashboard.styles";
 import { OrderPendingOptions } from "../data";
 
 interface IPieChart {
-  data: any;
   thumbnail: string;
   title: string;
   tooltip: string;
@@ -16,9 +16,16 @@ interface IPieChart {
 
 const { Title } = Typography;
 
-const PieChart: React.FC<IPieChart> = ({ data, thumbnail, title, tooltip }) => {
+const PieChart: React.FC<IPieChart> = ({ thumbnail, title, tooltip }) => {
   const { t } = useTranslation();
   const [selectedPieChart, setSelectedPieChart] = useState(OrderPendingOptions(t)[0].label);
+
+  const selectedOption = OrderPendingOptions(t).find((option: any) => option.label === selectedPieChart);
+  let queryParameter = "";
+
+  queryParameter = selectedOption?.value as string;
+
+  const { data } = useGetTopProductsQuery(queryParameter);
 
   const config: any = {
     appendPadding: 10,
@@ -81,9 +88,7 @@ const PieChart: React.FC<IPieChart> = ({ data, thumbnail, title, tooltip }) => {
       }
       bordered={false}
     >
-      <div className="column_chart">
-        <Pie {...config} className="chart" />
-      </div>
+      <div className="column_chart">{data && <Pie {...config} className="chart" />}</div>
     </S.PieChart>
   );
 };

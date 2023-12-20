@@ -14,6 +14,7 @@ interface ISellerProps {
 
 const SellerComponent: React.FC<ISellerProps> = ({ sellerData, isLoading }) => {
   const [isFollow, setIsFollow] = useState<boolean>(false);
+  const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
 
   const { t } = useTranslation();
 
@@ -29,8 +30,8 @@ const SellerComponent: React.FC<ISellerProps> = ({ sellerData, isLoading }) => {
         <div className="current-seller">
           <div className="seller-widget">
             <div className="seller-info">
-              <Link className="flex items-start" to={`/cua-hang/${sellerData?.id}`}>
-                <img className="logo" src={sellerData?.avatar} alt={sellerData?.name} />
+              <Link className="flex items-start" to={`/store/${sellerData?.id}`}>
+                <img className="logo" src={`${baseImage}/${sellerData.avatar}`} alt={sellerData?.name} />
                 <div className="ml-3">
                   <span className="seller-name">
                     <span>{sellerData?.name}</span>

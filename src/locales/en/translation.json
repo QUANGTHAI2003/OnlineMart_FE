@@ -23,6 +23,10 @@
       "button_view": "View My Shopping Cart"
     },
     "shopping_cart_page": {
+      "error_select_item": "You have not selected any products to buy",
+      "select_shipping_address": "Select shipping address",
+      "default_shipping_address": "Default",
+      "success_select_shipping_address": "Change shipping address successfully",
       "cart": "Cart",
       "selectAll": "Select All",
       "price": "Price",
@@ -32,7 +36,8 @@
       "btn_checkout": "Check out",
       "btn_delete": "Delete",
       "btn_confirm_title": "Delete product",
-      "btn_confirm_description": "Do you want to delete the selected product?",
+      "btn_confirm_description": "Do you want to delete the product?",
+      "btn_confirm_all_description": "Do you want to delete all products?",
       "deliver": "Delivering to",
       "change_address": "Change",
       "home_address": "Home",
@@ -44,6 +49,7 @@
       "shop_promotion_condition": "Please select a product first",
       "empty_cart": "Your cart is empty",
       "empty_description": "Continue shopping",
+      "add_to_cart_success": "Add to cart successfully",
       "modal_coupon": {
         "title": "OM Promotion",
         "empty_coupon": "There are no coupon codes yet",
@@ -56,6 +62,10 @@
       }
     },
     "payment_page": {
+      "thank_pre_order": "Thank you for your order",
+      "thank_subtitle": "Congratulations on your successful order. Code orders: ",
+      "thank_btn_continue": "Continue shopping",
+      "thank_btn_view_detail": "View detail",
       "delivery_method": "Choose Delivery Method",
       "delivery_by": "Delivered by",
       "quantity": "QT",
@@ -83,6 +93,7 @@
       "account_of": "Account to",
       "account_info": "Information",
       "account_notification": "Notifications",
+      "create_address_success": "Create address successfully",
       "account_notification_page": {
         "remove_all": "Clear all notifications",
         "read_all": "Mark read all",
@@ -1270,12 +1281,12 @@
     "reports": {
       "sales": {
         "piechart": {
-          "to_pay": "To pay",
+          "awaiting": "To waiting confirm",
           "in_progress": "In progress",
           "to_receive": "To receive",
           "completed": "Completed",
           "canceled": "Canceled",
-          "return_refund": "Return refund"
+          "return_refund": "Products"
         },
         "dualchart": {
           "store_revenue": "STORE REVENUE",
@@ -1291,7 +1302,7 @@
           "sales_report": "Sales report"
         },
         "order_status_data": {
-          "return": "RETURN",
+          "return": "SALES PRODUCT",
           "paid": "Paid",
           "payment": "PAYMENT",
           "qty_orders": "Quantity of orders",

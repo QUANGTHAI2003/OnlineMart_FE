@@ -13,6 +13,7 @@ import AccountLayout from "./app/pages/client/account/AccountLayout";
 import UserNotification from "./app/pages/client/account/notification/UserNotification";
 import UserWishlist from "./app/pages/client/account/wishlist/UserWishlist";
 import Cart from "./app/pages/client/home/Cart";
+import ReturnPayment from "./app/pages/client/home/components/payment/ReturnPayment";
 import Payment from "./app/pages/client/home/Payment";
 // Components
 
@@ -124,6 +125,7 @@ const AppRouter: React.FC = () => {
           <Route path="my_rating" element={<UserRating />} />
           <Route path="voucher" element={<Discount />} />
         </Route>
+        <Route path="thank" element={<ReturnPayment />} />
       </Route>
       <Route path="/admin/shop" element={protectedAdminLayout}>
         <Route index element={<Dashboard />} />

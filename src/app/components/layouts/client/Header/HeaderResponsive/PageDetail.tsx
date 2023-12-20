@@ -91,33 +91,7 @@ const PageDetail = () => {
         </div>
       </div>
       <div className="flex items-center">
-        <div>
-          {changeStyleHeader ? (
-            <Cart
-              items={[
-                {
-                  id: 1,
-                  name: "Sách Đắc Nhân Tâm",
-                  price: 25000,
-                  urlImage: "https://source.unsplash.com/random",
-                },
-              ]}
-              isBlue={true}
-            />
-          ) : (
-            <Cart
-              items={[
-                {
-                  id: 1,
-                  name: "Sách Đắc Nhân Tâm",
-                  price: 25000,
-                  urlImage: "https://source.unsplash.com/random",
-                },
-              ]}
-              isBlue={false}
-            />
-          )}
-        </div>
+        <div>{changeStyleHeader ? <Cart isBlue={true} /> : <Cart isBlue={false} />}</div>
         <div className="ml-[6px]">
           <Popover placement="top" content={content} trigger="click">
             <div className="w-8 h-8 rounded-[20px] bg-transparent flex items-center justify-center">

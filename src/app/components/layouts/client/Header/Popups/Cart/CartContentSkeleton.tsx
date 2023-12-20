@@ -1,6 +1,6 @@
 import { Skeleton } from "antd";
 
-function CartContentSkeleton({ count }: { count: number }) {
+function CartContentSkeleton({ count }: { count: any }) {
   const skeletons = Array(count).fill(null);
 
   return (

@@ -40,7 +40,7 @@ const ModalCouponShop = ({ title, data, isOpenModal, handleCloseModal }: any) =>
   return (
     <Modal title={title} open={isOpenModal} onCancel={handleCloseModal} footer={null}>
       <div className="h-full flex flex-col">
-        <div className="rounded block bg-[#f2f2f2] p-4">
+        <div className="rounded bg-[#f2f2f2] p-4 flex items-center">
           <div className="w-[calc(100%_-_97px)] inline-block align-top mr-2 relative">
             <img src={couponInput} alt="icon" className="absolute top-2 left-3" />
             <input
@@ -55,7 +55,7 @@ const ModalCouponShop = ({ title, data, isOpenModal, handleCloseModal }: any) =>
             type="submit"
             className={`text-sm font-medium leading-5  outline-0 bg-[#0b74e5] text-white border-none ${
               couponCode ? "" : "opacity-50 pointer-events-none"
-            } rounded opacity-100 w-[89px] h-9 inline-flex items-center justify-center align-top cursor-pointer`}
+            } rounded opacity-100 w-[89px] h-9 inline-block items-center justify-center align-top cursor-pointer`}
           >
             {t("user.shopping_cart_page.modal_coupon.button_apply")}
           </button>

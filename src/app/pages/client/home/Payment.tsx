@@ -1,7 +1,13 @@
 import { useResponsive } from "@app/hooks";
+import { useGetAddressRootQuery } from "@app/store/slices/api/user/addressApi";
+import { useGetCheckoutItemQuery } from "@app/store/slices/api/user/cartApi";
+import { useShippingFeeMutation, useUpdateCodAmountMutation } from "@app/store/slices/api/user/shippingApi";
+import { setShippingFee } from "@app/store/slices/redux/user/apiGHNSlice";
+import { setPaymentMethod } from "@app/store/slices/redux/user/shippingAddressSlice";
+import { useAppDispatch, useAppSelector } from "@app/store/store";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Radio, RadioChangeEvent } from "antd";
+import { Checkbox, Radio } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -14,14 +20,87 @@ import PaymentSkeleton from "./components/payment/PaymentSkeleton";
 
 const Payment = () => {
   const { isDesktop } = useResponsive();
-  const [value, setValue] = useState(1);
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [shippingFeeState, setShippingFeeState] = useState<boolean>(false);
+  const userId = useAppSelector((state) => state.userState.user)?.id;
+  const { data: checkoutItem = [], isLoading } = useGetCheckoutItemQuery(userId);
+  const { data: shippingAddress } = useGetAddressRootQuery(userId);
+  const selectAddress = shippingAddress?.find((address) => address.is_select === "1");
+  const [shippingFee] = useShippingFeeMutation();
+  const [updateCodAmount] = useUpdateCodAmountMutation();
+  const dispatch = useAppDispatch();
 
-  const { t } = useTranslation();
+  const itemsArray: any = [];
+  let totalCheckout = 0;
 
-  const onChange = (e: RadioChangeEvent): any => {
-    setValue(e.target.value);
+  checkoutItem.forEach((shop: any) => {
+    shop.items.forEach((item: any) => {
+      itemsArray.push(item);
+    });
+  });
+
+  itemsArray.forEach((item: any) => {
+    totalCheckout += item.price * item.quantity;
+  });
+
+  const handleShippingFee = async () => {
+    setShippingFeeState(!shippingFeeState);
+    if (!shippingFeeState) {
+      const items = itemsArray.map((item: any) => {
+        return {
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+          length: 12,
+          width: 12,
+          weight: 1200,
+          height: 12,
+        };
+      });
+
+      const orderData = {
+        payment_type_id: 2,
+        note: "Shipping OnlineMart Officical",
+        required_note: "CHOXEMHANGKHONGTHU",
+        return_phone: "0961518977",
+        return_address: "",
+        return_district_id: null,
+        return_ward_code: "",
+        client_order_code: "",
+        from_name: "OnlineMart",
+        from_phone: "0987654321",
+        from_address: "Hẻm tổ 7",
+        from_ward_name: "Phường An Khánh",
+        from_district_name: "Quận Ninh Kiều",
+        from_province_name: "Cần Thơ",
+        to_name: selectAddress && selectAddress?.name,
+        to_phone: selectAddress && selectAddress?.phone,
+        to_address: selectAddress && selectAddress?.address_home,
+        to_ward_name: selectAddress && selectAddress?.ward,
+        to_district_name: selectAddress && selectAddress?.district,
+        to_province_name: selectAddress && selectAddress?.city,
+        content: "Shipping Online Mart",
+        weight: 200,
+        length: 1,
+        width: 19,
+        height: 10,
+        cod_failed_amount: 5000,
+        pick_station_id: 1444,
+        deliver_station_id: null,
+        insurance_value: totalCheckout,
+        service_id: 0,
+        service_type_id: 2,
+        coupon: null,
+        items: items,
+      };
+
+      const response = await shippingFee(orderData).unwrap();
+      dispatch(setShippingFee(response.data));
+    } else {
+      dispatch(setShippingFee({}));
+    }
   };
 
   const openModal = () => {
@@ -30,6 +109,20 @@ const Payment = () => {
 
   const closeModal = () => {
     setIsOpenModal(false);
+  };
+
+  const serviceFee = useAppSelector((state) => state.shippingFee.fee) || {};
+  const onChange = async (e: any) => {
+    try {
+      dispatch(setPaymentMethod(e.target.value));
+      const data = {
+        cod_amount: e.target.value === "cod" ? totalCheckout : 0,
+        order_code: serviceFee?.order_code,
+      };
+      await updateCodAmount(data).unwrap();
+    } catch (error: any) {
+      console.error(error.message);
+    }
   };
 
   const seller_coupons = [
@@ -60,17 +153,16 @@ const Payment = () => {
   ];
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3 * 1000);
-  }, []);
+    setLoading(isLoading);
+  }, [isLoading]);
 
   return (
-    <>
-      {loading && <PaymentSkeleton />}
-      {!loading && (
+    <section>
+      {loading ? (
+        <PaymentSkeleton />
+      ) : (
         <div className="w-full flex flex-wrap xl:flex-row flex-col-reverse">
-          <div className="w-full xl:w-[900px] xl:mr-5 left mb-[267px] xl:mb-0">
+          <div className="w-full xl:w-[900px] xl:mr-5 left xl:mb-0">
             <div className="rounded relative p-4 mb-4 bg-white">
               <h3 className="text-black mb-4 font-bold text-lg leading-6 m-0">
                 {t("user.payment_page.delivery_method")}
@@ -78,24 +170,21 @@ const Payment = () => {
               <div className="relative w-full xl:w-[497px] pb-4 mb-4">
                 <div className="bg-[#f0f8ff] border border-solid border-[#c2e1ff] rounded-[10px] p-4 grid gap-y-[10px]">
                   <div>
-                    <Radio value={2}>
+                    <Checkbox onChange={handleShippingFee}>
                       <span className="text-sm leading-5 flex items-center">
                         <div className="cursor-pointer py-1">
                           <div className="py-[2px] flex items-center">
                             <img
                               className="mr-1 border-none w-[31px] h-[10px]"
-                              src="https://salt.tikicdn.com/ts/upload/46/1c/a2/f61d2cbe66b1f214f8657237a68db489.png"
+                              src="https://cdn.haitrieu.com/wp-content/uploads/2022/05/Logo-GHN-Slogan-En.png"
                               alt="fast-logo"
                             />
                             <span className="text-sm leading-5 text-black cursor-pointer">Giao tiết kiệm</span>
-                            <span className="text-[13px] leading-4 font-medium inline-flex items-center text-[#00ab56] px-1 bg-white ml-1 rounded cursor-pointer">
-                              -30k
-                            </span>
                           </div>
                         </div>
                       </span>
-                    </Radio>
-                    <div className="text-xs leading-4 text-gray-500 ml-[26px]">Có 3 sản phẩm hỗ trợ hình thức này</div>
+                    </Checkbox>
+                    <div className="text-xs leading-4 text-gray-500 ml-[26px]">{`Có ${itemsArray.length} sản phẩm hỗ trợ hình thức này`}</div>
                   </div>
                 </div>
                 <img
@@ -105,14 +194,14 @@ const Payment = () => {
                 />
               </div>
               <div className="w-full xl:grid gap-5">
-                <CheckoutItem />
+                <CheckoutItem checkoutItem={checkoutItem} />
               </div>
               <div className="mt-5">
                 <div className="flex flex-nowrap items-center cursor-pointer">
                   <span className="text-sm text-[#38383d] inline-block mr-[10px]">
                     {t("user.shopping_cart_page.shop_promotion")}
                   </span>
-                  <S.Ticket>
+                  {/* <S.Ticket>
                     <div className="ticket">
                       <img
                         className="w-[15px] h-[15px] absolute right-[-5px] top-[-5px] inline-block max-w-full z-50"
@@ -125,7 +214,7 @@ const Payment = () => {
                         100K
                       </div>
                     </div>
-                  </S.Ticket>
+                  </S.Ticket> */}
                   <FontAwesomeIcon
                     icon={faAngleRight}
                     className="w-4 h-4 ml-2 text-gray-600"
@@ -146,9 +235,9 @@ const Payment = () => {
                 {t("user.payment_page.payment_method")}
               </h3>
               <div>
-                <Radio.Group onChange={onChange} value={value}>
+                <Radio.Group onChange={onChange} name="radiogroup">
                   <div>
-                    <Radio value={"code"}>
+                    <Radio value={"cod"}>
                       <span className="text-sm leading-5 flex items-center">
                         <div className="cursor-pointer h-[64px]">
                           <div className="flex h-full items-center">
@@ -168,28 +257,7 @@ const Payment = () => {
                       </span>
                     </Radio>
                   </div>
-                  <div>
-                    <Radio value={"momo"}>
-                      <span className="text-sm leading-5 flex items-center">
-                        <div className="cursor-pointer h-[64px]">
-                          <div className="flex h-full items-center">
-                            <img
-                              className="mr-3 object-contain w-8 h-8"
-                              src="https://salt.tikicdn.com/ts/upload/ce/f6/e8/ea880ef285856f744e3ffb5d282d4b2d.jpg"
-                              alt="icon"
-                            />
-                            <div className="mr-3">
-                              <div className="text-sm leading-5 text-black flex items-center">
-                                <span className="mr-3 whitespace-nowrap">{t("user.payment_page.momo_method")}</span>
-                              </div>
-                              <div className="text-sm leading-5 text-[#808089]"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </span>
-                    </Radio>
-                  </div>
-                  <div>
+                  {/* <div>
                     <Radio value={"zalopay"}>
                       <span className="text-sm leading-5 flex items-center">
                         <div className="cursor-pointer h-[64px]">
@@ -209,7 +277,7 @@ const Payment = () => {
                         </div>
                       </span>
                     </Radio>
-                  </div>
+                  </div> */}
                   <div>
                     <Radio value={"vnpay"}>
                       <span className="text-sm leading-5 flex items-center">
@@ -257,7 +325,7 @@ const Payment = () => {
           )}
         </div>
       )}
-    </>
+    </section>
   );
 };
 
