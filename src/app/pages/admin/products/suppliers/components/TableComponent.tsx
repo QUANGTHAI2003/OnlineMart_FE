@@ -31,7 +31,7 @@ const TableComponent = React.memo(({ searchValue, searchType }: any) => {
   };
   const showConfirm = (id: number) => {
     confirm({
-      title: "Bạn có muốn xóa nhà cung cấp này?",
+      title: t("admin_shop.suppliers.delete_confirm"),
       icon: <ExclamationCircleFilled />,
       centered: true,
       keyboard: true,

@@ -1,7 +1,9 @@
 import { useAppSelector } from "@app/store/store";
 import { IActivity } from "@app/types/activity.types";
+import { useTranslation } from "react-i18next";
 
 const ModalLog = ({ id }: { id: number }) => {
+  const { t } = useTranslation();
   const activities = useAppSelector((state) => state.activitiesLogs.activities) || [];
 
   const activity = activities.find((activity: IActivity) => activity.id === id);
@@ -29,7 +31,7 @@ const ModalLog = ({ id }: { id: number }) => {
                     fill="#0088FF"
                   ></path>
                 </svg>
-                <p className="font-medium text-[#0f1824] pl-2 pb-1">Thiết bị</p>
+                <p className="font-medium text-[#0f1824] pl-2 pb-1">{t("admin_shop.product.list.filter.device")}</p>
               </div>
               <div>
                 <p className="text-[#46515f]"></p>
@@ -65,19 +67,19 @@ const ModalLog = ({ id }: { id: number }) => {
       <div className="px-6 py-4">
         <div className="">
           <div>
-            <span className="text-sm font-medium leading-5">- Nhân viên: </span>
+            <span className="text-sm font-medium leading-5">{t("admin_shop.product.list.filter.staff")}</span>
             <span className="text-sm leading-[17px]">{activity?.author}</span>
           </div>
           <div>
-            <span className="text-sm font-medium leading-5">- Chức năng: </span>
+            <span className="text-sm font-medium leading-5">{t("admin_shop.product.list.filter.function")}</span>
             <span className="text-sm leading-[17px]">{activity?.action}</span>
           </div>
           <div>
-            <span className="text-sm font-medium leading-5">- Thao tác: </span>
+            <span className="text-sm font-medium leading-5">{t("admin_shop.product.list.filter.operation")}</span>
             <span className="text-sm leading-[17px]">{activity?.content}</span>
           </div>
           <div>
-            <span className="text-sm font-medium leading-5">- Thời gian: </span>
+            <span className="text-sm font-medium leading-5">{t("admin_shop.product.list.filter.time")}</span>
             <span className="text-sm leading-[17px]">{activity?.action_date}</span>
           </div>
         </div>

@@ -207,7 +207,9 @@
       "save": "Lưu thay đổi",
       "phone_email": "Số điện thoại và email",
       "phone": "Số điện thoại",
+      "update_phone": "Cập nhật số điện thoại",
       "email": "Địa chỉ email",
+      "update_email": "Cập nhật email",
       "update": "Cập nhật",
       "security": "Bảo mật",
       "change_password": "Đổi mật khẩu",
@@ -269,7 +271,8 @@
       "price": "Giá",
       "reset": "Thiết lập lại",
       "apply": "Áp dụng",
-      "range": "Hoặc nhập giá ở ô dưới đây"
+      "range": "Hoặc nhập giá ở ô dưới đây",
+      "alert_no_product": "Rất tiếc, không tìm thấy sản phẩm phù hợp với lựa chọn của bạn"
     },
     "voucher": {
       "name": "Mã giảm giá",
@@ -380,6 +383,7 @@
         "order_date": "Ngày đặt hàng ",
         "review_success": "Đánh giá sản phẩm thành công",
         "agree": "Hài lòng",
+        "see_review": "Xem đánh giá",
         "disagree": "Không hài lòng",
         "receive_address": "ĐỊA CHỈ NGƯỜI NHẬN",
         "delivery_method": "HÌNH THỨC GIAO HÀNG: ",
@@ -405,7 +409,8 @@
         "total": "Tổng cộng:",
         "cancel_order": "Hủy đơn hàng",
         "back_order": "<< Quay lại đơn hàng của tôi",
-        "table_scrool": " Kéo sang trái hoặc phải để xem thêm nội dung"
+        "table_scrool": " Kéo sang trái hoặc phải để xem thêm nội dung",
+        "no_cart": "Chưa có đơn hàng"
       }
     },
     "select_address": {
@@ -419,6 +424,7 @@
       "select_ward": "Chọn phường/xã"
     },
     "searchbar": {
+      "input": "Bạn tìm gì hôm nay",
       "title": "Tìm kiếm",
       "expand": "Xem thêm",
       "collapse": "Thu gọn"
@@ -687,6 +693,11 @@
           },
           "placeholder": "Nhập vào {{placeholder}} ...",
           "category": "Danh mục",
+          "device": "Thiết bị",
+          "staff": "- Nhân viên:",
+          "function": "- Chức năng:",
+          "operation": "- Thao tác:",
+          "time": "- Thời gian:",
           "select_category": "Vui lòng chọn danh mục",
           "brand": "Thương hiệu",
           "select_brand": "Vui lòng chọn thương hiệu",
@@ -711,6 +722,7 @@
         "cancel": "Hủy",
         "save_draft": "Lưu nháp",
         "save_off": "Lưu tắt",
+        "update": "Cập nhật",
         "save_on": "Lưu bật",
         "expand": "Mở rộng thông tin",
         "collapse": "Thu gọn thông tin",
@@ -814,7 +826,8 @@
           "ago": "ngày trước",
           "comment_on": "Nhận xét vào ngày",
           "used_for": "Đã dùng",
-          "days": "ngày"
+          "days": "ngày",
+          "answered": "Đã trả lời"
         },
         "filter": {
           "include_content": "Có nội dung",
@@ -1066,7 +1079,10 @@
     "categories": {
       "name": "Danh mục sản phẩm",
       "title": "Thêm danh mục sản phẩm",
+      "btn_add": "Thêm mới",
       "p_search": "Tìm kiếm",
+      "parent_category": "Danh mục cha",
+      "parent_validate": "Danh mục cha không được để trống",
       "name_label": "Tên danh mục",
       "name_err": " Tên danh mục không được để trống",
       "image_label": "Hình ảnh",
@@ -1094,6 +1110,7 @@
       "dropdown_update_quantity": "Cập nhật nhà cung cấp",
       "dropdown_update_status": "Bật/Tắt trạng thái nhà cung cấp",
       "dropdown_delete": "Xóa nhà cung cấp được chọn",
+      "delete_confirm": "Xóa nhà cung cấp",
       "label_supplier_code": "Mã nhà cung cấp",
       "label_name": "Tên nhà cung cấp",
       "label_phone": "Số điện thoại",
@@ -1566,7 +1583,10 @@
         "ward": "Xã",
         "address_detail": "Địa chỉ",
         "back": "Quay lại",
-        "submit": "Gởi hồ sơ"
+        "submit": "Gởi hồ sơ",
+        "note_cmnd":"Giấy tờ tùy thân phải là bản gốc và còn hiệu lực",
+        "regulation": "Quy định về ảnh chụp giấy tờ tùy thân",
+        "note_load_image": "Cần chụp ảnh chân dung của Nhà Bán cùng với mặt trước của giấy tờ tùy thân. Đảm bảo khuôn mặt của bạn và giấy tờ tùy thân nằm gọn trong khung hình."
       },
       "store_bank_depots": {
         "title": "Thông tin ngân hàng",

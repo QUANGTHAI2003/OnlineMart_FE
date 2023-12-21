@@ -148,10 +148,10 @@ const TableComponent = React.memo(() => {
         value === "0"
           ? t("admin_shop.product.evouncher.expired")
           : value === "1"
-            ? t("admin_shop.product.evouncher.valid")
-            : value === "2"
-              ? t("admin_shop.product.evouncher.not_activated")
-              : null,
+          ? t("admin_shop.product.evouncher.valid")
+          : value === "2"
+          ? t("admin_shop.product.evouncher.not_activated")
+          : null,
     },
     {
       title: t("admin_shop.product.evouncher.table.start_date"),

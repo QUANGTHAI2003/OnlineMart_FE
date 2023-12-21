@@ -45,7 +45,7 @@ const ReviewFeedback: React.FC<IReviewFeedbackProps> = ({ data }) => {
   return (
     <div>
       {data?.reply_admin ? (
-        <div>Đã trả lời</div>
+        <div>{t("admin_shop.product.review.feedback.answered")}</div>
       ) : (
         <Button type="primary" onClick={showModal} className="border-0">
           {t("admin_shop.product.review.feedback.action")}

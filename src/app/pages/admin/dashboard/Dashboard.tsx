@@ -84,19 +84,18 @@ const Dashboard = () => {
 
               {loadingSkeletonCount ? <OrdersPendingSkeleton count={1} /> : <OrdersPending />}
 
-          {loadingSkeletonCount ? (
-            <PieChartSkeleton count={1} />
-          ) : (
-            <div className="chart_col">
-              <PieChart
-                thumbnail={TopProductsTitle(t)[0].thumbnail}
-                title={TopProductsTitle(t)[0].title}
-                tooltip={TopProductsTitle(t)[0].tooltip}
-              />
-            </div>
-          )}
-        </Col>
-
+              {loadingSkeletonCount ? (
+                <PieChartSkeleton count={1} />
+              ) : (
+                <div className="chart_col">
+                  <PieChart
+                    thumbnail={TopProductsTitle(t)[0].thumbnail}
+                    title={TopProductsTitle(t)[0].title}
+                    tooltip={TopProductsTitle(t)[0].tooltip}
+                  />
+                </div>
+              )}
+            </Col>
             <Col xs={0} sm={0} md={0} lg={9} xl={7} className="col_content">
               {loadingSkeletonCount ? <RecentActSkeleton count={1} /> : <RecentActivities />}
             </Col>

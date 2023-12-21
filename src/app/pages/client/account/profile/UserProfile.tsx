@@ -1,6 +1,4 @@
 import { EditOutlined } from "@ant-design/icons";
-import facebookImg from "@app/app/assets/images/facebook.png";
-import googleImg from "@app/app/assets/images/google.png";
 import { useResponsive } from "@app/hooks";
 import {
   useDeleteUserAvatarMutation,
@@ -285,7 +283,7 @@ const UserProfile = () => {
                         <FontAwesomeIcon icon={faPhone} className="icon" />
                         <div className="detail_info_item">
                           <p>{t("user.account_user_page.phone")}</p>
-                          <p>{user?.phone || "Vui lòng cập nhật số điện thoại"}</p>
+                          <p>{user?.phone || t("user.account_user_page.update_phone")}</p>
                         </div>
                       </div>
                       <div className="update">
@@ -300,7 +298,7 @@ const UserProfile = () => {
                         <FontAwesomeIcon icon={faEnvelope} className="icon" />
                         <div className="detail_info_item">
                           <p>{t("user.account_user_page.email")}</p>
-                          <p className="email_address">{user?.email || "Vui lòng cập nhật địa chỉ email"}</p>
+                          <p className="email_address">{user?.email || t("user.account_user_page.update_email")}</p>
                         </div>
                       </div>
                       <div className="update">
@@ -324,41 +322,6 @@ const UserProfile = () => {
                     <div>
                       <Space className="site-button-ghost-wrapper" wrap>
                         <EditPassword />
-                      </Space>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="network profileRight_item">
-                  <Divider orientation="left">{t("user.account_user_page.social_network")}</Divider>
-                  <div className="content_item">
-                    <div className="info_item">
-                      <img src={facebookImg} alt="Facebook" className="icon social_icon" />
-                      <div className="detail_info_item">
-                        <p>Facebook</p>
-                      </div>
-                    </div>
-                    <div>
-                      <Space className="site-button-ghost-wrapper" wrap>
-                        <Button type="primary" ghost>
-                          {t("user.account_user_page.connect")}
-                        </Button>
-                      </Space>
-                    </div>
-                  </div>
-
-                  <div className="content_item">
-                    <div className="info_item">
-                      <img src={googleImg} alt="Google" className="icon social_icon" />
-                      <div className="detail_info_item">
-                        <p>Google</p>
-                      </div>
-                    </div>
-                    <div>
-                      <Space>
-                        <Button type="text" disabled className="text-blue-500 bg-[#f5f5fa]">
-                          {t("user.account_user_page.connected")}
-                        </Button>
                       </Space>
                     </div>
                   </div>

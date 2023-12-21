@@ -207,7 +207,9 @@
       "save": "Save",
       "phone_email": "Phone number & Email",
       "phone": "Phone number",
+      "update_phone": "Please Update phone number",
       "email": "Email",
+      "update_email": "Please Update email",
       "update": "Update",
       "security": "Security",
       "change_password": "Change password",
@@ -269,7 +271,8 @@
       "price": "Price",
       "reset": "Reset",
       "apply": "Apply",
-      "range": "Or enter in the box below"
+      "range": "Or enter in the box below",
+      "alert_no_product": "Sorry, no products were found matching your selection"
     },
     "voucher": {
       "name": "My voucher",
@@ -362,6 +365,7 @@
         "order_date": "Order date",
         "review_success": "Successful product reviews",
         "agree": "Agree",
+        "see_review": "See review",
         "disagree": "Disagree",
         "receive_address": "RECEIVER'S ADDRESS",
         "delivery_method": "DELIVERY METHOD: ",
@@ -377,7 +381,7 @@
         "your_review": "Enter your reivew",
         "add_review": "Add reivew",
         "quantity": "Quantity",
-        "discount": "Discount",
+        "discount": "Discount:",
         "write_review": "Write a review",
         "provided": "Provided by:",
         "provisional": "Provisional:",
@@ -387,7 +391,8 @@
         "total": "Total:",
         "cancel_order": "Cancel Order",
         "back_order": "<< Back to my order",
-        "table_scrool": "Drag left or right to see more content"
+        "table_scrool": "Drag left or right to see more content",
+        "no_cart": "No orders yet"
       }
     },
     "select_address": {
@@ -401,6 +406,7 @@
       "select_ward": "Select ward"
     },
     "searchbar": {
+      "input": "What are you looking for today",
       "title": "Search",
       "expand": "Show more",
       "collapse": "Show less"
@@ -566,6 +572,7 @@
       "product_inventory": "Inventory management",
       "print_qrcode": "Print QR Code",
       "product_categories": "Category",
+      "supplier_edit": "Supplier Edit",
       "suppliers": "Supplier",
       "orders": "Orders",
       "evouncher": "E-Vouncher ",
@@ -667,6 +674,11 @@
           },
           "placeholder": "Enter {{placeholder}} ...",
           "category": "Category",
+          "device": "Device",
+          "staff": "- Staff:",
+          "function": "- Function:",
+          "operation": "- Operation:",
+          "time": "- Time:",
           "select_category": "Select Category",
           "brand": "Brand",
           "select_brand": "Select Brand",
@@ -762,6 +774,7 @@
         "cancel": "Cancel",
         "save_draft": "Save as draft",
         "save_off": "Submit and turn off",
+        "update": "Update",
         "save_on": "Submit and turn on",
         "expand": "Expand",
         "collapse": "Collapse",
@@ -865,7 +878,8 @@
           "ago": "days ago",
           "comment_on": "Comment on",
           "used_for": "Used for",
-          "days": "days"
+          "days": "days",
+          "answered": "Answered"
         },
         "filter": {
           "include_content": "Include content",
@@ -1042,7 +1056,10 @@
     "categories": {
       "name": "Category",
       "title": "Add new",
+      "btn_add": "Add new",
       "p_search": "Search",
+      "parent_category": "Parent category",
+      "parent_validate": "Parent category is required",
       "name_label": "Name",
       "name_err": " Please input this field",
       "image_label": "Image",
@@ -1070,6 +1087,7 @@
       "dropdown_update_quantity": "Update suppliers",
       "dropdown_update_status": "On/Off suppliers status",
       "dropdown_delete": "Delete selected suppliers",
+      "delete_confirm": "Do you want to delete the supplier?",
       "label_supplier_code": "Supplier code",
       "label_name": "Name",
       "label_phone": "Phone",
@@ -1543,7 +1561,10 @@
         "ward": "Ward",
         "address_detail": "Address",
         "back": "Back",
-        "submit": "Submit"
+        "submit": "Submit",
+        "note_cmnd": "Identification documents must be original and valid",
+        "regulation": "Regulations on photos of identification documents",
+        "note_load_image": "It is necessary to take a portrait photo of the Seller along with the front of the identification document. Make sure your face and identification fit within the frame"
       },
       "store_bank_depots": {
         "title": "Bank information",

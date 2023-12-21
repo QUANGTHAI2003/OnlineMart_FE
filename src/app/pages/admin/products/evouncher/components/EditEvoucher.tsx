@@ -69,6 +69,7 @@ const EditVoucher = ({ id, onCancel }: any) => {
       );
       onCancel();
     } catch (err) {
+      console.log("🚀 ~ err: ", err);
       handleApiError(err);
     }
   };

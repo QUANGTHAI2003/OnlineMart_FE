@@ -439,7 +439,7 @@ const BusinessLicense = () => {
         </div>
       </S.MainContent>
       <S.ModalProfileImage
-        title={<div className="text-center">Quy định về ảnh chụp giấy tờ tùy thân</div>}
+        title={<div className="text-center">{t("admin_shop.shop_info.store_bus.regulation")}</div>}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -452,16 +452,13 @@ const BusinessLicense = () => {
         <>
           <Alert
             className="mb-6"
-            message={<div className="font-bold">Lưu ý</div>}
+            message={<div className="font-bold">{t("admin_shop.shop_info.store_bus.note")}</div>}
             type="warning"
             showIcon
             description={
               <ul>
-                <li className="list-disc">Giấy tờ tùy thân phải là bản gốc và còn hiệu lực</li>
-                <li className="list-disc">
-                  Cần chụp ảnh chân dung của Nhà Bán cùng với mặt trước của giấy tờ tùy thân. Đảm bảo khuôn mặt của bạn
-                  và giấy tờ tùy thân nằm gọn trong khung hình.
-                </li>
+                <li className="list-disc">{t("admin_shop.shop_info.store_bus.note_cmnd")}</li>
+                <li className="list-disc">{t("admin_shop.shop_info.store_bus.note_load_image")}</li>
               </ul>
             }
           />

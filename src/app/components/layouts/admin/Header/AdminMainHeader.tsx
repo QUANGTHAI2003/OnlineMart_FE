@@ -4,7 +4,7 @@ import { Button, Layout, theme } from "antd";
 import PopupLanguage from "../../client/Header/Popups/Language/PopupLanguage";
 
 import * as S from "./AdminMainHeader.styles";
-import { AccountItem, ChatPlatformItem, NotificationItem } from "./components";
+import { AccountItem } from "./components";
 
 interface IMainHeaderProps {
   isCollapsed: boolean;
@@ -31,8 +31,6 @@ const MainHeader: React.FC<IMainHeaderProps> = ({ isCollapsed, toggleSidebar }) 
         />
 
         <S.HeaderRight className="header_right">
-          <ChatPlatformItem />
-          <NotificationItem />
           <AccountItem />
           <PopupLanguage />
         </S.HeaderRight>

@@ -134,7 +134,7 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
       {reviewProductData ? (
         <>
           <Button type="default" onClick={handleOpenModal} className="border-blue-400 text-blue-400">
-            Xem đánh giá
+            {t("user.orders.order_details.see_review")}
           </Button>
           <Spin spinning={isFetching}>
             <S.ModalReview

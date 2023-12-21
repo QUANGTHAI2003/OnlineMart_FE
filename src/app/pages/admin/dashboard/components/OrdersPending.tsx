@@ -28,7 +28,6 @@ const OrdersPending = () => {
   queryParameter = selectedOption?.value as string;
 
   const { data: orders } = useGetOrdersPendingQuery(queryParameter);
-  console.log("🚀 ~ orders:", orders);
 
   const renderIcon = (icon: any) => {
     switch (icon) {

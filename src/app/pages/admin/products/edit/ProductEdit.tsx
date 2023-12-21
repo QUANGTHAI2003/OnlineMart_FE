@@ -395,7 +395,7 @@ const ProductEdit = () => {
                           ghost
                           onClick={() => form.setFieldsValue({ status: product_detail?.status })}
                         >
-                          Cập nhật
+                          {t("admin_shop.product.create.update")}
                         </Button>
                       </Form.Item>
                       <Form.Item name="status">

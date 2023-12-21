@@ -124,11 +124,11 @@ const EditCategory = ({ id, dataCategory }: any) => {
 
           <S.FormField
             name="children_category"
-            label="Danh mục cha"
+            label={t("admin_shop.categories.parent_category")}
             rules={[
               {
                 required: true,
-                message: "Danh mục cha không được để trống",
+                message: t("admin_shop.categories.parent_validate"),
               },
             ]}
           >

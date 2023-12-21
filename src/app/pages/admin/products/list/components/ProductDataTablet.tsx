@@ -42,7 +42,7 @@ const ProductDataTablet: React.FC<IProductDataTabletProps> = ({ data, showConfir
                   <Row className="flex-1">
                     <Col span={12}>
                       <Space direction="vertical">
-                        <div className="secondary-description">Giá</div>
+                        <div className="secondary-description">{t("admin_shop.product.list.table.price")}</div>
                         {typeof item?.price === "number" ? (
                           <span>{formatCurrency(item?.price)}</span>
                         ) : (
@@ -62,7 +62,7 @@ const ProductDataTablet: React.FC<IProductDataTabletProps> = ({ data, showConfir
                     </Col>
                     <Col span={12}>
                       <Space direction="vertical">
-                        <div className="secondary-description">Tồn kho</div>
+                        <div className="secondary-description">{t("admin_shop.product.list.table.stock")}</div>
                         {item?.stock}
                       </Space>
                     </Col>

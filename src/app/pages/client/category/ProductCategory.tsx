@@ -7,6 +7,7 @@ import { useAppDispatch } from "@app/store/store";
 import { IProductCategoryData } from "@app/types/products_category.types";
 import { Alert, Col, Pagination as ProductPagination, Row } from "antd";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { trackWindowScroll } from "react-lazy-load-image-component";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
@@ -16,6 +17,7 @@ import * as S from "./ProductCategory.styles";
 const pageSize = 30;
 
 const ProductCategory = () => {
+  const { t } = useTranslation();
   const { id, slug } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -170,7 +172,7 @@ const ProductCategory = () => {
           ) : (
             <Alert
               className="w-full mx-1 text-xl"
-              message="Rất tiếc, không tìm thấy sản phẩm phù hợp với lựa chọn của bạn"
+              message={t("user.product_category_page.alert_no_product")}
               type="warning"
               showIcon
             />

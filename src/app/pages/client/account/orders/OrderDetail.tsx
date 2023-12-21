@@ -92,7 +92,7 @@ const OrderDetailPage = () => {
         <div className="pr-4">{t("user.orders.order_details.total")}</div>
         <span className="text-red-600 price-footer">{`${formatCurrency(dataOrder?.grand_total)}`}</span>
       </div>
-      <div className="grid grid-cols-5 w-full  mt-5">
+      <div className="grid grid-cols-5 w-full mt-5">
         <div className=" items-center pt-2  text-left col-start-1 col-end-3 space-x-10 mt-3">
           <Link to={"/account/orders"} className="link-agin text-blue-400">
             {t("user.orders.order_details.back_order")}

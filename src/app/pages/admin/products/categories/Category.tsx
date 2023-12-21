@@ -52,7 +52,7 @@ const Category = () => {
               <Row justify="end">
                 <Space>
                   <Button onClick={showModal} type="primary" icon={<PlusOutlined />}>
-                    Thêm mới
+                    {t("admin_shop.categories.btn_add")}
                   </Button>
                   <S.ModalForm
                     centered

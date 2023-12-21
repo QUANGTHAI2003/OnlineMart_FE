@@ -73,7 +73,7 @@ const Description = ({
               ></div>
               {lower && (
                 <Button className="btn-more" onClick={toggleDescription}>
-                  {`${isExpanded ? "Thu gọn" : "Xem thêm"}`}
+                  {`${isExpanded ? t("user.product_detail.collapse") : t("user.product_detail.view")}`}
                 </Button>
               )}
             </div>

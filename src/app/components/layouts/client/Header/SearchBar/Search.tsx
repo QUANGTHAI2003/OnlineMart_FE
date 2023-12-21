@@ -81,7 +81,7 @@ const Search: React.FC = () => {
       <div className="w-full h-full flex items-center rounded-lg relative border-solid border border-[#DDDDE3] bg-white">
         <img className="w-[20px] h-[20px] max-w-full ml-[18px]" src={iconSearch} alt="icon-search" />
         <Input
-          placeholder="Bạn tìm gì hôm nay"
+          placeholder={t("user.searchbar.input")}
           value={inputValue}
           onChange={handleInputChange}
           onBlur={handleInputBlur}

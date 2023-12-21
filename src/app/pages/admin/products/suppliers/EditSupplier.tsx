@@ -114,7 +114,7 @@ const EditSupplier = () => {
                 validateStatus={errorForm?.name && "error"}
                 help={errorForm?.name?.[0]}
               >
-                <Input placeholder="Nhập vào" />
+                <Input placeholder={t("admin_shop.suppliers.input_pla")} />
               </S.FormField>
               <S.FormField
                 name="code"
@@ -125,7 +125,7 @@ const EditSupplier = () => {
                 validateStatus={errorForm?.code && "error"}
                 help={errorForm?.code?.[0]}
               >
-                <Input placeholder="Nhập vào" />
+                <Input placeholder={t("admin_shop.suppliers.input_pla")} />
               </S.FormField>
             </Col>
             <Col span="12">
@@ -149,7 +149,7 @@ const EditSupplier = () => {
                 validateStatus={errorForm?.phone && "error"}
                 help={errorForm?.phone?.[0]}
               >
-                <Input placeholder="Nhập vào" />
+                <Input placeholder={t("admin_shop.suppliers.input_pla")} />
               </S.FormField>
             </Col>
             <SelectAddress onAddressChange={(value) => form.setFieldsValue({ full_address: value })} />
