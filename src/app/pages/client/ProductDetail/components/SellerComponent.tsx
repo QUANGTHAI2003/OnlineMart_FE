@@ -19,7 +19,7 @@ const SellerComponent: React.FC<ISellerProps> = ({ sellerData, isLoading, shop_i
   const [isFollow, setIsFollow] = useState<boolean>(false);
   const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
   const user_id = useAppSelector((state) => state.userState.user)?.id;
-  const { data: userFolowData } = useGetUserFolowQuery({ user_id, shop_id });
+  const { data: userFolowData } = useGetUserFolowQuery({ user_id: parseInt(user_id), shop_id: parseInt(shop_id) });
   const { t } = useTranslation();
 
   const handleFollowSeller = () => {

@@ -2,22 +2,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { useGetReviewProductQuery, useReviewProductMutation } from "@app/store/slices/api/user/reviewApi";
 import { useAppSelector } from "@app/store/store";
 import { baseImageUrl, handleApiError, notifySuccess } from "@app/utils/helper";
-import {
-  Button,
-  Divider,
-  Form,
-  Image,
-  Input,
-  InputRef,
-  Rate,
-  Select,
-  Space,
-  Spin,
-  Upload,
-  UploadFile,
-  UploadProps,
-} from "antd";
-import ImgCrop from "antd-img-crop";
+import { Button, Divider, Form, Image, Input, InputRef, Rate, Select, Space, Spin } from "antd";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -81,8 +66,6 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
   const handleSubmit = async (data: FormValues) => {
     const content = data.review_product;
     try {
-      const imagesArray = Object.values(fileList || []) as any[];
-
       const formData = new FormData();
       formData.append("content", content);
       formData.append("product_id", product_id as any);
@@ -92,11 +75,6 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
       formData.append("disagree", disagreeValue);
       formData.append("shop_id", 1 as any);
       formData.append("order_id", order_id as any);
-      if (imagesArray.length > 0) {
-        imagesArray.forEach((image: any, index: number) => {
-          formData.append(`images[${index}]`, image.originFileObj);
-        });
-      }
       await replyReview(formData).unwrap();
       form.resetFields();
       notifySuccess(t("user.orders.order_details.review_success"));
@@ -109,11 +87,6 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
   };
   const showModal = () => {
     setIsModalOpen(true);
-  };
-
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
   };
 
   const handleCancel = () => {
@@ -296,13 +269,13 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
                     options={disagreeItem.map((item) => ({ label: item, value: item }))}
                   />
                 </Form.Item>
-                <Form.Item name="upload" valuePropName="fileList">
+                {/* <Form.Item name="upload" valuePropName="fileList">
                   <ImgCrop>
                     <Upload listType="picture-card" fileList={fileList} onChange={onChange}>
                       {fileList.length < 5 && "+ Upload"}
                     </Upload>
                   </ImgCrop>
-                </Form.Item>
+                </Form.Item> */}
               </Form>
             </div>
           </S.ModalReview>
