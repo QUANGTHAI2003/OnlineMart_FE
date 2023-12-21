@@ -110,10 +110,13 @@ const TableComponent = React.memo(() => {
     },
     {
       title: t("admin_shop.product.evouncher.table.discount"),
-      dataIndex: "discount",
       key: "3",
       sorter: (a, b) => a.discount - b.discount,
       sortOrder: sortedInfo.columnKey === "discount" ? sortedInfo.order : null,
+      render: (record) => {
+        console.log(record.unit);
+        return record.unit === "0" ? record.discount : formatCurrency(record.discount);
+      },
     },
     {
       title: t("admin_shop.product.evouncher.table.unit"),

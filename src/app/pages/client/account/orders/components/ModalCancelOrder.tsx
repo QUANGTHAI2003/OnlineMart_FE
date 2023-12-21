@@ -1,7 +1,7 @@
 import { useAddReasonCancelForOrderMutation } from "@app/store/slices/api/user/orderApi";
 import { useGetReasonCancelForShopQuery } from "@app/store/slices/api/user/reasoncancelApi";
 import { useAppSelector } from "@app/store/store";
-import { notifySuccess } from "@app/utils/helper";
+import { handleApiError, notifySuccess } from "@app/utils/helper";
 import { Button, Form, Modal, Select, Spin } from "antd";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,10 +29,10 @@ const ModalCancelOrder: React.FC<any> = ({ order_id }) => {
       await addReasonCancel(values).unwrap();
       setIsModalOpen(false);
       notifySuccess("Hủy đơn thành công");
-
       navigate("/account/orders");
     } catch (err) {
       console.log(err);
+      handleApiError(err);
     }
   };
   const handleCancel = () => {

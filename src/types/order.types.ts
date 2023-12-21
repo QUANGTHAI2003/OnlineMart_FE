@@ -6,6 +6,8 @@ export interface IOrder {
   street: string;
   district: string;
   city: string;
+  code: string;
+  shipping_fee: number;
   delivery_date: string;
   created_at: string;
   grand_total: number;
@@ -43,12 +45,14 @@ export interface IOrder {
 export interface IOrderDetail {
   id: number;
   full_name: string;
+  code: string;
   shipping_unit: string;
   status: "awaiting" | "processing" | "shipping" | "canceled" | "delivered";
   street: string;
   district: string;
   city: string;
   delivery_date: string;
+  shipping_fee: number;
   created_at: string;
   grand_total: number;
   user: {

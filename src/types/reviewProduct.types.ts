@@ -6,5 +6,10 @@ export interface IReviewProduct {
   product_id: number;
   user_id: number;
   disagree: string;
-  media?: [media: string];
+  media: {
+    map: any;
+    review_media: {
+      media: string;
+    };
+  };
 }

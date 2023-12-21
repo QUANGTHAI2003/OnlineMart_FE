@@ -16,10 +16,10 @@ const OrderTableDataName: React.FC<IOrderTableDataNameProps> = ({ data }) => {
   return (
     <S.TableCellOrderStyle className="product-cell flex items-start flex-nowrap">
       <div className="content">
-        <Tooltip title={data?.id} className="id">
+        <Tooltip title={data?.code} className="id">
           <div className="flex">
             <span className="pr-2">{t("admin_shop.orders.list.table.id_order")}</span>
-            <h4 className=" pb-2 text-blue-500">{`${data?.id}`}</h4>
+            <h4 className=" pb-2 text-blue-500">{`${data?.code}`}</h4>
           </div>
         </Tooltip>
         <span className="pb-2 ">{dayjs(data?.created_at).format("DD/MM/YYYY HH:mm:ss")}</span>

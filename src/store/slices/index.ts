@@ -29,6 +29,7 @@ import { productApi } from "./api/user/productApi";
 import { productFlashsaleApi } from "./api/user/productFlashsaleApi";
 import { reviewApi } from "./api/user/reviewApi";
 import { shippingApi } from "./api/user/shippingApi";
+import { userFolowApi } from "./api/user/userFolowApi";
 import { voucherUserApi } from "./api/user/voucherApi";
 import { wishlistApi } from "./api/user/wishlistApi";
 import { userApi } from "./api/userApi";
@@ -81,6 +82,7 @@ export const rootReducer: any = {
   [orderUserApi.reducerPath]: orderUserApi.reducer,
   [printQRAdminApi.reducerPath]: printQRAdminApi.reducer,
   [reasonCancelApi.reducerPath]: reasonCancelApi.reducer,
+  [userFolowApi.reducerPath]: userFolowApi.reducer,
   [cartApi.reducerPath]: cartApi.reducer,
   [checkoutApi.reducerPath]: checkoutApi.reducer,
   [shippingApi.reducerPath]: shippingApi.reducer,
@@ -140,6 +142,7 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     orderUserApi.middleware,
     reasonCancelApi.middleware,
     trafficAdminApi.middleware,
+    userFolowApi.middleware,
     forgotPasswordApi.middleware,
     reviewApi.middleware,
     managerShopApi.middleware

@@ -1,6 +1,7 @@
 import { Input } from "antd";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { searchList } from "./data";
 
@@ -11,13 +12,15 @@ const SearchBar = () => {
 
   const [showSuggestion, setShowSuggestion] = useState<boolean>(false);
   const [filteredSearchList, setFilteredSearchList] = useState(searchList);
-
+  const navigator = useNavigate();
+  const urlSearch = "/search";
   const searchRef = useRef<HTMLDivElement>(null);
-
+  const queryParams = new URLSearchParams();
   const handleSearch = (value: string) => {
-    // handle search logic here
-    const filteredList = searchList.filter((item) => item.name.toLowerCase().includes(value.toLowerCase()));
-    setFilteredSearchList(filteredList);
+    // const url = `${urlSearch}?query=${encodeURIComponent(value)}`;
+    const search = queryParams.append("search", value);
+    // const filteredList = searchList.filter((item) => item.name.toLowerCase().includes(value.toLowerCase()));
+    navigator(`${urlSearch}?${search}`);
   };
 
   const handleFocus = () => {
@@ -45,7 +48,7 @@ const SearchBar = () => {
         placeholder={t("admin_shop.settings.placeholder")}
         allowClear
         enterButton
-        onSearch={handleSearch}
+        onSearch={handleSearch} // Xử lý chuyển hướng khi nhấn Enter hoặc nút tìm kiếm
         onFocus={handleFocus}
         onChange={(e) => {
           const value = e.target.value;

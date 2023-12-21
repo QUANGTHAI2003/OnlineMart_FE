@@ -1,4 +1,5 @@
 export interface ISeller {
+  shop_id: number;
   id: number;
   name: string;
   email: string;

@@ -12,7 +12,7 @@ const OrderDetailPrintPDF = () => {
     suppressErrors: true,
     removeAfterPrint: true,
     content: () => componentRef.current,
-    documentTitle: "ĐINH CHÍ NGUYỆN",
+    documentTitle: "Online Mart - Mua hàng online giá tốt, hàng chuẩn",
   });
 
   const { t } = useTranslation();

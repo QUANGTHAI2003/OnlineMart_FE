@@ -11,7 +11,9 @@ const ComponentDetailPrintPDF = ({ innerRef }: any) => {
   const { id } = useParams();
   const { t } = useTranslation();
   const { data: orderData } = useGetOrderOnlyQuery(Number(id));
-  const total = (orderData?.grand_total ?? 0) + 22000;
+  const grandTotal = orderData?.grand_total ?? 0;
+  const shippingFee = orderData?.shipping_fee ?? 0;
+  const total = Number(grandTotal) + Number(shippingFee);
   const productCount = orderData?.order_item?.length;
   return (
     <S.OrderDetailExport ref={innerRef}>
@@ -97,7 +99,7 @@ const ComponentDetailPrintPDF = ({ innerRef }: any) => {
         </S.TotalPrice>
         <S.TotalPrice>
           <div>{t("user.orders.order.print.shipping_fee")}</div>
-          <p>{formatCurrency(22000)}</p>
+          <p>{formatCurrency(orderData?.shipping_fee)}</p>
         </S.TotalPrice>
         <div className="flex items-center justify-between">
           <div className="font-semibold">{t("user.orders.order.print.custom_pay")}</div>

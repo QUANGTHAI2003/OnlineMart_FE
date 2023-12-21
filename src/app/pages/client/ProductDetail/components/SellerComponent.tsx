@@ -1,5 +1,7 @@
 import { RatingStar } from "@app/app/assets/icons";
-import { useState } from "react";
+import { useGetUserFolowQuery } from "@app/store/slices/api/user/userFolowApi";
+import { useAppSelector } from "@app/store/store";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -10,18 +12,24 @@ import { SellerSkeleton } from ".";
 interface ISellerProps {
   sellerData: any;
   isLoading: boolean;
+  shop_id: any;
 }
 
-const SellerComponent: React.FC<ISellerProps> = ({ sellerData, isLoading }) => {
+const SellerComponent: React.FC<ISellerProps> = ({ sellerData, isLoading, shop_id }) => {
   const [isFollow, setIsFollow] = useState<boolean>(false);
   const baseImage = import.meta.env.VITE_BASE_IMAGE_URL as string;
-
+  const user_id = useAppSelector((state) => state.userState.user)?.id;
+  const { data: userFolowData } = useGetUserFolowQuery({ user_id, shop_id });
   const { t } = useTranslation();
 
   const handleFollowSeller = () => {
     setIsFollow(!isFollow);
   };
-
+  useEffect(() => {
+    if (userFolowData) {
+      setIsFollow(true);
+    }
+  }, [isFollow, userFolowData]);
   return (
     <S.SellerStyle>
       {isLoading ? (

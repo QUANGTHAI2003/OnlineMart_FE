@@ -226,7 +226,11 @@ const ProductDetail = () => {
                 </S.DeliveryStyle>
                 <AddToCartComponent />
               </S.ProductInfoStyle>
-              <SellerComponent sellerData={productDetail?.shop} isLoading={isFetching} />
+              <SellerComponent
+                shop_id={productDetail?.shop?.id}
+                sellerData={productDetail?.shop}
+                isLoading={isFetching}
+              />
             </div>
           </section>
         </S.ProductDetailStyle>

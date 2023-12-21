@@ -86,21 +86,13 @@ const OrderDetailPage = () => {
     <div className="text-right sub-total px-12">
       <div className="flex justify-end">
         <span className="pr-4">{t("user.orders.order_details.transport_fee")}</span>
-        <span className="price-footer">{`${formatCurrency(22000)}`}</span>
-      </div>
-      <div className="flex justify-end">
-        <div className="pr-4">Giá giảm:</div>
-        <div className="price-footer">
-          {dataOrder?.voucher?.unit === "1"
-            ? `${formatCurrency(dataOrder?.voucher?.discount)} ${dataOrder?.voucher.unit === "1" ? "" : "%"}`
-            : `${dataOrder?.voucher?.discount} ${dataOrder?.voucher.unit === "0" ? "%" : "VNĐ"}`}
-        </div>
+        <span className="price-footer">{`${formatCurrency(dataOrder?.shipping_fee)}`}</span>
       </div>
       <div className="flex justify-end">
         <div className="pr-4">{t("user.orders.order_details.total")}</div>
         <span className="text-red-600 price-footer">{`${formatCurrency(dataOrder?.grand_total)}`}</span>
       </div>
-      <div className="grid grid-cols-5 w-full flex mt-5">
+      <div className="grid grid-cols-5 w-full  mt-5">
         <div className=" items-center pt-2  text-left col-start-1 col-end-3 space-x-10 mt-3">
           <Link to={"/account/orders"} className="link-agin text-blue-400">
             {t("user.orders.order_details.back_order")}
@@ -124,14 +116,14 @@ const OrderDetailPage = () => {
               dataOrder?.status === "awaiting"
                 ? t("admin_shop.orders.list.status.awaiting")
                 : dataOrder?.status === "processing"
-                ? t("admin_shop.orders.list.status.processing")
-                : dataOrder?.status === "shipping"
-                ? t("admin_shop.orders.list.status.shipping")
-                : dataOrder?.status === "canceled"
-                ? t("admin_shop.orders.list.status.canceled")
-                : dataOrder?.status === "delivered"
-                ? t("admin_shop.orders.list.status.delivered")
-                : null
+                  ? t("admin_shop.orders.list.status.processing")
+                  : dataOrder?.status === "shipping"
+                    ? t("admin_shop.orders.list.status.shipping")
+                    : dataOrder?.status === "canceled"
+                      ? t("admin_shop.orders.list.status.canceled")
+                      : dataOrder?.status === "delivered"
+                        ? t("admin_shop.orders.list.status.delivered")
+                        : null
             }
               `}
           </h1>
@@ -165,7 +157,7 @@ const OrderDetailPage = () => {
               <p className="py-2 ">{`${t("user.orders.order_details.delivery_method")}${dataOrder?.shipping_unit}`}</p>
               <p className="py-2">
                 {t("user.orders.order_details.transport_fee")}
-                {formatCurrency(22000)}
+                {formatCurrency(dataOrder?.shipping_fee)}
               </p>
             </div>
           </div>

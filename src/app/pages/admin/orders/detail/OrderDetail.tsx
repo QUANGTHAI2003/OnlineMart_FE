@@ -97,7 +97,7 @@ const OrderDetail = () => {
         <Row className="mb-3">
           <Col span={12}>
             <div className="flex items-center justify-start">
-              <h5 className="mr-6 text-xl font-medium">{`OM-${orderData?.id}`}</h5>
+              <h5 className="mr-6 text-xl font-medium">{orderData?.code}</h5>
               <Tag color={statusColor}>{statusText}</Tag>
             </div>
             <OrderDetailPrintPDF />

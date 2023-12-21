@@ -119,19 +119,7 @@ const TableComponent = (data: any) => {
               </S.OrderDetailTotalPrice>
               <S.OrderDetailTotalPrice>
                 <p>{t("admin_shop.orders.detail.table.delivery_charges")}</p>
-                <span>{formatCurrency(22000)}</span>
-              </S.OrderDetailTotalPrice>
-              <S.OrderDetailTotalPrice>
-                <p>{t("admin_shop.orders.detail.table.discount")}</p>
-                <span>
-                  {data?.data?.voucher
-                    ? `${
-                        data?.data?.voucher?.unit === "1"
-                          ? formatCurrency(data?.data?.voucher?.discount)
-                          : data?.data?.voucher?.discount
-                      }${data?.data?.voucher?.unit === "0" ? "%" : ""}`
-                    : "0 VNĐ"}
-                </span>
+                <span>{formatCurrency(data?.data?.shipping_fee)}</span>
               </S.OrderDetailTotalPrice>
               <S.OrderDetailTotalPrice>
                 <h4>{t("admin_shop.orders.detail.guests_must_pay")}</h4>

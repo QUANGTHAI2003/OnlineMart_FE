@@ -323,23 +323,23 @@
     "orders": {
       "order": {
         "print": {
-          "id": "Mã đơn hàng: ",
-          "created_at": "Ngày đặt hàng: ",
-          "bill": "HÓA ĐƠN",
-          "bill_to": "Hóa đơn đến: ",
-          "delivery_to": "Giao hàng đến: ",
-          "phone": "Số diện thoại: ",
-          "id_product": "Mã sản phẩm",
-          "name_product": "Tên sản phẩm",
-          "price": "Đơn giá",
-          "sale_price": "Giá giảm",
-          "total": "Thành tiền",
-          "quantity": "Số lượng",
-          "total_product": "Tổng số lượng",
-          "grand_total": "Tổng tiền",
-          "shipping_fee": "Phí vận chuyển",
-          "custom_pay": "Khách phải trả"
-        },
+        "id":"Mã đơn hàng: ",
+        "created_at":"Ngày đặt hàng: ",
+        "bill":  "HÓA ĐƠN",
+        "bill_to":"Hóa đơn đến: ",
+        "delivery_to":"Giao hàng đến: ",
+        "phone":"Số diện thoại: ",
+        "id_product":"Mã sản phẩm",
+        "name_product":"Tên sản phẩm",
+        "price":"Đơn giá",
+        "sale_price":"Giá giảm",
+        "total":"Thành tiền",
+        "quantity":"Số lượng",
+        "total_product":"Tổng số lượng",
+        "grand_total":"Tổng tiền",
+        "shipping_fee":"Phí vận chuyển",
+        "custom_pay":"Khách phải trả"
+      },
         "my_order": "Đơn hàng của tôi",
         "all_menus": "Tất cả đơn",
         "wait_pay": "Chờ thanh toán",
@@ -355,7 +355,25 @@
         "see_detail": "Xem chi tiết",
         "see_more": "Xem thêm",
         "show_less": "Rút gọn",
-        "product": "sản phẩm"
+        "product": "sản phẩm",
+        "print": {
+          "bill": "Hóa đơn",
+          "id":"Mã đơn hàng: ",
+          "created_at":"Ngày tạo đơn: ",
+          "bill_to":"Gửi đến: ",
+          "delivery_to":"Giao đến: ",
+          "phone":"Số diện thoại: ",
+          "id_product":"Mã sản phẩm",
+          "name_product":"Tên sản phẩm",
+          "price":"Đơn giá",
+          "quantity":"Số lượng",
+          "sale_price":"Giá giảm",
+          "total":"Tổng cộng",
+          "total_product":"Tổng sản phẩm",
+          "grand_total":"Tổng cộng",
+          "shipping_fee":"Phí vận chuyển",
+          "custom_pay":"Khách phải trả"
+        }
       },
       "order_details": {
         "order_detail": "Chi tiết đơn hàng: ",
@@ -857,6 +875,7 @@
           "status": "Trạng thái",
           "discount": "Giá giảm",
           "search": "Tìm kiếm",
+
           "refresh": "Làm mới",
           "update_voucher": "Cập nhật mã giảm giá",
           "select": {
@@ -948,7 +967,7 @@
             "id": "Mã đơn hàng",
             "sku": "SKU",
             "city": "Thành phố",
-            "name": "Tên khách hàng"
+            "name": " Tên khách hàng"
           },
           "print": "In phiếu các đơn hàng được chọn",
           "placeholder": "Nhập tối đa 20 {{placeholder}} cách nhau bằng dấu ',' ",
@@ -1221,8 +1240,6 @@
         "print_qrcode": "In tem mã",
         "categories": "Danh mục sản phẩm",
         "other_manage": "Quản lý khác",
-        "in_process": "Đang giao dịch",
-        "suspended": "Ngừng giao dịch",
         "warranty": "Bảo hành sản phẩm",
         "yes": "Có",
         "no": "Không",
@@ -1233,9 +1250,6 @@
         "selling": "Bán hàng",
         "allowing_sales": "Cho phép bán",
         "not_allowing_sales": "Không cho phép bán",
-        "classifying": "Phân loại sản phẩm",
-        "combo": "Combo",
-        "regular_product": "Sản phẩm thường",
         "creation_date": "Ngày tạo sản phẩm",
         "sku": "SKU"
       },
@@ -1248,7 +1262,7 @@
         "retail_price": "Giá bán lẻ",
         "import_price": "Giá nhập",
         "wholesale_price": "Giá bán buôn",
-        "qrcode": "Mã QR",
+        "qrcode": "Mã vạch",
         "supplier": "Nhãn hiệu",
         "status": "Trạng thái",
         "number_of_stock": "Số sản phẩm trong kho",

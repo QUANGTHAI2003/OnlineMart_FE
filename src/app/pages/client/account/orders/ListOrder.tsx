@@ -23,9 +23,11 @@ const ListOrder = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const pageSize = 2;
   const { data: orderData, isLoading } = useGetOrderQueryRootQuery(user_id);
+
   useEffect(() => {
     setCurrentPage(1); // Reset currentPage when the tab changes
   }, [tabFiltered]);
+
   useEffect(() => {
     window.scrollTo(120, 120);
   }, [location.pathname]);
@@ -64,17 +66,17 @@ const ListOrder = () => {
         grand_total={order.grand_total}
         item={order.order_item}
         shipping_address={order.city}
-        shipping={22000}
+        shipping={order.shipping_fee}
       />
     ));
 
-  const OrderDataTabs = OrderDataTab(t).map((item: any) => ({
+  const OrderDataTabs = OrderDataTab(t)?.map((item: any) => ({
     key: item.tab,
     label: item.label,
     children: (
       <>
         <SearchBar />
-        {visibleOrders.length > 0 ? visibleOrders : <EmptyOrder />}
+        {visibleOrders?.length > 0 ? visibleOrders : <EmptyOrder />}
       </>
     ),
   }));

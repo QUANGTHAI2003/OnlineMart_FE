@@ -94,7 +94,7 @@ const TableComponent = React.memo(() => {
               <span className="text-orange-500 mr-2">{record.shipping_unit}</span>
               <span>
                 {`(${t("admin_shop.orders.list.table.shipping_fee")}
-                ${formatCurrency(22000)})`}
+                ${formatCurrency(record?.shipping_fee)})`}
               </span>
             </div>
           </div>

@@ -17,7 +17,6 @@ import {
   UploadFile,
   UploadProps,
 } from "antd";
-import { RcFile } from "antd/es/upload";
 import ImgCrop from "antd-img-crop";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -37,12 +36,10 @@ type FormValues = {
 const ModalReviewProduct = ({ product_id, product_image, product_name, order_id }: any) => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
-
   const user_id = useAppSelector((state) => state.userState.user)?.id;
-
   const [replyReview, { isLoading }] = useReviewProductMutation();
   const { data: reviewProductData, isFetching } = useGetReviewProductQuery({ user_id, product_id });
-  const mappedMedia = reviewProductData?.media?.map((item: any) => `${baseImageUrl}/${item.media}`);
+  const mappedMedia = reviewProductData?.media?.map((item: any) => item.review_media.media);
   const [rating, setRating] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [items, setItems] = useState(["Đẹp", "Hàng chuẩn"]);
@@ -93,8 +90,8 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
       formData.append("rating", rating as any);
       formData.append("agree", selectedValue);
       formData.append("disagree", disagreeValue);
+      formData.append("shop_id", 1 as any);
       formData.append("order_id", order_id as any);
-
       if (imagesArray.length > 0) {
         imagesArray.forEach((image: any, index: number) => {
           formData.append(`images[${index}]`, image.originFileObj);
@@ -106,6 +103,7 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
       setIsModalOpen(false);
       form.resetFields();
     } catch (err: any) {
+      console.log(err);
       handleApiError(err);
     }
   };
@@ -117,25 +115,6 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
   const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
-  const onPreview = async (file: UploadFile<any>) => {
-    let src = file.url as string;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj as RcFile);
-        reader.onload = () => resolve(reader.result as string);
-      });
-    }
-
-    const image = document.createElement("img");
-    image.src = src;
-    image.alt = "Preview";
-
-    const imgWindow = window.open(src);
-    if (imgWindow) {
-      imgWindow.document.write(image.outerHTML);
-    }
-  };
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -143,6 +122,12 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
+  const imageGroup =
+    mappedMedia &&
+    mappedMedia.map((image: any) => ({
+      src: `${baseImageUrl}/${image}`,
+      alt: "your image review",
+    }));
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
@@ -161,9 +146,9 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
                 </Button>,
               ]}
             >
-              <div key="review-content">
+              <div>
                 <div className="pb-3">
-                  <div className="title-review flex h-20 w-full">
+                  <div className="title-review flex w-full">
                     <div className="review-image  w-[350px]">
                       <img
                         src={`${baseImageUrl}/${product_image}`}
@@ -172,7 +157,7 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
                       />
                     </div>
                     <div className="review-text pl-4 h-full">
-                      <p className="line-clamp-1 text-xl font-bold">{product_name}</p>
+                      <p className="line-clamp-3 text-xl font-bold">{product_name}</p>
                       <div className="h-3/6 rate">
                         <Rate className="rating" allowHalf disabled defaultValue={reviewProductData?.rating} />
                       </div>
@@ -203,7 +188,14 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
                   />
                 </div>
 
-                <Image src={`${baseImageUrl}/${mappedMedia}`} alt="your image review" />
+                <div className="grid gap-x-8 gap-y-4 grid-cols-3 pt-3">
+                  <Image.PreviewGroup>
+                    {imageGroup &&
+                      imageGroup.map((image: any, index: any) => (
+                        <Image key={index} width={100} className="p-4" src={image.src} alt={image.alt} />
+                      ))}
+                  </Image.PreviewGroup>
+                </div>
               </div>
             </S.ModalReview>
           </Spin>
@@ -224,9 +216,9 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
               </Button>,
             ]}
           >
-            <div key="review-content">
+            <div>
               <div className="py-3">
-                <div className="title-review flex h-20 w-full">
+                <div className="title-review flex  w-full">
                   <div className="review-image  w-[350px]">
                     <img
                       src={`${baseImageUrl}/${product_image}`}
@@ -235,7 +227,7 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
                     />
                   </div>
                   <div className="review-text pl-8 h-full">
-                    <p className="line-clamp-1 text-xl font-bold">{product_name}</p>
+                    <p className="line-clamp-3 text-xl font-bold">{product_name}</p>
                     <div className="h-3/6 rate">
                       <Rate className="rating" allowHalf value={rating} onChange={setRating} />
                     </div>
@@ -305,14 +297,8 @@ const ModalReviewProduct = ({ product_id, product_image, product_name, order_id 
                   />
                 </Form.Item>
                 <Form.Item name="upload" valuePropName="fileList">
-                  <ImgCrop rotationSlider>
-                    <Upload
-                      listType="picture-card"
-                      fileList={fileList}
-                      beforeUpload={() => false}
-                      onChange={onChange}
-                      onPreview={onPreview}
-                    >
+                  <ImgCrop>
+                    <Upload listType="picture-card" fileList={fileList} onChange={onChange}>
                       {fileList.length < 5 && "+ Upload"}
                     </Upload>
                   </ImgCrop>
