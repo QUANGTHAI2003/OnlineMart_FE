@@ -1,5 +1,5 @@
 import { Col } from "antd";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const UserProfile = styled.div`
   .main_title {

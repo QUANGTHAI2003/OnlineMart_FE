@@ -1,6 +1,5 @@
 import { useAppSelector } from "@app/store/store";
 import { JsonToTable } from "react-json-to-table";
-
 const ModalData = ({ id }: { id: number }) => {
   const activities = useAppSelector((state) => state.activitiesLogs.activities) || [];
 
@@ -18,7 +17,8 @@ const ModalData = ({ id }: { id: number }) => {
               {activity?.data === null ? (
                 <span className="font-medium text-center text-base">Không có dữ liệu</span>
               ) : (
-                /* @ts-expect-error */
+                // @ts-nocheck
+                /** @ts-ignore */
                 <JsonToTable json={activity?.data} />
               )}
             </div>

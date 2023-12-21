@@ -55,7 +55,7 @@ const SellerComponent: React.FC<ISellerProps> = ({ sellerData, isLoading, shop_i
             <div className="seller-detail">
               <div className="item review">
                 <div className="title">
-                  <span>{`${sellerData?.rating} / 5`}</span>
+                  <span>{`${4} / 5`}</span>
                   <RatingStar />
                 </div>
                 <div className="sub-title">2.6k+</div>

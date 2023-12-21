@@ -1,5 +1,5 @@
 import { Checkbox, Tabs } from "antd";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const Login = styled.div`
   transform: scale(0.9);

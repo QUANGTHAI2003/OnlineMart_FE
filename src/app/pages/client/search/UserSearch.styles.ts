@@ -1,5 +1,5 @@
 import { Drawer, Row, Space } from "antd";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const UserSearch = styled(Row)`
   padding: 25px;

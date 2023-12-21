@@ -1,5 +1,5 @@
 import { Tabs } from "antd";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const Tab = styled(Tabs).withConfig({
   shouldForwardProp: () => true,

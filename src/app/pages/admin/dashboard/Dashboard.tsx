@@ -96,6 +96,7 @@ const Dashboard = () => {
                 </div>
               )}
             </Col>
+
             <Col xs={0} sm={0} md={0} lg={9} xl={7} className="col_content">
               {loadingSkeletonCount ? <RecentActSkeleton count={1} /> : <RecentActivities />}
             </Col>

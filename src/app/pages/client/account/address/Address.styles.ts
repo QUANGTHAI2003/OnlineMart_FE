@@ -1,5 +1,5 @@
 import { Checkbox, Form } from "antd";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const Layout = styled.div`
   background-color: #fff;
