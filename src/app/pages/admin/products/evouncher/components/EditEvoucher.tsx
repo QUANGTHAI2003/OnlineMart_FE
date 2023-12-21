@@ -1,8 +1,9 @@
 import { useGetVoucherOnlyQuery, useUpdateVoucherMutation } from "@app/store/slices/api/admin/voucherApi";
+import { useAppSelector } from "@app/store/store";
 import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
 import { Button, Col, DatePicker, Form, Input, InputNumber, Row, Select, Spin } from "antd";
 import dayjs from "dayjs";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as S from "../Evouncher.style";
@@ -26,22 +27,39 @@ const { RangePicker } = DatePicker;
 const EditVoucher = ({ id, onCancel }: any) => {
   const { data, isFetching } = useGetVoucherOnlyQuery(id);
   const [updateVoucher, { isLoading, error }] = useUpdateVoucherMutation();
+  const [disabled, setDisabled] = useState<boolean>(false);
   const [form] = Form.useForm();
+  const shop_id = useAppSelector((state) => state.userState.user)?.shop?.id;
 
   const handleUnitChange = () => {
     form.validateFields(["discount"]);
+    if (form.getFieldValue("unit") === "1") {
+      setDisabled(!disabled);
+      form.setFieldsValue({
+        max_discount_amount: form.getFieldValue("discount"),
+      });
+    } else if (form.getFieldValue("unit") === "0") {
+      setDisabled(false); // Sửa thành false để bỏ đánh dấu disabled
+    }
   };
 
   useEffect(() => {
-    form.setFieldsValue({ unit: "0" });
-    form.validateFields(["discout"]);
-  }, [form]);
+    if (form.getFieldValue("unit") === "1") {
+      setDisabled(!disabled);
+      form.setFieldsValue({
+        max_discount_amount: form.getFieldValue("discount"),
+      });
+    } else if (form.getFieldValue("unit") === "0") {
+      setDisabled(false); // Sửa thành false để bỏ đánh dấu disabled
+    }
+  }, [disabled, form]);
   const handleSubmit = async (fieldValues: FormValues) => {
     const values = {
       ...fieldValues,
       start_date: fieldValues.date && dayjs(fieldValues.date[0]).format("YYYY-MM-DD ss:mm:HH"),
       expired_date: fieldValues.date && dayjs(fieldValues.date[1]).format("YYYY-MM-DD ss:mm:HH"),
       id,
+      shop_id,
     };
     try {
       await updateVoucher(values).unwrap();

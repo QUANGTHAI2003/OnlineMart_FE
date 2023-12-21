@@ -58,7 +58,7 @@ const Evouncher = () => {
                   onCancel={handleCancel}
                   footer={[]}
                 >
-                  <CreateEvoucher />
+                  <CreateEvoucher onCancel={handleCancel} />
                 </S.ModalForm>
               </Space>
             </Row>

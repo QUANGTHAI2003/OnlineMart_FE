@@ -13,7 +13,6 @@ const FilterEvoucher: React.FC = () => {
   const navigator = useNavigate();
   const { t } = useTranslation();
   const urlEvouncher = "/admin/shop/evoucher";
-
   const onReset = () => {
     form.resetFields();
     navigator(urlEvouncher);
