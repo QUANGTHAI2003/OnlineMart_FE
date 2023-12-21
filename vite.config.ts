@@ -1,9 +1,9 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import react from '@vitejs/plugin-react-swc';
-import path from 'path';
-import { defineConfig } from 'vite';
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
+import { defineConfig } from "vite";
 
 export default defineConfig({
   mode: process.env.NODE_ENV || "development",

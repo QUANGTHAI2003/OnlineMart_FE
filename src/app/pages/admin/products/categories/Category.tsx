@@ -12,8 +12,7 @@ import TableComponent from "./components/TableComponent";
 import CreateCategory from "./CreateCategory";
 
 const searchType = (t: any) => {
-  console.log("tranlate in src/app/pages/admin/products/categories/Category.tesx not used", t);
-
+  console.log("🚀 ~ t: ", t);
   return [
     { value: "name", label: "Tên danh mục" },
     { value: "category_children", label: "Danh mục cha" },

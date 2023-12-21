@@ -1,10 +1,10 @@
-import { InboxOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import SelectOrCreate from "@app/app/components/common/Select/SelectOrCreate";
 import { useAddCategoryMutation } from "@app/store/slices/api/categoryApi";
 import { handleApiError, isEntityError, notifySuccess } from "@app/utils/helper";
-import { Button, Col, Form, Input, Radio, RadioChangeEvent, Row, Upload, UploadFile } from "antd";
+import { Button, Col, Form, Image, Input, Radio, RadioChangeEvent, Row, Upload, UploadFile } from "antd";
 import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
-import type { UploadProps } from "antd/es/upload/interface";
+import type { RcFile, UploadProps } from "antd/es/upload/interface";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -14,6 +14,12 @@ import * as S from "./Category.styles";
 
 const { Dragger } = Upload;
 
+const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result as string));
+  reader.readAsDataURL(img);
+};
+
 const CreateCategory = ({ data, setIsModalOpen }: any) => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
@@ -21,6 +27,7 @@ const CreateCategory = ({ data, setIsModalOpen }: any) => {
   const [value, setValue] = useState(1);
   const [, setFile] = useState<UploadFile>();
   const [checked, setChecked] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
 
   const [addCategory, { isLoading, error }] = useAddCategoryMutation();
 
@@ -32,11 +39,16 @@ const CreateCategory = ({ data, setIsModalOpen }: any) => {
     onRemove: () => {
       setFile(undefined);
     },
-    beforeUpload: (file) => {
-      setFile(file);
-
+    beforeUpload: () => {
       return false;
     },
+    onChange: (info) => {
+      getBase64(info.file as RcFile, (url) => {
+        setImageUrl(url);
+      });
+    },
+    accept: ".jpg,.jpeg,.png,.webp",
+    showUploadList: false,
   };
 
   const handleSubmit = async (fieldValues: any) => {
@@ -44,7 +56,7 @@ const CreateCategory = ({ data, setIsModalOpen }: any) => {
       const { name, children_category, image, status, meta_title, meta_keywords, meta_description } = fieldValues;
       const formData = new FormData();
       formData.append("name", name);
-      formData.append("parent_id", children_category.selectedValue.at(-1));
+      formData.append("parent_id", children_category?.at(-1));
       formData.append("status", status);
       formData.append("shop_id", "1");
       formData.append("thumbnail_url", image);
@@ -53,6 +65,7 @@ const CreateCategory = ({ data, setIsModalOpen }: any) => {
         formData.append("meta_keywords", meta_keywords);
         formData.append("meta_description", meta_description);
       }
+
       await addCategory(formData).unwrap();
       notifySuccess("Added category", "Successfully");
       setIsModalOpen(false);
@@ -125,20 +138,27 @@ const CreateCategory = ({ data, setIsModalOpen }: any) => {
           <S.FormField
             name="image"
             label={t("admin_shop.categories.image_label")}
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: t("admin_shop.categories.image_err"),
-            //   },
-            // ] }
+            rules={[
+              {
+                required: true,
+                message: t("admin_shop.categories.image_err"),
+              },
+            ]}
             valuePropName="file"
             getValueFromEvent={normFile}
           >
             <Dragger {...props}>
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p className="ant-upload-text">Click or drag file to this area to upload</p>
+              {imageUrl ? (
+                <Image height={300} src={imageUrl} preview={false} />
+              ) : (
+                <>
+                  <p className="om-upload-drag-icon">
+                    <UploadOutlined />
+                  </p>
+                  <p className="om-upload-text">{t("admin_shop.product.create.option.label.click_drag_upload")}</p>
+                  <p className="om-upload-hint">{t("admin_shop.product.create.option.label.image_limit")}</p>
+                </>
+              )}
             </Dragger>
           </S.FormField>
 

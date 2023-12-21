@@ -6,8 +6,9 @@ import {
   useGetCategoryListQuery,
   useUpdateStatusMutation,
 } from "@app/store/slices/api/categoryApi";
+import { useAppSelector } from "@app/store/store";
 import { ICategory } from "@app/types/categories.types";
-import { handleApiError, notifySuccess, removeDiacritics } from "@app/utils/helper";
+import { baseImageKitUrl, handleApiError, notifySuccess, removeDiacritics } from "@app/utils/helper";
 import { Button, Card, Divider, Modal, Space, Switch } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { SorterResult } from "antd/es/table/interface";
@@ -21,12 +22,10 @@ import { UpdateData } from ".";
 
 const { confirm } = Modal;
 
-const baseImage = import.meta.env.VITE_BASE_IMAGE_URL;
-
-const shopId = 1;
-
 const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
   const { t } = useTranslation();
+
+  const shopId = useAppSelector((state) => state.userState.user.shop.id);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sortedInfo, setSortedInfo] = useState<SorterResult<ICategory>>({});
@@ -98,32 +97,10 @@ const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
       key: "thumbnail_url",
       render: (_, { name, thumbnail_url }) => (
         <div className="w-24">
-          <img className="w-full h-full object-cover" src={`${baseImage}/${thumbnail_url}`} alt={name} />
+          <img className="w-full h-full object-cover" src={`${baseImageKitUrl}/${thumbnail_url}`} alt={name} />
         </div>
       ),
     },
-    // {
-    //   title: t("admin_shop.categories.col_keyword"),
-    //   dataIndex: "keyword",
-    //   key: "keyword",
-    //   sorter: (a, b) => a.name.length - b.name.length,
-    //   sortOrder: sortedInfo.columnKey === "keyword" ? sortedInfo.order : null,
-    //   render: (_, { keyword }) => (
-    //     <>
-    //       {keyword.map((tag) => {
-    //         let color = tag.length > 5 ? "geekblue" : "green";
-    //         if (tag === "loser") {
-    //           color = "volcano";
-    //         }
-    //         return (
-    //           <Tag className="mb-2" color={color} key={tag}>
-    //             {tag.toUpperCase()}
-    //           </Tag>
-    //         );
-    //       })}
-    //     </>
-    //   ),
-    // },
     {
       title: t("admin_shop.categories.col_status"),
       dataIndex: "status",
@@ -132,10 +109,7 @@ const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
       sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
       render: (_, { id, status }) => (
         <PermissionsSwitch>
-          <Can
-            permissions={["Update cateory"]}
-            // style={{ backgroundColor: "gray", display: "inline-block", pointerEvents: "none" }}
-          >
+          <Can permissions={["Update category"]}>
             <Switch
               checkedChildren="Hiện"
               onChange={() => handleChangeStatus(id)}
@@ -145,13 +119,6 @@ const TableComponent = ({ dataCategory, searchValue, searchType }: any) => {
           </Can>
           <Can>{status === "1" ? "Hiện" : "Ẩn"}</Can>
         </PermissionsSwitch>
-
-        // <Switch
-        //   checkedChildren="Hiện"
-        //   onChange={() => handleChangeStatus(id)}
-        //   defaultChecked={status === "1" ? true : false}
-        //   unCheckedChildren="Ẩn"
-        // />
       ),
     },
     {

@@ -1,47 +1,50 @@
-import { InboxOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import SelectOrCreate from "@app/app/components/common/Select/SelectOrCreate";
 import { useGetCategoryByIdQuery, useUpdateCategoryMutation } from "@app/store/slices/api/categoryApi";
-import { handleApiError } from "@app/utils/helper";
-import { Button, Col, Form, Input, Radio, RadioChangeEvent, Row, Upload, UploadFile, UploadProps } from "antd";
+import { baseImageKitUrl, handleApiError } from "@app/utils/helper";
+import { Button, Col, Form, Image, Input, Radio, RadioChangeEvent, Row, Upload, UploadFile, UploadProps } from "antd";
 import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import TextArea from "antd/es/input/TextArea";
+import { RcFile } from "antd/es/upload";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { SelectCategory } from "../create/components";
+import { SelectCategory } from "../edit/components";
 
 import * as S from "./Category.styles";
 
 const { Dragger } = Upload;
 
-const baseImageUrl = import.meta.env.VITE_BASE_IMAGE_URL + "/";
+const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result as string));
+  reader.readAsDataURL(img);
+};
 
 const EditCategory = ({ id, dataCategory }: any) => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const { data } = useGetCategoryByIdQuery(id, {
-    skip: !id,
     refetchOnMountOrArgChange: true,
   });
+  console.log("🚀 ~ data: ", data);
   const [updateCategory] = useUpdateCategoryMutation();
 
   const [value, setValue] = useState(1);
   const [checked, setChecked] = useState(false);
-  const [file, setFile] = useState<UploadFile>({
-    uid: "-1",
-    name: data?.name,
-    status: "done",
-    url: baseImageUrl + data?.thumbnail_url,
-  });
+  const [, setFile] = useState<UploadFile>();
+  const [imageUrl, setImageUrl] = useState<string>();
 
   const handleSubmit = async (fieldValues: any) => {
     try {
       const { name, children_category, status, image, meta_title, meta_keywords, meta_description } = fieldValues;
       const formData = new FormData();
       formData.append("name", name);
-      formData.append("parent_id", children_category.selectedValue.at(-1));
+      formData.append("parent_id", children_category?.at(-1));
       formData.append("status", status);
+
       formData.append("thumbnail_url", image);
+
       if (checked) {
         formData.append("meta_title", meta_title);
         formData.append("meta_keywords", meta_keywords);
@@ -54,6 +57,12 @@ const EditCategory = ({ id, dataCategory }: any) => {
     }
   };
 
+  useEffect(() => {
+    const image = form.getFieldValue("thumbnail_url");
+
+    setImageUrl(image);
+  }, [form]);
+
   const onChangeRadio = (e: RadioChangeEvent) => {
     setValue(e.target.value);
   };
@@ -62,35 +71,20 @@ const EditCategory = ({ id, dataCategory }: any) => {
     setChecked(e.target.checked);
   };
 
-  const normFile = (e: any) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.file;
-  };
-
   const props: UploadProps = {
-    fileList: [file],
     onRemove: () => {
-      setFile({
-        uid: "-1",
-        name: "",
-        status: "done",
-        url: "",
-      });
+      setFile(undefined);
     },
-    beforeUpload: (newFile) => {
-      if (newFile.uid !== file.uid) {
-        setFile({
-          uid: newFile.uid,
-          name: newFile.name,
-          status: "done",
-          url: baseImageUrl + newFile.name,
-        });
-      }
-
+    beforeUpload: () => {
       return false;
     },
+    onChange: (info) => {
+      getBase64(info.file as RcFile, (url) => {
+        setImageUrl(url);
+      });
+    },
+    accept: ".jpg,.jpeg,.png,.webp",
+    showUploadList: false,
   };
 
   useEffect(() => {
@@ -106,6 +100,7 @@ const EditCategory = ({ id, dataCategory }: any) => {
       meta_title: data?.meta_title,
       meta_keywords: metaKeywords,
       meta_description: data?.meta_description,
+      thumbnail_url: baseImageKitUrl + "/" + data?.thumbnail_url,
       seo: isSeo,
     });
   }, [data, form]);
@@ -143,20 +138,25 @@ const EditCategory = ({ id, dataCategory }: any) => {
           <S.FormField
             name="image"
             label={t("admin_shop.categories.image_label")}
-            rules={[
-              {
-                required: true,
-                message: t("admin_shop.categories.image_err"),
-              },
-            ]}
-            valuePropName="file"
-            getValueFromEvent={normFile}
+            // rules={[
+            //   {
+            //     required: true,
+            //     message: t("admin_shop.categories.image_err"),
+            //   },
+            // ]}
           >
             <Dragger {...props}>
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p className="ant-upload-text">Click or drag file to this area to upload</p>
+              {imageUrl ? (
+                <Image height={300} src={imageUrl} preview={false} />
+              ) : (
+                <>
+                  <p className="om-upload-drag-icon">
+                    <UploadOutlined />
+                  </p>
+                  <p className="om-upload-text">{t("admin_shop.product.create.option.label.click_drag_upload")}</p>
+                  <p className="om-upload-hint">{t("admin_shop.product.create.option.label.image_limit")}</p>
+                </>
+              )}
             </Dragger>
           </S.FormField>
 
