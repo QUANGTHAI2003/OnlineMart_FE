@@ -132,6 +132,7 @@ export const apiMiddleware = (getDefaultMiddleware: any) =>
     inventoryAdminApi.middleware,
     binAdminApi.middleware,
     shopApi.middleware,
+    printQRAdminApi.middleware,
     activityApi.middleware,
     cartApi.middleware,
     checkoutApi.middleware,

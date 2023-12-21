@@ -3,7 +3,6 @@ import { IconCheck } from "@app/app/assets/icons";
 import defaultAvatar from "@app/app/assets/images/default_avatar_user.png";
 import likeIcon from "@app/app/assets/images/icon-like.png";
 import seeMoreIcon from "@app/app/assets/images/icon-see-more.png";
-import arrowSendIcon from "@app/app/assets/images/icon-send-arrow-comment.png";
 import { RatingText } from "@app/app/pages/admin/products/review/data";
 import { useResponsive } from "@app/hooks";
 import {
@@ -14,10 +13,11 @@ import {
 } from "@app/store/slices/api/user/reviewApi";
 import { useAppSelector } from "@app/store/store";
 import { baseImageKitUrl, calculateTimes, handleApiError } from "@app/utils/helper";
-import { faComment, faThumbsUp as faThumbsUpRegular } from "@fortawesome/free-regular-svg-icons";
+import { faComment, faFaceLaughWink, faThumbsUp as faThumbsUpRegular } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsUp as faThumbsUpSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Divider, Image, Pagination, Rate, Spin } from "antd";
+import { Button, Divider, Image, Pagination, Popover, Rate } from "antd";
+import EmojiPicker from "emoji-picker-react";
 import { debounce } from "lodash";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -42,18 +42,27 @@ const CommentComponent: React.FC<any> = ({ activeItems }) => {
   const { data: reviewData, isFetching } = useGetReviewByProductQuery(parseInt(productId as string));
   const { data: likeData } = useGetLikesQuery(parseInt(productId as string));
 
+  const orderId = reviewData[0]?.order_id;
+
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const [updateLike] = useUpdateLikeMutation();
-  const [addComment, { isLoading }] = useAddCommentMutation();
+  // const [addComment, { isLoading }] = useAddCommentMutation();
+  const [addComment] = useAddCommentMutation();
 
   const [likeCounts, setLikeCounts] = useState<{ [key: number]: number }>({});
 
   const [content, setContent] = useState<string>("");
   const [replyComment, setReplyComment] = useState<number[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const onEmojiClick = (emojiObject: any) => {
+    setContent(content + emojiObject.emoji);
+  };
+
+  const emojiPicker = <EmojiPicker onEmojiClick={onEmojiClick} />;
 
   const handleExpandCommentItem = () => {
     setIsExpanded(!isExpanded);
@@ -105,6 +114,7 @@ const CommentComponent: React.FC<any> = ({ activeItems }) => {
           content: content.trim(),
           reviewId,
           productId: parseInt(productId || "0"),
+          orderId: orderId,
         };
 
         await addComment(values);
@@ -235,15 +245,43 @@ const CommentComponent: React.FC<any> = ({ activeItems }) => {
                           <span>{itemProAttr}</span>
                         </div>
                       ))} */}
-                        <span className="text-red-500">*** BIẾN THỂ ***</span>
+                        <span className="">
+                          {item.product?.variants.map((variant: any, index: number) => {
+                            const variation_name = variant.variation_name;
+
+                            const value_names = variant.values.map((value: any) => value.variation_value_name);
+
+                            const value_names_string = value_names.join(", ");
+
+                            return (
+                              <p key={index}>
+                                {variation_name}
+                                {": "}
+                                {value_names_string}
+                              </p>
+                            );
+                          })}
+                        </span>
                       </div>
 
                       <span>{`${t("user.product_detail.reviewed")} ${reviewTimes.time_elapsed}`}</span>
 
                       <Divider type="vertical" />
 
-                      {/* <span className="review-comment__time-line">{item.timeline?.content}</span> */}
-                      <span className="review-comment__time-line text-red-500">*** THỜI GIAN ĐÃ DÙNG ***</span>
+                      {/* <span className="review-comment__time-line text-red-500">
+                        {item.product?.variants.map((variant: any, index: number) => {
+                          // Lấy ngày nhận hàng (ngày cập nhật cuối cùng của giá trị biến thể đầu tiên)
+                          const receivedDate = dayjs(variant.values[0].updated_at);
+
+                          // Lấy ngày đánh giá
+                          const reviewDate = dayjs(item.updated_at);
+
+                          // Tính số ngày đã sử dụng
+                          const daysUsed = Math.ceil(reviewDate.diff(receivedDate, "day"));
+
+                          return <p key={index}>{daysUsed}</p>;
+                        })}
+                      </span> */}
                     </div>
 
                     {userId && (
@@ -295,10 +333,10 @@ const CommentComponent: React.FC<any> = ({ activeItems }) => {
                         </div>
 
                         <div className="reply-comment__wrapper">
-                          <div>
+                          <div className="flex items-center relative">
                             <textarea
                               placeholder={t("user.product_detail.write_response")}
-                              className="reply-comment__input"
+                              className="reply-comment__input absolute"
                               value={content}
                               onChange={(e) => {
                                 setContent(e.target.value);
@@ -311,15 +349,22 @@ const CommentComponent: React.FC<any> = ({ activeItems }) => {
                               }}
                               spellCheck="false"
                             />
+
+                            <Popover placement="topRight" content={emojiPicker} trigger="click">
+                              <Button
+                                className="absolute right-1 border-0 flex items-center justify-center"
+                                icon={<FontAwesomeIcon icon={faFaceLaughWink} className="text-lg leading-none" />}
+                              ></Button>
+                            </Popover>
                           </div>
 
-                          <button onClick={() => handleAddComment(item.id)} disabled={isLoading} className="contents">
+                          {/* <button onClick={() => handleAddComment(item.id)} disabled={isLoading} className="contents">
                             {isLoading ? (
                               <Spin size="small" className="reply-comment__submit" />
                             ) : (
                               <img className="reply-comment__submit" src={arrowSendIcon} alt="send icon" />
                             )}
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>

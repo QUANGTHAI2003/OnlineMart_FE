@@ -37,9 +37,9 @@ export const reviewApi = createApi({
     }),
 
     // Bình luận dựa trên một đánh giá đã tồn tại
-    addComment: builder.mutation<IReview, { content: string; reviewId: number; productId: number }>({
-      query: ({ content, reviewId, productId }) => ({
-        url: `customer_reviews/${reviewId}/${productId}/comment`,
+    addComment: builder.mutation<IReview, { content: string; reviewId: number; productId: number; orderId: number }>({
+      query: ({ content, reviewId, productId, orderId }) => ({
+        url: `customer_reviews/${reviewId}/${productId}/${orderId}/comment`,
         method: "POST",
         body: { content }, // Khi nào trong backend có dùng request thì ở đây sẽ dùng body
       }),
